@@ -7,6 +7,10 @@ export const lightThemeOptions: ThemeOptions = {
       main: '#0f0'
     },
   },
+  typography: {
+    fontFamily:
+      '"Montserrat"',
+  }
 };
 
 export const lightTheme = createTheme(lightThemeOptions);
