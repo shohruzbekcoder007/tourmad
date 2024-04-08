@@ -1,14 +1,12 @@
 export type ThemeType = typeof light;
 
 export const light = {
-  primary: "#f45511",
-  text: "#000",
-  background: "#fff",
+  main_bg: "#FAFBFC",
+  neutrals: '#ffffff'
 }
 export const dark: ThemeType = {
-    primary: "#f45511",
-    text: "#000",
-    background: "#fff",
+    main_bg: "#FAFBFC",
+    neutrals: '#ffffff'
 }
 
 const theme = light;

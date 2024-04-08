@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import { Welcome } from '../../components';
+import { Wrapper } from '../../global_styles/styles';
 
 const Main: React.FC = () => {
   return (
-    <div>
-      <Button variant="contained">Contained</Button>
-      salom
-    </div>
+    <Wrapper height="100vh">
+      <Welcome />
+    </Wrapper>
   );
 };
 
