@@ -7,6 +7,10 @@ export const lightThemeOptions: ThemeOptions = {
       main: '#8DD3BB',
       contrastText: '#112211',
     },
+    secondary: {
+      main: "#ffffff",
+      contrastText: "#112211"
+    }
   },
   typography: {
     fontFamily:
@@ -17,6 +21,7 @@ export const lightThemeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           fontFamily: '"Montserrat"',
+          textTransform: "inherit"
         }
       }
     }

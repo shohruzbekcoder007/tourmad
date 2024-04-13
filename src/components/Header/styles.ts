@@ -34,3 +34,16 @@ export const HeaderMenuListItemText = styled.span`
     font-weight: 600;
     line-height: normal;
 `
+
+export const AuthUser = styled.div`
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const WelcomeLogo = styled.div`
+    img {
+        display: inline-block;
+    }
+`
