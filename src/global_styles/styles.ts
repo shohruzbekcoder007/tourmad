@@ -10,6 +10,7 @@ export const Wrapper = styled.div<WrapperPropsType>`
 
 export const Container = styled.div`
     width: 1232px;
+    margin: 0 auto;
 `
 
 export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
