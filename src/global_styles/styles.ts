@@ -19,6 +19,6 @@ export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
     line-height: normal;
     text-transform: uppercase;
     font-size: ${props => props.fontSize};
-    padding-bottom: ${props => props.paddingBottom || "0px"};
+    padding-bottom: ${props => props.paddingbottom || "0px"};
     color: ${props => props.part ? props.theme.part_title : props.theme.neutrals};
 `
