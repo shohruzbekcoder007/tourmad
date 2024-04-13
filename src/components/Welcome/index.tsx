@@ -31,8 +31,8 @@ const  Welcome: React.FC = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    <WelcomeMainText fontSize={"45px"} paddingBottom="4px">Helping Others</WelcomeMainText>
-                    <WelcomeMainText fontSize={"80px"} paddingBottom="16px">Live & Travel</WelcomeMainText>
+                    <WelcomeMainText fontSize={"45px"} paddingbottom="4px">Helping Others</WelcomeMainText>
+                    <WelcomeMainText fontSize={"80px"} paddingbottom="16px">Live & Travel</WelcomeMainText>
                     <WelcomeMainText fontSize={"20px"}>Special offers to suit your plan</WelcomeMainText>
                 </Box>
             </Box>

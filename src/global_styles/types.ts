@@ -4,6 +4,6 @@ export type WrapperPropsType = {
 
 export type WelcomeMainTextType = {
     fontSize: string,
-    paddingBottom?: string,
+    paddingbottom?: string,
     part?: boolean
 }
