@@ -7,3 +7,10 @@ export type WelcomeMainTextType = {
     paddingbottom?: string,
     part?: boolean
 }
+
+export type GlobalParagraphType = {
+    fontSize: string,
+    paddingbottom?: string,
+    color?: string,
+    fontWeight: string,
+}
