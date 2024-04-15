@@ -14,3 +14,4 @@ export type GlobalParagraphType = {
     color?: string,
     fontWeight: string,
 }
+
