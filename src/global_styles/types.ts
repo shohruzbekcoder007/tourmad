@@ -5,7 +5,7 @@ export type WrapperPropsType = {
 export type WelcomeMainTextType = {
     fontSize: string,
     paddingbottom?: string,
-    part?: boolean
+    part?: boolean | string
 }
 
 export type GlobalParagraphType = {

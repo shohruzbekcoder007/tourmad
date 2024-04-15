@@ -18,7 +18,7 @@ const TripPlan: React.FC = () => {
             <Box pb='48px'>
                 <Grid container pb="40px">
                     <Grid item xl={8} md={8} sm={6} xs={6}>
-                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} part>Plan your perfect trip</WelcomeMainText>
+                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} part="true">Plan your perfect trip</WelcomeMainText>
                         <GlobalParagraph fontSize={"16px"} fontWeight="400">Search Flights & Places Hire to our most popular destinations</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
