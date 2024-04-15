@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
@@ -14,20 +14,35 @@ export const HeadeMenuList = styled.div`
     gap: 32px;
 `
 
-export const HeaderMenuListItem = styled(Link)`
+export const HeaderMenuListItem = styled(NavLink)<{ type?: "white" | "dark" }>`
     padding: 30px 0;
     display: flex;
     align-items: center;
     gap: 4px;
+    fill: ${props => props.type === "white"? props.theme.neutrals: props.theme.blackish_green};
+    color: ${props => props.type === "white"? props.theme.neutrals: props.theme.blackish_green};
+    &.active {
+        position: relative;
+        &::after{
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 5px;
+            background-color: ${props => props.theme.mint_green};
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+        }
+    }
 `
 
+
 export const HeaderMenuListItemIconc = styled.span`
-    fill: ${props => props.theme.neutrals};
+    display: inline-block;
 `
 
 export const HeaderMenuListItemText = styled.span`
     display: inline-block;
-    color: ${props => props.theme.neutrals};
     padding-bottom: 6px;
     font-size: 14px;
     font-style: normal;
