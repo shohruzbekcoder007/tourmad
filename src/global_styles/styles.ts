@@ -24,7 +24,6 @@ export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
     color: ${props => props.part ? props.theme.part_title : props.theme.neutrals};
 `
 export const GlobalParagraph = styled.p<GlobalParagraphType>`
-    font-family: Montserrat;
     font-size: ${props => props.fontSize};
     font-style: normal;
     padding-bottom: ${props => props.paddingbottom || "0px"};

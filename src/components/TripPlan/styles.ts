@@ -26,10 +26,8 @@ export const CardPhoto = styled.div`
 `
 
 export const TripCardTitle = styled.h3`
-    color: var(--Blackish-Green, #121);
-    /* Montserrat/Semibold/16px */
+    color: ${props => props.theme.blackish_green};
     opacity: 0.7;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
