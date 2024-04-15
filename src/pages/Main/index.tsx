@@ -1,5 +1,5 @@
 import React from 'react';
-import { TicketTable, TripPlan, Welcome } from '../../components';
+import { TicketTable, TripPlan, Welcome, ShowService, Footer } from '../../components';
 import { Wrapper } from '../../global_styles/styles';
 
 const Main: React.FC = () => {
@@ -9,6 +9,9 @@ const Main: React.FC = () => {
       <TicketTable/>
 
       <TripPlan/>
+      <ShowService />
+
+      <Footer />
     </Wrapper>
   );
 };

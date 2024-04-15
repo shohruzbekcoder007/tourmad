@@ -11,6 +11,7 @@ import NewYork from "./../../media/images/Rectangle 4 (2).png";
 import London from "./../../media/images/Rectangle 3 (3).png";
 import Tokyo from "./../../media/images/Rectangle 3 (4).png";
 import Dubai from "./../../media/images/Rectangle 4 (3).png";
+
 const TripPlan: React.FC = () => {
     return (
         <Container>
