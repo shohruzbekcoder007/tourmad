@@ -5,12 +5,19 @@ export const Wrapper = styled.div<WrapperPropsType>`
     width: 1440px;
     background: #FAFBFC;
     margin: 0 auto;
-    min-height: ${props => props.height || 'auto'}; 
+    min-height: ${props => props.height || 'auto'};
+    @media (max-width: 1440px) {
+        width: 100%;
+    }
 `
 
 export const Container = styled.div`
     width: 1232px;
     margin: 0 auto;
+    @media (max-width: 1232px) {
+        width: 100%;
+        padding: 0 20px;
+    }
 `
 
 export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
