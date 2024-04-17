@@ -5,7 +5,8 @@ export type WrapperPropsType = {
 export type WelcomeMainTextType = {
     fontSize: string,
     paddingbottom?: string,
-    part?: boolean | string
+    part?: boolean | string,
+    mediafontsize?: string,
 }
 
 export type GlobalParagraphType = {
@@ -13,5 +14,6 @@ export type GlobalParagraphType = {
     paddingbottom?: string,
     color?: string,
     fontWeight: string,
+    oposity? : string,
 }
 
