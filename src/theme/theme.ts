@@ -7,7 +7,8 @@ export const light = {
   neutrals_white: "#FFFFFF",
   mint_green: "#8DD3BB",
   blackish_green: "#112211",
-  part_title: "#000000"
+  part_title: "#000000",
+  medium_green: "#CDEAE1",
 }
 export const dark: ThemeType = {
   main_bg: "#FAFBFC",
@@ -16,7 +17,8 @@ export const dark: ThemeType = {
   neutrals_white: "#FFFFFF",
   mint_green: "#8DD3BB",
   blackish_green: "#112211",
-  part_title: "#ffffff"
+  part_title: "#ffffff",
+  medium_green: "#CDEAE1",
 }
 
 const theme = light;

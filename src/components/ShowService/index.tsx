@@ -8,7 +8,7 @@ import { Box, Button, Grid } from "@mui/material";
 const ShowService: React.FC = () => {
     return (
         <Container>
-            <Box pb="70px">
+            <Box pb="370px">
                 <Grid container spacing={2}>
                     <Grid item xl={6} md={6} sm={6} xs={12}>
                            <Box sx={{ 
@@ -30,7 +30,7 @@ const ShowService: React.FC = () => {
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="#fff" paddingbottom="16px">
                                             Search Flights & Places Hire to our most popular <br/> destinations
                                         </GlobalParagraph>
-                                        <Button sx={{backgroundColor: "#8DD3BB", color: "#000"}}  variant="contained" startIcon={<TelegramIcon />}>Show Filghts</Button>
+                                        <Button  variant="contained" startIcon={<TelegramIcon />}>Show Filghts</Button>
                                     </Box>
                                </Box>
                            </Box> 
@@ -55,7 +55,7 @@ const ShowService: React.FC = () => {
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="#fff" paddingbottom="16px">
                                             Search hotels & Places Hire to our most popular <br/> destinations
                                         </GlobalParagraph>
-                                        <Button sx={{backgroundColor: "#8DD3BB", color: "#000"}}  variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>
+                                        <Button variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>
                                     </Box>
                                 </Box>
                            </Box> 

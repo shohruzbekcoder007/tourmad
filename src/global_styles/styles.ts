@@ -29,6 +29,9 @@ export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
     font-size: ${props => props.fontSize};
     padding-bottom: ${props => props.paddingbottom || "0px"};
     color: ${props => props.part ? props.theme.part_title : props.theme.neutrals};
+    @media (max-width: 768px) {
+        font-size: ${props => props.mediafontsize};
+    }
 `
 export const GlobalParagraph = styled.p<GlobalParagraphType>`
     font-size: ${props => props.fontSize};
@@ -37,4 +40,5 @@ export const GlobalParagraph = styled.p<GlobalParagraphType>`
     font-weight: ${props => props.fontWeight};
     line-height: normal;
     color: ${props => props.color || "#121"};
+    opacity: ${props => props.oposity};
 `
