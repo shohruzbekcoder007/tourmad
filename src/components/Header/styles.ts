@@ -53,5 +53,7 @@ export const HeaderMenuListItemText = styled.span`
 export const WelcomeLogo = styled.div`
     img {
         display: inline-block;
+        width: 200px;
+        object-fit: cover;
     }
 `
