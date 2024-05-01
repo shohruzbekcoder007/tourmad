@@ -19,10 +19,7 @@ const Welcome: React.FC = () => {
                     height: "600px"
                 }}
             >
-                <Box sx={{
-                    backgroundColor: '#00000054',
-                    borderRadius: '24px',
-                }}
+                <Box
                     padding="0 32px"
                 >
                     <Header

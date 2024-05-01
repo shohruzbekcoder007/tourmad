@@ -1,7 +1,7 @@
 import React from "react";
 import { HeadeMenuList, HeaderMenuListItem, HeaderMenuListItemIconc, HeaderMenuListItemText, HeaderWrapper, WelcomeLogo } from "./styles";
 import { Box, Divider } from "@mui/material";
-import Logo from "./../../media/images/m.tuor.png";
+import Logo from "./../../media/images/logo2.png";
 
 type HeaderProps = {
     auth?: React.ReactElement;
