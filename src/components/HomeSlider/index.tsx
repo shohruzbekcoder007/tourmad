@@ -24,7 +24,7 @@ const responsive = {
     }
   };
 
-const TripPlan: React.FC = () => {
+const HomeSlider: React.FC = () => {
     return (
         <Container>
             <Box pb="300px">
@@ -73,4 +73,4 @@ const TripPlan: React.FC = () => {
     );
 };
 
-export default TripPlan;
+export default HomeSlider;

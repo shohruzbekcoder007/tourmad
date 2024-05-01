@@ -46,6 +46,9 @@ export const FooterList = styled.a`
 export const FooterLogoImg = styled.div`
     img{
         display: inline-block;
+        width: 165px;
+        object-fit: cover;
+        margin-left: -15px;
     }
 `
 
