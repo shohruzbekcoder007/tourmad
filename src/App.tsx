@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Main } from './pages';
+import { Main, Welcome } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -15,8 +15,12 @@ const App: React.FC = () => {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Main/>}>
+            <Route path="public" element={<Welcome/>}/>
+          </Route>
           <Route path="users" element={<p>user</p>} />
+          <Route path="signin" element={<p>login</p>} />
+          <Route path="signup" element={<p>login</p>} />
         </Routes>
       </ThemeProvider>
     </MuiTheme>
