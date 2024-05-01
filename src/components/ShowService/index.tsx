@@ -8,7 +8,7 @@ import { Box, Button, Grid } from "@mui/material";
 const ShowService: React.FC = () => {
     return (
         <Container>
-            <Box pb="370px">
+            <Box pb="70px">
                 <Grid container spacing={2}>
                     <Grid item xl={6} md={6} sm={6} xs={12}>
                            <Box sx={{ 

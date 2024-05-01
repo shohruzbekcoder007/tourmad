@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material'
 import React from 'react'
-import welcome_bg from './../../media/images/welcome.png'
+import welcome_bg from './../../media/images/body-bg.jpg'
 import Header from '../Header'
 import { WelcomeMainText } from '../../global_styles/styles'
 import { AuthUser } from './styles'
@@ -19,7 +19,10 @@ const Welcome: React.FC = () => {
                     height: "600px"
                 }}
             >
-                <Box
+                <Box sx={{
+                    backgroundColor: '#00000054',
+                    borderRadius: '24px',
+                }}
                     padding="0 32px"
                 >
                     <Header
