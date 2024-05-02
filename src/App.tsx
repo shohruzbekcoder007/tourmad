@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp';
 import Verify from './pages/Verify';
 import ForgotPassword from './pages/ForgotPassword';
 import SetPassword from './pages/SetPassword';
+import Error from './pages/Error';
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route path="set-password" element={<SetPassword />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="verify" element={<Verify />} />
+          <Route path='*' element={<Error />} />
         </Routes>
       </ThemeProvider>
     </MuiTheme>
