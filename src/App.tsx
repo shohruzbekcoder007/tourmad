@@ -9,6 +9,10 @@ import {
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Verify from './pages/Verify';
+import ForgotPassword from './pages/ForgotPassword';
+import SetPassword from './pages/SetPassword';
 
 const App: React.FC = () => {
   return (
@@ -20,8 +24,11 @@ const App: React.FC = () => {
             <Route path="public" element={<Welcome/>}/>
           </Route>
           <Route path="users" element={<p>user</p>} />
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<p>login</p>} />
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="set-password" element={<SetPassword />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="verify" element={<Verify />} />
         </Routes>
       </ThemeProvider>
     </MuiTheme>
