@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WelcomeMainTextType, WrapperPropsType, GlobalParagraphType } from "./types";
+import { WelcomeMainTextType, WrapperPropsType, GlobalParagraphType, GlobalLinkType } from "./types";
 
 export const Wrapper = styled.div<WrapperPropsType>`
     width: 1440px;
@@ -25,7 +25,7 @@ export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    text-transform: uppercase;
+    text-transform: ${props => props.texttransform || "uppercase"};
     font-size: ${props => props.fontSize};
     padding-bottom: ${props => props.paddingbottom || "0px"};
     color: ${props => props.part ? props.theme.part_title : props.theme.neutrals};
@@ -39,6 +39,20 @@ export const GlobalParagraph = styled.p<GlobalParagraphType>`
     padding-bottom: ${props => props.paddingbottom || "0px"};
     font-weight: ${props => props.fontWeight};
     line-height: normal;
-    color: ${props => props.color || "#121"};
+    color: ${props => props.color || props.theme.blackish_green};
     opacity: ${props => props.oposity};
+`
+
+export const GlobalLink = styled.a<GlobalLinkType>`
+    color: ${props => props.color || props.theme.slamon};
+    font-size: ${props => props.fontSize};
+    font-style: normal;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: ${props => props.fontWeight};
+    line-height: normal;
+    padding-bottom: ${props => props.paddingbottom || "0px"};
+    &:hover{
+        color: ${props => props.color || props.theme.mint_green};
+    }
 `

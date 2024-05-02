@@ -7,6 +7,7 @@ export type WelcomeMainTextType = {
     paddingbottom?: string,
     part?: boolean | string,
     mediafontsize?: string,
+    texttransform?: string,
 }
 
 export type GlobalParagraphType = {
@@ -15,5 +16,13 @@ export type GlobalParagraphType = {
     color?: string,
     fontWeight: string,
     oposity? : string,
+}
+
+export type GlobalLinkType = {
+    fontSize: string,
+    paddingbottom?: string,
+    color?: string,
+    fontWeight: string,
+    hovercolor?: string,
 }
 
