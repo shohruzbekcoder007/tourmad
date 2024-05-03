@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Main, Welcome } from './pages';
+import { Main, Protected, TravelFilters, Welcome } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -22,7 +22,11 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Main/>}>
+            <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
+            <Route path="protected" element={<Protected/>}>
+              <Route index element={<TravelFilters/>}/>
+            </Route>
           </Route>
           <Route path="users" element={<p>user</p>} />
           <Route path="sign-in" element={<SignIn />} />

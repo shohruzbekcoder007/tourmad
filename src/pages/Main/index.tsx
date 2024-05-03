@@ -7,7 +7,7 @@ const Main: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate("public")
+    // navigate("public")
   }, [])
 
   return (
