@@ -34,7 +34,7 @@ const CustomAutocomplete: React.FC<CustomAutocompleteProps> = ({ options, icon, 
                     getChange(newValue);
                 }}
                 sx={{
-                    minWidth: "300px",
+                    width: "100%",
                     '& .MuiAutocomplete-paper': {
                         zIndex: 10,
                     }

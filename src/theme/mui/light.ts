@@ -10,6 +10,10 @@ export const lightThemeOptions: ThemeOptions = {
     secondary: {
       main: "#ffffff",
       contrastText: "#112211"
+    },
+    success: {
+      main: "#121",
+      contrastText: "#ffffff"
     }
   },
   typography: {

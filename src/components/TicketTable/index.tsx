@@ -57,7 +57,7 @@ const TicketTable: React.FC = () => {
           flexWrap="wrap"
         >
 
-          <Box>
+          <Box width='300px'>
             <CustomAutocomplete
               options={options}
               placeholder="From - To"
@@ -70,7 +70,7 @@ const TicketTable: React.FC = () => {
             />
           </Box>
 
-          <Box>
+          <Box width='300px'>
             <CustomAutocomplete
               options={options}
               placeholder="From - To"
@@ -83,7 +83,7 @@ const TicketTable: React.FC = () => {
             />
           </Box>
 
-          <Box>
+          <Box width='300px'  >
             <CustomAutocomplete
               options={options}
               placeholder="From - To"
