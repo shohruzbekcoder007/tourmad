@@ -14,27 +14,27 @@ import { Paper } from '@mui/material'
 let items: sublink[] = [
     {
         name: "hotel",
-        to: "/hotel",
+        to: "hotel",
         iconc: <HotelIcon />
     },
     {
         name: "ticket",
-        to: "/",
+        to: "ticket",
         iconc: <FlightTakeoffIcon />
     },
     {
         name: "restaurant",
-        to: "/",
+        to: "restaurant",
         iconc: <RestaurantMenuIcon />
     },
     {
         name: "drive",
-        to: "/",
+        to: "drive",
         iconc: <LocalTaxiIcon />
     },
     {
         name: "plan",
-        to: "/",
+        to: "plan",
         iconc: <BookmarkAddIcon />
     }
 ];
@@ -55,20 +55,20 @@ const ServicesLinkForAllPages: React.FC = () => {
                         {items.map((item, index) => (
                             <NavLink
                                 key={index}
-                                to={`/`}
+                                to={`/protected/${item.to}`}
                                 style={{ textDecoration: 'none' }}
                             >
                                 {
-                                    window.location.pathname === item.to ?
+                                    window.location.pathname === `/protected/${item.to}` ?
+                                        <Chip
+                                            icon={item.iconc}
+                                            label={item.name}
+                                        />:
                                         <Chip
                                             icon={item.iconc}
                                             label={item.name}
                                             variant='outlined'
-                                        /> :
-                                        <Chip
-                                            icon={item.iconc}
-                                            label={item.name}
-                                        />
+                                        /> 
                                 }
                             </NavLink>
 
