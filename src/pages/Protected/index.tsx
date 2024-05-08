@@ -12,6 +12,11 @@ const Protected: React.FC = () => {
                     <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<FavouritesUser/>} />
                 </Container>
             </HeaderWrapper>
+            {/* <Box
+                margin="30px 0 0 0"
+            >
+                <ServicesLinkForAllPages/>
+            </Box> */}
             <Outlet/>
             <Box
                 paddingTop="170px"
