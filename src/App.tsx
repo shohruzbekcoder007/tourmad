@@ -15,6 +15,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import SetPassword from './pages/SetPassword';
 import Error from './pages/Error';
 import FlightDetail from './pages/FlightDetail';
+import Hotel from './pages/Hotel';
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
             <Route path="protected" element={<Protected/>}>
               <Route index element={<TravelFilters/>}/>
               <Route path='flight-detail' element={<FlightDetail/>}/>
+              <Route path='hotel' element={<Hotel />} />
             </Route>
           </Route>
           <Route path="users" element={<p>user</p>} />
