@@ -1,6 +1,6 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Main, Protected, TravelFilters, Welcome } from './pages';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -8,14 +8,6 @@ import {
   ThemeProvider as MuiTheme
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Verify from './pages/Verify';
-import ForgotPassword from './pages/ForgotPassword';
-import SetPassword from './pages/SetPassword';
-import Error from './pages/Error';
-import FlightDetail from './pages/FlightDetail';
-import Hotel from './pages/Hotel';
 
 const App: React.FC = () => {
   return (
@@ -27,9 +19,14 @@ const App: React.FC = () => {
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
             <Route path="protected" element={<Protected/>}>
-              <Route index element={<TravelFilters/>}/>
-              <Route path='flight-detail' element={<FlightDetail/>}/>
-              <Route path='hotel' element={<Hotel />} />
+              {/* <Route index element={<TravelFilters/>}/> */}
+              <Route index element={<Navigate to="hotel"/>}/>
+              <Route path="hotel" element={<Hotel/>}/>
+              <Route path="ticket" element={<Ticket/>}/>
+              <Route path="restaurant" element={<Restaurant/>}/>
+              <Route path="drive" element={<Drive/>}/>
+              <Route path="plan" element={<Plan/>}/>
+              
             </Route>
           </Route>
           <Route path="users" element={<p>user</p>} />

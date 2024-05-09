@@ -1,5 +1,5 @@
 import React from 'react'
-import { TicketTable, TripPlan, Welcome as WelcomeComponent, ShowService, Footer } from '../../components';
+import { TripPlan, Welcome as WelcomeComponent, ShowService, Footer, ServicesLink } from '../../components';
 
 import { Box } from '@mui/system';
 
@@ -7,7 +7,8 @@ const Welcome: React.FC = () => {
     return (
         <>
             <WelcomeComponent />
-            <TicketTable />
+            {/* <TicketTable /> */}
+            <ServicesLink/>
             <TripPlan />
             <ShowService />
             <Box

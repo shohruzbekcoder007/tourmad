@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { WelcomeMainTextType, WrapperPropsType, GlobalParagraphType, GlobalLinkType } from "./types";
 
 export const Wrapper = styled.div<WrapperPropsType>`
-    width: 1440px;
+    /* width: 1440px; */
     background: #FAFBFC;
     margin: 0 auto;
     min-height: ${props => props.height || 'auto'};
