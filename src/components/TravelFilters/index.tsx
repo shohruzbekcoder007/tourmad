@@ -128,7 +128,7 @@ const TravelFilters: React.FC = () => {
         sx={{
           boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
           borderRadius: "16px",
-          padding: "16px 32px 32px 32px",
+          padding: "32px 24px",
           marginTop: '48px',
           mb: "32px",
         }}>
@@ -201,7 +201,7 @@ const TravelFilters: React.FC = () => {
           </GlobalParagraph>
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+              sx={{ width: '100%', maxWidth: 360 }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -240,7 +240,7 @@ const TravelFilters: React.FC = () => {
           <Divider />
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+              sx={{ width: '100%', maxWidth: 360}}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -279,7 +279,7 @@ const TravelFilters: React.FC = () => {
           <Divider />
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+              sx={{ width: '100%', maxWidth: 360 }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -301,7 +301,7 @@ const TravelFilters: React.FC = () => {
           <Divider />
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', bgcolor: 'background.paper' }}
+              sx={{ width: '100%', }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -341,7 +341,7 @@ const TravelFilters: React.FC = () => {
           <Divider />
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', bgcolor: 'background.paper' }}
+              sx={{ width: '100%' }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -385,7 +385,7 @@ const TravelFilters: React.FC = () => {
             sx={{
               boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
               borderRadius: "12px",
-              padding: "16px 32px 32px 32px",
+              padding: "16px 24px",
               marginTop: '48px',
               mb: "32px",
             }}>

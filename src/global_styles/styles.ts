@@ -39,7 +39,8 @@ export const GlobalParagraph = styled.p<GlobalParagraphType>`
     padding-bottom: ${props => props.paddingbottom || "0px"};
     font-weight: ${props => props.fontWeight};
     line-height: normal;
-    color: ${props => props.color || props.theme.blackish_green};
+    /* color: ${props => props.theme.slamon || props.theme.blackish_green}; */
+    color: ${props => props.theme[""+props.color] || props.theme.blackish_green};
     opacity: ${props => props.oposity};
 `
 

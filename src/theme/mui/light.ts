@@ -14,7 +14,11 @@ export const lightThemeOptions: ThemeOptions = {
     success: {
       main: "#121",
       contrastText: "#ffffff"
-    }
+    },
+    error: {
+      main: "#FF8682",
+      contrastText: "#121"
+    },
   },
   typography: {
     fontFamily:
