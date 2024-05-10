@@ -27,7 +27,7 @@ const ShowService: React.FC = () => {
                                         <WelcomeMainText fontSize="40px" paddingbottom="8px">
                                             Flights
                                         </WelcomeMainText>
-                                        <GlobalParagraph fontSize="16px" fontWeight="400" color="#fff" paddingbottom="16px">
+                                        <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
                                             Search Flights & Places Hire to our most popular <br/> destinations
                                         </GlobalParagraph>
                                         <Button  variant="contained" startIcon={<TelegramIcon />}>Show Filghts</Button>
@@ -52,7 +52,7 @@ const ShowService: React.FC = () => {
                                         <WelcomeMainText fontSize="40px" paddingbottom="8px">
                                             Hotels
                                         </WelcomeMainText>
-                                        <GlobalParagraph fontSize="16px" fontWeight="400" color="#fff" paddingbottom="16px">
+                                        <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
                                             Search hotels & Places Hire to our most popular <br/> destinations
                                         </GlobalParagraph>
                                         <Button variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>

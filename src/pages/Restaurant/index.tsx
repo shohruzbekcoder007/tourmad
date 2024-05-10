@@ -1,20 +1,18 @@
 import React from 'react'
 import { Container } from '../../global_styles/styles'
-import ProtectedHeader from '../../components/ProtectedHeader'
+import Banner from '../../components/Banner'
+import ResentSearch from '../../components/ResentSearch'
+import IntoTravel from '../../components/IntoTravel'
 
 const Restaurant: React.FC = () => {
   return (
     <>
-            <ProtectedHeader>
-                <img src={require('./../../media/images/restaurant.jpg')} alt="hotel welcome" />
-            </ProtectedHeader>
+            <Banner heightprops='400px' bgimage={require('./../../media/images/restaurant.jpg')}
+            bannersubtitle='Make your travel whishlist, we’ll do the rest'
+            bannertitle='Special offers to suit your plan' />
             <Container>
-                <p>Restaurant</p>
-                {
-                    [1,2,3,4,5,6,7,8,9,10].map((_, index) => (
-                        <p key={index}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit et rerum velit quam unde tempora, praesentium modi a voluptate nam voluptates aspernatur corrupti odio minima, dolorem neque qui illo error!</p>
-                    ))
-                }
+                <ResentSearch />
+                <IntoTravel />
             </Container>
         </>
   )

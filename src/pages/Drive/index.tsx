@@ -1,23 +1,21 @@
 import React from 'react'
 import { Container } from '../../global_styles/styles'
-import ProtectedHeader from '../../components/ProtectedHeader'
+import Banner from '../../components/Banner'
+import banner_photo from './../../media/images/banner-drive.webp'
+import DriverCard from '../../components/DriverCard'
+import ResentSearch from '../../components/ResentSearch'
 
 const Drive: React.FC = () => {
-  return (
-    <>
-            <ProtectedHeader>
-                <img src={require('./../../media/images/plan3.jpg')} alt="hotel welcome" />
-            </ProtectedHeader>
+    return (
+        <>
+            <Banner bgimage={banner_photo} heightprops='400px' 
+            bannersubtitle='Special offers to suit your plan' bannertitle='Smart, polite, courteous drivers for customers'/>
             <Container>
-                <p>Drive</p>
-                {
-                    [1,2,3,4,5,6,7,8,9,10].map((_, index) => (
-                        <p key={index}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit et rerum velit quam unde tempora, praesentium modi a voluptate nam voluptates aspernatur corrupti odio minima, dolorem neque qui illo error!</p>
-                    ))
-                }
+                <ResentSearch />    
+                <DriverCard />
             </Container>
         </>
-  )
+    )
 }
 
 export default Drive
