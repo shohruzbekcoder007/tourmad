@@ -1,23 +1,24 @@
 import React from 'react'
-import { Container } from '../../global_styles/styles'
-import ProtectedHeader from '../../components/ProtectedHeader'
+import { Container, WelcomeMainText } from '../../global_styles/styles'
+import Banner from '../../components/Banner'
+import banner_photo from './../../media/images/banner-plan.jpg';
+import PlanCategory from '../../components/PlanCategory';
+import IntoTravel from '../../components/IntoTravel';
 
 const Plan: React.FC = () => {
-  return (
-    <>
-            <ProtectedHeader>
-                <img src={require('./../../media/images/hotel.jpg')} alt="hotel welcome" />
-            </ProtectedHeader>
+    return (
+        <>
+            <Banner bgimage={banner_photo} heightprops='400px'
+                bannersubtitle='Special offers to suit your plan' bannertitle='Make the best travel plan.' />
             <Container>
-                <p>Plan</p>
-                {
-                    [1,2,3,4,5,6,7,8,9,10].map((_, index) => (
-                        <p key={index}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit et rerum velit quam unde tempora, praesentium modi a voluptate nam voluptates aspernatur corrupti odio minima, dolorem neque qui illo error!</p>
-                    ))
-                }
+                <WelcomeMainText part="true" texttransform='capitalize' fontSize='32px' paddingbottom='32px'>This to Do in Trip Name</WelcomeMainText>
+            </Container>
+            <PlanCategory />
+            <Container>
+                <IntoTravel />
             </Container>
         </>
-  )
+    )
 }
 
 export default Plan

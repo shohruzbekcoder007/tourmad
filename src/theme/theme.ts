@@ -6,8 +6,8 @@ export const light = {
   slamon: "#FF8682",
   neutrals_white: "#FFFFFF",
   mint_green: "#8DD3BB",
-  blackish_green: "#112211",
-  part_title: "#000000",
+  blackish_green: "#1B1464",
+  part_title: "#1B1464",
   medium_green: "#CDEAE1",
 }
 export const dark: ThemeType = {

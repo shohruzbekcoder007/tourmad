@@ -1,23 +1,20 @@
 import React from 'react'
 import { Container } from '../../global_styles/styles'
-import ProtectedHeader from '../../components/ProtectedHeader'
+import Banner from '../../components/Banner'
+import banner_photo from './../../media/images/banner-flight.jpg'
+import { TravelFilters } from '../../components'
 
 const Ticket: React.FC = () => {
-  return (
-    <>
-            <ProtectedHeader>
-                <img src={require('./../../media/images/plan.jpg')} alt="hotel welcome" />
-            </ProtectedHeader>
+    return (
+        <>
+            <Banner bgimage={banner_photo} heightprops='400px'
+            bannertitle='Make your travel whishlist, we’ll do the rest'
+            bannersubtitle='Special offers to suit your plan'/>
             <Container>
-                <p>Ticket</p>
-                {
-                    [1,2,3,4,5,6,7,8,9,10].map((_, index) => (
-                        <p key={index}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit et rerum velit quam unde tempora, praesentium modi a voluptate nam voluptates aspernatur corrupti odio minima, dolorem neque qui illo error!</p>
-                    ))
-                }
+                <TravelFilters />
             </Container>
         </>
-  )
+    )
 }
 
 export default Ticket

@@ -1,13 +1,13 @@
-import { Box, Button, Grid, IconButton, Stack } from '@mui/material'
-import React from 'react'
-import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import photo1 from "./../../media/images/into-hotel-1.jpg"
-import photo2 from "./../../media/images/into-hotel-2.jpg"
-import photo3 from "./../../media/images/into-hotel-3.jpg"
-import photo4 from "./../../media/images/into-hotel-4.jpg"
+import { Box, Button, Grid, IconButton, Stack } from '@mui/material';
+import React from 'react';
+import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
+import photo1 from "./../../media/images/driver-1.jpg";
+import photo2 from "./../../media/images/driver-2.jpg";
+import photo3 from "./../../media/images/dricer-3.png";
+import photo4 from "./../../media/images/driver-4.jpg";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const IntoTravel: React.FC = () => {
+const DriverCard: React.FC = () => {
   return (
     <Stack pb="80px">
         <Grid container pb="32px">
@@ -36,12 +36,12 @@ const IntoTravel: React.FC = () => {
                 <Box width="100%">
                     <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                         <Box>
-                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Samarqand</GlobalParagraph>
-                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>An amazing journey</GlobalParagraph>
+                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Jaloliddin</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Malibu</GlobalParagraph>
                         </Box>
-                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>$ 700</GlobalParagraph>
+                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 30</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Hotel</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Driver</Button>
                 </Box>
             </Box>
             <Box p="24px" display="flex" alignItems="flex-end" borderRadius="12px" height="420px" width={{xl: "296px"}} 
@@ -60,12 +60,12 @@ const IntoTravel: React.FC = () => {
                 <Box width="100%">
                     <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                         <Box>
-                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Bukhara</GlobalParagraph>
-                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>A Bukhara Adventure</GlobalParagraph>
+                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Husan</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Ko'k Jiguli</GlobalParagraph>
                         </Box>
-                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>$ 600</GlobalParagraph>
+                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 5</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Hotel</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Driver</Button>
                 </Box>
             </Box>
             <Box p="24px" display="flex" alignItems="flex-end" borderRadius="12px" height="420px" width={{xl: "296px"}} 
@@ -84,12 +84,12 @@ const IntoTravel: React.FC = () => {
                 <Box width="100%">
                     <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                         <Box>
-                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Xiva</GlobalParagraph>
-                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Xiva eye adventure</GlobalParagraph>
+                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Omadbek</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Gentra</GlobalParagraph>
                         </Box>
-                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>$ 350</GlobalParagraph>
+                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 20</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Hotel</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a driver</Button>
                 </Box>
             </Box>
             <Box p="24px" display="flex" alignItems="flex-end" borderRadius="12px" height="420px" width={{xl: "296px"}} 
@@ -108,12 +108,12 @@ const IntoTravel: React.FC = () => {
                 <Box width="100%">
                     <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                         <Box>
-                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Qarshi</GlobalParagraph>
-                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Amazing streets</GlobalParagraph>
+                            <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>Baxodir</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400' color='neutrals'>Matiz</GlobalParagraph>
                         </Box>
-                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>$ 700</GlobalParagraph>
+                        <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 10</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Hotel</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a driver</Button>
                 </Box>
             </Box>
         </Box>
@@ -121,4 +121,4 @@ const IntoTravel: React.FC = () => {
   )
 }
 
-export default IntoTravel
+export default DriverCard
