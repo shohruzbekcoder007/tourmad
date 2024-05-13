@@ -22,6 +22,7 @@ const App: React.FC = () => {
               {/* <Route index element={<TravelFilters/>}/> */}
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>}/>
+              <Route path="hotel-filter" element={<Hotel/>}/>
               <Route path="ticket" element={<Ticket/>}/>
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
