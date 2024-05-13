@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, HotelFilter, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -22,7 +22,7 @@ const App: React.FC = () => {
               {/* <Route index element={<TravelFilters/>}/> */}
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>}/>
-              <Route path="hotel-filter" element={<Hotel/>}/>
+              <Route path="hotel-filter" element={<HotelFilter/>}/>
               <Route path="ticket" element={<Ticket/>}/>
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
