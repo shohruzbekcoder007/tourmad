@@ -1,8 +1,6 @@
 import React from 'react'
 import { Container } from '../../global_styles/styles'
 import Banner from '../../components/Banner'
-import ResentSearch from '../../components/ResentSearch'
-import IntoTravel from '../../components/IntoTravel'
 import banner_photo from './../../media/images/banner-hotel.jpg'
 
 const HotelFilter: React.FC = () => {
