@@ -1,8 +1,10 @@
 import { combineReducers } from "redux"
-import { languageReducer } from "./languageReducer"
+// import { languageReducer } from "./languageReducer"
+// import { userReducer } from "./userReducer";
 
 const reducers = combineReducers({
-    language: languageReducer
+    // language: languageReducer,
+    // user: userReducer
 })
 
 export default reducers;

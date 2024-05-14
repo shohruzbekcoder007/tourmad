@@ -19,7 +19,6 @@ const App: React.FC = () => {
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
             <Route path="protected" element={<Protected/>}>
-              {/* <Route index element={<TravelFilters/>}/> */}
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>}/>
               <Route path="hotel-filter" element={<HotelFilter/>}/>
@@ -27,7 +26,6 @@ const App: React.FC = () => {
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
               <Route path="plan" element={<Plan/>}/>
-              
             </Route>
           </Route>
           <Route path="users" element={<p>user</p>} />
