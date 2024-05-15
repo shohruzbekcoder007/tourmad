@@ -4,6 +4,7 @@ import { Box, Container } from '@mui/material'
 import { HeaderWrapper } from '../Protected/styles'
 import UsersBanner from '../../components/UserBanner'
 import UserTabs from '../../components/UserTabs'
+import { Outlet } from 'react-router-dom'
 
 const Users: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const Users: React.FC = () => {
             <Container>
                 <UsersBanner />
                 <UserTabs />
+                <Outlet />
             </Container>
             <Box
                 paddingTop="170px"

@@ -4,8 +4,8 @@ export const lightThemeOptions: ThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: '#8DD3BB',
-      contrastText: '#112211',
+      main: '#1B1464',
+      contrastText: '#ffffff',
     },
     secondary: {
       main: "#ffffff",
@@ -23,6 +23,9 @@ export const lightThemeOptions: ThemeOptions = {
   typography: {
     fontFamily:
       '"Montserrat"',
+    button: { // works
+      color: '#112211' // doesn't work
+    }
   },
   components: {
     MuiButton: {

@@ -13,27 +13,27 @@ import { Paper } from '@mui/material'
 
 let items: sublink[] = [
     {
-        name: "hotel",
+        name: "Hotel",
         to: "hotel",
         iconc: <HotelIcon />
     },
     {
-        name: "ticket",
+        name: "Ticket",
         to: "ticket",
         iconc: <FlightTakeoffIcon />
     },
     {
-        name: "restaurant",
+        name: "Restaurant",
         to: "restaurant",
         iconc: <RestaurantMenuIcon />
     },
     {
-        name: "drive",
+        name: "Drive",
         to: "drive",
         iconc: <LocalTaxiIcon />
     },
     {
-        name: "plan",
+        name: "Plan",
         to: "plan",
         iconc: <BookmarkAddIcon />
     }
@@ -60,11 +60,17 @@ const ServicesLinkForAllPages: React.FC = () => {
                             >
                                 {
                                     window.location.pathname === `/protected/${item.to}` ?
-                                        <Chip
+                                        <Chip color='primary' sx={{
+                                            width: "120px",
+                                            height: "40px",
+                                        }}
                                             icon={item.iconc}
                                             label={item.name}
                                         />:
-                                        <Chip
+                                        <Chip color='primary' sx={{
+                                            width: "120px",
+                                            height: "40px"
+                                        }}
                                             icon={item.iconc}
                                             label={item.name}
                                             variant='outlined'

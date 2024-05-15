@@ -5,23 +5,23 @@ import { sublink } from './types'
 
 let items: sublink[] = [
     {
-        name: "hotel",
+        name: "Hotel",
         to: "hotel"
     },
     {
-        name: "ticket",
+        name: "Ticket",
         to: "ticket"
     },
     {
-        name: "restaurant",
+        name: "Restaurant",
         to: "restaurant"
     },
     {
-        name: "drive",
+        name: "Drive",
         to: "drive"
     },
     {
-        name: "plan",
+        name: "Plan",
         to: "plan"
     }
 ];

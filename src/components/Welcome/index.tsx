@@ -20,6 +20,8 @@ const Welcome: React.FC = () => {
                 }}
             >
                 <Box
+                borderRadius="24px"
+                bgcolor="#00000080"
                     padding="0 32px"
                 >
                     <Header
