@@ -8,6 +8,7 @@ import {
   ThemeProvider as MuiTheme
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
+import Users from './pages/Users';
 
 const App: React.FC = () => {
   return (
@@ -28,7 +29,12 @@ const App: React.FC = () => {
               <Route path="plan" element={<Plan/>}/>
             </Route>
           </Route>
-          <Route path="users" element={<p>user</p>} />
+          <Route path="users" element={<Users />}> 
+            <Route index element={<p>User Account</p>} />
+            <Route path='users-account' element={<p>User Account</p>} />
+            <Route path='users-history' element={<p>User History</p>} />
+            <Route path='users-payment' element={<p>Users Payments</p>} />
+          </Route>
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="set-password" element={<SetPassword />} />
