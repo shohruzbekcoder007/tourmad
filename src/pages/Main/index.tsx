@@ -3,17 +3,17 @@ import { Wrapper } from '../../global_styles/styles';
 import { Outlet } from 'react-router';
 import { getRequest } from '../../utils/request';
 import { me } from '../../utils/API_urls';
-// import { useDispatch } from 'react-redux';
-// import { setUser } from '../../redux/action/userActions';
+import { useAppSelector } from '../../redux/hooks';
+import { getStudentsList } from '../../redux/slices/langSlice';
 
 const Main: React.FC = () => {
 
-  // const dispatch = useDispatch()
+  const lang = useAppSelector(getStudentsList)
 
   useEffect(() => {
     getRequest(me).then(response => {
+      console.log(lang, "<-lang")
       console.log(response.data, "<--response.data")
-      // dispatch(setUser(response.data))
     }).catch(error => {
       console.log(error)
     })

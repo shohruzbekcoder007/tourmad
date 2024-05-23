@@ -6,7 +6,7 @@ import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_style
 import LoginWith from '../LoginWith'
 import LoginCarousel from '../LoginCarousel'
 import { postRequest } from '../../utils/request'
-import { token } from '../../utils/API_urls'
+import { login } from '../../utils/API_urls'
 import { setStorage, setStorageR } from '../../utils/storage'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,11 +19,11 @@ const SignIn: React.FC = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
   
-    const username = data.get('username');
+    const email = data.get('email');
     const password = data.get('password');
 
-    postRequest(token, {
-      username,
+    postRequest(login, {
+      email,
       password
     }).then(response => {
       if(response.status === 200){
@@ -55,7 +55,7 @@ const SignIn: React.FC = () => {
             <Box>
               <FormControl fullWidth>
                 <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='text' label='Email' variant='outlined' name="username"/>
+                  <TextField type='text' label='Email' variant='outlined' name="email"/>
                 </FormGroup>
                 <FormGroup sx={{pb: '24px'}}>
                   <TextField type='password' label='Password' variant='outlined' name="password"/>

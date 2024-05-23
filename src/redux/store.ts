@@ -1,8 +1,9 @@
-// import { compose, createStore }  from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
+import langSlice from './slices/langSlice'
 
 const store = configureStore({
   reducer: {
+    language: langSlice
   },
 })
 
