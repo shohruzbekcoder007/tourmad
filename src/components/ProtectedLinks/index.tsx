@@ -35,16 +35,13 @@ const ProtectedLinks: React.FC = () => {
             >
                 {
                     items.map((item, index) => (
-                        <>
-                            <SubLink
-                                key={index}
-                                to={item.to}
-                                className={(navData) => (navData.isActive ? 'active' : '')}
-                            >
-                                {item.name}
-                            </SubLink>
-                        </>
-                        
+                        <SubLink
+                            key={index}
+                            to={item.to}
+                            className={(navData) => (navData.isActive ? 'active' : '')}
+                        >
+                            {item.name}
+                        </SubLink>
                     ))
                 }
             </Box>

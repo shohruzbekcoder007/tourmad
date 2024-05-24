@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-interface LangState {
+type LangState = {
     lang: string,
     error: string | null
 }
 
-export const initialState: LangState = {
+const initialState: LangState = {
     lang: "uz",
     error: null,
 }
 
 export const authSlice = createSlice({
-    name: 'auth',
+    name: 'language',
     initialState,
     reducers: {
         changeLanguage: (state, action) => {
