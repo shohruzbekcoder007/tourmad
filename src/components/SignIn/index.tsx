@@ -1,12 +1,15 @@
 import { Box, FormControl, FormGroup, Stack, TextField, FormControlLabel, Checkbox, Button, Divider } from '@mui/material'
-import logo from "./../../media/images/logo2.png";
+import logo from "./../../media/images/logo2.png"
 import React from 'react'
-import { FooterLogoImg } from '../Footer/styles';
-import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
-import LoginWith from '../LoginWith';
-import LoginCarousel from '../LoginCarousel';
+import { FooterLogoImg } from '../Footer/styles'
+import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
+import LoginWith from '../LoginWith'
+import LoginCarousel from '../LoginCarousel'
 
 const SignIn: React.FC = () => {
+
+  
+
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
       <Box display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>
