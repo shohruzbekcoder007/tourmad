@@ -15,6 +15,7 @@ export type GlobalParagraphType = {
     paddingbottom?: string,
     color?: string,
     fontWeight: string,
+    mediafontsize?: string,
     oposity? : string,
 }
 

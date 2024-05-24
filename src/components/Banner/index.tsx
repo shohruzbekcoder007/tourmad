@@ -19,14 +19,14 @@ const Banner: React.FC<PropsType> = (props) => {
                     backgroundImage: `url(${props.bgimage})`,
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center"
+                    backgroundPosition: "right"
                 }}>
                 <Box width="100%" pt="80px" height="100%" sx={{ backgroundImage: "linear-gradient(90deg, rgba(0, 35, 77, 0.63) 11.46%, rgba(0, 35, 77, 0.00) 77.37%)" }}>
                     <Container>
-                        <Box width="50%">
-                            <WelcomeMainText fontSize='45px' paddingbottom='8px'>{props.bannertitle}</WelcomeMainText>
+                        <Box width={{xl: "50%", md: "70%", sm: "80%", xs: "90%"}}>
+                            <WelcomeMainText fontSize='45px' mediafontsize='32px' paddingbottom='8px'>{props.bannertitle}</WelcomeMainText>
                         </Box>
-                        <GlobalParagraph fontSize='20px' color='neutrals' fontWeight='500'>{props.bannersubtitle}</GlobalParagraph>
+                        <GlobalParagraph fontSize='20px' color='neutrals' mediafontsize='14px' fontWeight='500'>{props.bannersubtitle}</GlobalParagraph>
                     </Container>
                 </Box>
             </Stack>

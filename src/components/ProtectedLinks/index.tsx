@@ -32,6 +32,7 @@ const ProtectedLinks: React.FC = () => {
             <Box
                 display="flex"
                 justifyContent="flex-start"
+                flexWrap="wrap"
             >
                 {
                     items.map((item, index) => (
