@@ -42,6 +42,9 @@ export const GlobalParagraph = styled.p<GlobalParagraphType>`
     /* color: ${props => props.theme.slamon || props.theme.blackish_green}; */
     color: ${props => props.theme[""+props.color] || props.theme.blackish_green};
     opacity: ${props => props.oposity};
+    @media (max-width: 600px) {
+        font-size: ${props => props.mediafontsize};
+    }
 `
 
 export const GlobalLink = styled.a<GlobalLinkType>`

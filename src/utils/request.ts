@@ -24,7 +24,6 @@ export const postRequest = (url: string, data: any): Promise<AxiosResponse> => {
             url,
             data
         ).then((response) => {
-            console.log(response)
             resolve(response)
         })
         .catch((error) => {

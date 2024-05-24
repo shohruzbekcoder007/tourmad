@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, HotelFilter, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -8,6 +8,7 @@ import {
   ThemeProvider as MuiTheme
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
+import Users from './pages/Users';
 
 const App: React.FC = () => {
   return (
@@ -19,7 +20,6 @@ const App: React.FC = () => {
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
             <Route path="protected" element={<Protected/>}>
-              {/* <Route index element={<TravelFilters/>}/> */}
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>}/>
               <Route path="hotel-filter" element={<HotelFilter/>}/>
@@ -27,10 +27,14 @@ const App: React.FC = () => {
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
               <Route path="plan" element={<Plan/>}/>
-              
             </Route>
           </Route>
-          <Route path="users" element={<p>user</p>} />
+          <Route path="users" element={<Users />}> 
+            <Route index element={<UserAccount />} />
+            <Route path='users-account' element={<UserAccount />} />
+            <Route path='users-history' element={<UserHistory />} />
+            <Route path='users-payment' element={<p>Users Payments</p>} />
+          </Route>
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="set-password" element={<SetPassword />} />

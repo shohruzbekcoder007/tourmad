@@ -11,7 +11,7 @@ const Plan: React.FC = () => {
             <Banner bgimage={banner_photo} heightprops='400px'
                 bannersubtitle='Special offers to suit your plan' bannertitle='Make the best travel plan.' />
             <Container>
-                <WelcomeMainText part="true" texttransform='capitalize' fontSize='32px' paddingbottom='32px'>This to Do in Trip Name</WelcomeMainText>
+                <WelcomeMainText part="true" texttransform='capitalize' fontSize='32px' mediafontsize='24px' paddingbottom='32px'>This to Do in Trip Name</WelcomeMainText>
             </Container>
             <PlanCategory />
             <Container>

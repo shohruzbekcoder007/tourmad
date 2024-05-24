@@ -15,7 +15,7 @@ export const HeadeMenuList = styled.div`
 `
 
 export const HeaderMenuListItem = styled(NavLink)<{ type?: "white" | "dark" }>`
-    padding: 30px 0;
+    padding: 15px 0;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -27,7 +27,7 @@ export const HeaderMenuListItem = styled(NavLink)<{ type?: "white" | "dark" }>`
             position: absolute;
             content: '';
             width: 100%;
-            height: 5px;
+            height: 3px;
             background-color: ${props => props.theme.mint_green};
             z-index: 1;
             bottom: 0;
