@@ -4,6 +4,7 @@ import Banner from '../../components/Banner'
 import banner_photo from './../../media/images/banner-plan.jpg';
 import PlanCategory from '../../components/PlanCategory';
 import IntoTravel from '../../components/IntoTravel';
+import SwipeDrawer from '../../components/SwipeDrawer';
 
 const Plan: React.FC = () => {
     return (
@@ -16,6 +17,7 @@ const Plan: React.FC = () => {
             <PlanCategory />
             <Container>
                 <IntoTravel />
+                <SwipeDrawer />
             </Container>
         </>
     )
