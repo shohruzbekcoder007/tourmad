@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FavouritesUser, Footer, Header, ProtectedLinks } from '../../components'
+import { AuthUserInfo, Footer, Header, ProtectedLinks } from '../../components'
 import { Box, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import { HeaderWrapper } from './styles'
@@ -28,7 +28,7 @@ const Protected: React.FC = () => {
         <>
             <HeaderWrapper>
                 <Container>
-                    <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<FavouritesUser/>} />
+                    <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<AuthUserInfo/>} />
                     {
                         topNavbar && <ProtectedLinks/>
                     }

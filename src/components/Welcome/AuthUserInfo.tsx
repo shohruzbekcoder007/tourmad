@@ -47,6 +47,7 @@ const AuthUserInfo: React.FC = () => {
         return (
             <Paper
                 sx={{padding: "5px 10px"}}
+                elevation={0}
             >
                 <p>loading</p>
             </Paper>
@@ -57,6 +58,7 @@ const AuthUserInfo: React.FC = () => {
         return (
             <Paper
                 sx={{padding: "5px 10px"}}
+                elevation={0}
             >
                 <FavouritesUser/>
             </Paper>
