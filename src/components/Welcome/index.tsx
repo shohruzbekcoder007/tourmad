@@ -4,6 +4,7 @@ import welcome_bg from './../../media/images/body-bg.jpg'
 import Header from '../Header'
 import { WelcomeMainText } from '../../global_styles/styles'
 import { AuthUser } from './styles'
+import { Link } from 'react-router-dom'
 
 const Welcome: React.FC = () => {
     return (
@@ -29,15 +30,18 @@ const Welcome: React.FC = () => {
                         auth={
                             (<>
                                 <AuthUser>
-                                    <Button
-                                        color="secondary"
-                                        sx={{
-                                            borderRadius: "8px",
-                                            padding: "15px 24px"
-                                        }}
-                                    >
-                                        Login
-                                    </Button>
+                                    <Link to="sign-in">
+                                        <Button
+                                            color="secondary"
+                                            sx={{
+                                                borderRadius: "8px",
+                                                padding: "15px 24px"
+                                            }}
+                                        >
+                                            Login
+                                        </Button>
+                                    </Link>
+                                    
                                     <Button
                                         color="secondary"
                                         variant="contained"

@@ -10,6 +10,9 @@ export const SubLink = styled(NavLink)<{ isActive?: boolean }>`
     &:hover{
         border-bottom: 2px solid ${props => props.theme.blackish_green};
     };
+    &.active{
+        border-bottom: 2px solid ${props => props.theme.blackish_green};
+    };
     ${props => props.isActive &&
     css`
       border-bottom: 2px solid ${props.theme.blackish_green};

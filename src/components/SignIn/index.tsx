@@ -1,15 +1,46 @@
 import { Box, FormControl, FormGroup, Stack, TextField, FormControlLabel, Checkbox, Button, Divider } from '@mui/material'
-import logo from "./../../media/images/logo2.png";
+import logo from "./../../media/images/logo2.png"
 import React from 'react'
-import { FooterLogoImg } from '../Footer/styles';
-import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
-import LoginWith from '../LoginWith';
-import LoginCarousel from '../LoginCarousel';
+import { FooterLogoImg } from '../Footer/styles'
+import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
+import LoginWith from '../LoginWith'
+import LoginCarousel from '../LoginCarousel'
+import { postRequest } from '../../utils/request'
+import { login } from '../../utils/API_urls'
+import { setStorage, setStorageR } from '../../utils/storage'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn: React.FC = () => {
+
+  let navigate = useNavigate()
+
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+  
+    const email = data.get('email');
+    const password = data.get('password');
+
+    postRequest(login, {
+      email,
+      password
+    }).then(response => {
+      if(response.status === 200){
+        const { access_token, refresh_token } = response.data
+        setStorage(access_token)
+        setStorageR(refresh_token)
+        navigate('/protected')
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+
+  }
+
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
-      <Box display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>
+      <Box component={"form"} onSubmit={submitHandler} display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>
         <Box width={{xl: '512px', md: '48%', sm: '400px', xs: "360px"}}>
           <FooterLogoImg>
             <img src={logo} alt="TourMad" />
@@ -24,10 +55,10 @@ const SignIn: React.FC = () => {
             <Box>
               <FormControl fullWidth>
                 <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='text' label='Email' variant='outlined'></TextField>
+                  <TextField type='text' label='Email' variant='outlined' name="email"/>
                 </FormGroup>
                 <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='password' label='Password' variant='outlined'></TextField>
+                  <TextField type='password' label='Password' variant='outlined' name="password"/>
                 </FormGroup>
                 <FormGroup sx={{pb: '40px', display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: "space-between"}}>
                   <FormControlLabel
@@ -41,7 +72,7 @@ const SignIn: React.FC = () => {
               </FormControl>
             </Box>
             <Box pb='16px'>
-              <Button fullWidth variant='contained'>
+              <Button fullWidth variant='contained' type='submit'>
                 Login
               </Button>
             </Box>

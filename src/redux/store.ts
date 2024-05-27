@@ -1,11 +1,13 @@
-import { createStore }  from 'redux'
-import reducers from './reducers/index'
+import { configureStore } from '@reduxjs/toolkit'
+import langSlice from './slices/langSlice'
 
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
-//   && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = configureStore({
+  reducer: {
+    language: langSlice
+  },
+})
 
-const store = createStore(reducers, {}, composeEnhancers);
-
-export default store;
+export default store
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
