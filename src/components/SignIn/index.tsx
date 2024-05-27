@@ -27,9 +27,10 @@ const SignIn: React.FC = () => {
       password
     }).then(response => {
       if(response.status === 200){
-        const { access_token, refresh_token } = response.data
-        setStorage(access_token)
-        setStorageR(refresh_token)
+        console.log(response.data.data.tokens)
+        const { access, refresh } = response.data.data.tokens
+        setStorage(access)
+        setStorageR(refresh)
         navigate('/protected')
       }
     }).catch(error => {

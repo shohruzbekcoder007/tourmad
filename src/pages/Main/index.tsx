@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { Wrapper } from '../../global_styles/styles';
 import { Outlet } from 'react-router';
-import { getRequest } from '../../utils/request';
-import { me } from '../../utils/API_urls';
-import { useAppSelector } from '../../redux/hooks';
-import { getStudentsList } from '../../redux/slices/langSlice';
+import { useSelector } from 'react-redux';
+import { getUser, getUserStatus, getUserToken } from '../../redux/slices/userSlice';
+import { useAppDispatch } from '../../redux/hooks';
 
 const Main: React.FC = () => {
 
-  const lang = useAppSelector(getStudentsList)
+  const dispatch = useAppDispatch()
+  const token = useSelector(getUserToken)
+  const userStatus = useSelector(getUserStatus)
 
   useEffect(() => {
-    getRequest(me).then(response => {
-      console.log(lang, "<-lang")
-      console.log(response.data, "<--response.data")
-    }).catch(error => {
-      console.log(error)
-    })
-  }, [])
+    if(token){
+      if (userStatus === 'idle') {
+        dispatch(getUser())
+      }
+    }
+	}, [token, userStatus, dispatch])
 
   return (
     <Wrapper height="100vh">
