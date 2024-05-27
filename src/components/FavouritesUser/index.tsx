@@ -8,7 +8,6 @@ const FavouritesUser: React.FC = () => {
     <FavouritesUserWrapper>
         <Favourites/>
         <User/>
-        {/* FavouritesUser */}
     </FavouritesUserWrapper>
   )
 }

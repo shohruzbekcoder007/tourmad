@@ -1,10 +1,11 @@
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import React from 'react'
 import welcome_bg from './../../media/images/body-bg.jpg'
 import Header from '../Header'
 import { WelcomeMainText } from '../../global_styles/styles'
-import { AuthUser } from './styles'
-import { Link } from 'react-router-dom'
+import AuthUserInfo from './AuthUserInfo'
+
+// shu joyiga ruyhatdan utgan utmagani tugirlandi
 
 const Welcome: React.FC = () => {
     return (
@@ -21,42 +22,13 @@ const Welcome: React.FC = () => {
                 }}
             >
                 <Box
-                borderRadius="24px"
-                bgcolor="#00000080"
+                    borderRadius="24px"
+                    bgcolor="#00000080"
                     padding="0 32px"
                 >
                     <Header
                         logo={true}
-                        auth={
-                            (<>
-                                <AuthUser>
-                                    <Link to="sign-in">
-                                        <Button
-                                            color="secondary"
-                                            sx={{
-                                                borderRadius: "8px",
-                                                padding: "15px 24px"
-                                            }}
-                                        >
-                                            Login
-                                        </Button>
-                                    </Link>
-                                    
-                                    <Button
-                                        color="secondary"
-                                        variant="contained"
-                                        sx={{
-                                            borderRadius: "8px",
-                                            padding: "15px 24px"
-                                        }}
-                                    >
-                                        <span>
-                                            Sign up
-                                        </span>
-                                    </Button>
-                                </AuthUser>
-                            </>)
-                        }
+                        auth={<AuthUserInfo/>}
                     />
                     <Box
                         sx={{
