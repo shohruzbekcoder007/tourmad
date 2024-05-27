@@ -29,7 +29,7 @@ export const getUser = createAsyncThunk("me",
     async (_, { rejectWithValue }) => {
         try {
             const response = await UserService.me();
-            const user: UserState = response.data;
+            const user: UserType = response.data;
             return user;
         } catch (error) {
             let errorMessage = 'Error';
@@ -51,23 +51,25 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getUser.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                state.loading = true
+                state.error = null
+                state.status = "loading"
             })
-            .addCase(getUser.fulfilled, (state, action: PayloadAction<UserState>) => {
-                state.loading = false;
-                let user = action.payload
-                console.log(action.payload, "<-action")
-                // state.user = action.payload;
+            .addCase(getUser.fulfilled, (state, action: PayloadAction<UserType>) => {
+                state.loading = false
+                let user = action?.payload
+                state.user = user
+                state.status = "succeeded"
             })
             .addCase(getUser.rejected, (state, action) => {
-                state.loading = false;
+                state.loading = false
+                state.status = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             });
     }
 })
 
-export const { } = userSlice.actions
+// export const { } = userSlice.actions
 
 export const getUserStatus = (state: RootState) => state.user.status
 export const getUserError = (state: RootState) => state.user.error

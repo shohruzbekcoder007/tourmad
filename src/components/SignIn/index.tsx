@@ -27,7 +27,6 @@ const SignIn: React.FC = () => {
       password
     }).then(response => {
       if(response.status === 200){
-        console.log(response.data.data.tokens)
         const { access, refresh } = response.data.data.tokens
         setStorage(access)
         setStorageR(refresh)

@@ -2,8 +2,13 @@ import { Avatar } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React from 'react'
 import { FavouritesText } from './styles'
+import { useAppSelector } from '../../redux/hooks'
+import { getUserInfo } from '../../redux/slices/userSlice'
 
 const User = () => {
+
+    const userInfo = useAppSelector(getUserInfo)
+    
     return (
         <Stack direction="row" spacing={1} alignItems="center" gap="5px" sx={{cursor: "pointer"}}>
             <Box
@@ -20,7 +25,7 @@ const User = () => {
                     </svg>
                 </Box>
             </Box>
-            <FavouritesText>John D.</FavouritesText>
+            <FavouritesText>{userInfo?.first_name} {userInfo?.last_name}</FavouritesText>
         </Stack>
     )
 }
