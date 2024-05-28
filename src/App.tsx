@@ -29,18 +29,18 @@ const App: React.FC = () => {
               <Route path="plan" element={<Plan/>}/>
             </Route>
           </Route>
-          <Route path="users" element={<Users />}> 
-            <Route index element={<UserAccount />} />
-            <Route path='users-account' element={<UserAccount />} />
-            <Route path='users-history' element={<UserHistory />} />
-            <Route path='users-payment' element={<p>Users Payments</p>} />
+          <Route path="users" element={<Users />}>
+            <Route index element={<UserAccount />}/>
+            <Route path='users-account' element={<UserAccount />}/>
+            <Route path='users-history' element={<UserHistory />}/>
+            <Route path='users-payment' element={<p>Users Payments</p>}/>
           </Route>
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
-          <Route path="set-password" element={<SetPassword />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="verify" element={<Verify />} />
-          <Route path='*' element={<Error />} />
+          <Route path="sign-in" element={<SignIn />}/>
+          <Route path="sign-up" element={<SignUp />}/>
+          <Route path="set-password" element={<SetPassword/>}/>
+          <Route path="forgot-password" element={<ForgotPassword/>}/>
+          <Route path="verify" element={<Verify/>}/>
+          <Route path='*' element={<Error/>}/>
         </Routes>
       </ThemeProvider>
     </MuiTheme>
