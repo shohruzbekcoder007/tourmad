@@ -26,14 +26,14 @@ const Protected: React.FC = () => {
 
     return (
         <>
-            <HeaderWrapper>
+            {/* <HeaderWrapper>
                 <Container>
                     <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<FavouritesUser/>} />
                     {
                         topNavbar && <ProtectedLinks/>
                     }
                 </Container>
-            </HeaderWrapper>
+            </HeaderWrapper> */}
             <Outlet/>
             <Box
                 paddingTop="170px"
