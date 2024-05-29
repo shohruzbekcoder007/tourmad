@@ -1,8 +1,13 @@
-import { trip_hotel } from "../utils/API_urls"
+import { location_hotel, recommendation_trip_hotel, trip_hotel } from "../utils/API_urls"
 import { getRequest } from "../utils/request"
 
 class TripHotel {
-    static trip_hotels = () => {
+
+    static locationHotels = () => {
+        return getRequest(location_hotel)
+    }
+
+    static tripHotels = () => {
         return getRequest(trip_hotel)
     }
 
@@ -16,6 +21,10 @@ class TripHotel {
 
     static hotelDetail = () => {
         
+    }
+
+    static recommendationTripHotel = () => {
+        return getRequest(recommendation_trip_hotel)
     }
 }
 

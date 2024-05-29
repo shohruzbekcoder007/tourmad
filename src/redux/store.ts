@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import langSlice from './slices/langSlice'
 import userSlice from './slices/userSlice'
+import hotelSlice from './slices/hotelSlice'
 
 const store = configureStore({
   reducer: {
     language: langSlice,
-    user: userSlice
+    user: userSlice,
+    hotel: hotelSlice
   },
 })
 

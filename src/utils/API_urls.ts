@@ -6,3 +6,5 @@ export const me: string = 'accounts/me/'
 
 export const trip_hotel = "trip/trip-hotel"
 export const trip_hotel_oder = "trip/trip-hotel-oder"
+export const location_hotel = "common/location-hotel"
+export const recommendation_trip_hotel = "trip/recommendation-trip-hotel"
