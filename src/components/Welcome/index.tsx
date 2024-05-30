@@ -22,7 +22,6 @@ const Welcome: React.FC = () => {
                 }}
             >
                 <Box
-<<<<<<< HEAD
                 borderRadius="24px"
                 bgcolor="#00000080"
                     padding={{xl: "0 32px", md: "0 32px", sm: "0 16px", xs: "0 16px"}}
@@ -32,45 +31,7 @@ const Welcome: React.FC = () => {
                 >
                     <Header
                         logo={true}
-                        auth={
-                            (<>
-                                <AuthUser>
-                                    <Link to="sign-in">
-                                        <Button
-                                            color="secondary"
-                                            sx={{
-                                                borderRadius: "8px",
-                                                padding: {xl: "15px 24px", md: "15px 24px", sm: "15px 24px", xs: "8px 12px"}
-                                            }}
-                                        >
-                                            Login
-                                        </Button>
-                                    </Link>
-                                    
-                                    <Button
-                                        color="secondary"
-                                        variant="contained"
-                                        sx={{
-                                            borderRadius: "8px",
-                                            padding: {xl: "15px 24px", md: "15px 24px", sm: "15px 24px", xs: "8px 12px"}
-                                        }}
-                                    >
-                                        <span>
-                                            Sign up
-                                        </span>
-                                    </Button>
-                                </AuthUser>
-                            </>)
-                        }
-=======
-                    borderRadius="24px"
-                    bgcolor="#00000080"
-                    padding="0 32px"
-                >
-                    <Header
-                        logo={true}
                         auth={<AuthUserInfo/>}
->>>>>>> a1def5daadf66b82a912ceff40fa10085c4eff47
                     />
                     <Box
                         sx={{
