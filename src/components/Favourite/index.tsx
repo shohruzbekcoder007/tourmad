@@ -4,10 +4,6 @@ import {
   Divider,
   Paper,
   Rating,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
 } from "@mui/material";
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -15,143 +11,9 @@ import { GlobalParagraph } from "../../global_styles/styles";
 import card_image from "./../../media/images/fav-card-img.png";
 
 const Favourite: React.FC = () => {
-  const [valueTab, setValueTab] = React.useState(0);
-  const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
-    setValueTab(newValue);
-  };
   const value: number | null = 2;
   return (
-    <Stack>
-      <GlobalParagraph fontSize="32px" mediafontsize="24px" fontWeight="700" style={{
-        marginTop: "48px"
-      }}>
-        Favourites
-      </GlobalParagraph>
       <Paper
-        elevation={0}
-        sx={{
-          boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
-          borderRadius: "16px",
-          padding: "32px 24px",
-          marginTop: "48px",
-          mb: "32px",
-        }}
-      >
-        <Tabs
-          value={valueTab}
-          onChange={handleChangeTab}
-          aria-label="icon label tabs example"
-        >
-          <Tab
-            sx={{
-              // width: {xl: "25%", md: "20%", sm: "20%", xs: "20%"},
-              width: "24%",
-              fontSize: {xl: "16px", md: "16px", sm: "14px", xs: "12px"},
-              fontWeight: 600,
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-            label={
-              <>
-                Hotel
-                <Typography
-                  display="block"
-                  mt="8px"
-                  sx={{
-                    fontSize: {xl: "14px", md: "14px", sm: "12px", xs: "10px"},
-                    fontWeight: 400,
-                    opacity: 0.4,
-                  }}
-                >
-                  2 marked 
-                </Typography>
-              </>
-            }
-          />
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tab
-            sx={{
-              // width: {xl: "25%", md: "20%", sm: "20%", xs: "20%"},
-              width: "24%",
-              fontSize: {xl: "16px", md: "16px", sm: "14px", xs: "12px"},
-              fontWeight: 600,
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-            label={
-              <>
-                Hotel
-                <Typography
-                  display="block"
-                  mt="8px"
-                  sx={{
-                    fontSize: {xl: "14px", md: "14px", sm: "12px", xs: "10px"},
-                    fontWeight: 400,
-                    opacity: 0.4,
-                  }}
-                >
-                  2 marked 
-                </Typography>
-              </>
-            }
-          />
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tab
-            sx={{
-              // width: {xl: "25%", md: "20%", sm: "20%", xs: "20%"},
-              width: "24%",
-              fontSize: {xl: "16px", md: "16px", sm: "14px", xs: "12px"},
-              fontWeight: 600,
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-            label={
-              <>
-                Hotel
-                <Typography
-                  display="block"
-                  mt="8px"
-                  sx={{
-                    fontSize: {xl: "14px", md: "14px", sm: "12px", xs: "10px"},
-                    fontWeight: 400,
-                    opacity: 0.4,
-                  }}
-                >
-                  2 marked 
-                </Typography>
-              </>
-            }
-          />
-          <Divider orientation="vertical" variant="middle" flexItem />
-          <Tab
-            sx={{
-              // width: {xl: "25%", md: "20%", sm: "20%", xs: "20%"},
-              width: "24%",
-              fontSize: {xl: "16px", md: "16px", sm: "14px", xs: "12px"},
-              fontWeight: 600,
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-            label={
-              <>
-                Hotel
-                <Typography
-                  display="block"
-                  mt="8px"
-                  sx={{
-                    fontSize: {xl: "14px", md: "14px", sm: "12px", xs: "10px"},
-                    fontWeight: 400,
-                    opacity: 0.4,
-                  }}
-                >
-                  2 marked 
-                </Typography>
-              </>
-            }
-          />
-        </Tabs>
-      </Paper>
-      {/* <Paper
       elevation={0}
       sx={{
         boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
@@ -162,7 +24,7 @@ const Favourite: React.FC = () => {
       }}>
         <Box display="flex" flexWrap="wrap" justifyContent="space-between" width="100%">
           <Box sx={{
-              width: {xl: "440px", md: "34%", sm: "100%", xs: "100%"},
+              width: {xl: "410px", md: "36%", sm: "100%", xs: "100%"},
               
             }}>
               <img src={card_image} width="100%" alt="" style={{
@@ -170,7 +32,7 @@ const Favourite: React.FC = () => {
               }} />
             </Box>
           <Box sx={{
-            width: {xl: "792px", md: "64%", sm: "100%", xs: "100%"}
+            width: {xl: "700px", md: "62%", sm: "100%", xs: "100%"}
           }}>
               <Box width="100%" display="flex" justifyContent="space-between">
                 <Box sx={{
@@ -354,8 +216,7 @@ const Favourite: React.FC = () => {
               </Box>
             </Box>
         </Box>
-      </Paper> */}
-    </Stack>
+      </Paper>
   );
 };
 

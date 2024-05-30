@@ -1,11 +1,12 @@
 import React from 'react'
 import { Container } from '../../global_styles/styles'
-import { Favourite } from '../../components'
+import { Favourite, TabsPart } from '../../components'
 const Favourites: React.FC = () => {
     return (
         <>
             <Container>
-                <Favourite/>
+                {/* <Favourite/> */}
+                <TabsPart/>
             </Container>
         </>
     )
