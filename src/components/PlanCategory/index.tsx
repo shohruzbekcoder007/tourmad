@@ -4,7 +4,7 @@ import { Container, GlobalParagraph, WelcomeMainText } from '../../global_styles
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 const PlanCategory: React.FC = () => (
-    <Stack py="40px" mb="40px" bgcolor="#edececee">
+    <Stack py="40px" mb="40px"  bgcolor="#edececee">
         <Container>
             <Grid container pb="32px">
                 <Grid item xl={8} md={8} sm={6} xs={8}>

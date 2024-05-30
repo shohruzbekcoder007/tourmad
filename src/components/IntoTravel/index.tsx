@@ -5,6 +5,7 @@ import photo1 from "./../../media/images/into-hotel-1.jpg"
 import photo2 from "./../../media/images/into-hotel-2.jpg"
 import photo3 from "./../../media/images/into-hotel-3.jpg"
 import photo4 from "./../../media/images/into-hotel-4.jpg"
+import SwipeDrawer from '../SwipeDrawer'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice'

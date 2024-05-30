@@ -48,7 +48,8 @@ const ServicesLinkForAllPages: React.FC = () => {
                     sx={{
                         boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
                         borderRadius: "16px",
-                        padding: "32px"
+                        padding: "32px",
+                        display: {xl: "block", md: "block", sm: "none", xs: "none"}
                     }}
                 >
                     <ServicesLinks>

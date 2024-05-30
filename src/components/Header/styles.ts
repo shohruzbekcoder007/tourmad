@@ -4,6 +4,8 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
     justify-content: space-between;
 `
 
@@ -12,6 +14,9 @@ export const HeadeMenuList = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 32px;
+    @media (max-width: 900px) {
+        display: none;
+    }
 `
 
 export const HeaderMenuListItem = styled(NavLink)<{ type?: "white" | "dark" }>`
@@ -48,6 +53,9 @@ export const HeaderMenuListItemText = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media (max-width: 1200px) {
+        font-size: 12px;
+    }
 `
 
 export const WelcomeLogo = styled.div`
@@ -55,5 +63,11 @@ export const WelcomeLogo = styled.div`
         display: inline-block;
         width: 200px;
         object-fit: cover;
+        @media (max-width: 1200px) {
+            width: 120px;
+        }
+        @media (max-width: 600px) {
+            width: 90px;
+        }
     }
 `
