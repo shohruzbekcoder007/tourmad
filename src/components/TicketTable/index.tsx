@@ -3,18 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Container } from '../../global_styles/styles'
 import Header from '../Header'
 import { CustomAutocomplete } from '../../helper_components'
-import { HotelRecommendationType } from '../../utils/response_types'
 
 type Option = {
   label: string,
   value: string
 }
 
-type TicketTablePropsType = {
-  data:  HotelRecommendationType[] | null
-}
-
-const TicketTable: React.FC<TicketTablePropsType> = ({data}) => {
+const TicketTable: React.FC = () => {
 
   const [from, setFrom] = useState<Option | null>(null)
   const [depart, setDepart] = useState<Option | null>(null)

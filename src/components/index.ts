@@ -19,7 +19,6 @@ export { default as ServicesLinkForAllPages } from './ServicesLink/ServicesLinkF
 export { default as ProtectedLinks } from './ProtectedLinks'
 export { default as PageWelcome } from './PageWelcome'
 export { default as FlightCard } from './FlightCard'
-export { default as Hotel } from './Hotel'
 export { default as UserAccount } from './UserAccounts'
 export { default as UserHistory } from './UserHistory'
 export { default as HotelFilters } from './HotelFilter'

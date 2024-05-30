@@ -12,7 +12,7 @@ const Restaurant: React.FC = () => {
             bannertitle='Special offers to suit your plan' />
             <Container>
                 <ResentSearch />
-                <IntoTravel />
+                <IntoTravel data={null}/>
             </Container>
         </>
   )

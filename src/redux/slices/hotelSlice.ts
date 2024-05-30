@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { HotelLocationType, HotelRecommendationType } from "../../utils/response_types";
 import { AxiosError } from "axios";
-import TripHotel from "../../services/TripHotel";
+import TripHotelService from "../../services/TripHotelService";
 import { RootState } from "../store";
 
 export interface HotelState {
@@ -29,7 +29,7 @@ const initialState: HotelState = {
 export const getLoacationList = createAsyncThunk("get-location-hotel",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await TripHotel.locationHotels();
+            const response = await TripHotelService.locationHotels();
             const location_list: HotelLocationType[] = response.data?.results;
             return location_list;
         } catch (error) {
@@ -45,7 +45,7 @@ export const getLoacationList = createAsyncThunk("get-location-hotel",
 export const getRecommendationTripHotel = createAsyncThunk('recommendation-trip-hotel',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await TripHotel.recommendationTripHotel();
+            const response = await TripHotelService.recommendationTripHotel();
             const location_list: HotelRecommendationType[] = response.data?.results;
             return location_list;
         } catch (error) {
