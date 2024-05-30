@@ -14,6 +14,9 @@ export const FavouritesText = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media (max-width: 600px) {
+        display: none;
+    }
 `
 
 export const FavouriteWrapper = styled.div`
@@ -24,4 +27,5 @@ export const FavouriteWrapper = styled.div`
     padding-right: 15px;
     cursor: pointer;
     border-right: 2px solid ${props => props.theme.blackish_green};
+
 `

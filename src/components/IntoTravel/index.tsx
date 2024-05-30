@@ -6,6 +6,7 @@ import photo2 from "./../../media/images/into-hotel-2.jpg"
 import photo3 from "./../../media/images/into-hotel-3.jpg"
 import photo4 from "./../../media/images/into-hotel-4.jpg"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SwipeDrawer from '../SwipeDrawer'
 
 const IntoTravel: React.FC = () => {
   return (
