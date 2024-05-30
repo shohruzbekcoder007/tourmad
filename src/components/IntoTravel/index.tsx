@@ -1,11 +1,6 @@
 import { Box, Button, Grid, IconButton, Stack } from '@mui/material'
 import React, { useEffect } from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import photo1 from "./../../media/images/into-hotel-1.jpg"
-import photo2 from "./../../media/images/into-hotel-2.jpg"
-import photo3 from "./../../media/images/into-hotel-3.jpg"
-import photo4 from "./../../media/images/into-hotel-4.jpg"
-import SwipeDrawer from '../SwipeDrawer'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice'
@@ -15,8 +10,6 @@ const IntoTravel: React.FC = () => {
     const statusLastRecommendationHotel = useAppSelector(getStatusLastRecommendationHotel)
     const hotelRecommendationList = useAppSelector(getHotelRecommendationList)
     const dispatch = useAppDispatch()
-
-    console.log(hotelRecommendationList, "<-hotelRecommendationList-|")
 
     useEffect(() => {
         if (statusLastRecommendationHotel === 'idle') {
@@ -69,10 +62,10 @@ const IntoTravel: React.FC = () => {
                                 <Box width="100%">
                                     <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                                         <Box>
-                                            <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>Samarqand</GlobalParagraph>
-                                            <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>An amazing journey</GlobalParagraph>
+                                            <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{hotelRecommendation?.name}</GlobalParagraph>
+                                            <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{hotelRecommendation?.desc}</GlobalParagraph>
                                         </Box>
-                                        <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>$ 700</GlobalParagraph>
+                                        <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{hotelRecommendation?.room_style?hotelRecommendation?.room_style[0]?.price:"0"} $</GlobalParagraph>
                                     </Box>
                                     <Button sx={{ height: "48px" }} fullWidth variant='contained'>Book a Hotel</Button>
                                 </Box>

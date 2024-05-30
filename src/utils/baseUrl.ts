@@ -13,7 +13,8 @@ instance.interceptors.request.use(
   (config) => { 
     const token = getStorage(); 
     if (token) { 
-      config.headers.Authorization = `Bearer ${token}`; 
+      config.headers.Authorization = `Bearer ${token}`;
+      config.headers["Accept-Language"] = `uz`; 
     } 
     return config; 
   }, 

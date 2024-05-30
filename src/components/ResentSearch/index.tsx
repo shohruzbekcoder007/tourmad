@@ -20,9 +20,20 @@ const ResentSearch: React.FC = () => {
     return (
         <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
             <WelcomeMainText
-                texttransform='capitalize' part="true"
-                color='part_title' fontSize='32px' mediafontsize='24px'>Your recent searches</WelcomeMainText>
-            <Box display="flex" justifyContent="space-between" alignItems="center" flexWrap="wrap">
+                texttransform='capitalize' 
+                part="true"
+                color='part_title' 
+                fontSize='32px' 
+                mediafontsize='24px'
+            >
+                Your recent searches
+            </WelcomeMainText>
+            <Box 
+                display="flex" 
+                justifyContent="space-between" 
+                alignItems="center" 
+                flexWrap="wrap"
+            >
                 {
                     hotelLocationList?.map((hotelLocation, index) => {
                         return (
@@ -42,7 +53,11 @@ const ResentSearch: React.FC = () => {
                                 gap="16px"
                                 alignItems="center"
                             >
-                                <Box borderRadius="8px" width="90px" height="90px">
+                                <Box 
+                                    borderRadius="8px" 
+                                    width="90px" 
+                                    height="90px"
+                                >
                                     <img src={`${hotelLocation?.photo}`} width="100%" height="100%" style={{ objectFit: "cover" }} alt="Hotel" />
                                 </Box>
                                 <Box>
