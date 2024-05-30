@@ -74,10 +74,18 @@ export default function BasicTabs() {
               marginLeft: "30px",
             }}
           >
-            <Tab label="Hotel" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} />
-            <Tab label="Item four" {...a11yProps(3)} />
+            <Tab sx={{
+              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
+            }} label="Hotel" {...a11yProps(0)} />
+            <Tab sx={{
+              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
+            }} label="Item Two" {...a11yProps(1)} />
+            <Tab sx={{
+              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
+            }} label="Item Three" {...a11yProps(2)} />
+            <Tab sx={{
+              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
+            }} label="Item four" {...a11yProps(3)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
