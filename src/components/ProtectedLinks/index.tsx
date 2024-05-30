@@ -28,7 +28,7 @@ let items: sublink[] = [
 
 const ProtectedLinks: React.FC = () => {
     return (
-        <Box>
+        <Box display={{xl: 'block', md: "block", sm: "none", xs: "none"}}>
             <Box
                 display="flex"
                 justifyContent="flex-start"

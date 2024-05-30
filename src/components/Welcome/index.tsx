@@ -18,13 +18,16 @@ const Welcome: React.FC = () => {
                     backgroundImage: `url(${welcome_bg})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: "600px"
+                    height: {xl: '600px', md: "500px", sm: "400px", xs: "400px" }
                 }}
             >
                 <Box
-                    borderRadius="24px"
-                    bgcolor="#00000080"
-                    padding="0 32px"
+                borderRadius="24px"
+                bgcolor="#00000080"
+                    padding={{xl: "0 32px", md: "0 32px", sm: "0 16px", xs: "0 16px"}}
+                    sx={{
+                        height: {xl: '600px', md: "500px", sm: "400px", xs: "400px" }
+                    }}
                 >
                     <Header
                         logo={true}
@@ -32,16 +35,16 @@ const Welcome: React.FC = () => {
                     />
                     <Box
                         sx={{
-                            height: "500px",
+                            height: {xl: '600px', md: "500px", sm: "400px", xs: "300px" },
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}
                     >
-                        <WelcomeMainText fontSize={"45px"} paddingbottom="4px">Helping Others</WelcomeMainText>
-                        <WelcomeMainText fontSize={"80px"} paddingbottom="16px">Live & Travel</WelcomeMainText>
-                        <WelcomeMainText fontSize={"20px"}>Special offers to suit your plan</WelcomeMainText>
+                        <WelcomeMainText fontSize={"45px"} mediafontsize='20px' paddingbottom="4px">Helping Others</WelcomeMainText>
+                        <WelcomeMainText fontSize={"80px"} mediafontsize='28px' paddingbottom="16px">Live & Travel</WelcomeMainText>
+                        <WelcomeMainText fontSize={"20px"} mediafontsize='12px'>Special offers to suit your plan</WelcomeMainText>
                     </Box>
                 </Box>
             </Box>

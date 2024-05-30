@@ -14,6 +14,18 @@ export const TripPlanCard = styled.div`
         box-shadow: 0px 4px 4px 0px rgba(17, 34, 17, 0.05); 
         cursor: pointer;
     }
+    @media (max-width: 1233px) {
+        width: 31%;
+        margin-top: 32px;
+    }
+    @media (max-width: 900px) {
+        width: 48%;
+        margin-top: 32px;
+    }
+    @media (max-width: 600px) {
+        width: 100%;
+        margin-top: 32px;
+    }
 `
 
 export const CardPhoto = styled.div`
