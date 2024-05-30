@@ -1,10 +1,11 @@
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import React from 'react'
 import welcome_bg from './../../media/images/body-bg.jpg'
 import Header from '../Header'
 import { WelcomeMainText } from '../../global_styles/styles'
-import { AuthUser } from './styles'
-import { Link } from 'react-router-dom'
+import AuthUserInfo from './AuthUserInfo'
+
+// shu joyiga ruyhatdan utgan utmagani tugirlandi
 
 const Welcome: React.FC = () => {
     return (
@@ -21,6 +22,7 @@ const Welcome: React.FC = () => {
                 }}
             >
                 <Box
+<<<<<<< HEAD
                 borderRadius="24px"
                 bgcolor="#00000080"
                     padding={{xl: "0 32px", md: "0 32px", sm: "0 16px", xs: "0 16px"}}
@@ -60,6 +62,15 @@ const Welcome: React.FC = () => {
                                 </AuthUser>
                             </>)
                         }
+=======
+                    borderRadius="24px"
+                    bgcolor="#00000080"
+                    padding="0 32px"
+                >
+                    <Header
+                        logo={true}
+                        auth={<AuthUserInfo/>}
+>>>>>>> a1def5daadf66b82a912ceff40fa10085c4eff47
                     />
                     <Box
                         sx={{
