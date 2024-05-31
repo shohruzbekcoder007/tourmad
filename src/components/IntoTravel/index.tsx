@@ -44,7 +44,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                         backgroundPosition: "center",
                                         backgroundSize: "cover",
                                         position: "relative",
-                                        minWidth: "296px",
+                                        width: "296px",
                                         '&:hover': {
                                             boxShadow: `0px 0px 5px 5px rgba(37, 69, 37, 0.217)`,
                                             cursor: 'pointer',
@@ -54,7 +54,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                         <FavoriteBorderIcon />
                                     </IconButton>
                                     <Box width="100%">
-                                        <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
+                                        <Box pb="16px" width="100%" display="flex" justifyContent="space-between" gap="10px" alignItems="flex-end">
                                             <Box>
                                                 <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.name}</GlobalParagraph>
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
