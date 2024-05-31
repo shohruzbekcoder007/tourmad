@@ -34,7 +34,7 @@ const SwipeDrawer = () => {
 
     const list = (anchor: Anchor) => (
         <Box
-            sx={{ width: 500 }}
+            sx={{ width: {xl: 500, md: 400, sm: 350, xs: 300} }}
             p="24px"
             pt="44px"
             role="presentation"

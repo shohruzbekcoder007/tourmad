@@ -19,10 +19,10 @@ const App: React.FC = () => {
           <Route path="/" element={<Main/>}>
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
+            <Route path='hotel-filter' element={<HotelFilter />} />
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
-              <Route path="hotel" element={<Hotel/>}/>
-              <Route path="hotel-filter" element={<HotelFilter/>}/>
+              <Route path="hotel" element={<Hotel/>} />
               <Route path="ticket" element={<Ticket/>}/>
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
