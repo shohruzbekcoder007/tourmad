@@ -1,17 +1,13 @@
 import { Box, Button, Grid, IconButton, Stack } from '@mui/material'
 import React, { useEffect } from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import photo1 from "./../../media/images/into-hotel-1.jpg"
-import photo2 from "./../../media/images/into-hotel-2.jpg"
-import photo3 from "./../../media/images/into-hotel-3.jpg"
-import photo4 from "./../../media/images/into-hotel-4.jpg"
-import SwipeDrawer from '../SwipeDrawer'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice'
+import { useNavigate } from 'react-router-dom'
 
 const IntoTravel: React.FC = () => {
-
+    const navigate = useNavigate();
     const statusLastRecommendationHotel = useAppSelector(getStatusLastRecommendationHotel)
     const hotelRecommendationList = useAppSelector(getHotelRecommendationList)
     const dispatch = useAppDispatch()
@@ -32,7 +28,7 @@ const IntoTravel: React.FC = () => {
                     <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
                 </Grid>
                 <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                    <Button variant="outlined" >See All</Button>
+                    <Button variant="outlined" onClick={() => navigate("/hotel-filter")}>See All</Button>
                 </Grid>
             </Grid>
             <Box display="flex" width="100%" justifyContent="flex-start" gap="20px" sx={{
