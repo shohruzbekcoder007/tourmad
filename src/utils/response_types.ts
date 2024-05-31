@@ -9,7 +9,7 @@ export type RoomStyle = {
     price: number | null
 }
 
-export type HotelLocationType = {
+export type LocationType = {
     id: number | null,
     name: string | null,
     parent: number | null,
@@ -27,9 +27,9 @@ export type UserType = {
     role: "user" | "admin"
 }
 
-export type HotelRecommendationType = {
+export type RecommendationType = {
     id: number | null,
-    location: HotelLocationType | null,
+    location: LocationType | null,
     gallery: GalleryType[] | null,
     room_style: RoomStyle[] | null,
     banner: string | null,

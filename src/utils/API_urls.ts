@@ -10,3 +10,4 @@ export const location_hotel = "common/location-hotel"
 export const recommendation_trip_hotel = "trip/recommendation-trip-hotel"
 
 export const recommendation_trip_restaurant = "trip/recommendation-trip-restaurant"
+export const recommendation_trip_drive = "/trip/recommendation-trip-drive"

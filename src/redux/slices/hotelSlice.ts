@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { HotelLocationType, HotelRecommendationType } from "../../utils/response_types";
+import { LocationType, RecommendationType } from "../../utils/response_types";
 import { AxiosError } from "axios";
 import TripHotelService from "../../services/TripHotelService";
 import { RootState } from "../store";
@@ -10,8 +10,8 @@ export interface HotelState {
     loading: boolean,
     message: string,
     showMessage: boolean,
-    locationList: HotelLocationType[] | null
-    hotelRecommendationList: HotelRecommendationType[] | null
+    locationList: LocationType[] | null
+    hotelRecommendationList: RecommendationType[] | null
     error: null,
 }
 
@@ -30,7 +30,7 @@ export const getLoacationList = createAsyncThunk("get-location-hotel",
     async (_, { rejectWithValue }) => {
         try {
             const response = await TripHotelService.locationHotels();
-            const location_list: HotelLocationType[] = response.data?.results;
+            const location_list: LocationType[] = response.data?.results;
             return location_list;
         } catch (error) {
             let errorMessage = 'Error';
@@ -46,7 +46,7 @@ export const getRecommendationTripHotel = createAsyncThunk('recommendation-trip-
     async (_, { rejectWithValue }) => {
         try {
             const response = await TripHotelService.recommendationTripHotel();
-            const location_list: HotelRecommendationType[] = response.data?.results;
+            const location_list: RecommendationType[] = response.data?.results;
             return location_list;
         } catch (error) {
             let errorMessage = 'Error';
@@ -71,7 +71,7 @@ export const hotelSlice = createSlice({
                 state.error = null
                 state.statusLastSearchHotel = "loading"
             })
-            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<HotelLocationType[]>) => {
+            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<LocationType[]>) => {
                 state.loading = false
                 let locationList = action?.payload
                 state.locationList = locationList
@@ -87,7 +87,7 @@ export const hotelSlice = createSlice({
                 state.error = null
                 state.statusLastRecommendationHotel = "loading"
             })
-            .addCase(getRecommendationTripHotel.fulfilled, (state, action: PayloadAction<HotelRecommendationType[]>) => {
+            .addCase(getRecommendationTripHotel.fulfilled, (state, action: PayloadAction<RecommendationType[]>) => {
                 state.loading = false
                 let locationList = action?.payload
                 state.hotelRecommendationList = locationList

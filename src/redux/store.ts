@@ -2,12 +2,16 @@ import { configureStore } from '@reduxjs/toolkit'
 import langSlice from './slices/langSlice'
 import userSlice from './slices/userSlice'
 import hotelSlice from './slices/hotelSlice'
+import restaurantSlice from './slices/restaurantSlice'
+import driverSlice from './slices/DriverSliser'
 
 const store = configureStore({
   reducer: {
     language: langSlice,
     user: userSlice,
-    hotel: hotelSlice
+    hotel: hotelSlice,
+    restaurant: restaurantSlice,
+    driver: driverSlice
   },
 })
 

@@ -2,12 +2,13 @@ import { Box, Button, Grid, IconButton, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { HotelRecommendationType } from '../../utils/response_types'
+import { RecommendationType } from '../../utils/response_types'
 
 type IntoTravelPropsType = {
-    data:  HotelRecommendationType[] | null
+    data:  RecommendationType[] | null,
+    daily?: boolean
   }
-const IntoTravel: React.FC<IntoTravelPropsType> = ({data}) => {
+const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
 
     if(data){
         return (
@@ -58,7 +59,9 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data}) => {
                                                 <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.name}</GlobalParagraph>
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
-                                            <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style?item?.room_style[0]?.price:"0"} $</GlobalParagraph>
+                                            {
+                                                item?.room_style?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{daily?"daily/":""} {item?.room_style[0]?.price} $</GlobalParagraph>:<></>
+                                            }
                                         </Box>
                                         <Button sx={{ height: "48px" }} fullWidth variant='contained'>Book a Hotel</Button>
                                     </Box>
@@ -70,7 +73,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data}) => {
             </Stack>
         )
     }else{
-        return <p>yuq hali</p>
+        return <p>Ma'lumot yo'q</p>
     }
     
 }
