@@ -249,7 +249,7 @@ const HotelFilters: React.FC = () => {
             alignItems="center"
             pb="24px"
           >
-            <GlobalParagraph fontSize="14px" fontWeight="600">
+            <GlobalParagraph fontSize="14px" mediafontsize="12px" fontWeight="600">
               Showing 4 of <span style={{ color: `#FF8682` }}>257 places</span>
             </GlobalParagraph>
             <Box width="250px" display={{xl: "block", md: "block", sm: "none", xs: "none"}}>

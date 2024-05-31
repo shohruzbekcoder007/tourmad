@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -27,6 +27,7 @@ const App: React.FC = () => {
               <Route path="restaurant" element={<Restaurant/>}/>
               <Route path="drive" element={<Drive/>}/>
               <Route path="plan" element={<Plan/>}/>
+              <Route path='favourites' element={<Favourites/>}/>
             </Route>
           </Route>
           <Route path="users" element={<Users />}>
