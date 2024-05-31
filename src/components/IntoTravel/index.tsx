@@ -59,7 +59,6 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                                 <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.name}</GlobalParagraph>
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
-                                            {daily}
                                             {
                                                 daily?
                                                 (item?.price)?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph>:<></>:
