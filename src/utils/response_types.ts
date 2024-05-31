@@ -40,6 +40,7 @@ export type RecommendationType = {
     longitude: number | null,
     latitude: number | null,
     rate: number | null,
-    grade: number | null
+    grade: number | null,
+    price: number | null
 }
 
