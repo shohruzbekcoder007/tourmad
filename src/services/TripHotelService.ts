@@ -1,3 +1,4 @@
+import { HotelQueryType } from "../types/types"
 import { location_hotel, recommendation_trip_hotel, trip_hotel } from "../utils/API_urls"
 import { getRequest } from "../utils/request"
 
@@ -8,6 +9,7 @@ class TripHotelService {
     }
 
     static tripHotels = () => {
+
         return getRequest(trip_hotel)
     }
 

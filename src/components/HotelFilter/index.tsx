@@ -19,12 +19,14 @@ import React, { useEffect, useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
-import HotelFilterCard from "../HotelFilterCard";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { CustomAutocomplete } from "../../helper_components";
 import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import HotelCard from "./HotelCard";
 
 type Option = {
   label: string,
@@ -33,6 +35,7 @@ type Option = {
 
 const MAX = 1200;
 const MIN = 50;
+
 const marks = [
   {
     value: MIN,
@@ -43,6 +46,16 @@ const marks = [
     label: "",
   },
 ];
+
+const options: Option[] = [
+  { label: 'The Shawshank Redemption', value: "1994" },
+  { label: 'The Godfather', value: "1972" },
+  { label: 'The Godfather: Part II', value: "1974" },
+  { label: 'The Dark Knight', value: "2008" },
+  { label: '12 Angry Men', value: "1957" },
+  { label: "Schindler's List", value: "1993" },
+  { label: 'Pulp Fiction', value: "1994" },
+]
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -71,22 +84,25 @@ const HotelFilters: React.FC = () => {
     setOpenRating(!openRating);
   };
 
-  const options: Option[] = [
-    { label: 'The Shawshank Redemption', value: "1994" },
-    { label: 'The Godfather', value: "1972" },
-    { label: 'The Godfather: Part II', value: "1974" },
-    { label: 'The Dark Knight', value: "2008" },
-    { label: '12 Angry Men', value: "1957" },
-    { label: "Schindler's List", value: "1993" },
-    { label: 'Pulp Fiction', value: "1994" },
-  ]
-
-
   useEffect(() => { }, [from]) //for error fixed
 
   const getChangeOptionFrom = (newValue: Option | null) => {
     setFrom(newValue)
   }
+
+  // redux
+  const statusHotelLIst = useAppSelector(getStatusHotelList)
+  const hotelList = useAppSelector(getHotelList)
+  const hotelListTotalPages = useAppSelector(getHotelListTotalPages)
+  const hotelListCurrentPage = useAppSelector(getHotelListCurrentPage)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (statusHotelLIst === 'idle') {
+      dispatch(getTripHotelList())
+    }
+  }, [statusHotelLIst, dispatch])
+
 
   return (
     <Stack mt="40px">
@@ -252,7 +268,7 @@ const HotelFilters: React.FC = () => {
             <GlobalParagraph fontSize="14px" mediafontsize="12px" fontWeight="600">
               Showing 4 of <span style={{ color: `#FF8682` }}>257 places</span>
             </GlobalParagraph>
-            <Box width="250px" display={{xl: "block", md: "block", sm: "none", xs: "none"}}>
+            <Box width="250px" display={{ xl: "block", md: "block", sm: "none", xs: "none" }}>
               <FormControl fullWidth size="small">
                 <InputLabel id="demo-select-small-label">
                   Sort Hotel
@@ -271,9 +287,24 @@ const HotelFilters: React.FC = () => {
               </FormControl>
             </Box>
           </Box>
-          <HotelFilterCard />
+          {
+            hotelList?.map((hotel, index) => {
+              return (
+                <HotelCard 
+                  key={index}
+                  galery={hotel.gallery}
+                  grade={hotel.grade} 
+                  name={hotel.name}
+                  location={hotel.location}
+                  room_style={hotel.room_style} 
+                  rate={hotel.rate}
+                  card={hotel.card}
+                />
+              )
+            })
+          }
           <Box display="flex" justifyContent="flex-end">
-            <Pagination count={10} color="primary" />
+            <Pagination count={hotelListTotalPages} page={hotelListCurrentPage} color="primary" />
           </Box>
         </Box>
       </Box>
