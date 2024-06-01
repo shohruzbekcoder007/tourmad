@@ -58,7 +58,7 @@ const ResentSearch: React.FC = () => {
                                     width="90px" 
                                     height="90px"
                                 >
-                                    <img src={`${hotelLocation?.photo}`} width="100%" height="100%" style={{ objectFit: "cover" }} alt="Hotel" />
+                                    <img src={`${hotelLocation?.photo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
                                 </Box>
                                 <Box>
                                     <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{hotelLocation?.name}</GlobalParagraph>

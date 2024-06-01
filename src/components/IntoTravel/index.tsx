@@ -1,6 +1,6 @@
-import { Box, Button, Grid, IconButton, Stack } from '@mui/material'
+import { Box, Button, IconButton, Stack } from '@mui/material'
 import React from 'react'
-import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
+import { GlobalParagraph } from '../../global_styles/styles'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { RecommendationType } from '../../utils/response_types'
 
@@ -13,15 +13,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
     if(data){
         return (
             <Stack pb="80px">
-                <Grid container>
-                    <Grid item xl={8} md={8} sm={6} xs={8}>
-                        <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">Fall into travel</WelcomeMainText>
-                        <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
-                    </Grid>
-                    <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button variant="outlined" >See All</Button>
-                    </Grid>
-                </Grid>
+                
                 <Box display="flex" width="100%" justifyContent="flex-start" gap="20px" sx={{
                     overflowX: "scroll", '&::-webkit-scrollbar': {
                         display: 'none'
