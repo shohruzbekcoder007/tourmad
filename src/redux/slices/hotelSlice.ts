@@ -17,7 +17,8 @@ export interface HotelState {
     error: null,
     hotelListPageSize: number,
     hotelListCurrentPage: number,
-    hotelListTotalPages: number
+    hotelListTotalPages: number,
+    hotelGrade: 1 | 2 | 3 | 4 | 5
 }
 
 const initialState: HotelState = {
@@ -33,7 +34,8 @@ const initialState: HotelState = {
     error: null,
     hotelListPageSize: 1,
     hotelListCurrentPage: 1,
-    hotelListTotalPages: 1
+    hotelListTotalPages: 1,
+    hotelGrade: 3
 }
 
 export const getLoacationList = createAsyncThunk("get-location-hotel",
@@ -69,11 +71,10 @@ export const getRecommendationTripHotel = createAsyncThunk('recommendation-trip-
 )
 
 export const getTripHotelList = createAsyncThunk('get-trip-hotel-list',
-    async (_, { rejectWithValue }) => {
+    async (_, { rejectWithValue, getState }) => {
         try {
-            // const state = getState();
-            // const hotelListPageSize = state.hotel.hotelListPageSize
-            const response = await TripHotelService.tripHotels();
+            let state = getState();
+            const response = await TripHotelService.tripHotels(state);
             const hotel_list: RecommendationType[] = response.data?.results;
             const total_pages: number = response.data?.total_pages || 1;
             const current_page: number = response.data?.current_page || 1;
@@ -93,8 +94,13 @@ export const hotelSlice = createSlice({
     name: 'hotel',
     initialState,
     reducers: {
-        changeLanguage: (state, action) => {
+        changePage: (state, action) => {
             state.hotelListCurrentPage = action.payload
+            state.statusHotelList = "idle"
+        },
+        changeGrade: (state, action) => {
+            state.hotelGrade = action.payload
+            state.statusHotelList = "idle"
         }
     },
     extraReducers: (builder) => {
@@ -152,7 +158,7 @@ export const hotelSlice = createSlice({
     }
 })
 
-// export const { } = hotelSlice.actions
+export const { changePage, changeGrade } = hotelSlice.actions
 
 export const getStatusLastSearchHotel = (state: RootState) => state.hotel.statusLastSearchHotel
 export const getStatusLastRecommendationHotel = (state: RootState) => state.hotel.statusLastRecommendationHotel
@@ -167,6 +173,6 @@ export const getHotelList = (state: RootState) => state.hotel.hotelList
 export const getHotelListPageSize = (state: RootState) => state.hotel.hotelListPageSize
 export const getHotelListCurrentPage = (state: RootState) => state.hotel.hotelListCurrentPage
 export const getHotelListTotalPages = (state: RootState) => state.hotel.hotelListTotalPages
+export const getHotelGrade = (state: RootState) => state.hotel.hotelGrade
 
 export default hotelSlice.reducer
-

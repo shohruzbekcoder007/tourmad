@@ -14,6 +14,7 @@ import {
   MenuItem,
   Paper,
   Pagination,
+  Skeleton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -25,16 +26,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
-import HotelCard from "./HotelCard";
+import { changePage, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import HotelCard from "./HotelCard"
+import { AppDispatch } from "../../redux/store"
 
 type Option = {
   label: string,
   value: string
 }
 
-const MAX = 1200;
-const MIN = 50;
+const MAX = 500;
+const MIN = 10;
 
 const marks = [
   {
@@ -58,44 +60,52 @@ const options: Option[] = [
 ]
 
 function valuetext(value: number) {
-  return `${value}°C`;
+  return `${value + 10}$`;
 }
 
 const HotelFilters: React.FC = () => {
+
   const [from, setFrom] = useState<Option | null>(null)
-  const [openPrice, setOpenPrice] = React.useState(true);
-  const [openRating, setOpenRating] = React.useState(true);
-  const [value, setValue] = React.useState<number[]>([20, 37]);
-  const [age, setAge] = React.useState("");
-
-  const handleChangeSort = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
-  };
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
-
-  const handleClickPrice = () => {
-    setOpenPrice(!openPrice);
-  };
-
-  const handleClickRating = () => {
-    setOpenRating(!openRating);
-  };
-
-  useEffect(() => { }, [from]) //for error fixed
-
-  const getChangeOptionFrom = (newValue: Option | null) => {
-    setFrom(newValue)
-  }
+  const [openPrice, setOpenPrice] = React.useState(true)
+  const [openRating, setOpenRating] = React.useState(true)
+  const [value, setValue] = React.useState<number[]>([20, 37])
+  const [age, setAge] = React.useState("")
 
   // redux
   const statusHotelLIst = useAppSelector(getStatusHotelList)
   const hotelList = useAppSelector(getHotelList)
   const hotelListTotalPages = useAppSelector(getHotelListTotalPages)
   const hotelListCurrentPage = useAppSelector(getHotelListCurrentPage)
-  const dispatch = useAppDispatch()
+  const hotelLoading = useAppSelector(getHotelLoading)
+
+  // redux dispatch
+  const dispatch: AppDispatch = useAppDispatch()
+
+  const handleChangeSort = (event: SelectChangeEvent) => {
+    setAge(event.target.value);
+  }
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number[])
+  }
+
+  const handleClickPrice = () => {
+    setOpenPrice(!openPrice)
+  }
+
+  const handleClickRating = () => {
+    setOpenRating(!openRating)
+  }
+
+  const getChangeOptionFrom = (newValue: Option | null) => {
+    setFrom(newValue)
+  }
+
+  const changePageHandler = (page: number) => {
+    dispatch(changePage(page))
+  }
+
+  useEffect(() => { }, [from]) //for error fixed
 
   useEffect(() => {
     if (statusHotelLIst === 'idle') {
@@ -167,6 +177,8 @@ const HotelFilters: React.FC = () => {
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                     getAriaValueText={valuetext}
+                    min={MIN}
+                    max={MAX}
                   />
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
@@ -288,23 +300,29 @@ const HotelFilters: React.FC = () => {
             </Box>
           </Box>
           {
-            hotelList?.map((hotel, index) => {
-              return (
-                <HotelCard 
-                  key={index}
-                  galery={hotel.gallery}
-                  grade={hotel.grade} 
-                  name={hotel.name}
-                  location={hotel.location}
-                  room_style={hotel.room_style} 
-                  rate={hotel.rate}
-                  card={hotel.card}
-                />
-              )
-            })
+            hotelLoading ? <Skeleton animation="wave" width="100%" height="250px"/> :
+              <>
+                {
+                  hotelList?.map((hotel, index) => {
+                    return (
+                      <HotelCard
+                        key={index}
+                        galery={hotel.gallery}
+                        grade={hotel.grade}
+                        name={hotel.name}
+                        location={hotel.location}
+                        room_style={hotel.room_style}
+                        rate={hotel.rate}
+                        card={hotel.card}
+                      />
+                    )
+                  })
+                }
+              </>
           }
+
           <Box display="flex" justifyContent="flex-end">
-            <Pagination count={hotelListTotalPages} page={hotelListCurrentPage} color="primary" />
+            <Pagination count={hotelListTotalPages} page={hotelListCurrentPage} color="primary" onChange={(_, page) => { changePageHandler(page) }} />
           </Box>
         </Box>
       </Box>
