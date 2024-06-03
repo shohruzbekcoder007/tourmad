@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "../../global_styles/styles";
-import PlanCategory from "../../components/PlanCategory";
-import { AuthUserInfo, ConsultingBanner, ConsultingCards, ConsultingSearch, Header } from "../../components";
+import { AuthUserInfo, ConsultingBanner, ConsultingCards, ConsultingSearch, CunsultingPlanCategory, Header } from "../../components";
 const Consulting: React.FC = () => {
 
     return (
@@ -14,7 +13,7 @@ const Consulting: React.FC = () => {
             <Container>
                 <ConsultingSearch />
             </Container>
-            <PlanCategory />
+            <CunsultingPlanCategory />
             <Container>
                 <ConsultingCards />
             </Container>

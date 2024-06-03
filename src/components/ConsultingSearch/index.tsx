@@ -11,13 +11,7 @@ const ConsultingSearch: React.FC = () => {
     const [from, setFrom] = useState<Option | null>(null)
 
     const options: Option[] = [
-        { label: 'The Shawshank Redemption', value: "1994" },
-        { label: 'The Godfather', value: "1972" },
-        { label: 'The Godfather: Part II', value: "1974" },
-        { label: 'The Dark Knight', value: "2008" },
-        { label: '12 Angry Men', value: "1957" },
-        { label: "Schindler's List", value: "1993" },
-        { label: 'Pulp Fiction', value: "1994" },
+        { label: '', value: "1994" },
     ]
     useEffect(() => { }, [from])
     const getChangeOptionFrom = (newValue: Option | null) => {
@@ -43,7 +37,7 @@ const ConsultingSearch: React.FC = () => {
                     <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
                         <CustomAutocomplete
                             options={options}
-                            placeholder="Location"
+                            placeholder="Search"
                             getChange={getChangeOptionFrom}
                         />
                     </Box>

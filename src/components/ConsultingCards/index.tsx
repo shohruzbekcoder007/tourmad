@@ -1,12 +1,9 @@
-import { Box, Button, Grid, IconButton, Pagination, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Pagination, Stack } from "@mui/material";
 import React from "react";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import card_image from '../../media/images/users.jpg'
 const ConsultingCards: React.FC = () => {
-    const [page, setPage] = React.useState(1);
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value);
-      };
     return (
         <>
             <Stack pb="80px">
@@ -19,7 +16,7 @@ const ConsultingCards: React.FC = () => {
                 <Box display='flex' flexWrap='wrap' width="100%" justifyContent='space-between' alignItems='center'>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -37,8 +34,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -52,7 +49,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -70,8 +67,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -85,7 +82,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -103,8 +100,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -118,7 +115,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -136,8 +133,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -151,7 +148,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -169,8 +166,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -184,7 +181,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -202,8 +199,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -217,7 +214,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -235,8 +232,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -250,7 +247,7 @@ const ConsultingCards: React.FC = () => {
                     </Box>
                     <Box
                         sx={{
-                            backgroundImage: `url(https://api.tourmad.uz/media/hotels/husan_l4jRpEp.jpg)`,
+                            backgroundImage: `url(${card_image})`,
                             backgroundRepeat: "no-repeat",
                             p: '24px',
                             display: "flex",
@@ -268,8 +265,8 @@ const ConsultingCards: React.FC = () => {
                             }
                         }}
                     >
-                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px'}} aria-label="favorite" color="secondary">
-                            <FavoriteBorderIcon/>
+                        <IconButton sx={{ position: 'absolute', top: '10px', right: '10px' }} aria-label="favorite" color="secondary">
+                            <FavoriteBorderIcon />
                         </IconButton>
                         <Box width='100%'>
                             <Box pb='16px' width='100%' display='flex' flexWrap='wrap' justifyContent='space-between' alignItems='flex-end'>
@@ -286,10 +283,7 @@ const ConsultingCards: React.FC = () => {
                     textAlign: 'center',
                     margin: "50px auto"
                 }}>
-                    <Typography>Page: {page}</Typography>
-                    <Pagination count={5} page={page} onChange={handleChange} sx={{
-                        marginTop: "20px"
-                    }}/>
+                    <Pagination count={10} color="primary" />
                 </Box>
             </Stack>
         </>
