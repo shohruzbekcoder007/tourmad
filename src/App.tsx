@@ -10,6 +10,8 @@ import {
 import { lightTheme } from './theme/mui/light';
 import Users from './pages/Users';
 import HotelDetail from './pages/HotelDetail';
+import RestaurantFilter from './pages/RestaurantFilter';
+import RestaurantDetail from './pages/RestaurantDetail';
 
 const App: React.FC = () => {
   return (
@@ -21,7 +23,9 @@ const App: React.FC = () => {
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
             <Route path='hotel-filter' element={<HotelFilter />} />
+            <Route path='restaurant-filter' element={<RestaurantFilter />} />
             <Route path='hotel-detail' element={<HotelDetail />} />
+            <Route path='restaurant-detail' element={<RestaurantDetail />} />
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>} />
