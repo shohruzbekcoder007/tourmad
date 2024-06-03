@@ -1,5 +1,4 @@
 import React from "react";
-import banner_foto from '../../media/images/banner-drive.webp'
 import { Container } from "../../global_styles/styles";
 import PlanCategory from "../../components/PlanCategory";
 import { AuthUserInfo, ConsultingBanner, ConsultingCards, ConsultingSearch, Header } from "../../components";
