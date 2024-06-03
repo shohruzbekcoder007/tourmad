@@ -26,7 +26,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changePage, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 
@@ -77,6 +77,7 @@ const HotelFilters: React.FC = () => {
   const hotelListTotalPages = useAppSelector(getHotelListTotalPages)
   const hotelListCurrentPage = useAppSelector(getHotelListCurrentPage)
   const hotelLoading = useAppSelector(getHotelLoading)
+  const hotelGrade = useAppSelector(getHotelGrade)
 
   // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
@@ -103,6 +104,10 @@ const HotelFilters: React.FC = () => {
 
   const changePageHandler = (page: number) => {
     dispatch(changePage(page))
+  }
+
+  const changeGradeHanler = (grade: number) => {
+    dispatch(changeGrade(grade))
   }
 
   useEffect(() => { }, [from]) //for error fixed
@@ -210,35 +215,37 @@ const HotelFilters: React.FC = () => {
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant="outlined"
+                    variant={hotelGrade === 1?"contained":"outlined"}
+                    onClick={() => {changeGradeHanler(1)}}
                   >
                     1+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant="outlined"
+                    variant={hotelGrade === 2?"contained":"outlined"}
+                    onClick={() => {changeGradeHanler(2)}}
                   >
                     2+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant="outlined"
+                    variant={hotelGrade === 3?"contained":"outlined"}
                   >
                     3+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant="outlined"
+                    variant={hotelGrade === 4?"contained":"outlined"}
                   >
                     4+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant="outlined"
+                    variant={hotelGrade === 5?"contained":"outlined"}
                   >
                     5+
                   </Button>
