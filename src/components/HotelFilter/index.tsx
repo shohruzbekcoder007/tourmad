@@ -26,7 +26,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 
@@ -78,6 +78,8 @@ const HotelFilters: React.FC = () => {
   const hotelListCurrentPage = useAppSelector(getHotelListCurrentPage)
   const hotelLoading = useAppSelector(getHotelLoading)
   const hotelGrade = useAppSelector(getHotelGrade)
+  const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
+  const hotelPriceTo = useAppSelector(getHotelPriceTo)
 
   // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
@@ -86,7 +88,8 @@ const HotelFilters: React.FC = () => {
     setAge(event.target.value);
   }
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_: Event, newValue: number | number[]) => {
+    console.log(newValue, "<-gfh")
     setValue(newValue as number[])
   }
 
@@ -109,6 +112,10 @@ const HotelFilters: React.FC = () => {
   const changeGradeHanler = (grade: number) => {
     dispatch(changeGrade(grade))
   }
+
+  useEffect(() => {
+    setValue([hotelPriceFrom, hotelPriceTo])
+  },[hotelPriceFrom, hotelPriceTo])
 
   useEffect(() => { }, [from]) //for error fixed
 

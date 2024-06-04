@@ -18,7 +18,9 @@ export interface HotelState {
     hotelListPageSize: number,
     hotelListCurrentPage: number,
     hotelListTotalPages: number,
-    hotelGrade: 1 | 2 | 3 | 4 | 5
+    hotelGrade: 1 | 2 | 3 | 4 | 5,
+    hotelPriceFrom: number,
+    hotelPriceTo: number
 }
 
 const initialState: HotelState = {
@@ -35,7 +37,9 @@ const initialState: HotelState = {
     hotelListPageSize: 1,
     hotelListCurrentPage: 1,
     hotelListTotalPages: 1,
-    hotelGrade: 3
+    hotelGrade: 3,
+    hotelPriceFrom: 20,
+    hotelPriceTo: 100
 }
 
 export const getLoacationList = createAsyncThunk("get-location-hotel",
@@ -101,6 +105,14 @@ export const hotelSlice = createSlice({
         changeGrade: (state, action) => {
             state.hotelGrade = action.payload
             state.statusHotelList = "idle"
+        },
+        changePriceFrom: (state, action) => {
+            state.hotelPriceFrom = action.payload
+            state.statusHotelList = "idle"
+        },
+        changePriceTo: (state, action) => {
+            state.hotelPriceTo = action.payload
+            state.statusHotelList = "idle"
         }
     },
     extraReducers: (builder) => {
@@ -158,7 +170,7 @@ export const hotelSlice = createSlice({
     }
 })
 
-export const { changePage, changeGrade } = hotelSlice.actions
+export const { changePage, changeGrade, changePriceFrom, changePriceTo } = hotelSlice.actions
 
 export const getStatusLastSearchHotel = (state: RootState) => state.hotel.statusLastSearchHotel
 export const getStatusLastRecommendationHotel = (state: RootState) => state.hotel.statusLastRecommendationHotel
@@ -174,5 +186,7 @@ export const getHotelListPageSize = (state: RootState) => state.hotel.hotelListP
 export const getHotelListCurrentPage = (state: RootState) => state.hotel.hotelListCurrentPage
 export const getHotelListTotalPages = (state: RootState) => state.hotel.hotelListTotalPages
 export const getHotelGrade = (state: RootState) => state.hotel.hotelGrade
+export const getHotelPriceFrom = (state: RootState) => state.hotel.hotelPriceFrom
+export const getHotelPriceTo = (state: RootState) => state.hotel.hotelPriceTo
 
 export default hotelSlice.reducer
