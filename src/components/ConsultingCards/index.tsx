@@ -6,14 +6,14 @@ import card_image from '../../media/images/users.jpg'
 const ConsultingCards: React.FC = () => {
     return (
         <>
-            <Stack pb="80px">
+            <Stack pb="80px" mb='80px'>
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform="capitalize" fontSize={"32px"} part="true">consulting</WelcomeMainText>
                         <GlobalParagraph fontSize={"16px"} mediafontsize="14px" fontWeight="400">consulting</GlobalParagraph>
                     </Grid>
                 </Grid>
-                <Box display='flex' flexWrap='wrap' width="100%" justifyContent='space-between' alignItems='center'>
+                <Box display='flex' flexWrap='wrap' width="100%" justifyContent='flex-start' alignItems='center' gap="15px">
                     <Box
                         sx={{
                             backgroundImage: `url(${card_image})`,
