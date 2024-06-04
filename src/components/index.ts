@@ -24,3 +24,5 @@ export { default as UserHistory } from './UserHistory'
 export { default as HotelFilters } from './HotelFilter'
 export { default as TabsPart } from './TabsPart'
 export { default as AuthUserInfo } from './Welcome/AuthUserInfo'
+export { default as HistoryService } from './HistoryService'
+
