@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AuthUserInfo, Footer, Header, ProtectedLinks, } from '../../components'
 import { Box, Button, Container, Stack } from '@mui/material'
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
 import { HeaderWrapper } from './styles'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -11,15 +8,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
-import DetailMap from '../../components/DetailMap';
 import DetailReviews from '../../components/DetailReviews';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
-function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-}
-
-const RestaurantDetail: React.FC = () => {
+const DriveDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
     useEffect(() => {
@@ -48,20 +40,27 @@ const RestaurantDetail: React.FC = () => {
                 </Container>
             </HeaderWrapper>
             <Container>
-                <Box my="32px">
-                    <div role="presentation" onClick={handleClick}>
-                        <Breadcrumbs aria-label="breadcrumb">
-                            <Link underline="hover" color="inherit" href="/">
-                                Toshkent
-                            </Link>
-                            <Typography color="text.primary">BeyOglu</Typography>
-                        </Breadcrumbs>
-                    </div>
-                </Box>
-                <Box pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
+                <Box mt='32px' pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
                     <Box>
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
-                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>CVK Park Bosphorus Hotel Istanbul</WelcomeMainText>
+                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>Sevda Apa</WelcomeMainText>
+                        </Box>
+                        <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
+                            <DirectionsCarIcon />
+                            <GlobalParagraph fontSize="14px" fontWeight="700">Malibu</GlobalParagraph>
+                            <Box ml='5px' display='flex' borderRadius='5px' justifyContent='flex-start' gap='5px' p='5px' border='solid 2px #000'>
+                                <Box pr='5px' borderRight="solid 2px #000">
+                                    <GlobalParagraph fontSize="12px" fontWeight="700">30</GlobalParagraph>
+                                </Box>
+                                <Box display='flex' justifyContent='flex-start'>
+                                    <Box pr='5px'>
+                                        <GlobalParagraph fontSize="12px" fontWeight="700">A777BC</GlobalParagraph>
+                                    </Box>
+                                    <Box pl='5px' borderLeft="solid 2px #000">
+                                        <GlobalParagraph fontSize="12px" fontWeight="700">UZ</GlobalParagraph>
+                                    </Box>
+                                </Box>
+                            </Box>
                         </Box>
                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                             <LocationOnIcon />
@@ -73,8 +72,9 @@ const RestaurantDetail: React.FC = () => {
                             <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph>
                         </Box>
                     </Box>
-                    <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
-                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/night</GlobalParagraph>
+                    <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
+                        <GlobalParagraph fontSize="12px" fontWeight="500">starting from</GlobalParagraph>
+                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/day</GlobalParagraph>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
@@ -84,8 +84,7 @@ const RestaurantDetail: React.FC = () => {
                 </Box>
                 <DetailBanner bgimage='' />
                 <DetailDescription />
-                <DetailMap />
-                <DetailReviews />   
+                <DetailReviews />
             </Container>
             <Box
                 paddingTop="170px"
@@ -93,7 +92,7 @@ const RestaurantDetail: React.FC = () => {
                 <Footer />
             </Box>
         </Stack>
-    )  
+    )
 }
 
-export default RestaurantDetail
+export default DriveDetail

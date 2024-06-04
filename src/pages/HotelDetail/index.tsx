@@ -86,7 +86,7 @@ const HotelDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner />
+                <DetailBanner bgimage='' />
                 <DetailDescription />
                 <HotelRooms />
                 <DetailMap />

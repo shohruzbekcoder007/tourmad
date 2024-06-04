@@ -41,6 +41,19 @@ const DriveFilterCard: React.FC = () => {
             <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
               <DirectionsCarIcon />
               <GlobalParagraph fontSize="14px" fontWeight="700">Malibu</GlobalParagraph>
+              <Box ml='5px' display='flex' borderRadius='5px' justifyContent='flex-start' gap='5px' p='5px' border='solid 2px #000'>
+                <Box pr='5px' borderRight="solid 2px #000">
+                  <GlobalParagraph fontSize="12px" fontWeight="700">30</GlobalParagraph>
+                </Box>
+                <Box display='flex' justifyContent='flex-start'>
+                  <Box pr='5px'>
+                    <GlobalParagraph fontSize="12px" fontWeight="700">A777BC</GlobalParagraph>
+                  </Box>
+                  <Box pl='5px' borderLeft="solid 2px #000">
+                    <GlobalParagraph fontSize="12px" fontWeight="700">UZ</GlobalParagraph>
+                  </Box>
+                </Box>
+              </Box>
             </Box>
             <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
               <Button variant="outlined">4.2</Button>
