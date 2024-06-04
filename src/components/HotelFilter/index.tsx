@@ -232,6 +232,7 @@ const HotelFilters: React.FC = () => {
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
                     variant={hotelGrade === 3?"contained":"outlined"}
+                    onClick={() => {changeGradeHanler(3)}}
                   >
                     3+
                   </Button>
@@ -239,6 +240,7 @@ const HotelFilters: React.FC = () => {
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
                     variant={hotelGrade === 4?"contained":"outlined"}
+                    onClick={() => {changeGradeHanler(4)}}
                   >
                     4+
                   </Button>
@@ -246,6 +248,7 @@ const HotelFilters: React.FC = () => {
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
                     variant={hotelGrade === 5?"contained":"outlined"}
+                    onClick={() => {changeGradeHanler(5)}}
                   >
                     5+
                   </Button>
