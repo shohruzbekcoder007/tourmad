@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, Consulting } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -8,7 +8,6 @@ import {
   ThemeProvider as MuiTheme
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
-import Users from './pages/Users';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +19,10 @@ const App: React.FC = () => {
             <Route index element={<Welcome/>}/>
             <Route path="public" element={<Welcome/>}/>
             <Route path='hotel-filter' element={<HotelFilter />} />
-            <Route path='consulting' element={<Consulting/>}/>
+            <Route path='hotel-detail' element={<HotelDetail />} />
+            <Route path='restaurant-filter' element={<ReataurantFilter />} />
+            <Route path='restaurant-detail' element={<ReataurantDetail />} />
+            <Route path='drive-filter' element={<DriveFilter />} />
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>} />
