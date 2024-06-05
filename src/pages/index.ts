@@ -28,3 +28,5 @@ export { default as HistoryDetail } from './HistoryDetail'
 export { default as History } from './History'
 export { default as Consulting } from './Consulting'
 export { default as ConsultingDetail } from './ConsultingDetail'
+
+export { default as PlanDetail } from './PlanDetail'

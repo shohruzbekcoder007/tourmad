@@ -4,7 +4,7 @@ import { Box, Button, Container, Rating, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import { HeaderWrapper } from './styles'
+import { HeaderWrapper } from '../ConsultingDetail/styles'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -19,7 +19,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     console.info('You clicked a breadcrumb.');
 }
 
-const ConsultingDetail: React.FC = () => {
+const PlanDetail: React.FC = () => {
     const value: number | null = 5;
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
@@ -64,7 +64,7 @@ const ConsultingDetail: React.FC = () => {
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
                             <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>Registan square</WelcomeMainText>
                             <Rating name="disabled" value={value} disabled />
-                            <GlobalParagraph fontSize="12px" fontWeight="500">5 Star consulting</GlobalParagraph>
+                            <GlobalParagraph fontSize="12px" fontWeight="500">5 Star plan</GlobalParagraph>
                         </Box>
                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                             <LocationOnIcon />
@@ -99,4 +99,4 @@ const ConsultingDetail: React.FC = () => {
     )
 }
 
-export default ConsultingDetail
+export default PlanDetail
