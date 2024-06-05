@@ -23,5 +23,6 @@ export { default as HotelDetail } from './HotelDetail'
 export { default as DriveFilter } from './DriveFilter'
 export { default as Users } from './Users'
 
+export { default as HistoryDetail } from './HistoryDetail'
 export { default as History } from './History'
 export { default as Consulting } from './Consulting'
