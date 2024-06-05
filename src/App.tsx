@@ -27,6 +27,8 @@ const App: React.FC = () => {
             <Route path='restaurant-detail' element={<ReataurantDetail />} />
             <Route path='drive-filter' element={<DriveFilter />} />
             <Route path='drive-detail' element={<DriveDetail />} />
+            <Route path='history' element={<History />} />
+            <Route path='history-detail' element={<HistoryDetail />} />
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>} />
@@ -40,7 +42,7 @@ const App: React.FC = () => {
           <Route path="users" element={<Users />}>
             <Route index element={<UserAccount />}/>
             <Route path='users-account' element={<UserAccount />}/>
-            <Route path='users-history' element={<UserHistory />}/>
+            <Route path='users-History' element={<UserHistory />}/>
             <Route path='users-payment' element={<p>Users Payments</p>}/>
           </Route>
           <Route path="sign-in" element={<SignIn />}/>

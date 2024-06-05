@@ -12,9 +12,9 @@ class TripHotelService {
 
         let hotel: HotelState = state?.hotel as HotelState
 
-        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade } = hotel
+        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade, hotelPriceFrom, hotelPriceTo } = hotel
 
-        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}`)
+        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}`)
     }
 
     static createHotelOrder = () => {
