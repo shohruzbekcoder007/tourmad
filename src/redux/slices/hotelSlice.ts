@@ -20,7 +20,8 @@ export interface HotelState {
     hotelListTotalPages: number,
     hotelGrade: 1 | 2 | 3 | 4 | 5,
     hotelPriceFrom: number,
-    hotelPriceTo: number
+    hotelPriceTo: number,
+    room_style: "basic" | "premium" | "all"
 }
 
 const initialState: HotelState = {
@@ -39,7 +40,8 @@ const initialState: HotelState = {
     hotelListTotalPages: 1,
     hotelGrade: 3,
     hotelPriceFrom: 20,
-    hotelPriceTo: 100
+    hotelPriceTo: 100,
+    room_style: "all"
 }
 
 export const getLoacationList = createAsyncThunk("get-location-hotel",
@@ -112,6 +114,10 @@ export const hotelSlice = createSlice({
         },
         changePriceTo: (state, action) => {
             state.hotelPriceTo = action.payload
+            state.statusHotelList = "idle"
+        },
+        changeRoomStyle: (state, action) => {
+            state.room_style = action.payload
             state.statusHotelList = "idle"
         }
     },
@@ -188,5 +194,6 @@ export const getHotelListTotalPages = (state: RootState) => state.hotel.hotelLis
 export const getHotelGrade = (state: RootState) => state.hotel.hotelGrade
 export const getHotelPriceFrom = (state: RootState) => state.hotel.hotelPriceFrom
 export const getHotelPriceTo = (state: RootState) => state.hotel.hotelPriceTo
+export const getRoomStyle = (state: RootState) => state.hotel.room_style
 
 export default hotelSlice.reducer
