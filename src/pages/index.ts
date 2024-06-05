@@ -24,3 +24,6 @@ export { default as DriveFilter } from './DriveFilter'
 export { default as DriveDetail } from './DriveDetail'
 export { default as Users } from './Users'
 
+export { default as HistoryDetail } from './HistoryDetail'
+export { default as History } from './History'
+export { default as Consulting } from './Consulting'

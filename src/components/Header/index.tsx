@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     </HeaderMenuListItemIconc>
                     <HeaderMenuListItemText>My Driver</HeaderMenuListItemText>
                 </HeaderMenuListItem>
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/consulting" type={type}>
                     <HeaderMenuListItemIconc>
                         <ManageAccountsIcon />
                     </HeaderMenuListItemIconc>
