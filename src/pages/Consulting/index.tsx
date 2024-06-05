@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "../../global_styles/styles";
-import { AuthUserInfo, ConsultingBanner, ConsultingCards, ConsultingSearch, CunsultingPlanCategory, Header } from "../../components";
+import { AuthUserInfo, ConsultingBanner, ConsultingCards, ConsultingSearch, CunsultingPlanCategory, Footer, Header } from "../../components";
 const Consulting: React.FC = () => {
 
     return (
@@ -17,6 +17,7 @@ const Consulting: React.FC = () => {
             <Container>
                 <ConsultingCards />
             </Container>
+            <Footer/>
         </>
     )
 }
