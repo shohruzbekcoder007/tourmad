@@ -69,7 +69,7 @@ const HotelFilters: React.FC = () => {
   const [from, setFrom] = useState<Option | null>(null)
   const [openPrice, setOpenPrice] = React.useState(true)
   const [openRating, setOpenRating] = React.useState(true)
-  const [value, setValue] = React.useState<number[]>([20, 37])
+  const [value, setValue] = React.useState<number[]>([20, 300])
   const [age, setAge] = React.useState("")
   
   const [sliderValue] =useDebounce(value, 1000)
@@ -121,7 +121,7 @@ const HotelFilters: React.FC = () => {
       dispatch(changePriceFrom(sliderValue[0]))
     }
     if(hotelPriceTo !== sliderValue[1]) {
-      dispatch(changePriceTo(sliderValue[0]))
+      dispatch(changePriceTo(sliderValue[1]))
     }
   }, [sliderValue, dispatch])
 

@@ -11,7 +11,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
-import HotelRooms from '../../components/HotelRooms';
 import DetailMap from '../../components/DetailMap';
 import DetailReviews from '../../components/DetailReviews';
 
