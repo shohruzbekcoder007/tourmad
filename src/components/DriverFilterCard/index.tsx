@@ -6,7 +6,11 @@ import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
-const DriveFilterCard: React.FC = () => {
+type PropsType = {
+  time?: string
+}
+
+const DriveFilterCard: React.FC<PropsType> = (props) => {
 
   return (
     <Stack>
@@ -31,7 +35,7 @@ const DriveFilterCard: React.FC = () => {
               <WelcomeMainText fontSize="20px" part="true" texttransform="capitalize">Sevda Apa</WelcomeMainText>
               <Box>
                 <GlobalParagraph fontSize="12px" fontWeight="500">starting from</GlobalParagraph>
-                <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">$240/day</GlobalParagraph>
+                <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">$240/{props.time}</GlobalParagraph>
               </Box>
             </Box>
             <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">

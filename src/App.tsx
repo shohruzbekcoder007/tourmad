@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter, DriveDetail, Consulting, History, HistoryDetail } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter, DriveDetail, Consulting, History, HistoryDetail, MyDriver } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -27,6 +27,7 @@ const App: React.FC = () => {
             <Route path='drive-detail' element={<DriveDetail />} />
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail />} />
+            <Route path='my-driver' element={<MyDriver />} />
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>} />

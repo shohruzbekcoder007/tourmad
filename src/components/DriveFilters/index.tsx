@@ -279,7 +279,7 @@ const DriveFilter: React.FC = () => {
                             </FormControl>
                         </Box>
                     </Box>
-                    <DriveFilterCard />
+                    <DriveFilterCard time="h"/>
                     <Box display="flex" justifyContent="flex-end">
                         <Pagination count={10} color="primary" />
                     </Box>
