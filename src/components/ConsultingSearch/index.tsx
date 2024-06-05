@@ -11,8 +11,14 @@ const ConsultingSearch: React.FC = () => {
     const [from, setFrom] = useState<Option | null>(null)
 
     const options: Option[] = [
-        { label: '', value: "1994" },
-    ]
+        { label: 'The Shawshank Redemption', value: "1994" },
+        { label: 'The Godfather', value: "1972" },
+        { label: 'The Godfather: Part II', value: "1974" },
+        { label: 'The Dark Knight', value: "2008" },
+        { label: '12 Angry Men', value: "1957" },
+        { label: "Schindler's List", value: "1993" },
+        { label: 'Pulp Fiction', value: "1994" },
+      ]
     useEffect(() => { }, [from])
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
