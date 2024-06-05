@@ -9,10 +9,13 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+type PropsType = {
+    btnText: string
+  }
 
 type Anchor = 'right';
 
-const SwipeDrawer = () => {
+const SwipeDrawer: React.FC<PropsType> = (props) => {
     const [state, setState] = React.useState({
         right: false,
     });
@@ -97,7 +100,7 @@ const SwipeDrawer = () => {
         <div>
             {(['right'] as const).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer("right", true)} sx={{height: "48px"}} variant='contained'>Create Trip</Button>
+                    <Button onClick={toggleDrawer("right", true)} sx={{height: "48px"}} variant='contained'>{props.btnText}</Button>
                     <SwipeableDrawer
                         anchor={anchor}
                         open={state["right"]}

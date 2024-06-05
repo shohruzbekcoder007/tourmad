@@ -21,6 +21,7 @@ export { default as ReataurantFilter } from './RestaurantFilter'
 export { default as ReataurantDetail } from './RestaurantDetail'
 export { default as HotelDetail } from './HotelDetail'
 export { default as DriveFilter } from './DriveFilter'
+export { default as DriveDetail } from './DriveDetail'
 export { default as Users } from './Users'
 
 export { default as HistoryDetail } from './HistoryDetail'

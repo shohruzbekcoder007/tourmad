@@ -20,7 +20,7 @@ const Plan: React.FC = () => {
             <PlanCategory />
             <Container>
                 <IntoTravel data={null}/>
-                <SwipeDrawer />
+                <SwipeDrawer btnText='Create Trip' />
             </Container>
         </>
     )
