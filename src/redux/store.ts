@@ -3,7 +3,7 @@ import langSlice from './slices/langSlice'
 import userSlice from './slices/userSlice'
 import hotelSlice from './slices/hotelSlice'
 import restaurantSlice from './slices/restaurantSlice'
-import driverSlice from './slices/driverSliser'
+import driverSlice from './slices/DriverSliser'
 
 const store = configureStore({
   reducer: {

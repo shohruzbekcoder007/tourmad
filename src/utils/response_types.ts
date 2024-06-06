@@ -4,7 +4,7 @@ export type GalleryType = {
 }
 
 export type RoomStyle = {
-    id: number | null,
+    id?: number | null,
     style: 'basic' | 'premium' | null,
     price: number | null
 }
