@@ -26,6 +26,8 @@ export { default as Users } from './Users'
 export { default as HistoryDetail } from './HistoryDetail'
 export { default as History } from './History'
 export { default as Consulting } from './Consulting'
+export { default as ConsultingDetail } from './ConsultingDetail'
+export { default as PlanDetail } from './PlanDetail'
 export { default as MyTrip} from './MyTrip';
 export { default as TripDetail} from './TripDetail';
 export { default as MyDriver } from './MyDriver'

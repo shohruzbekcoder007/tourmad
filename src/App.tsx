@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter, DriveDetail, Consulting, History, HistoryDetail, MyDriver, MyDriverDetail, MyTrip, TripDetail } from './pages';
+import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter, DriveDetail, Consulting, History, HistoryDetail, MyDriver, MyDriverDetail, MyTrip, TripDetail, ConsultingDetail, PlanDetail } from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -18,6 +18,8 @@ const App: React.FC = () => {
           <Route path="/" element={<Main/>}>
             <Route index element={<Welcome/>}/>
             <Route path='consulting' element={<Consulting/>}/>
+            <Route path='consulting-detail' element={<ConsultingDetail />}/>
+            <Route index element={<Welcome/>}/>
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail/>} />
             <Route path="public" element={<Welcome/>}/>
@@ -29,6 +31,7 @@ const App: React.FC = () => {
             <Route path='drive-detail' element={<DriveDetail />} />
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail />} />
+            <Route path='plan-detail' element={<PlanDetail />} />
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />
             <Route path='my-driver' element={<MyDriver />} />
