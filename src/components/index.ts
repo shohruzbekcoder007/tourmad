@@ -29,6 +29,5 @@ export { default as AuthUserInfo } from './Welcome/AuthUserInfo'
 export { default as HistoryService } from './HistoryService'
 
 export { default as ConsultingCards} from './ConsultingCards'
-export { default as ConsultingBanner} from './ConsultingBanner'
 export { default as ConsultingSearch} from './ConsultingSearch'
 export { default as CunsultingPlanCategory } from './CunsultingPlanCategory'
