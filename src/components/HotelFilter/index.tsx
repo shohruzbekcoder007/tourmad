@@ -13,8 +13,7 @@ import {
   InputLabel,
   MenuItem,
   Paper,
-  Pagination,
-  Skeleton,
+  Pagination
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -31,6 +30,7 @@ import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
 import room_styles from "../../dictionary/room_style";
+import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 
 type Option = {
   label: string,
@@ -331,7 +331,7 @@ const HotelFilters: React.FC = () => {
             </Box>
           </Box>
           {
-            hotelLoading ? <Skeleton animation="wave" width="100%" height="250px"/> :
+            hotelLoading ? <DriveFilterSkeleton/> :
               <>
                 {
                   hotelList?.map((hotel, index) => {
