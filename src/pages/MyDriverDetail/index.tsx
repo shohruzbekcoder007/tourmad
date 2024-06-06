@@ -11,7 +11,7 @@ import DetailDescription from '../../components/DetailDescription';
 import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
-const MyDriveDetail: React.FC = () => {
+const DriveDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
     useEffect(() => {
@@ -74,7 +74,7 @@ const MyDriveDetail: React.FC = () => {
                     </Box>
                     <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
                         <GlobalParagraph fontSize="12px" fontWeight="500">starting from</GlobalParagraph>
-                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/day</GlobalParagraph>
+                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/h</GlobalParagraph>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
@@ -95,4 +95,4 @@ const MyDriveDetail: React.FC = () => {
     )
 }
 
-export default MyDriveDetail
+export default DriveDetail
