@@ -26,10 +26,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getRoomStyle, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
+import room_styles from "../../dictionary/room_style";
 
 type Option = {
   label: string,
@@ -70,7 +71,7 @@ const HotelFilters: React.FC = () => {
   const [openPrice, setOpenPrice] = React.useState(true)
   const [openRating, setOpenRating] = React.useState(true)
   const [value, setValue] = React.useState<number[]>([20, 300])
-  const [age, setAge] = React.useState("")
+  const [age, setAge] = React.useState(room_styles[0].value)
   
   const [sliderValue] =useDebounce(value, 1000)
 
@@ -84,6 +85,7 @@ const HotelFilters: React.FC = () => {
   const hotelGrade = useAppSelector(getHotelGrade)
   const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
+  const hotelRoomStyle = useAppSelector(getRoomStyle)
 
   // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
@@ -292,9 +294,9 @@ const HotelFilters: React.FC = () => {
                   label="Sort Hotel"
                   onChange={handleChangeSort}
                 >
-                  <MenuItem value={10}>Sort 1</MenuItem>
-                  <MenuItem value={20}>Sort 2</MenuItem>
-                  <MenuItem value={30}>Sort 3</MenuItem>
+                  {
+                    room_styles.map((room, index) => <MenuItem key={index} value={room.value}>{room.label}</MenuItem>)
+                  }
                 </Select>
               </FormControl>
             </Box>
@@ -321,9 +323,9 @@ const HotelFilters: React.FC = () => {
                   label="Sort Hotel"
                   onChange={handleChangeSort}
                 >
-                  <MenuItem value={10}>Sort 1</MenuItem>
-                  <MenuItem value={20}>Sort 2</MenuItem>
-                  <MenuItem value={30}>Sort 3</MenuItem>
+                  {
+                    room_styles.map((room, index) => <MenuItem key={index} value={room.value}>{room.label}</MenuItem>)
+                  }
                 </Select>
               </FormControl>
             </Box>
