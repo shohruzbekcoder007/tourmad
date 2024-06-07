@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Pagination, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
-import photo from './../../media/images/users.jpg';
+import photo from './../../media/images/users.png';
 
 const DetailReviews: React.FC = () => {
   return (

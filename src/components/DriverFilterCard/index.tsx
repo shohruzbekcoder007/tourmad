@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Paper, Stack } from "@mui/material";
-import card_image from "./../../media/images/users.jpg";
+import card_image from "./../../media/images/into-hotel-1.png";
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";

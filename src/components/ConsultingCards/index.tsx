@@ -2,7 +2,7 @@ import { Box, Button, Grid, IconButton, Pagination, Stack } from "@mui/material"
 import React from "react";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import card_image from '../../media/images/users.jpg'
+import card_image from '../../media/images/into-hotel-2.png'
 const ConsultingCards: React.FC = () => {
     return (
         <>
