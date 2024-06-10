@@ -3,7 +3,9 @@ import React from "react";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import card_image from '../../media/images/users.jpg'
+import { useNavigate } from "react-router-dom";
 const ConsultingCards: React.FC = () => {
+    const navigate = useNavigate()
     return (
         <>
             <Stack pb="80px" mb='80px'>
@@ -43,7 +45,7 @@ const ConsultingCards: React.FC = () => {
                                     <GlobalParagraph fontSize="24px" mediafontsize="18px" fontWeight="600" color='neutrals'>consulting</GlobalParagraph>
                                     <GlobalParagraph fontSize="14px" mediafontsize="12px" fontWeight="400" color='neutrals'>consulting</GlobalParagraph>
                                 </Box>
-                                <Button sx={{ height: '48px' }} fullWidth variant="contained">consulting</Button>
+                                <Button sx={{ height: '48px' }} onClick={() => navigate("/consulting-detail")} fullWidth variant="contained">consulting</Button>
                             </Box>
                         </Box>
                     </Box>

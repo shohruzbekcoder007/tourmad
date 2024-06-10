@@ -10,8 +10,9 @@ import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import DriveOrder from '../../components/DriveOrder';
 
-const DriveDetail: React.FC = () => {
+const MyDriverDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
     useEffect(() => {
@@ -78,7 +79,7 @@ const DriveDetail: React.FC = () => {
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
-                            <Button variant='contained'>Book Now</Button>
+                            <DriveOrder btnText='Book Now' />
                         </Box>
                     </Box>
                 </Box>
@@ -95,4 +96,4 @@ const DriveDetail: React.FC = () => {
     )
 }
 
-export default DriveDetail
+export default MyDriverDetail

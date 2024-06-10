@@ -30,6 +30,7 @@ import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
 import room_styles from "../../dictionary/room_style";
+import { useNavigate } from "react-router-dom";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 
 type Option = {
@@ -66,7 +67,7 @@ function valuetext(value: number) {
 }
 
 const HotelFilters: React.FC = () => {
-
+  const navigate = useNavigate()
   const [from, setFrom] = useState<Option | null>(null)
   const [openPrice, setOpenPrice] = React.useState(true)
   const [openRating, setOpenRating] = React.useState(true)
@@ -144,7 +145,7 @@ const HotelFilters: React.FC = () => {
     <Stack mt="40px">
       <Box pb="40px" display="flex" justifyContent="space-between">
         <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Hotel Filter</WelcomeMainText>
-        <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+        <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
       </Box>
       <Paper
         elevation={0}
