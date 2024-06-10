@@ -4,9 +4,11 @@ import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useNavigate } from "react-router-dom";
 
 const HotelFilterCard: React.FC = () => {
   const value: number | null = 2;
+  const navigate = useNavigate();
 
   return (
     <Stack>
@@ -56,7 +58,7 @@ const HotelFilterCard: React.FC = () => {
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button variant="contained" fullWidth>
+                <Button onClick={() => navigate("/restaurant-detail")} variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>
@@ -110,7 +112,7 @@ const HotelFilterCard: React.FC = () => {
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button variant="contained" fullWidth>
+                <Button onClick={() => navigate("/restaurant-detail")} variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>

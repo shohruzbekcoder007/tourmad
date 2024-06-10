@@ -16,6 +16,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ResentSearch from "../ResentSearch";
 import photo1 from "./../../media/images/Samarkand_registan.jpg";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useNavigate } from "react-router-dom";
 
 
 type Option = {
@@ -25,7 +26,7 @@ type Option = {
 
 const HistoryService: React.FC = () => {
   const [from, setFrom] = useState<Option | null>(null)
-
+    const navigate = useNavigate()
 
   const options: Option[] = [
     { label: 'The Shawshank Redemption', value: "1994" },
@@ -48,7 +49,7 @@ const HistoryService: React.FC = () => {
     <Stack mt="40px">
       <Box pb="40px" display="flex" justifyContent="space-between">
         <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">History</WelcomeMainText>
-        <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+        <Button variant="outlined" onClick={() => navigate(-1)}><KeyboardBackspaceIcon /></Button>
       </Box>
       <Paper
         elevation={0}
@@ -113,7 +114,7 @@ const HistoryService: React.FC = () => {
                             <GlobalParagraph fontSize='14px' fontWeight='400' mediafontsize='12px' color='neutrals'>Samarqand</GlobalParagraph>
                         </Box>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>View History</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained' onClick={() => navigate("/history-detail")}>View History</Button>
                 </Box>
           </Box>
           <Box 

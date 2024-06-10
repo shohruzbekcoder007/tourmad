@@ -4,6 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles"
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { GalleryType, LocationType, RoomStyle } from "../../utils/response_types"
+import { useNavigate } from "react-router-dom"
 
 // galery grade name location room_style rate
 type HotelCardProps = {
@@ -17,7 +18,7 @@ type HotelCardProps = {
 }
 
 const HotelCard: React.FC<HotelCardProps> = ({card, galery, grade, name, location, room_style, rate}) => {
-
+  const navigate = useNavigate();
   return (
       <Paper
         elevation={0}
@@ -68,7 +69,7 @@ const HotelCard: React.FC<HotelCardProps> = ({card, galery, grade, name, locatio
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button variant="contained" fullWidth>
+                <Button onClick={() => navigate("/hotel-detail")}  variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>

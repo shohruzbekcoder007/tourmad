@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HotelFilterCard from '../HotelFilterCard';
+import { useNavigate } from 'react-router-dom';
 
 type Option = {
     label: string,
@@ -15,6 +16,7 @@ type Option = {
 
 const RestaurantFilter: React.FC = () => {
     const [from, setFrom] = useState<Option | null>(null)
+    const navigate = useNavigate()
 
     const options: Option[] = [
         { label: 'The Shawshank Redemption', value: "1994" },
@@ -36,7 +38,7 @@ const RestaurantFilter: React.FC = () => {
         <Stack mt='40px'>
             <Box pb="40px" display="flex" justifyContent="space-between">
                 <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Restaurant Filter</WelcomeMainText>
-                <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+                <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
             </Box>
             <Paper
                 elevation={0}
