@@ -132,6 +132,7 @@ export const hotelSlice = createSlice({
                 state.loading = false
                 let locationList = action?.payload
                 state.locationList = locationList
+                state.error = null
                 state.statusLastSearchHotel = "succeeded"
             })
             .addCase(getLoacationList.rejected, (state, _) => {

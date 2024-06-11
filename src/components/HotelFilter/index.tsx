@@ -25,13 +25,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getRoomStyle, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
 import room_styles from "../../dictionary/room_style";
 import { useNavigate } from "react-router-dom";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
+import { RecommendationType } from "../../utils/response_types";
 
 type Option = {
   label: string,
@@ -67,14 +68,15 @@ function valuetext(value: number) {
 }
 
 const HotelFilters: React.FC = () => {
+
   const navigate = useNavigate()
   const [from, setFrom] = useState<Option | null>(null)
   const [openPrice, setOpenPrice] = React.useState(true)
   const [openRating, setOpenRating] = React.useState(true)
   const [value, setValue] = React.useState<number[]>([20, 300])
   const [age, setAge] = React.useState(room_styles[0].value)
-  
-  const [sliderValue] =useDebounce(value, 1000)
+
+  const [sliderValue] = useDebounce(value, 1000)
 
 
   // redux
@@ -86,7 +88,7 @@ const HotelFilters: React.FC = () => {
   const hotelGrade = useAppSelector(getHotelGrade)
   const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
-  const hotelRoomStyle = useAppSelector(getRoomStyle)
+  // const hotelRoomStyle = useAppSelector(getRoomStyle)
 
   // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
@@ -120,17 +122,17 @@ const HotelFilters: React.FC = () => {
   }
 
   useEffect(() => {
-    if(hotelPriceFrom !== sliderValue[0]) {
+    if (hotelPriceFrom !== sliderValue[0]) {
       dispatch(changePriceFrom(sliderValue[0]))
     }
-    if(hotelPriceTo !== sliderValue[1]) {
+    if (hotelPriceTo !== sliderValue[1]) {
       dispatch(changePriceTo(sliderValue[1]))
     }
   }, [sliderValue, dispatch])
 
   useEffect(() => {
     setValue([hotelPriceFrom, hotelPriceTo])
-  },[hotelPriceFrom, hotelPriceTo])
+  }, [hotelPriceFrom, hotelPriceTo])
 
   useEffect(() => { }, [from]) //for error fixed
 
@@ -237,40 +239,40 @@ const HotelFilters: React.FC = () => {
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 1?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(1)}}
+                    variant={hotelGrade === 1 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(1) }}
                   >
                     1+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 2?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(2)}}
+                    variant={hotelGrade === 2 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(2) }}
                   >
                     2+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 3?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(3)}}
+                    variant={hotelGrade === 3 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(3) }}
                   >
                     3+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 4?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(4)}}
+                    variant={hotelGrade === 4 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(4) }}
                   >
                     4+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 5?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(5)}}
+                    variant={hotelGrade === 5 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(5) }}
                   >
                     5+
                   </Button>
@@ -332,10 +334,10 @@ const HotelFilters: React.FC = () => {
             </Box>
           </Box>
           {
-            hotelLoading ? <DriveFilterSkeleton/> :
+            hotelLoading ? <DriveFilterSkeleton /> :
               <>
                 {
-                  hotelList?.map((hotel, index) => {
+                  hotelList?.map((hotel: RecommendationType, index: number) => {
                     return (
                       <HotelCard
                         key={index}
