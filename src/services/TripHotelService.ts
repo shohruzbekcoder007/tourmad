@@ -12,21 +12,9 @@ class TripHotelService {
 
         let hotel: HotelState = state?.hotel as HotelState
 
-        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade, hotelPriceFrom, hotelPriceTo } = hotel
+        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade, hotelPriceFrom, hotelPriceTo, searchLocation } = hotel
 
-        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}`)
-    }
-
-    static createHotelOrder = () => {
-
-    }
-
-    static updateHotelOrderDetail = () => {
-
-    }
-
-    static hotelDetail = () => {
-        
+        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}&location=${searchLocation || ""}`)
     }
 
     static recommendationTripHotel = () => {
