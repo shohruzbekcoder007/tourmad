@@ -5,12 +5,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import { useNavigate } from "react-router-dom";
 
 type PropsType = {
   time?: string
 }
 
 const DriveFilterCard: React.FC<PropsType> = (props) => {
+  const navigate = useNavigate();
 
   return (
     <Stack>
@@ -72,7 +74,7 @@ const DriveFilterCard: React.FC<PropsType> = (props) => {
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button variant="contained" fullWidth>
+                <Button onClick={() => navigate("/drive-detail")} variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>

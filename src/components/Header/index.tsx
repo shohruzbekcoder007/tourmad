@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     divider? <Divider orientation="vertical" variant="middle" flexItem/> : <></>
                 }
                 
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/my-driver" type={type}>
                     <HeaderMenuListItemIconc>
                         <LocalTaxiIcon />
                     </HeaderMenuListItemIconc>
@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     </HeaderMenuListItemIconc>
                     <HeaderMenuListItemText>Consulting</HeaderMenuListItemText>
                 </HeaderMenuListItem>
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/history" type={type}>
                     <HeaderMenuListItemIconc>
                         <CastleIcon />
                     </HeaderMenuListItemIconc>

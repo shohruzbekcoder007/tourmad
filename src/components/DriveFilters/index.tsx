@@ -26,6 +26,7 @@ import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TranslateIcon from '@mui/icons-material/Translate';
 import DriveFilterCard from "../DriverFilterCard";
+import { useNavigate } from "react-router-dom";
 
 type Option = {
     label: string,
@@ -50,6 +51,7 @@ function valuetext(value: number) {
 }
 
 const DriveFilter: React.FC = () => {
+    const navigate = useNavigate();
     const [from, setFrom] = useState<Option | null>(null)
     const [openPrice, setOpenPrice] = React.useState(true);
     const [openRating, setOpenRating] = React.useState(true);
@@ -91,7 +93,7 @@ const DriveFilter: React.FC = () => {
         <Stack mt="40px">
             <Box pb="40px" display="flex" justifyContent="space-between">
                 <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Drive Filter</WelcomeMainText>
-                <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+                <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
             </Box>
             <Paper
                 elevation={0}

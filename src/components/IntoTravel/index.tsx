@@ -14,11 +14,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
         return (
             <Stack pb="80px">
                 
-                <Box display="flex" width="100%" justifyContent="flex-start" gap="20px" sx={{
-                    overflowX: "scroll", '&::-webkit-scrollbar': {
-                        display: 'none'
-                    }
-                }}>
+                <Box width="100%" display='flex' flexWrap='wrap' justifyContent="space-between">
                     {
                         data?.map((item, index) => {
                             return (
@@ -36,7 +32,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                         backgroundPosition: "center",
                                         backgroundSize: "cover",
                                         position: "relative",
-                                        width: "296px",
+                                        width: {xl: "296px", md: '30%', sm: "47%", xs: '100%'},
                                         '&:hover': {
                                             boxShadow: `0px 0px 5px 5px rgba(37, 69, 37, 0.217)`,
                                             cursor: 'pointer',

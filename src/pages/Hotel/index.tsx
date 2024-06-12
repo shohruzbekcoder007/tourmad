@@ -8,8 +8,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice'
 import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import SwipeDrawer from '../../components/SwipeDrawer'
 
 const Hotel: React.FC = () => {
+
     const navigate = useNavigate();
     const statusLastRecommendationHotel = useAppSelector(getStatusLastRecommendationHotel)
     const hotelRecommendationList = useAppSelector(getHotelRecommendationList)
@@ -17,7 +19,7 @@ const Hotel: React.FC = () => {
 
     useEffect(() => {
         if (statusLastRecommendationHotel === 'idle') {
-        dispatch(getRecommendationTripHotel())
+            dispatch(getRecommendationTripHotel())
         }
     }, [statusLastRecommendationHotel, dispatch])
 
@@ -39,6 +41,7 @@ const Hotel: React.FC = () => {
                     </Grid>
                 </Grid>
                 <IntoTravel data={hotelRecommendationList}/>
+                <SwipeDrawer btnText='See More'/>
             </Container>
         </>
     )

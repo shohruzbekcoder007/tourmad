@@ -44,3 +44,9 @@ export type RecommendationType = {
     price: number | null
 }
 
+export type CommonLocationType = {
+    id: number,
+    name: string,
+    parent: number | null,
+    photo: string
+}

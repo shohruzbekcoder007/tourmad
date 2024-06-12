@@ -11,6 +11,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { CustomAutocomplete } from '../../helper_components';
 import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer';
 
 type PropsType = {
     btnText: string
@@ -23,28 +25,40 @@ type Option = {
     value: string
 }
 
-const options: Option[] = [
-    { label: 'The Shawshank Redemption', value: "1994" },
-    { label: 'The Godfather', value: "1972" },
-    { label: 'The Godfather: Part II', value: "1974" },
-    { label: 'The Dark Knight', value: "2008" },
-    { label: '12 Angry Men', value: "1957" },
-    { label: "Schindler's List", value: "1993" },
-    { label: 'Pulp Fiction', value: "1994" },
-]
+
 
 const SwipeDrawer: React.FC<PropsType> = (props) => {
+
     const [state, setState] = React.useState({
         right: false,
     });
-
     const [from, setFrom] = useState<Option | null>(null)
+
+    const dispatch = useAppDispatch()
+    const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+    const commonLocationList = useAppSelector(getCommonLocations)
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
     }
 
+    useEffect(() => {
+        if (statusCommonLocation === 'idle') {
+            dispatch(getCommonLocationList())
+        }
+    }, [statusCommonLocation, dispatch])
+
+
     useEffect(() => { }, [from])
+
+    const filterLocation = commonLocationList?.filter((item) => {
+        return item.parent !== null
+    })
+
+    const newOption: Option[] | undefined = filterLocation?.map((item) => {
+        return { label: item.name, value: "" + item.id }
+    })
+
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -74,14 +88,14 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 <WelcomeMainText fontSize='32px' part="true" mediafontsize='24px'>
                     My Trips
                 </WelcomeMainText>
-                <Box borderRadius='8px' display='flex' justifyContent='flex-start' gap={{xl: '32px', md: '32px', sm: 0, xs: 0}}
+                <Box borderRadius='8px' display='flex' justifyContent='flex-start' gap={{ xl: '32px', md: '32px', sm: 0, xs: 0 }}
                     flexWrap='wrap' boxShadow={1} mt='32px' width='100%'
                     height={{ xl: "150px", md: "150px", sm: "auto", xs: "auto" }}>
                     <Box borderRadius={{ xl: '8px 0 0 8px', md: '8px 0 0 8px', sm: '8px 0 0 8px', xs: '8px 8px 0 0' }}
                         width={{ xl: "35%", md: "35%", sm: "100%", xs: "100%" }} height='100%' overflow="hidden">
                         <img src={trip_photo} width='100%' height='100%' style={{ objectFit: "cover" }} alt="" />
                     </Box>
-                    <Box width={{ xl: "45%", md: "45%", sm: "100%", xs: "100%" }} pb={{xl: 0, md: 0, sm: "8px", xs: '8px'}}   ml={{ xl: 0, md: 0, sm: '20px', xs: "20px" }}>
+                    <Box width={{ xl: "45%", md: "45%", sm: "100%", xs: "100%" }} pb={{ xl: 0, md: 0, sm: "8px", xs: '8px' }} ml={{ xl: 0, md: 0, sm: '20px', xs: "20px" }}>
                         <GlobalParagraph fontSize='24px' fontWeight='700' mediafontsize='16px'>Samarqand</GlobalParagraph>
                         <Box mt='16px' display='flex' justifyContent='flex-start' flexWrap='wrap' gap='16px'>
                             <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
@@ -106,7 +120,8 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Destination</GlobalParagraph>
                 <CustomAutocomplete
-                    options={options}
+                    options={newOption === undefined ? [] : newOption}
+                    // options={commonLocationList}
                     placeholder="Location"
                     getChange={getChangeOptionFrom}
                     icon={<LocationOnIcon />}
