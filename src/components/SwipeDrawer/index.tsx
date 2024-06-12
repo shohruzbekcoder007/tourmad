@@ -50,15 +50,14 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
 
 
     useEffect(() => { }, [from])
-    console.log(commonLocationList)
 
     const filterLocation = commonLocationList?.filter((item) => {
         return item.parent !== null
     })
-   
+
     const newOption: Option[] | undefined = filterLocation?.map((item) => {
-            return { label: item.name, value: "" + item.id }
-        })
+        return { label: item.name, value: "" + item.id }
+    })
 
 
     const toggleDrawer =
