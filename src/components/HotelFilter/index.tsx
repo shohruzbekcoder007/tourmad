@@ -33,6 +33,7 @@ import room_styles from "../../dictionary/room_style";
 import { useNavigate } from "react-router-dom";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 import { RecommendationType } from "../../utils/response_types";
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
 
 type Option = {
   label: string,
@@ -52,16 +53,6 @@ const marks = [
     label: "",
   },
 ];
-
-const options: Option[] = [
-  { label: 'The Shawshank Redemption', value: "1994" },
-  { label: 'The Godfather', value: "1972" },
-  { label: 'The Godfather: Part II', value: "1974" },
-  { label: 'The Dark Knight', value: "2008" },
-  { label: '12 Angry Men', value: "1957" },
-  { label: "Schindler's List", value: "1993" },
-  { label: 'Pulp Fiction', value: "1994" },
-]
 
 function valuetext(value: number) {
   return `${value + 10}$`;
@@ -88,6 +79,8 @@ const HotelFilters: React.FC = () => {
   const hotelGrade = useAppSelector(getHotelGrade)
   const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
+  const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+  const commonLocationList = useAppSelector(getCommonLocations)
   // const hotelRoomStyle = useAppSelector(getRoomStyle)
 
   // redux dispatch
@@ -122,6 +115,12 @@ const HotelFilters: React.FC = () => {
   }
 
   useEffect(() => {
+    if (statusCommonLocation === 'idle') {
+      dispatch(getCommonLocationList())
+    }
+  }, [statusCommonLocation, dispatch])
+
+  useEffect(() => {
     if (hotelPriceFrom !== sliderValue[0]) {
       dispatch(changePriceFrom(sliderValue[0]))
     }
@@ -142,6 +141,13 @@ const HotelFilters: React.FC = () => {
     }
   }, [statusHotelLIst, dispatch])
 
+  const filterLocation = commonLocationList?.filter((item) => {
+    return item.parent !== null
+  })
+
+  const newOption: Option[] | undefined = filterLocation?.map((item) => {
+    return { label: item.name, value: "" + item.id }
+  })
 
   return (
     <Stack mt="40px">
@@ -164,7 +170,7 @@ const HotelFilters: React.FC = () => {
         >
           <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
             <CustomAutocomplete
-              options={options}
+              options={newOption === undefined ? [] : newOption}
               placeholder="Location"
               getChange={getChangeOptionFrom}
               icon={<LocationOnIcon />}

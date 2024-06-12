@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
-import { Divider, Grid, TextField } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { CustomAutocomplete } from '../../helper_components';
+import Box from '@mui/material/Box'
+import SwipeableDrawer from '@mui/material/SwipeableDrawer'
+import Button from '@mui/material/Button'
+import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
+import { Divider, Grid, TextField } from '@mui/material'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { CustomAutocomplete } from '../../helper_components'
 import trip_photo from './../../media/images/trip-card-phot.webp'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
 
 type PropsType = {
     btnText: string
@@ -24,8 +24,6 @@ type Option = {
     label: string,
     value: string
 }
-
-
 
 const SwipeDrawer: React.FC<PropsType> = (props) => {
 
