@@ -25,7 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, changePriceFrom, changePriceTo, changeSearchLocation, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, changePriceFrom, changePriceTo, changeRoomStyle, changeSearchLocation, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
@@ -87,6 +87,7 @@ const HotelFilters: React.FC = () => {
 
   const handleChangeSort = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+    dispatch(changeRoomStyle(event.target.value as string))
   }
 
   const handleChange = (_: Event, newValue: number | number[]) => {

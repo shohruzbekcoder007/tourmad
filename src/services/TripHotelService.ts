@@ -12,9 +12,14 @@ class TripHotelService {
 
         let hotel: HotelState = state?.hotel as HotelState
 
-        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade, hotelPriceFrom, hotelPriceTo, searchLocation } = hotel
+        const { hotelListPageSize,  hotelListCurrentPage, hotelGrade, hotelPriceFrom, hotelPriceTo, searchLocation, room_style } = hotel
 
-        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}&location=${searchLocation || ""}`)
+        let room_style_query: string = room_style
+        if (room_style === "all") {
+            room_style_query = ""
+        }
+
+        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}&location=${searchLocation || ""}&room_style=${room_style_query || ""}`)
     }
 
     static recommendationTripHotel = () => {
