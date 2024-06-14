@@ -4,6 +4,7 @@ import userSlice from './slices/userSlice'
 import hotelSlice from './slices/hotelSlice'
 import restaurantSlice from './slices/restaurantSlice'
 import driverSlice from './slices/driverSliser'
+import commonLanguageSlice from './slices/commonLanguage'
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     user: userSlice,
     hotel: hotelSlice,
     restaurant: restaurantSlice,
-    driver: driverSlice
+    driver: driverSlice,
+    commonlanguage: commonLanguageSlice, 
   },
 })
 

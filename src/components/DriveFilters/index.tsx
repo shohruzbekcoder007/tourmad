@@ -27,14 +27,22 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TranslateIcon from '@mui/icons-material/Translate';
 import DriveFilterCard from "../DriverFilterCard";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from '../../redux/hooks'
+import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverList, getDriverPriceFrom, getDriverPriceto, getDrivers, getLoadingDriver,  getStatusDriverList } from '../../redux/slices/driverSliser'
+import { AppDispatch } from '../../redux/store'
+import { useDispatch } from 'react-redux'
+import { driver_styles } from "../../dictionary/room_style";
+import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
+import { useDebounce } from "use-debounce";
+import { getCommonLanguageList, getLanguageList, getStatusCommonLanguage } from "../../redux/slices/commonLanguage";
 
 type Option = {
     label: string,
     value: string
 }
 
-const MAX = 1200;
-const MIN = 50;
+const MAX = 1000;
+const MIN = 0;
 const marks = [
     {
         value: MIN,
@@ -55,8 +63,10 @@ const DriveFilter: React.FC = () => {
     const [from, setFrom] = useState<Option | null>(null)
     const [openPrice, setOpenPrice] = React.useState(true);
     const [openRating, setOpenRating] = React.useState(true);
-    const [value, setValue] = React.useState<number[]>([20, 37]);
-    const [age, setAge] = React.useState("");
+    const [value, setValue] = React.useState<number[]>([0, 100]);
+    const [age, setAge] = React.useState(driver_styles[0].value);
+
+    const [sliderValue] =useDebounce(value, 1000)
 
     const handleChangeSort = (event: SelectChangeEvent) => {
         setAge(event.target.value);
@@ -74,20 +84,56 @@ const DriveFilter: React.FC = () => {
         setOpenRating(!openRating);
     };
 
-    const options: Option[] = [
-        { label: 'The Shawshank Redemption', value: "1994" },
-        { label: 'The Godfather', value: "1972" },
-        { label: 'The Godfather: Part II', value: "1974" },
-        { label: 'The Dark Knight', value: "2008" },
-        { label: '12 Angry Men', value: "1957" },
-        { label: "Schindler's List", value: "1993" },
-        { label: 'Pulp Fiction', value: "1994" },
-    ]
+    const options: Option[] = []
+
+    // redux
+    const statusDriverList = useAppSelector(getStatusDriverList);
+    const drivers = useAppSelector(getDrivers);
+    const driversGrade = useAppSelector(getDriverGrade);
+    const loadingDriver = useAppSelector(getLoadingDriver);
+    const driverPriceFrom = useAppSelector(getDriverPriceFrom)
+    const driverPriceTo = useAppSelector(getDriverPriceto) 
+    const languagesList = useAppSelector(getLanguageList) 
+    const statusLanguage = useAppSelector(getStatusCommonLanguage)
+    // const showMessageDriver = useAppSelector(getShowMessageDriver);
+    // const errorDriver = useAppSelector(getErrorDriver);
+    // const messageDriver = useAppSelector(getMessageDriver);
+
+    // redux dispatch
+    const dispatch: AppDispatch = useDispatch();
+
+    const changeGradeHanler = (grade: number) => {
+        dispatch(changeGrade(grade))
+    }
+
+    useEffect(() => {
+        if (statusLanguage === 'idle') {
+            dispatch(getCommonLanguageList())
+        }
+        console.log(languagesList);
+    }, [statusLanguage, dispatch])
+
+    useEffect(() => {
+        if (statusDriverList === 'idle') {
+            dispatch(getDriverList())
+        }
+    }, [statusDriverList, dispatch])
+
     useEffect(() => { }, [from]) //for error fixed
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
     }
+
+    useEffect(() => {
+        if(driverPriceFrom !== sliderValue[0]) {
+          dispatch(changePriceFrom(sliderValue[0]*10))
+        }
+        if(driverPriceTo !== sliderValue[1]) {
+          dispatch(changePriceTo(sliderValue[1]*10))
+        }
+      }, [value, dispatch])
+
 
     return (
         <Stack mt="40px">
@@ -192,35 +238,40 @@ const DriveFilter: React.FC = () => {
                                     <Button
                                         sx={{ mr: "16px", mt: "16px" }}
                                         size="small"
-                                        variant="outlined"
+                                        variant={driversGrade === 1?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(1)}}
                                     >
                                         1+
                                     </Button>
                                     <Button
                                         sx={{ mr: "16px", mt: "16px" }}
-                                        size="small"
-                                        variant="outlined"
+                                        size="small"                    
+                                        variant={driversGrade === 2?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(2)}}
                                     >
                                         2+
                                     </Button>
                                     <Button
                                         sx={{ mr: "16px", mt: "16px" }}
                                         size="small"
-                                        variant="outlined"
+                                        variant={driversGrade === 3?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(3)}}
                                     >
                                         3+
                                     </Button>
                                     <Button
                                         sx={{ mr: "16px", mt: "16px" }}
                                         size="small"
-                                        variant="outlined"
+                                        variant={driversGrade === 4?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(4)}}
                                     >
                                         4+
                                     </Button>
                                     <Button
                                         sx={{ mr: "16px", mt: "16px" }}
                                         size="small"
-                                        variant="outlined"
+                                        variant={driversGrade === 5?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(5)}}
                                     >
                                         5+
                                     </Button>
@@ -245,9 +296,9 @@ const DriveFilter: React.FC = () => {
                                     label="Sort Type"
                                     onChange={handleChangeSort}
                                 >
-                                    <MenuItem value={10}>Start</MenuItem>
-                                    <MenuItem value={20}>Camford</MenuItem>
-                                    <MenuItem value={30}>Biznes</MenuItem>
+                                    {
+                                        driver_styles.map((driver, index) => <MenuItem key={index} value={driver.value}>{driver.label}</MenuItem>)
+                                    }
                                 </Select>
                             </FormControl>
                         </Box>
@@ -274,14 +325,36 @@ const DriveFilter: React.FC = () => {
                                     label="Sort Type"
                                     onChange={handleChangeSort}
                                 >
-                                    <MenuItem value={10}>Start</MenuItem>
-                                    <MenuItem value={20}>Camford</MenuItem>
-                                    <MenuItem value={30}>Biznes</MenuItem>
+                                    {
+                                        driver_styles.map((driver, index) => <MenuItem key={index} value={driver.value}>{driver.label}</MenuItem>)
+                                    }
                                 </Select>
                             </FormControl>
                         </Box>
                     </Box>
-                    <DriveFilterCard time="h"/>
+                    {
+                        loadingDriver ? <DriveFilterSkeleton /> :
+                            <>
+                                {
+                                    drivers?.map((drivers, index) => {
+                                        return (
+                                            <DriveFilterCard
+                                                key={index + 1}
+                                                user={drivers.user}
+                                                auto_number={drivers.auto_number}
+                                                avg_rate={drivers.avg_rate}
+                                                location={drivers.location}
+                                                auto_model={drivers.auto_model}
+                                                auto_photo={drivers.auto_photo}
+                                                languages={drivers.languages}
+                                                price={drivers.price}
+                                                orders_count={drivers.orders_count}
+                                                time="h" />
+                                        )
+                                    })
+                                }
+                            </>
+                    }
                     <Box display="flex" justifyContent="flex-end">
                         <Pagination count={10} color="primary" />
                     </Box>

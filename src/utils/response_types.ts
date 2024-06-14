@@ -27,6 +27,15 @@ export type UserType = {
     role: "user" | "admin"
 }
 
+export type UserDrivers = {
+    birth_date: Date | null,
+    email: string | null,
+    first_name: string | null,
+    gender: "male" | "female",
+    last_name: string | null,
+    middle_name: string | null,
+}
+
 export type RecommendationType = {
     id: number | null,
     location: LocationType | null,
@@ -44,3 +53,40 @@ export type RecommendationType = {
     price: number | null
 }
 
+export type Location = {
+    id: number,
+    name: string,
+    parent: number,
+    photo: string
+}
+
+export type AutoModel = {
+    id: number,
+    name: string,
+    status: string,
+}
+
+export type Language = {
+    id: number,
+    lang: string
+}
+
+export type AutoNumber = {
+    region: number,
+    number: string,
+    country: string
+}
+
+export type DriverType = {
+    user: UserDrivers,
+    avg_rate: number,
+    location: Location,
+    auto_model: AutoModel,
+    auto_number: AutoNumber,
+    auto_photo: string,
+    auto_doc1: string,
+    auto_doc2: string,
+    languages: Language[],
+    price: number,
+    orders_count: number,
+}

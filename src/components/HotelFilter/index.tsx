@@ -140,7 +140,6 @@ const HotelFilters: React.FC = () => {
     }
   }, [statusHotelLIst, dispatch])
 
-
   return (
     <Stack mt="40px">
       <Box pb="40px" display="flex" justifyContent="space-between">
