@@ -79,8 +79,6 @@ const HistoryService: React.FC = () => {
         }
     }, [statusHistoryList, dispatch])
 
-    console.log(historyList)
-
     return (
         <Stack mt="40px">
             <Box pb="40px" display="flex" justifyContent="space-between">
