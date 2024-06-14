@@ -28,10 +28,6 @@ const initialState: HistoryState = {
     historyListTotalPages: 1,
 }
 
-
-
-
-
 export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
     async (_, { rejectWithValue, getState }) => {
         try {
@@ -50,7 +46,6 @@ export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
         }
     }
 )
-
 
 export const historySlice = createSlice({
     name: 'history',

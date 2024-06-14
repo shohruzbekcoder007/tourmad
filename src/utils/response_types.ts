@@ -14,7 +14,7 @@ export type LocationType = {
     name: string | null,
     parent: number | null,
     photo: string | null,
-    hotels: number | null
+    hotels?: number | null
 }
 
 export type UserType = {
@@ -69,4 +69,12 @@ export type HistoryType = {
     location: LocationType | null,
     latitude: number | null,
     longitude: number | null
+}
+
+export type TripType = {
+    id: number | null,
+    title: string | null,
+    location: LocationType[] | null,
+    start_time: Date | string | null,
+    end_time: Date | string | null
 }

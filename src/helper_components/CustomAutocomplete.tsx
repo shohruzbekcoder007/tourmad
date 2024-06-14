@@ -10,10 +10,11 @@ type CustomAutocompleteProps = {
     options: Option[],
     icon?: React.ReactElement<SVGProps<SVGSVGElement>> | null;
     placeholder?: string,
-    getChange: (val: Option | null) => void
+    getChange: (val: Option | null) => void,
+    disabled?: boolean
 }
 
-const CustomAutocomplete: React.FC<CustomAutocompleteProps> = ({ options, icon, placeholder = "", getChange }: CustomAutocompleteProps) => {
+const CustomAutocomplete: React.FC<CustomAutocompleteProps> = ({ options, icon, placeholder = "", getChange, disabled=false }: CustomAutocompleteProps) => {
 
     const [optionList, setOptionList] = useState<Option[]>(options)
 
@@ -43,6 +44,7 @@ const CustomAutocomplete: React.FC<CustomAutocompleteProps> = ({ options, icon, 
                     {...params} 
                     label={placeholder} 
                 />}
+                disabled={disabled}
             />
         </>
     )
