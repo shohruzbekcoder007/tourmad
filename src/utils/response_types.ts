@@ -50,3 +50,23 @@ export type CommonLocationType = {
     parent: number | null,
     photo: string
 }
+
+export type HistoryOrPlaceCategryType = {
+    id: number | null,
+    title: string | null,
+    logo: string | null,
+    count: number | null
+}
+
+export type HistoryType = {
+    id: number | null,
+    title: string | null,
+    banner: string | null,
+    card: string | null,
+    category: HistoryOrPlaceCategryType | null,
+    body: string | null,
+    audio: string | null,
+    location: LocationType | null,
+    latitude: number | null,
+    longitude: number | null
+}

@@ -25,7 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, changePriceFrom, changePriceTo, changeRoomStyle, changeSearchLocation, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
@@ -33,6 +33,7 @@ import room_styles from "../../dictionary/room_style";
 import { useNavigate } from "react-router-dom";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 import { RecommendationType } from "../../utils/response_types";
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
 
 type Option = {
   label: string,
@@ -53,16 +54,6 @@ const marks = [
   },
 ];
 
-const options: Option[] = [
-  { label: 'The Shawshank Redemption', value: "1994" },
-  { label: 'The Godfather', value: "1972" },
-  { label: 'The Godfather: Part II', value: "1974" },
-  { label: 'The Dark Knight', value: "2008" },
-  { label: '12 Angry Men', value: "1957" },
-  { label: "Schindler's List", value: "1993" },
-  { label: 'Pulp Fiction', value: "1994" },
-]
-
 function valuetext(value: number) {
   return `${value + 10}$`;
 }
@@ -78,7 +69,6 @@ const HotelFilters: React.FC = () => {
 
   const [sliderValue] = useDebounce(value, 1000)
 
-
   // redux
   const statusHotelLIst = useAppSelector(getStatusHotelList)
   const hotelList = useAppSelector(getHotelList)
@@ -88,6 +78,8 @@ const HotelFilters: React.FC = () => {
   const hotelGrade = useAppSelector(getHotelGrade)
   const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
+  const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+  const commonLocationList = useAppSelector(getCommonLocations)
   // const hotelRoomStyle = useAppSelector(getRoomStyle)
 
   // redux dispatch
@@ -95,6 +87,7 @@ const HotelFilters: React.FC = () => {
 
   const handleChangeSort = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+    dispatch(changeRoomStyle(event.target.value as string))
   }
 
   const handleChange = (_: Event, newValue: number | number[]) => {
@@ -122,6 +115,12 @@ const HotelFilters: React.FC = () => {
   }
 
   useEffect(() => {
+    if (statusCommonLocation === 'idle') {
+      dispatch(getCommonLocationList())
+    }
+  }, [statusCommonLocation, dispatch])
+
+  useEffect(() => {
     if (hotelPriceFrom !== sliderValue[0]) {
       dispatch(changePriceFrom(sliderValue[0]))
     }
@@ -134,14 +133,19 @@ const HotelFilters: React.FC = () => {
     setValue([hotelPriceFrom, hotelPriceTo])
   }, [hotelPriceFrom, hotelPriceTo])
 
-  useEffect(() => { }, [from]) //for error fixed
-
   useEffect(() => {
     if (statusHotelLIst === 'idle') {
       dispatch(getTripHotelList())
     }
   }, [statusHotelLIst, dispatch])
 
+  const filterLocation = commonLocationList?.filter((item) => {
+    return item.parent !== null
+  })
+
+  const newOption: Option[] | undefined = filterLocation?.map((item) => {
+    return { label: item.name, value: "" + item.id }
+  })
 
   return (
     <Stack mt="40px">
@@ -164,14 +168,21 @@ const HotelFilters: React.FC = () => {
         >
           <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
             <CustomAutocomplete
-              options={options}
+              options={newOption === undefined ? [] : newOption}
               placeholder="Location"
               getChange={getChangeOptionFrom}
               icon={<LocationOnIcon />}
             />
           </Box>
           <Box mt="16px" width={'56px'}>
-            <Button sx={{ height: '56px' }} fullWidth variant='contained'>
+            <Button
+              sx={{ height: '56px' }}
+              fullWidth
+              variant='contained'
+              onClick={() => {
+                dispatch(changeSearchLocation(from?.value))
+              }}
+            >
               <SearchIcon />
             </Button>
           </Box>
