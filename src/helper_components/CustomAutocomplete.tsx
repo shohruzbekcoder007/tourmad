@@ -39,7 +39,10 @@ const CustomAutocomplete: React.FC<CustomAutocompleteProps> = ({ options, icon, 
                         zIndex: 10,
                     }
                 }}
-                renderInput={(params) => <TextField {...params} label={placeholder} />}
+                renderInput={(params) => <TextField 
+                    {...params} 
+                    label={placeholder} 
+                />}
             />
         </>
     )

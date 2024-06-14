@@ -21,7 +21,8 @@ export interface HotelState {
     hotelGrade: 1 | 2 | 3 | 4 | 5,
     hotelPriceFrom: number,
     hotelPriceTo: number,
-    room_style: "basic" | "premium" | "all"
+    room_style: "basic" | "premium" | "all",
+    searchLocation: string | null,
 }
 
 const initialState: HotelState = {
@@ -35,13 +36,14 @@ const initialState: HotelState = {
     hotelRecommendationList: [],
     hotelList: [],
     error: null,
-    hotelListPageSize: 1,
+    hotelListPageSize: 5,
     hotelListCurrentPage: 1,
     hotelListTotalPages: 1,
     hotelGrade: 3,
     hotelPriceFrom: 20,
     hotelPriceTo: 100,
-    room_style: "all"
+    room_style: "all",
+    searchLocation: "",
 }
 
 export const getLoacationList = createAsyncThunk("get-location-hotel",
@@ -106,18 +108,27 @@ export const hotelSlice = createSlice({
         },
         changeGrade: (state, action) => {
             state.hotelGrade = action.payload
+            state.hotelListCurrentPage = 1
             state.statusHotelList = "idle"
         },
         changePriceFrom: (state, action) => {
             state.hotelPriceFrom = action.payload
+            state.hotelListCurrentPage = 1
             state.statusHotelList = "idle"
         },
         changePriceTo: (state, action) => {
             state.hotelPriceTo = action.payload
+            state.hotelListCurrentPage = 1
             state.statusHotelList = "idle"
         },
         changeRoomStyle: (state, action) => {
             state.room_style = action.payload
+            state.hotelListCurrentPage = 1
+            state.statusHotelList = "idle"
+        },
+        changeSearchLocation: (state, action) => {
+            state.searchLocation = action.payload
+            state.hotelListCurrentPage = 1
             state.statusHotelList = "idle"
         }
     },
@@ -177,7 +188,7 @@ export const hotelSlice = createSlice({
     }
 })
 
-export const { changePage, changeGrade, changePriceFrom, changePriceTo } = hotelSlice.actions
+export const { changePage, changeGrade, changePriceFrom, changePriceTo, changeSearchLocation, changeRoomStyle } = hotelSlice.actions
 
 export const getStatusLastSearchHotel = (state: RootState) => state.hotel.statusLastSearchHotel
 export const getStatusLastRecommendationHotel = (state: RootState) => state.hotel.statusLastRecommendationHotel
