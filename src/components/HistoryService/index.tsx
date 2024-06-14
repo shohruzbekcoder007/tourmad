@@ -14,7 +14,6 @@ import { CustomAutocomplete } from "../../helper_components";
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ResentSearch from "../ResentSearch";
-import photo1 from "./../../media/images/Samarkand_registan.jpg";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from "react-router-dom";
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
