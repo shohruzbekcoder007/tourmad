@@ -14,6 +14,7 @@ export interface HistoryState {
     historyListPageSize: number,
     historyListCurrentPage: number,
     historyListTotalPages: number,
+    searchLocation: string | null,
 }
 
 const initialState: HistoryState = {
@@ -26,6 +27,7 @@ const initialState: HistoryState = {
     historyListPageSize: 8,
     historyListCurrentPage: 1,
     historyListTotalPages: 1,
+    searchLocation: "",
 }
 
 export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
@@ -55,6 +57,11 @@ export const historySlice = createSlice({
             state.historyListCurrentPage = action.payload
             state.statusHistoryList = "idle"
         },
+        changeSearchLocation: (state, action) => {
+            state.searchLocation = action.payload
+            state.historyListCurrentPage = 1
+            state.statusHistoryList = "idle"
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -79,7 +86,7 @@ export const historySlice = createSlice({
     }
 })
 
-export const { changePage } = historySlice.actions
+export const { changePage, changeSearchLocation } = historySlice.actions
 
 export const getStatusHistoryList = (state: RootState) => state.history.statusHistoryList
 export const getHistoryError = (state: RootState) => state.history.error

@@ -8,9 +8,9 @@ class HistoryService {
 
         let history: HistoryState = state?.history as HistoryState
 
-        const { historyListPageSize,  historyListCurrentPage } = history
+        const { historyListPageSize,  historyListCurrentPage, searchLocation } = history
 
-        return getRequest(`${history_trip_history}?size=${historyListPageSize}&page=${historyListCurrentPage}`)
+        return getRequest(`${history_trip_history}?size=${historyListPageSize}&page=${historyListCurrentPage}&location=${searchLocation || ""}`)
     }
 
     static createHotelOrder = () => {
