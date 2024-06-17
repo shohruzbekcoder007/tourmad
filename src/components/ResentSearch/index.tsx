@@ -4,7 +4,11 @@ import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelLocationList, getLoacationList, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 
-const ResentSearch: React.FC = () => {
+type ResentSearchPropsType =  {
+    title?: string
+}
+
+const ResentSearch: React.FC<ResentSearchPropsType> = ({title}) => {
 
     const dispatch = useAppDispatch()
     const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
@@ -25,7 +29,7 @@ const ResentSearch: React.FC = () => {
                 fontSize='32px' 
                 mediafontsize='24px'
             >
-                Your recent searches
+                {title?title:"Your recent searches"}
             </WelcomeMainText>
             <Box 
                 display="flex" 
