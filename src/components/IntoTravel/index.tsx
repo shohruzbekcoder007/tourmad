@@ -3,17 +3,18 @@ import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { RecommendationType } from '../../utils/response_types'
+import SwipeDrawer from '../SwipeDrawer'
 
 type IntoTravelPropsType = {
-    data:  RecommendationType[] | null,
+    data: RecommendationType[] | null,
     daily?: boolean
-  }
-const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
+}
+const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily }) => {
 
-    if(data){
+    if (data) {
         return (
             <Stack pb="80px">
-                
+
                 <Box width="100%" display='flex' flexWrap='wrap' justifyContent="space-between">
                     {
                         data?.map((item, index) => {
@@ -32,7 +33,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                         backgroundPosition: "center",
                                         backgroundSize: "cover",
                                         position: "relative",
-                                        width: {xl: "296px", md: '30%', sm: "47%", xs: '100%'},
+                                        width: { xl: "296px", md: '30%', sm: "47%", xs: '100%' },
                                         '&:hover': {
                                             boxShadow: `0px 0px 5px 5px rgba(37, 69, 37, 0.217)`,
                                             cursor: 'pointer',
@@ -48,12 +49,22 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
                                             {
-                                                daily?
-                                                (item?.price)?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph>:<></>:
-                                                (item?.room_style)?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price} $</GlobalParagraph>:<></>
+                                                daily ?
+                                                    (item?.price) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph> : <></> :
+                                                    (item?.room_style) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price} $</GlobalParagraph> : <></>
                                             }
                                         </Box>
-                                        <Button sx={{ height: "48px" }} fullWidth variant='contained'>Book a Hotel</Button>
+                                        <SwipeDrawer
+                                            hotel_id={item?.id}
+                                            addType={'hotel'}
+                                            button={<Button
+                                                sx={{ height: "48px" }}
+                                                fullWidth
+                                                variant='contained'
+                                            >
+                                                Book a Hotel
+                                            </Button>}
+                                        />
                                     </Box>
                                 </Box>
                             )
@@ -62,10 +73,10 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                 </Box>
             </Stack>
         )
-    }else{
+    } else {
         return <p>Ma'lumot yo'q</p>
     }
-    
+
 }
 
 export default IntoTravel

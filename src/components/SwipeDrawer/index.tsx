@@ -3,21 +3,23 @@ import Box from '@mui/material/Box'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import Button from '@mui/material/Button'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import { Alert, Divider, Grid, TextField } from '@mui/material'
+import { Alert, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { CustomAutocomplete } from '../../helper_components'
-import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
 import { createTrip, getNewTrip, getTripList, getTrips } from '../../redux/slices/tripSlice'
-import { TripType } from '../../utils/response_types'
+import { LocationType, TripType } from '../../utils/response_types'
+import dayjs from 'dayjs'
 
 type PropsType = {
-    btnText: string
+    button: React.ReactNode,
+    hotel_id?: number | null,
+    addType?: "hotel" | "restaurant"
 }
 
 type Anchor = 'right';
@@ -66,6 +68,13 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
         }))
     }
 
+    const addToTrip = (trip_id: number | null, startDate: string | null, endDate: string | null) => {
+        // console.log(props?.hotel_id, trip_id, startDate, endDate)
+        if(props?.addType === "hotel"){
+            
+        }
+    }
+
     useEffect(() => {
         if (statusCommonLocation === 'idle') {
             dispatch(getCommonLocationList())
@@ -76,7 +85,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
         if (trips.tripListStatus === "idle") {
             dispatch(getTripList())
         }
-    }, [newTrip, dispatch])
+    }, [trips, dispatch])
 
     const filterLocation = commonLocationList?.filter((item) => {
         return item.parent !== null
@@ -85,7 +94,6 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
     const newOption: Option[] | undefined = filterLocation?.map((item) => {
         return { label: item.name, value: "" + item.id }
     })
-
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -115,7 +123,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 </WelcomeMainText>
                 {
                     trips?.tripList?.map((elem: TripType, index: number) => {
-                        return <SimpleTrip key={index}/>
+                        return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => {addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
                     })
                 }
             </Box>
@@ -162,7 +170,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                                 <DemoContainer components={['DatePicker']}>
                                     <DatePicker
                                         name='start_time'
-                                        label="Start Data"
+                                        label="Start Date"
                                         disabled={newTrip.newTripCreateLoading as boolean}
                                     />
                                 </DemoContainer>
@@ -173,7 +181,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                                 <DemoContainer components={['DatePicker']}>
                                     <DatePicker
                                         name='end_time'
-                                        label="End Data"
+                                        label="End Date"
                                         disabled={newTrip.newTripCreateLoading as boolean}
                                     />
                                 </DemoContainer>
@@ -209,7 +217,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
         <div>
             {(['right'] as const).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer("right", true)} sx={{ height: "48px" }} variant='contained'>{props.btnText}</Button>
+                    <Box onClick={toggleDrawer("right", true)}>{props.button}</Box>
                     <SwipeableDrawer
                         anchor={anchor}
                         open={state["right"]}
@@ -224,31 +232,122 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
     )
 }
 
-const SimpleTrip = () => {
+const SimpleTrip = ({
+    id,
+    title,
+    time,
+    location,
+    addHotelToTripFunction
+}: {
+    id: number | null,
+    title?: string | null,
+    time?: string,
+    location?: LocationType[] | null
+    addHotelToTripFunction: (id: number | null, startDate: string | null, endDate: string | null) => void
+}) => {
+
+    const [openModal, setOpenModal] = useState(false);
+    const [startDate, setStartDate] = useState<string | null>(null)
+    const [endDate, setEndDate] = useState<string | null>(null)
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    }
+
+    const handleCloseModal = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        setOpenModal(false);
+    }
+
+    const addHotelAndCloseModal = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        setOpenModal(false);
+        addHotelToTripFunction(id, startDate, endDate);
+    }
+
+    const changeStartDate = (date: dayjs.Dayjs | null) => {
+        if(date !== null) {
+            const start_date = date.toISOString().substring(0, 10) || null;
+            setStartDate(start_date);
+        }
+    }
+
+    const changeEndDate = (date: dayjs.Dayjs | null) => {
+        if(date !== null){
+            const end_date = date.toISOString().substring(0, 10) || null;
+            setEndDate(end_date);
+        }
+    }
+
     return (
-        <Box 
-            borderRadius='8px' 
-            display='flex' 
-            justifyContent='flex-start' 
+        <Box
+            borderRadius='8px'
+            display='flex'
+            justifyContent='flex-start'
             gap={{ xl: '32px', md: '32px', sm: 0, xs: 0 }}
-            sx={{cursor: 'pointer'}}
-            flexWrap='wrap' boxShadow={1} mt='32px' width='100%'
+            sx={{ cursor: 'pointer', "&:hover": { boxShadow: 3 } }}
+            flexWrap='wrap'
+            boxShadow={1}
+            mt='32px'
+            width='100%'
             height={{ xl: "150px", md: "150px", sm: "auto", xs: "auto" }}
+            onClick={handleOpenModal}
         >
+            <Dialog
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
+            >
+                <DialogTitle id="dialog-title">Confirm Action</DialogTitle>
+                <DialogContent>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Choose your time frame to stay</GlobalParagraph>
+                    <Grid container spacing={2}>
+                        <Grid item xl={6} md={6} sm={12} xs={12}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker
+                                        label="Start Date"
+                                        onChange={changeStartDate}
+                                    />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xl={6} md={6} sm={12} xs={12}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker
+                                        label="End Date"
+                                        onChange={changeEndDate}
+                                    />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseModal} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={addHotelAndCloseModal} color="primary" autoFocus>
+                        Confirm
+                    </Button>
+                </DialogActions>
+            </Dialog>
             <Box borderRadius={{ xl: '8px 0 0 8px', md: '8px 0 0 8px', sm: '8px 0 0 8px', xs: '8px 8px 0 0' }}
                 width={{ xl: "35%", md: "35%", sm: "100%", xs: "100%" }} height='100%' overflow="hidden">
-                <img src={trip_photo} width='100%' height='100%' style={{ objectFit: "cover" }} alt="" />
+                <img src={`${location?.[0].photo}`} width='100%' height='100%' style={{ objectFit: "cover" }} alt={`${location?.[0].name}`} />
             </Box>
             <Box width={{ xl: "45%", md: "45%", sm: "100%", xs: "100%" }} pb={{ xl: 0, md: 0, sm: "8px", xs: '8px' }} ml={{ xl: 0, md: 0, sm: '20px', xs: "20px" }}>
-                <GlobalParagraph fontSize='24px' fontWeight='700' mediafontsize='16px'>Samarqand</GlobalParagraph>
+                <GlobalParagraph fontSize='24px' fontWeight='700' mediafontsize='16px'>{title}</GlobalParagraph>
                 <Box mt='16px' display='flex' justifyContent='flex-start' flexWrap='wrap' gap='16px'>
                     <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
                         <CalendarMonthIcon />
-                        <GlobalParagraph fontSize='14px' fontWeight='400'>Jun 6 → Jun 14, 2024</GlobalParagraph>
+                        <GlobalParagraph fontSize='14px' fontWeight='400'>{time}</GlobalParagraph>
                     </Box>
                     <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
                         <LocationOnIcon />
-                        <GlobalParagraph fontSize='14px' fontWeight='400'>Samarqand</GlobalParagraph>
+                        <GlobalParagraph fontSize='14px' fontWeight='400'>{location?.[0]?.name}</GlobalParagraph>
                     </Box>
                 </Box>
             </Box>

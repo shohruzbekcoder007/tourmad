@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TripCreateType } from "../../utils/request_types";
-import TripService from "../../services/TripService";
-import { AxiosError } from "axios";
-import { RootState } from "../store";
-import { TripType } from "../../utils/response_types";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { HotelToTripType, TripCreateType } from "../../utils/request_types"
+import TripService from "../../services/TripService"
+import { AxiosError } from "axios"
+import { RootState } from "../store"
+import { TripType } from "../../utils/response_types"
 
 export interface TripState {
     newTrip: {
@@ -16,6 +16,12 @@ export interface TripState {
         tripListLoading: boolean | null,
         tripListMessage: string | null,
         tripListStatus: 'idle' | "loading" | "succeeded" | "failed",
+    },
+    addHotel: {
+        newOrderedHotel: HotelToTripType | null,
+        status: boolean | null,
+        message: string | null,
+        loading: boolean,
     }
 }
 
@@ -30,21 +36,27 @@ const initialState: TripState = {
         tripListLoading: false,
         tripListMessage: "",
         tripListStatus: "idle"
+    },
+    addHotel: {
+        newOrderedHotel: null,
+        status: null,
+        message: null,
+        loading: false,
     }
 }
 
 export const createTrip = createAsyncThunk('create-trip',
     async (newTrip: TripCreateType, { rejectWithValue }) => {
         try {
-            const response = await TripService.createTrip(newTrip);
-            const new_trip: TripCreateType = response.data?.results;
-            return new_trip;
+            const response = await TripService.createTrip(newTrip)
+            const new_trip: TripCreateType = response.data?.results
+            return new_trip
         } catch (error) {
-            let errorMessage = 'Error';
+            let errorMessage = 'Error'
             if (error instanceof AxiosError && error.response?.data?.message) {
-                errorMessage = error.response.data.message;
+                errorMessage = error.response.data.message
             }
-            return rejectWithValue({ message: errorMessage });
+            return rejectWithValue({ message: errorMessage })
         }
     }
 )
@@ -52,15 +64,31 @@ export const createTrip = createAsyncThunk('create-trip',
 export const getTripList = createAsyncThunk('get-trip-list',
     async (_, { rejectWithValue }) => {
         try{
-            const response = await TripService.getTripList();
-            const trip_list: TripType[] = response.data?.results;
-            return trip_list;
+            const response = await TripService.getTripList()
+            const trip_list: TripType[] = response.data?.results
+            return trip_list
         } catch (error) {
-            let errorMessage = 'Error';
+            let errorMessage = 'Error'
             if (error instanceof AxiosError && error.response?.data?.message) {
-                errorMessage = error.response.data.message;
+                errorMessage = error.response.data.message
             }
-            return rejectWithValue({ message: errorMessage });
+            return rejectWithValue({ message: errorMessage })
+        }
+    }
+)
+
+export const addHotelToTrip = createAsyncThunk('add-hotel-to-trip',
+    async (hotelToTrip: HotelToTripType, { rejectWithValue }) => {
+        try {
+            const response = await TripService.addHotelToTrip(hotelToTrip)
+            const new_order: HotelToTripType = response.data?.results
+            return new_order
+        } catch (error) {
+            let errorMessage = 'Error'
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message
+            }
+            return rejectWithValue({ message: errorMessage })
         }
     }
 )
@@ -79,6 +107,7 @@ export const tripSlice = createSlice({
             state.newTrip.newTripCreate = action.payload;
             state.newTrip.newTripCreateLoading = false;
             state.newTrip.newTripCreateMessage = ""
+            state.tripList.tripListStatus = "idle";
         })
         .addCase(createTrip.rejected, (state, _) => {
             state.newTrip.newTripCreateLoading = false;
