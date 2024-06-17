@@ -10,6 +10,6 @@ export type HotelToTripType = {
     id?: number | null
     trip: number,
     hotel: number,
-    start_time: null,
-    end_time: null
+    start_time: string,
+    end_time: string
 }

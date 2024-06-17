@@ -22,6 +22,7 @@ export interface TripState {
         status: boolean | null,
         message: string | null,
         loading: boolean,
+        error: boolean | null
     }
 }
 
@@ -42,6 +43,7 @@ const initialState: TripState = {
         status: null,
         message: null,
         loading: false,
+        error: null
     }
 }
 
@@ -81,7 +83,7 @@ export const addHotelToTrip = createAsyncThunk('add-hotel-to-trip',
     async (hotelToTrip: HotelToTripType, { rejectWithValue }) => {
         try {
             const response = await TripService.addHotelToTrip(hotelToTrip)
-            const new_order: HotelToTripType = response.data?.results
+            const new_order: HotelToTripType = response.data
             return new_order
         } catch (error) {
             let errorMessage = 'Error'
@@ -130,6 +132,23 @@ export const tripSlice = createSlice({
             state.tripList.tripListMessage = "Xatolik yuzaga keldi";
             state.tripList.tripListStatus = "failed";
         })
+        .addCase(addHotelToTrip.pending, (state) => {
+            state.addHotel.loading = true
+            state.addHotel.status = false
+            state.addHotel.error = false
+        })
+        .addCase(addHotelToTrip.fulfilled, (state, action) => {
+            state.addHotel.newOrderedHotel = action.payload
+            state.addHotel.status = true
+            state.addHotel.loading = false
+            state.addHotel.message = ""
+        })
+        .addCase(addHotelToTrip.rejected, (state, _) => {
+            state.addHotel.status = true
+            state.addHotel.loading = false
+            state.addHotel.error = true
+            state.addHotel.message = "Xatolik yuzaga keldi"
+        })
     }
 })
 
@@ -137,5 +156,6 @@ export const tripSlice = createSlice({
 
 export const getNewTrip = (state: RootState) => state.trip.newTrip
 export const getTrips = (state: RootState) => state.trip.tripList
+export const getAddHotel = (state: RootState) => state.trip.addHotel
 
 export default tripSlice.reducer

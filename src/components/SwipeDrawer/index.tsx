@@ -12,9 +12,11 @@ import { CustomAutocomplete } from '../../helper_components'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
-import { createTrip, getNewTrip, getTripList, getTrips } from '../../redux/slices/tripSlice'
+import { addHotelToTrip, createTrip, getAddHotel, getNewTrip, getTripList, getTrips } from '../../redux/slices/tripSlice'
 import { LocationType, TripType } from '../../utils/response_types'
 import dayjs from 'dayjs'
+import { HotelToTripType } from '../../utils/request_types'
+import NotificationAlert from '../../helper_components/NotificationAlert'
 
 type PropsType = {
     button: React.ReactNode,
@@ -41,6 +43,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
     const commonLocationList = useAppSelector(getCommonLocations)
     const newTrip = useAppSelector(getNewTrip)
     const trips = useAppSelector(getTrips)
+    const addHotel = useAppSelector(getAddHotel)
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
@@ -69,9 +72,14 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
     }
 
     const addToTrip = (trip_id: number | null, startDate: string | null, endDate: string | null) => {
-        // console.log(props?.hotel_id, trip_id, startDate, endDate)
+        const newTrip: HotelToTripType = {
+            hotel: props?.hotel_id as number,
+            trip: trip_id as number,
+            start_time: startDate as string,
+            end_time: endDate as string
+        }
         if(props?.addType === "hotel"){
-            
+            dispatch(addHotelToTrip(newTrip))
         }
     }
 
@@ -121,6 +129,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 <WelcomeMainText fontSize='32px' part="true" mediafontsize='24px'>
                     My Trips
                 </WelcomeMainText>
+                <p>{`${addHotel.status}`}</p> 
                 {
                     trips?.tripList?.map((elem: TripType, index: number) => {
                         return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => {addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
@@ -209,6 +218,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                         {newTrip.newTripCreateLoading ? "Loading..." : 'Create Trip'}
                     </Button>
                 </Box>
+                <NotificationAlert alert={addHotel.status} alertType={addHotel.error?"error":"success"}/>
             </Box>
         </Box>
     );
@@ -330,7 +340,7 @@ const SimpleTrip = ({
                         Cancel
                     </Button>
                     <Button onClick={addHotelAndCloseModal} color="primary" autoFocus>
-                        Confirm
+                        Add
                     </Button>
                 </DialogActions>
             </Dialog>
