@@ -70,3 +70,20 @@ export type HistoryType = {
     latitude: number | null,
     longitude: number | null
 }
+
+export type RestaurantType = {
+    id: number | null,
+    location: LocationType | null,
+    gallery: GalleryType[] | null,
+    banner: string | null,
+    card: string | null,
+    name: string | null,
+    desc: string | null,
+    body: string | null,
+    longitude: number | null,
+    latitude: number | null,
+    rate: number | null,
+    grade: number | null,
+    price: number | null,
+    reviews_count: number | null
+}
