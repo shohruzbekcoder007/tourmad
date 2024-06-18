@@ -70,3 +70,19 @@ export type HistoryType = {
     latitude: number | null,
     longitude: number | null
 }
+
+export type ConsultingCategoryType = {
+    id: number | null,
+    name: string | null,
+    count: number | null
+}
+
+export type ConsultingType = {
+    id: number | null
+    name: string | null,
+    desc: string | null,
+    body: string | null,
+    category: ConsultingCategoryType | null,
+    card: string | null,
+    banner: string | null
+}

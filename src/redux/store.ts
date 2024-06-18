@@ -6,6 +6,7 @@ import restaurantSlice from './slices/restaurantSlice'
 import driverSlice from './slices/driverSliser'
 import commonLocationSlice from './slices/commonLocationSlicer'
 import historySlice from './slices/historySlice'
+import consultingSlice from './slices/consultingSlice'
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     restaurant: restaurantSlice,
     driver: driverSlice,
     commonLocation: commonLocationSlice,
-    history: historySlice
+    history: historySlice,
+    consulting: consultingSlice
   },
 })
 

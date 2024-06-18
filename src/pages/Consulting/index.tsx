@@ -6,8 +6,10 @@ import { Box, Button } from "@mui/material";
 import { HeaderWrapper } from "../../components/Header/styles";
 import BannerMain from "../../components/BannerMain";
 import consultingbannerimage from '../../media/images/consulting-banner.jpeg'
+import { useNavigate } from "react-router-dom";
 const Consulting: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+    const navigate = useNavigate()
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY <= 400) {
@@ -38,7 +40,7 @@ const Consulting: React.FC = () => {
             <Container>
                 <Box pt="40px" display="flex" justifyContent="space-between">
                     <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Consulting</WelcomeMainText>
-                    <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+                    <Button variant="outlined" onClick={() => navigate(-1)}><KeyboardBackspaceIcon /></Button>
                 </Box>
                 <ConsultingSearch />
             </Container>

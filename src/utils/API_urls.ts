@@ -13,3 +13,5 @@ export const recommendation_trip_restaurant = "trip/recommendation-trip-restaura
 export const recommendation_trip_drive = "/trip/recommendation-trip-drive"
 export const common_location = "common/location"
 export const history_trip_history = "history/trip-history"
+export const consulting_list = "consulting/list"
+export const consulting_category_list = "consulting/categories"
