@@ -4,16 +4,16 @@ import LanguageService from "../../services/LanguageService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
 
-export interface CommonLanguage  {
+export interface CommonLanguage {
     statusCommonLanguage: "idle" | "loading" | "succeeded" | "failed",
     loading: boolean,
     message: string,
     error: null,
     showMessage: boolean,
-    languageList: Language[], 
+    languageList: Language[] | null, 
 }
 
-const initialState = {
+const initialState: CommonLanguage = {
     statusCommonLanguage: "idle",
     loading: false,
     message: "",

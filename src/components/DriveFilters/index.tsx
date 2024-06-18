@@ -28,13 +28,14 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import DriveFilterCard from "../DriverFilterCard";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from '../../redux/hooks'
-import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverList, getDriverPriceFrom, getDriverPriceto, getDrivers, getLoadingDriver,  getStatusDriverList } from '../../redux/slices/driverSliser'
+import { changeDriversStyle, changeGrade, changePage, changePriceFrom, changePriceTo, changeSearchLanguage, changeSearchLocation, getDriverCurrentPage, getDriverGrade, getDriverList, getDriverPriceFrom, getDriverPriceto, getDriverTotalPage, getDrivers, getLoadingDriver,  getStatusDriverList } from '../../redux/slices/driverSliser'
 import { AppDispatch } from '../../redux/store'
 import { useDispatch } from 'react-redux'
 import { driver_styles } from "../../dictionary/room_style";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 import { useDebounce } from "use-debounce";
 import { getCommonLanguageList, getLanguageList, getStatusCommonLanguage } from "../../redux/slices/commonLanguage";
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
 
 type Option = {
     label: string,
@@ -60,7 +61,8 @@ function valuetext(value: number) {
 
 const DriveFilter: React.FC = () => {
     const navigate = useNavigate();
-    const [from, setFrom] = useState<Option | null>(null)
+    const [fromLocation, setFromLocation] = useState<Option | null>(null)
+    const [fromLanguage, setFromLanguage] = useState<Option | null>(null)
     const [openPrice, setOpenPrice] = React.useState(true);
     const [openRating, setOpenRating] = React.useState(true);
     const [value, setValue] = React.useState<number[]>([0, 100]);
@@ -70,6 +72,7 @@ const DriveFilter: React.FC = () => {
 
     const handleChangeSort = (event: SelectChangeEvent) => {
         setAge(event.target.value);
+        dispatch(changeDriversStyle(event.target.value as string))
     };
 
     const handleChange = (event: Event, newValue: number | number[]) => {
@@ -84,7 +87,7 @@ const DriveFilter: React.FC = () => {
         setOpenRating(!openRating);
     };
 
-    const options: Option[] = []
+   
 
     // redux
     const statusDriverList = useAppSelector(getStatusDriverList);
@@ -95,6 +98,10 @@ const DriveFilter: React.FC = () => {
     const driverPriceTo = useAppSelector(getDriverPriceto) 
     const languagesList = useAppSelector(getLanguageList) 
     const statusLanguage = useAppSelector(getStatusCommonLanguage)
+    const commonLocationList = useAppSelector(getCommonLocations)
+    const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+    const driverCurrentPage = useAppSelector(getDriverCurrentPage);
+    const driverTotalPage = useAppSelector(getDriverTotalPage);
     // const showMessageDriver = useAppSelector(getShowMessageDriver);
     // const errorDriver = useAppSelector(getErrorDriver);
     // const messageDriver = useAppSelector(getMessageDriver);
@@ -102,16 +109,37 @@ const DriveFilter: React.FC = () => {
     // redux dispatch
     const dispatch: AppDispatch = useDispatch();
 
-    const changeGradeHanler = (grade: number) => {
-        dispatch(changeGrade(grade))
-    }
-
     useEffect(() => {
         if (statusLanguage === 'idle') {
             dispatch(getCommonLanguageList())
         }
-        console.log(languagesList);
     }, [statusLanguage, dispatch])
+
+    const newOption: Option[] | undefined = languagesList?.map((item) => {
+        return { label: item.lang, value: "" + item.id }
+      })
+
+      useEffect(() => {
+        if (statusCommonLocation === 'idle') {
+          dispatch(getCommonLocationList())
+        }
+      }, [statusCommonLocation, dispatch])
+
+      const filterLocation = commonLocationList?.filter((item) => {
+        return item.parent !== null
+      })
+    
+      const newLocation: Option[] | undefined = filterLocation?.map((item) => {
+        return { label: item.name, value: "" + item.id }
+      })
+
+    const changeGradeHanler = (grade: number) => {
+        dispatch(changeGrade(grade))
+    }
+
+    const changePageHandler = (page: number) => {
+        dispatch(changePage(page))
+      }
 
     useEffect(() => {
         if (statusDriverList === 'idle') {
@@ -119,10 +147,12 @@ const DriveFilter: React.FC = () => {
         }
     }, [statusDriverList, dispatch])
 
-    useEffect(() => { }, [from]) //for error fixed
+    const getChangeOptionFromLocation = (newValue: Option | null) => {
+        setFromLocation(newValue)
+    }
 
-    const getChangeOptionFrom = (newValue: Option | null) => {
-        setFrom(newValue)
+    const getChangeOptionFromLanguage = (newValue: Option | null) => {
+        setFromLanguage(newValue)
     }
 
     useEffect(() => {
@@ -134,6 +164,11 @@ const DriveFilter: React.FC = () => {
         }
       }, [value, dispatch])
 
+
+    const search = () => {
+        dispatch(changeSearchLanguage(fromLanguage?.value))
+        dispatch(changeSearchLocation(fromLocation?.value))
+    }
 
     return (
         <Stack mt="40px">
@@ -157,22 +192,22 @@ const DriveFilter: React.FC = () => {
                 >
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
-                            options={options}
+                            options={newLocation === undefined ? [] : newLocation}
                             placeholder="Location"
-                            getChange={getChangeOptionFrom}
+                            getChange={getChangeOptionFromLocation}
                             icon={<LocationOnIcon />}
                         />
                     </Box>
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
-                            options={options}
+                            options={newOption === undefined ? [] : newOption}
                             placeholder="Language"
-                            getChange={getChangeOptionFrom}
+                            getChange={getChangeOptionFromLanguage}
                             icon={<TranslateIcon />}
                         />
                     </Box>
                     <Box mt="16px" width={{ xl: '56px', md: '56px', sm: '56px', xs: "100%" }}>
-                        <Button sx={{ height: '56px' }} fullWidth variant='contained'>
+                        <Button onClick={search} sx={{ height: '56px' }} fullWidth variant='contained'>
                             <SearchIcon />
                         </Button>
                     </Box>
@@ -356,7 +391,7 @@ const DriveFilter: React.FC = () => {
                             </>
                     }
                     <Box display="flex" justifyContent="flex-end">
-                        <Pagination count={10} color="primary" />
+                        <Pagination count={driverTotalPage} page={driverCurrentPage} onChange={(_, page) => {changePageHandler(page)}} color="primary" />
                     </Box>
                 </Box>
             </Box>

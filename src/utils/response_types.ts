@@ -14,7 +14,7 @@ export type LocationType = {
     name: string | null,
     parent: number | null,
     photo: string | null,
-    hotels: number | null
+    hotels?: number | null
 }
 
 export type UserType = {
@@ -53,6 +53,40 @@ export type RecommendationType = {
     price: number | null
 }
 
+export type CommonLocationType = {
+    id: number,
+    name: string,
+    parent: number | null,
+    photo: string
+}
+
+export type HistoryOrPlaceCategryType = {
+    id: number | null,
+    title: string | null,
+    logo: string | null,
+    count: number | null
+}
+
+export type HistoryType = {
+    id: number | null,
+    title: string | null,
+    banner: string | null,
+    card: string | null,
+    category: HistoryOrPlaceCategryType | null,
+    body: string | null,
+    audio: string | null,
+    location: LocationType | null,
+    latitude: number | null,
+    longitude: number | null
+}
+
+export type TripType = {
+    id: number | null,
+    title: string | null,
+    location: LocationType[] | null,
+    start_time: Date | string | null,
+    end_time: Date | string | null
+}
 export type Location = {
     id: number,
     name: string,

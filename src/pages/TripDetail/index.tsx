@@ -8,7 +8,6 @@ import { GlobalParagraph } from '../../global_styles/styles'
 import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DriveFilterCard from '../../components/DriverFilterCard'
 
 const MyTrip: React.FC = () => {
 

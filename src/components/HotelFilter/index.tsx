@@ -13,8 +13,7 @@ import {
   InputLabel,
   MenuItem,
   Paper,
-  Pagination,
-  Skeleton,
+  Pagination
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -26,12 +25,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterDrawerHotel from "../FilterDrawerHotel";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changeGrade, changePage, changePriceFrom, changePriceTo, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getRoomStyle, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
+import { changeGrade, changePage, changePriceFrom, changePriceTo, changeRoomStyle, changeSearchLocation, getHotelGrade, getHotelList, getHotelListCurrentPage, getHotelListTotalPages, getHotelLoading, getHotelPriceFrom, getHotelPriceTo, getStatusHotelList, getTripHotelList } from "../../redux/slices/hotelSlice";
 import HotelCard from "./HotelCard"
 import { AppDispatch } from "../../redux/store"
 import { useDebounce } from 'use-debounce';
 import room_styles from "../../dictionary/room_style";
 import { useNavigate } from "react-router-dom";
+import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
+import { RecommendationType } from "../../utils/response_types";
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
 
 type Option = {
   label: string,
@@ -52,30 +54,20 @@ const marks = [
   },
 ];
 
-const options: Option[] = [
-  { label: 'The Shawshank Redemption', value: "1994" },
-  { label: 'The Godfather', value: "1972" },
-  { label: 'The Godfather: Part II', value: "1974" },
-  { label: 'The Dark Knight', value: "2008" },
-  { label: '12 Angry Men', value: "1957" },
-  { label: "Schindler's List", value: "1993" },
-  { label: 'Pulp Fiction', value: "1994" },
-]
-
 function valuetext(value: number) {
   return `${value + 10}$`;
 }
 
 const HotelFilters: React.FC = () => {
+
   const navigate = useNavigate()
   const [from, setFrom] = useState<Option | null>(null)
   const [openPrice, setOpenPrice] = React.useState(true)
   const [openRating, setOpenRating] = React.useState(true)
   const [value, setValue] = React.useState<number[]>([20, 300])
   const [age, setAge] = React.useState(room_styles[0].value)
-  
-  const [sliderValue] =useDebounce(value, 1000)
 
+  const [sliderValue] = useDebounce(value, 1000)
 
   // redux
   const statusHotelLIst = useAppSelector(getStatusHotelList)
@@ -86,13 +78,16 @@ const HotelFilters: React.FC = () => {
   const hotelGrade = useAppSelector(getHotelGrade)
   const hotelPriceFrom = useAppSelector(getHotelPriceFrom)
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
-  const hotelRoomStyle = useAppSelector(getRoomStyle)
+  const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+  const commonLocationList = useAppSelector(getCommonLocations)
+  // const hotelRoomStyle = useAppSelector(getRoomStyle)
 
   // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
 
   const handleChangeSort = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+    dispatch(changeRoomStyle(event.target.value as string))
   }
 
   const handleChange = (_: Event, newValue: number | number[]) => {
@@ -120,25 +115,37 @@ const HotelFilters: React.FC = () => {
   }
 
   useEffect(() => {
-    if(hotelPriceFrom !== sliderValue[0]) {
+    if (statusCommonLocation === 'idle') {
+      dispatch(getCommonLocationList())
+    }
+  }, [statusCommonLocation, dispatch])
+
+  useEffect(() => {
+    if (hotelPriceFrom !== sliderValue[0]) {
       dispatch(changePriceFrom(sliderValue[0]))
     }
-    if(hotelPriceTo !== sliderValue[1]) {
+    if (hotelPriceTo !== sliderValue[1]) {
       dispatch(changePriceTo(sliderValue[1]))
     }
   }, [sliderValue, dispatch])
 
   useEffect(() => {
     setValue([hotelPriceFrom, hotelPriceTo])
-  },[hotelPriceFrom, hotelPriceTo])
-
-  useEffect(() => { }, [from]) //for error fixed
+  }, [hotelPriceFrom, hotelPriceTo])
 
   useEffect(() => {
     if (statusHotelLIst === 'idle') {
       dispatch(getTripHotelList())
     }
   }, [statusHotelLIst, dispatch])
+
+  const filterLocation = commonLocationList?.filter((item) => {
+    return item.parent !== null
+  })
+
+  const newOption: Option[] | undefined = filterLocation?.map((item) => {
+    return { label: item.name, value: "" + item.id }
+  })
 
   return (
     <Stack mt="40px">
@@ -161,14 +168,21 @@ const HotelFilters: React.FC = () => {
         >
           <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
             <CustomAutocomplete
-              options={options}
+              options={newOption === undefined ? [] : newOption}
               placeholder="Location"
               getChange={getChangeOptionFrom}
               icon={<LocationOnIcon />}
             />
           </Box>
           <Box mt="16px" width={'56px'}>
-            <Button sx={{ height: '56px' }} fullWidth variant='contained'>
+            <Button
+              sx={{ height: '56px' }}
+              fullWidth
+              variant='contained'
+              onClick={() => {
+                dispatch(changeSearchLocation(from?.value))
+              }}
+            >
               <SearchIcon />
             </Button>
           </Box>
@@ -236,40 +250,40 @@ const HotelFilters: React.FC = () => {
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 1?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(1)}}
+                    variant={hotelGrade === 1 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(1) }}
                   >
                     1+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 2?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(2)}}
+                    variant={hotelGrade === 2 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(2) }}
                   >
                     2+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 3?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(3)}}
+                    variant={hotelGrade === 3 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(3) }}
                   >
                     3+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 4?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(4)}}
+                    variant={hotelGrade === 4 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(4) }}
                   >
                     4+
                   </Button>
                   <Button
                     sx={{ mr: "16px", mt: "16px" }}
                     size="small"
-                    variant={hotelGrade === 5?"contained":"outlined"}
-                    onClick={() => {changeGradeHanler(5)}}
+                    variant={hotelGrade === 5 ? "contained" : "outlined"}
+                    onClick={() => { changeGradeHanler(5) }}
                   >
                     5+
                   </Button>
@@ -331,10 +345,10 @@ const HotelFilters: React.FC = () => {
             </Box>
           </Box>
           {
-            hotelLoading ? <Skeleton animation="wave" width="100%" height="250px"/> :
+            hotelLoading ? <DriveFilterSkeleton /> :
               <>
                 {
-                  hotelList?.map((hotel, index) => {
+                  hotelList?.map((hotel: RecommendationType, index: number) => {
                     return (
                       <HotelCard
                         key={index}

@@ -8,8 +8,8 @@ class DriverService {
     }
     static drivers = (state: any) => {
         let driver: DriverState = state?.driver as DriverState;
-        const {driverGrade, driverPriceTo, driverPriceFrom} = driver;
-        return getRequest(`${driver_list}?grade=${driverGrade}&price_from=${driverPriceFrom}&price_to=${driverPriceTo}`);
+        const {driverGrade, driverPriceTo, driverPriceFrom, searchLanguage, searchLocation, driverCurrentPage, driversStyle} = driver;
+        return getRequest(`${driver_list}?grade=${driverGrade}&page=${driverCurrentPage}&status=${driversStyle === 'all' ? "" : driversStyle}&price_from=${driverPriceFrom}&price_to=${driverPriceTo}${searchLocation ? `&location=${searchLocation}`: ""}${searchLanguage ? `&languages=${searchLanguage}`: ""}`);
     }
 }
 

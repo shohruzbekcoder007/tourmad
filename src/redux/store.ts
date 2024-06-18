@@ -4,6 +4,9 @@ import userSlice from './slices/userSlice'
 import hotelSlice from './slices/hotelSlice'
 import restaurantSlice from './slices/restaurantSlice'
 import driverSlice from './slices/driverSliser'
+import commonLocationSlice from './slices/commonLocationSlicer'
+import historySlice from './slices/historySlice'
+import tripSlice from './slices/tripSlice'
 import commonLanguageSlice from './slices/commonLanguage'
 
 const store = configureStore({
@@ -13,7 +16,10 @@ const store = configureStore({
     hotel: hotelSlice,
     restaurant: restaurantSlice,
     driver: driverSlice,
-    commonlanguage: commonLanguageSlice, 
+    commonLocation: commonLocationSlice,
+    history: historySlice,
+    trip: tripSlice,
+    commonlanguage: commonLanguageSlice,
   },
 })
 

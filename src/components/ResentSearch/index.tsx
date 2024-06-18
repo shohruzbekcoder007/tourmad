@@ -1,15 +1,14 @@
 import { Box, Stack } from '@mui/material'
 import React, { useEffect } from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import { useAppDispatch } from '../../redux/hooks'
-import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelLocationList, getLoacationList, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 
 const ResentSearch: React.FC = () => {
 
     const dispatch = useAppDispatch()
-    const statusLastSearchHotel = useSelector(getStatusLastSearchHotel)
-    const hotelLocationList = useSelector(getHotelLocationList)
+    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
+    const hotelLocationList = useAppSelector(getHotelLocationList)
 
     useEffect(() => {
         if (statusLastSearchHotel === 'idle') {
@@ -35,7 +34,7 @@ const ResentSearch: React.FC = () => {
                 flexWrap="wrap"
             >
                 {
-                    hotelLocationList?.map((hotelLocation, index) => {
+                    statusLastSearchHotel === "succeeded"? hotelLocationList?.map((hotelLocation, index) => {
                         return (
                             <Box
                                 key={index}
@@ -66,7 +65,9 @@ const ResentSearch: React.FC = () => {
                                 </Box>
                             </Box>
                         )
-                    })
+                    }):
+                    statusLastSearchHotel === "loading"?<p>Loading...</p>:
+                    <></>
                 }
             </Box>
         </Stack>
