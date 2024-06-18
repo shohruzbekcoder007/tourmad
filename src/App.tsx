@@ -21,10 +21,14 @@ const App: React.FC = () => {
             <Route path='consulting-detail' element={<ConsultingDetail />}/>
             <Route index element={<Welcome/>}/>
             <Route path='history' element={<History />} />
-            <Route path='history-detail' element={<HistoryDetail/>} />
+            <Route path='history-detail'>
+              <Route path=':id' element={<HistoryDetail />} />
+            </Route>
             <Route path="public" element={<Welcome/>}/>
             <Route path='hotel-filter' element={<HotelFilter />} />
-            <Route path='hotel-detail' element={<HotelDetail />} />
+            <Route path='hotel-detail'>
+              <Route path=':id' element={<HotelDetail />} />
+            </Route>
             <Route path='restaurant-filter' element={<ReataurantFilter />} />
             <Route path='restaurant-detail' element={<ReataurantDetail />} />
             <Route path='drive-filter' element={<DriveFilter />} />

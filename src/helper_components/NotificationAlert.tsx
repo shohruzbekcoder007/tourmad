@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 const NotificationAlert: React.FC<{
     alert: boolean | null,
     alertType?: "success" | "error",
-    alertMessage?: string
+    alertMessage?: string | null
 }> = ({
     alert,
     alertType = "success",
@@ -30,7 +30,7 @@ const NotificationAlert: React.FC<{
             <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', left: '10px', bottom: '10px' }}>
                 {showAlert && (
                     <Alert severity={alertType} onClose={() => { setShowAlert(false) }}>
-                        This is a success message!
+                        {alertMessage}
                     </Alert>
                 )}
             </div>

@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { AuthUserInfo, Footer, Header, ProtectedLinks, } from '../../components'
 import { Box, Button, Container, Rating, Stack } from '@mui/material'
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Link from '@mui/material/Link'
 import { HeaderWrapper } from './styles'
-import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
-import DetailBanner from '../../components/DetailBanner';
-import DetailDescription from '../../components/DetailDescription';
-import HotelRooms from '../../components/HotelRooms';
-import DetailMap from '../../components/DetailMap';
-import DetailReviews from '../../components/DetailReviews';
+import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import ShareIcon from '@mui/icons-material/Share'
+import DetailBanner from '../../components/DetailBanner'
+import DetailDescription from '../../components/DetailDescription'
+import HotelRooms from '../../components/HotelRooms'
+import DetailMap from '../../components/DetailMap'
+import DetailReviews from '../../components/DetailReviews'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getHotelDetail, getHotelDetailInfo } from '../../redux/slices/hotelSlice'
+import { useParams } from 'react-router-dom'
+import parse from 'html-react-parser';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
@@ -21,8 +25,17 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const HotelDetail: React.FC = () => {
-    const value: number | null = 5;
+
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+    const { hotel } = useAppSelector(getHotelDetail);
+
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        dispatch(getHotelDetailInfo(id as string))
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,6 +52,7 @@ const HotelDetail: React.FC = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     return (
         <Stack>
             <HeaderWrapper>
@@ -54,31 +68,31 @@ const HotelDetail: React.FC = () => {
                     <div role="presentation" onClick={handleClick}>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link underline="hover" color="inherit" href="/">
-                                Toshkent
+                            {hotel?.location?.name}
                             </Link>
-                            <Typography color="text.primary">Anor Plaza</Typography>
+                            <Typography color="text.primary">{hotel?.name}</Typography>
                         </Breadcrumbs>
                     </div>
                 </Box>
                 <Box pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
                     <Box>
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
-                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>CVK Park Bosphorus Hotel Istanbul</WelcomeMainText>
-                            <Rating name="disabled" value={value} disabled />
-                            <GlobalParagraph fontSize="12px" fontWeight="500">5 Star Hotel</GlobalParagraph>
+                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>{hotel?.name}</WelcomeMainText>
+                            <Rating name="disabled" value={hotel?.grade || 0} disabled />
+                            <GlobalParagraph fontSize="12px" fontWeight="500">{hotel?.grade} Star Hotel</GlobalParagraph>
                         </Box>
                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                             <LocationOnIcon />
-                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">Toshkent</GlobalParagraph>
+                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">{hotel?.location?.name}</GlobalParagraph>
                         </Box>
                         <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
-                            <Button variant="outlined">4.2</Button>
+                            <Button variant="outlined">{hotel?.rate}</Button>
                             <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
-                            <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph>
+                            {/* <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph> */}
                         </Box>
                     </Box>
                     <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
-                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/night</GlobalParagraph>
+                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">{hotel?.room_style?.[0]?.price}$</GlobalParagraph>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
@@ -86,10 +100,12 @@ const HotelDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner bgimage='' />
-                <DetailDescription />
+                <DetailBanner bgimage={`${hotel?.banner}`} />
+                <DetailDescription>
+                    {parse((hotel?.body as string)||"")}
+                </DetailDescription>
                 <HotelRooms />
-                <DetailMap />
+                <DetailMap longitude={hotel?.longitude} latitude={hotel?.latitude}/>
                 <DetailReviews />   
             </Container>
             <Box
