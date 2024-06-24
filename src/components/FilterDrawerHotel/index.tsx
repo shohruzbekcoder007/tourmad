@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
@@ -6,9 +6,14 @@ import { GlobalParagraph } from '../../global_styles/styles';
 import { Collapse, Divider, List,  ListItemButton, ListItemText, Slider, Typography } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { useAppSelector } from '../../redux/hooks';
+import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverPriceFrom, getDriverPriceto, getDrivers, getLoadingDriver, getStatusDriverList } from '../../redux/slices/driverSliser';
+import { useDebounce } from 'use-debounce';
+import { AppDispatch } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 
-const MAX = 1200;
-const MIN = 50;
+const MAX = 1000;
+const MIN = 0;
 const marks = [
     {
         value: MIN,
@@ -32,8 +37,9 @@ const FilterDrawerHotel: React.FC = () => {
     });
     const [openRating, setOpenRating] = React.useState(true);
     const [openPrice, setOpenPrice] = React.useState(true);
-    const [value, setValue] = React.useState<number[]>([20, 37]);
+    const [value, setValue] = React.useState<number[]>([0, 100]);
 
+    const [sliderValue] =useDebounce(value, 1000)
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
@@ -46,6 +52,33 @@ const FilterDrawerHotel: React.FC = () => {
     const handleClickRating = () => {
         setOpenRating(!openRating);
     };
+
+    // redux
+    const statusDriverList = useAppSelector(getStatusDriverList);
+    const drivers = useAppSelector(getDrivers);
+    const driversGrade = useAppSelector(getDriverGrade);
+    const loadingDriver = useAppSelector(getLoadingDriver);
+    const driverPriceFrom = useAppSelector(getDriverPriceFrom)
+    const driverPriceTo = useAppSelector(getDriverPriceto) 
+    // const showMessageDriver = useAppSelector(getShowMessageDriver);
+    // const errorDriver = useAppSelector(getErrorDriver);
+    // const messageDriver = useAppSelector(getMessageDriver);
+
+    // redux dispatch
+    const dispatch: AppDispatch = useDispatch();
+
+    const changeGradeHanler = (grade: number) => {
+        dispatch(changeGrade(grade))
+    }
+
+    useEffect(() => {
+        if(driverPriceFrom !== sliderValue[0]) {
+          dispatch(changePriceFrom(sliderValue[0]*10))
+        }
+        if(driverPriceTo !== sliderValue[1]) {
+          dispatch(changePriceTo(sliderValue[1]*10))
+        }
+      }, [value, dispatch])
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -126,23 +159,28 @@ const FilterDrawerHotel: React.FC = () => {
                     </ListItemButton>
                     <Collapse in={openRating} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant='outlined'>1+</Button>
-                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant='outlined'>2+</Button>
-                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant='outlined'>3+</Button>
-                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant='outlined'>4+</Button>
-                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant='outlined'>5+</Button>
+                            <Button sx={{ mr: '16px', mt: "16px" }} variant={driversGrade === 1?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(1)}} size='small' >1+</Button>
+                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant={driversGrade === 2?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(2)}}>2+</Button>
+                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant={driversGrade === 3?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(3)}} >3+</Button>
+                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant={driversGrade === 4?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(4)}}>4+</Button>
+                            <Button sx={{ mr: '16px', mt: "16px" }} size='small' variant={driversGrade === 5?"contained":"outlined"}
+                                        onClick={() => {changeGradeHanler(5)}}>5+</Button>
                         </List>
                     </Collapse>
                 </List>
             </Box>
             <Divider />
             <Box py="44px" display="flex" justifyContent="space-between">
-                <Button variant='outlined' sx={{
+                <Button variant='outlined' onClick={toggleDrawer(anchor, false)} sx={{
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
                 }}>Cancel</Button>
-                <Button variant='contained' sx={{
+                <Button variant='contained' onClick={toggleDrawer(anchor, false)} sx={{
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"

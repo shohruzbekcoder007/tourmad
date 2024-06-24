@@ -1,6 +1,41 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Drive, Error, ForgotPassword, Hotel, Main, Plan, Protected, Restaurant, SetPassword, SignIn, SignUp, Ticket, Verify, Welcome, UserAccount, UserHistory, HotelFilter, Favourites, HotelDetail, ReataurantDetail, ReataurantFilter, Users, DriveFilter, DriveDetail, Consulting, History, HistoryDetail, MyDriver, MyDriverDetail, MyTrip, TripDetail, ConsultingDetail, PlanDetail } from './pages';
+import {
+  Drive,
+  Error,
+  ForgotPassword,
+  Hotel,
+  Main,
+  Plan,
+  Protected,
+  Restaurant,
+  SetPassword,
+  SignIn,
+  SignUp,
+  Ticket,
+  Verify,
+  Welcome,
+  UserAccount,
+  UserHistory,
+  HotelFilter,
+  Favourites,
+  HotelDetail,
+  ReataurantDetail,
+  ReataurantFilter,
+  Users,
+  DriveFilter,
+  DriveDetail,
+  Consulting,
+  History,
+  HistoryDetail,
+  MyDriver,
+  MyDriverDetail,
+  MyTrip,
+  TripDetail,
+  ConsultingDetail,
+  PlanDetail,
+  PlanFilter
+} from './pages';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
 import { CssBaseline } from "@mui/material";
@@ -15,11 +50,11 @@ const App: React.FC = () => {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<Main/>}>
-            <Route index element={<Welcome/>}/>
-            <Route path='consulting' element={<Consulting/>}/>
-            <Route path='consulting-detail' element={<ConsultingDetail />}/>
-            <Route index element={<Welcome/>}/>
+          <Route path="/" element={<Main />}>
+            <Route index element={<Welcome />} />
+            <Route path='consulting' element={<Consulting />} />
+            <Route path='consulting-detail' element={<ConsultingDetail />} />
+            <Route index element={<Welcome />} />
             <Route path='history' element={<History />} />
             <Route path='history-detail'>
               <Route path=':id' element={<HistoryDetail />} />
@@ -36,32 +71,33 @@ const App: React.FC = () => {
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail />} />
             <Route path='plan-detail' element={<PlanDetail />} />
+            <Route path='plan-filter' element={<PlanFilter />} />
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />
             <Route path='my-driver' element={<MyDriver />} />
             <Route path='my-driver-detail' element={<MyDriverDetail />} />
-            <Route path="protected" element={<Protected/>}>
-              <Route index element={<Navigate to="hotel"/>}/>
-              <Route path="hotel" element={<Hotel/>} />
-              <Route path="ticket" element={<Ticket/>}/>
-              <Route path="restaurant" element={<Restaurant/>}/>
-              <Route path="drive" element={<Drive/>}/>
-              <Route path="plan" element={<Plan/>}/>
-              <Route path='favourites' element={<Favourites/>}/>
+            <Route path="protected" element={<Protected />}>
+              <Route index element={<Navigate to="hotel" />} />
+              <Route path="hotel" element={<Hotel />} />
+              <Route path="ticket" element={<Ticket />} />
+              <Route path="restaurant" element={<Restaurant />} />
+              <Route path="drive" element={<Drive />} />
+              <Route path="plan" element={<Plan />} />
+              <Route path='favourites' element={<Favourites />} />
             </Route>
           </Route>
           <Route path="users" element={<Users />}>
-            <Route index element={<UserAccount />}/>
-            <Route path='users-account' element={<UserAccount />}/>
-            <Route path='users-History' element={<UserHistory />}/>
-            <Route path='users-payment' element={<p>Users Payments</p>}/>
+            <Route index element={<UserAccount />} />
+            <Route path='users-account' element={<UserAccount />} />
+            <Route path='users-History' element={<UserHistory />} />
+            <Route path='users-payment' element={<p>Users Payments</p>} />
           </Route>
-          <Route path="sign-in" element={<SignIn />}/>
-          <Route path="sign-up" element={<SignUp />}/>
-          <Route path="set-password" element={<SetPassword/>}/>
-          <Route path="forgot-password" element={<ForgotPassword/>}/>
-          <Route path="verify" element={<Verify/>}/>
-          <Route path='*' element={<Error/>}/>
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="set-password" element={<SetPassword />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="verify" element={<Verify />} />
+          <Route path='*' element={<Error />} />
         </Routes>
       </ThemeProvider>
     </MuiTheme>

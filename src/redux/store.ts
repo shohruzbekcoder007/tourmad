@@ -7,6 +7,7 @@ import driverSlice from './slices/driverSliser'
 import commonLocationSlice from './slices/commonLocationSlicer'
 import historySlice from './slices/historySlice'
 import tripSlice from './slices/tripSlice'
+import commonLanguageSlice from './slices/commonLanguage'
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     driver: driverSlice,
     commonLocation: commonLocationSlice,
     history: historySlice,
-    trip: tripSlice
+    trip: tripSlice,
+    commonlanguage: commonLanguageSlice,
   },
 })
 
