@@ -4,6 +4,7 @@ import { Outlet } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getUser, getUserStatus, getUserToken } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../redux/hooks';
+import LanguageSelect from '../../components/LanguageSelect';
 
 const Main: React.FC = () => {
 
@@ -21,6 +22,7 @@ const Main: React.FC = () => {
 
   return (
     <Wrapper height="100vh">
+      <LanguageSelect/>
       <Outlet/>
     </Wrapper>
   );

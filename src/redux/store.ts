@@ -7,6 +7,7 @@ import driverSlice from './slices/driverSliser'
 import commonLocationSlice from './slices/commonLocationSlicer'
 import historySlice from './slices/historySlice'
 import consultingSlice from './slices/consultingSlice'
+import i18nSlice from './slices/i18nSlice'
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     driver: driverSlice,
     commonLocation: commonLocationSlice,
     history: historySlice,
-    consulting: consultingSlice
+    consulting: consultingSlice,
+    i18n: i18nSlice
   },
 })
 

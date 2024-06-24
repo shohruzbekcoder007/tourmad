@@ -11,14 +11,16 @@ import NewYork from "./../../media/images/Rectangle 4 (2).png";
 import London from "./../../media/images/Rectangle 3 (3).png";
 import Tokyo from "./../../media/images/Rectangle 3 (4).png";
 import Dubai from "./../../media/images/Rectangle 4 (3).png";
+import { useTranslation } from "react-i18next";
 
 const TripPlan: React.FC = () => {
+    const {t} = useTranslation()
     return (
         <Container>
             <Box pb='48px'>
                 <Grid container pb="40px">
                     <Grid item xl={8} md={8} sm={6} xs={6}>
-                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} mediafontsize="18px" part="true">Plan your perfect trip</WelcomeMainText>
+                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} mediafontsize="18px" part="true">{t("plan_your_perfect_trip")}</WelcomeMainText>
                         <GlobalParagraph fontSize={"16px"} mediafontsize="12px" fontWeight="400">Search Flights & Places Hire to our most popular destinations</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
