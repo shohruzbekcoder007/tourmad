@@ -1,17 +1,27 @@
 import { Box, Button, Divider, Paper, Stack } from "@mui/material";
-import card_image from "./../../media/images/users.jpg";
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import { useNavigate } from "react-router-dom";
+import { AutoModel, AutoNumber, Language, Location, UserDrivers } from "../../utils/response_types";
+import TranslateIcon from '@mui/icons-material/Translate';
 
-type PropsType = {
-  time?: string
+type DriveFilterProps = {
+  user: UserDrivers | null,
+  auto_number: AutoNumber | null,
+  avg_rate: number | null,
+  location: Location | null,
+  auto_model: AutoModel | null,
+  auto_photo: string | null,
+  languages: Language[] | null,
+  price: number ,
+  time?: string,
+  orders_count: number,
 }
 
-const DriveFilterCard: React.FC<PropsType> = (props) => {
+const DriveFilterCard: React.FC<DriveFilterProps> = ({time, price, languages, auto_model, auto_number, auto_photo, location, avg_rate, user, orders_count}) => {
   const navigate = useNavigate();
 
   return (
@@ -30,41 +40,53 @@ const DriveFilterCard: React.FC<PropsType> = (props) => {
       >
         <Box display="flex" justifyContent="space-between" flexWrap="wrap">
           <Box  width={{xl: '30%', md: "30%", sm: "30%", xs: "100%"}}>
-            <img src={card_image} width="100%" height="100%" style={{objectFit: "cover", borderRadius: "12px"}} alt="" />
+            <img src={`${auto_photo}`} width="100%" height="100%" style={{objectFit: "cover", borderRadius: "12px"}} alt="" />
           </Box>
           <Box mt={{xl: 0, md: 0, sm: 0, xs: "24px"}} width={{xl: '65%', md: "65%", sm: "65%", xs: "100%"}}>
             <Box pb="16px" width="100%" display="flex" justifyContent="space-between" gap="24px">
-              <WelcomeMainText fontSize="20px" part="true" texttransform="capitalize">Sevda Apa</WelcomeMainText>
+              <Box>
+                <WelcomeMainText fontSize="20px" part="true" texttransform="capitalize">{user?.first_name} {user?.last_name}</WelcomeMainText>
+                <Box  display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
+                  <TranslateIcon />
+                  <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">
+                    {
+                      languages?.map((lang) => {
+                        return `${lang.lang}, `
+                      })
+                    }
+                  </GlobalParagraph>
+                </Box>
+              </Box>
               <Box>
                 <GlobalParagraph fontSize="12px" fontWeight="500">starting from</GlobalParagraph>
-                <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">$240/{props.time}</GlobalParagraph>
+                <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">${price}/{time}</GlobalParagraph>
               </Box>
             </Box>
             <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
               <LocationOnIcon />
-              <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">Samarqand</GlobalParagraph>
+              <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">{location?.name}</GlobalParagraph>
             </Box>
             <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
               <DirectionsCarIcon />
-              <GlobalParagraph fontSize="14px" fontWeight="700">Malibu</GlobalParagraph>
+              <GlobalParagraph fontSize="14px" fontWeight="700">{auto_model?.name}</GlobalParagraph>
               <Box ml='5px' display='flex' borderRadius='5px' justifyContent='flex-start' gap='5px' p='5px' border='solid 2px #000'>
                 <Box pr='5px' borderRight="solid 2px #000">
-                  <GlobalParagraph fontSize="12px" fontWeight="700">30</GlobalParagraph>
+                  <GlobalParagraph fontSize="12px" fontWeight="700">{auto_number?.region}</GlobalParagraph>
                 </Box>
                 <Box display='flex' justifyContent='flex-start'>
                   <Box pr='5px'>
-                    <GlobalParagraph fontSize="12px" fontWeight="700">A777BC</GlobalParagraph>
+                    <GlobalParagraph fontSize="12px" fontWeight="700">{auto_number?.number}</GlobalParagraph>
                   </Box>
                   <Box pl='5px' borderLeft="solid 2px #000">
-                    <GlobalParagraph fontSize="12px" fontWeight="700">UZ</GlobalParagraph>
+                    <GlobalParagraph fontSize="12px" fontWeight="700">{auto_number?.country}</GlobalParagraph>
                   </Box>
                 </Box>
               </Box>
             </Box>
             <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
-              <Button variant="outlined">4.2</Button>
+              <Button variant="outlined">{avg_rate}</Button>
               <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
-              <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph>
+              <GlobalParagraph fontSize="12px" fontWeight="500">{orders_count} reviews</GlobalParagraph>
             </Box>
             <Divider style={{
               marginTop: "24px"

@@ -8,7 +8,6 @@ import { GlobalParagraph } from '../../global_styles/styles'
 import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DriveFilterCard from '../../components/DriverFilterCard'
 
 const MyTrip: React.FC = () => {
 
@@ -69,8 +68,6 @@ const MyTrip: React.FC = () => {
                             </Box>
                             <Box mt='32px'>
                                 <GlobalParagraph fontSize='24px' mediafontsize='16px' fontWeight='600' paddingbottom='16px'>Date: Year</GlobalParagraph>
-                                <DriveFilterCard />
-                                <DriveFilterCard />
                             </Box>
                         </Box>
                         <Box width={{xl: "40%", md: "40%", sm: '100%', xs: "100%"}} height={{xl: "600px", md: '600px', sm: "auto", xs: "auto"}} 

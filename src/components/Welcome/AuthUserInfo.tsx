@@ -14,7 +14,7 @@ const AuthUserInfo: React.FC = () => {
         return (
             <>
             <AuthUser>
-                <Link to="sign-in">
+                <Link to="/sign-in">
                     <Button
                         color="secondary"
                         sx={{
