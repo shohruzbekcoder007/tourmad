@@ -1,40 +1,47 @@
 import { Box, FormControl, FormGroup, Stack, TextField, FormControlLabel, Checkbox, Button, Divider } from '@mui/material'
 import logo from "./../../media/images/logo2.png"
-import React from 'react'
+import React, { useState } from 'react'
 import { FooterLogoImg } from '../Footer/styles'
 import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import LoginWith from '../LoginWith'
 import LoginCarousel from '../LoginCarousel'
-import { postRequest } from '../../utils/request'
-import { login } from '../../utils/API_urls'
 import { setStorage, setStorageR } from '../../utils/storage'
 import { useNavigate } from 'react-router-dom'
+import UserService from '../../services/UserService'
+import { enqueueSnackbar } from 'notistack'
 
 const SignIn: React.FC = () => {
 
   let navigate = useNavigate()
 
+  const [loading, setLoading] = useState(false)
+
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     
+    setLoading(true)
     event.preventDefault();
     const data = new FormData(event.currentTarget);
   
     const email = data.get('email');
     const password = data.get('password');
 
-    postRequest(login, {
+    UserService.login({
       email,
       password
     }).then(response => {
       if(response.status === 200){
-        console.log(response.data.data.tokens)
         const { access, refresh } = response.data.data.tokens
         setStorage(access)
         setStorageR(refresh)
+        setLoading(false)
         navigate('/protected')
       }
     }).catch(error => {
-      console.log(error)
+      // console.log(error)
+      if(error?.response?.data?.message){
+        enqueueSnackbar(error?.response?.data?.message, { variant: 'error' })
+      }
+      setLoading(false)
     })
 
   }
@@ -73,8 +80,8 @@ const SignIn: React.FC = () => {
               </FormControl>
             </Box>
             <Box pb='16px'>
-              <Button fullWidth variant='contained' type='submit'>
-                Login
+              <Button disabled={loading} fullWidth variant='contained' type='submit'>
+                {loading?"Login ...":"Loading"}
               </Button>
             </Box>
             <Box mb='40px' display='flex' flexDirection='row' alignItems='center' justifyContent='center' gap='5px'>

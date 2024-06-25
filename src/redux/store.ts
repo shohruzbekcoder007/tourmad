@@ -1,11 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit'
 import langSlice from './slices/langSlice'
 import userSlice from './slices/userSlice'
+import hotelSlice from './slices/hotelSlice'
+import restaurantSlice from './slices/restaurantSlice'
+import driverSlice from './slices/driverSliser'
+import commonLocationSlice from './slices/commonLocationSlicer'
+import historySlice from './slices/historySlice'
+import tripSlice from './slices/tripSlice'
+import commonLanguageSlice from './slices/commonLanguage'
 
 const store = configureStore({
   reducer: {
     language: langSlice,
-    user: userSlice
+    user: userSlice,
+    hotel: hotelSlice,
+    restaurant: restaurantSlice,
+    driver: driverSlice,
+    commonLocation: commonLocationSlice,
+    history: historySlice,
+    trip: tripSlice,
+    commonlanguage: commonLanguageSlice,
   },
 })
 

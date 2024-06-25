@@ -28,7 +28,7 @@ let items: sublink[] = [
 
 const ProtectedLinks: React.FC = () => {
     return (
-        <Box>
+        <Box display={{xl: 'block', md: "block", sm: "none", xs: "none"}}>
             <Box
                 display="flex"
                 justifyContent="flex-start"
@@ -38,7 +38,7 @@ const ProtectedLinks: React.FC = () => {
                     items.map((item, index) => (
                         <SubLink
                             key={index}
-                            to={item.to}
+                            to={`/protected/${item.to}`}
                             className={(navData) => (navData.isActive ? 'active' : '')}
                         >
                             {item.name}

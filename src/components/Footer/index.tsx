@@ -30,12 +30,14 @@ const Footer: React.FC = () => {
                                     background: "#fff",
                                     border: "none",
                                     borderRadius: "4px",
-                                    width: {xl: "450px", md: "450px", sm: "250px", xs: "200px"},
+                                    width: {xl: "450px", md: "450px", sm: "250px", xs: "100%"},
                                 }}/>
-                                <Button variant="contained" sx={{
+                                <Button  variant="contained" sx={{
                                     color: "#fff",
                                     background: "#000", 
-                                    marginLeft: "24px",
+                                    marginLeft: {xl: "24px", md: "24px", sm: "24px", xs: 0},
+                                    mt: {xl: 0, md: 0, sm: 0, xs: "24px"},
+                                    width: {xl: "auto", md: "auto", sm: "auto", xs: "100%"},
                                     height: "56px"
                                 }}>
                                     Subscribe
@@ -47,7 +49,7 @@ const Footer: React.FC = () => {
                         </FooterTopPhoto>
                     </FooterTop>
                 </Box>
-                <Box pb="52px">
+                <Box pb="52px" pt="24px">
                     <FooterBottom>
                         <FooterLogo>
                             <FooterLogoImg>

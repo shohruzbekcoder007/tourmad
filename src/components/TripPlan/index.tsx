@@ -18,14 +18,17 @@ const TripPlan: React.FC = () => {
             <Box pb='48px'>
                 <Grid container pb="40px">
                     <Grid item xl={8} md={8} sm={6} xs={6}>
-                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} part="true">Plan your perfect trip</WelcomeMainText>
-                        <GlobalParagraph fontSize={"16px"} fontWeight="400">Search Flights & Places Hire to our most popular destinations</GlobalParagraph>
+                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} mediafontsize="18px" part="true">Plan your perfect trip</WelcomeMainText>
+                        <GlobalParagraph fontSize={"16px"} mediafontsize="12px" fontWeight="400">Search Flights & Places Hire to our most popular destinations</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
                         <Button variant="outlined" sx={{color: "#000"}} color="success">See more places</Button>
                     </Grid>
                 </Grid>
-                <Box display='flex' justifyContent='center' flexWrap='wrap' gap='32px'>
+                <Box display='flex' 
+                justifyContent={{xl: "center", md: "space-between", sm: "space-between", xs: "space-between"}} 
+                flexWrap='wrap' 
+                gap={{xl: '32px', md: 0, sm: 0, xs: 0}}>
                     <TripPlanCard>
                         <CardPhoto>
                             <img src={Istanbul} alt="Istanbul, Turkey" />

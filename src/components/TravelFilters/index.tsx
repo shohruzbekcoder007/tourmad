@@ -6,6 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { GlobalParagraph } from '../../global_styles/styles';
 import TravelFilterCard from '../TravelFilterCard';
+import FilterDrawerTrip from '../FilterDrawerTrip';
 
 type Option = {
   label: string,
@@ -128,7 +129,7 @@ const TravelFilters: React.FC = () => {
         sx={{
           boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
           borderRadius: "16px",
-          padding: "32px 24px",
+          padding: "16px 24px 32px 24px",
           marginTop: '48px',
           mb: "32px",
         }}>
@@ -136,10 +137,9 @@ const TravelFilters: React.FC = () => {
           display="flex"
           alignItems="center"
           justifyContent="space-between"
-          gap="24px"
           flexWrap="wrap"
         >
-          <Box minWidth="300px">
+          <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
               placeholder="From - To"
@@ -151,7 +151,7 @@ const TravelFilters: React.FC = () => {
               </svg>}
             />
           </Box>
-          <Box minWidth="140x">
+          <Box mt="16px" minWidth={{ xl: "200px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
               placeholder="Trip"
@@ -163,7 +163,7 @@ const TravelFilters: React.FC = () => {
               </svg>}
             />
           </Box>
-          <Box minWidth="300px">
+          <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
               placeholder="Depart- Return"
@@ -175,7 +175,7 @@ const TravelFilters: React.FC = () => {
               </svg>}
             />
           </Box>
-          <Box minWidth="300px">
+          <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
               placeholder="Passenger - Class"
@@ -187,15 +187,15 @@ const TravelFilters: React.FC = () => {
               </svg>}
             />
           </Box>
-          <Box>
-            <Button sx={{ height: '56px', width: '56px' }} variant='contained'>
+          <Box mt="16px" width={{ xl: "56px", md: "100%", sm: "100%", xs: "100%" }}>
+            <Button sx={{ height: '56px' }} fullWidth variant='contained'>
               <SearchIcon />
             </Button>
           </Box>
         </Box>
       </Paper>
       <Box display='flex' justifyContent='space-between'>
-        <Box width='343px'>
+        <Box display={{ xl: "block", md: "block", sm: "none", xs: "none" }} width={{ xl: "343px", md: "28%" }}>
           <GlobalParagraph fontSize='20px' fontWeight='600'>
             Filters
           </GlobalParagraph>
@@ -240,7 +240,7 @@ const TravelFilters: React.FC = () => {
           <Divider />
           <Box width="100%" py='32px' >
             <List
-              sx={{ width: '100%', maxWidth: 360}}
+              sx={{ width: '100%', maxWidth: 360 }}
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
@@ -379,8 +379,8 @@ const TravelFilters: React.FC = () => {
             </List>
           </Box>
         </Box>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <Box width="792px">
+        <Divider sx={{ display: { xl: "block", md: "block", sm: "none", xs: "none" } }} orientation="vertical" variant="middle" flexItem />
+        <Box width={{ xl: "792px", md: "68%", sm: "100%", xs: "100%" }}>
           <Paper elevation={0}
             sx={{
               boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
@@ -388,22 +388,45 @@ const TravelFilters: React.FC = () => {
               padding: "16px 24px",
               marginTop: '48px',
               mb: "32px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+
             }}>
-            <Tabs value={valueTab} onChange={handleChangeTab} aria-label="icon label tabs example">
-              <Tab sx={{ width: "180px" }} label="Cheapest" />
+            <Box display={{ xl: "none", md: "none", sm: "block", xs: "block" }}>
+              <FilterDrawerTrip />
+            </Box>
+            <Box display={{ xl: "none", md: "none", sm: "none", xs: "block" }} width={{xl: "250px", md: "250px", sm: "250px", xs: "200px"}}>
+              <FormControl fullWidth size='medium'>
+                <InputLabel id="demo-select-small-label">Sort by Recommended</InputLabel>
+                <Select
+                  labelId="demo-select-small-label"
+                  id="demo-select-small"
+                  value={age}
+                  label="Sort by Recommended"
+                  onChange={handleChangeSort}
+                >
+                  <MenuItem value={10}>Sort 1</MenuItem>
+                  <MenuItem value={20}>Sort 2</MenuItem>
+                  <MenuItem value={30}>Sort 3</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Tabs value={valueTab} sx={{ display: { xl: "block", md: "block", sm: "block", xs: "none" } }} onChange={handleChangeTab} aria-label="icon label tabs example">
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Cheapest" />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: "180px" }} label="Best" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Best" />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: "180px" }} label="Quickest" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Quickest" />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: "180px" }} label="Other sort" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Other sort" />
             </Tabs>
           </Paper>
           <Box width="100%" display="flex" justifyContent='space-between' alignItems='center' pb='24px' >
             <GlobalParagraph fontSize='14px' fontWeight='600'>
               Showing 4 of <span style={{ color: `#FF8682` }}>257 places</span>
             </GlobalParagraph>
-            <Box width="250px">
+            <Box display={{ xl: "block", md: "block", sm: "block", xs: "none" }} width="250px">
               <FormControl fullWidth size="small">
                 <InputLabel id="demo-select-small-label">Sort by Recommended</InputLabel>
                 <Select
@@ -421,12 +444,12 @@ const TravelFilters: React.FC = () => {
             </Box>
           </Box>
           <TravelFilterCard />
+          <Box display='flex' justifyContent="flex-end">
+            <Button sx={{ width: "792px" }} color='success' variant='contained'>
+              Show more results
+            </Button>
+          </Box>
         </Box>
-      </Box>
-      <Box display='flex' justifyContent="flex-end">
-        <Button sx={{width: "792px"}} color='success' variant='contained'>
-          Show more results
-        </Button>
       </Box>
     </Stack>
   )

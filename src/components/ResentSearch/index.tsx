@@ -1,69 +1,81 @@
 import { Box, Stack } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import resent_photo from "./../../media/images/Rectangle 3 (1).png"
-import resent_photo1 from "./../../media/images/Rectangle 3 (2).png"
-import resent_photo2 from "./../../media/images/Rectangle 3 (3).png"
-import resent_photo3 from "./../../media/images/Rectangle 3 (4).png"
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getHotelLocationList, getLoacationList, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 
-const ResentSearch: React.FC = () => {
-  return (
-    <Stack pb="80px">
-        <WelcomeMainText 
-        texttransform='capitalize' part="true" 
-        color='part_title' fontSize='32px' mediafontsize='24px'>Your recent searches</WelcomeMainText>
-        <Box display="flex" justifyContent="space-between" alignItems="center" flexWrap="wrap">
-            <Box mt="32px" width={{xl: "22%", md: "30%", sm: "47%", xs: "100%"}} borderRadius="8px" sx={{ '&:hover': {
-                boxShadow: `0px 0px 4px 2px rgba(49, 125, 49, 0.05)`,
-                cursor: 'pointer',
-            }}} display=" flex" justifyContent="flex-start" gap="16px" alignItems="center">
-                <Box borderRadius="8px" width="90px" height="90px">
-                    <img src={resent_photo} width="100%" height="100%" style={{objectFit: "cover"}} alt="Hotel" />
-                </Box>
-                <Box>
-                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>Istanbul, Turkey</GlobalParagraph>
-                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>325 places</GlobalParagraph>
-                </Box>
+type ResentSearchPropsType =  {
+    title?: string
+}
+
+const ResentSearch: React.FC<ResentSearchPropsType> = ({title}) => {
+
+    const dispatch = useAppDispatch()
+    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
+    const hotelLocationList = useAppSelector(getHotelLocationList)
+
+    useEffect(() => {
+        if (statusLastSearchHotel === 'idle') {
+            dispatch(getLoacationList())
+        }
+    }, [statusLastSearchHotel, dispatch])
+
+    return (
+        <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
+            <WelcomeMainText
+                texttransform='capitalize' 
+                part="true"
+                color='part_title' 
+                fontSize='32px' 
+                mediafontsize='24px'
+            >
+                {title?title:"Your recent searches"}
+            </WelcomeMainText>
+            <Box 
+                display="flex" 
+                justifyContent="space-between" 
+                alignItems="center" 
+                flexWrap="wrap"
+            >
+                {
+                    statusLastSearchHotel === "succeeded"? hotelLocationList?.map((hotelLocation, index) => {
+                        return (
+                            <Box
+                                key={index}
+                                mt="32px"
+                                width={{ xl: "22%", md: "30%", sm: "47%", xs: "100%" }}
+                                borderRadius="8px"
+                                sx={{
+                                    '&:hover': {
+                                        boxShadow: `0px 0px 4px 2px rgba(49, 125, 49, 0.05)`,
+                                        cursor: 'pointer',
+                                    }
+                                }}
+                                display=" flex"
+                                justifyContent="flex-start"
+                                gap="16px"
+                                alignItems="center"
+                            >
+                                <Box 
+                                    borderRadius="8px" 
+                                    width="90px" 
+                                    height="90px"
+                                >
+                                    <img src={`${hotelLocation?.photo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
+                                </Box>
+                                <Box>
+                                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{hotelLocation?.name}</GlobalParagraph>
+                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{hotelLocation?.hotels} places</GlobalParagraph>
+                                </Box>
+                            </Box>
+                        )
+                    }):
+                    statusLastSearchHotel === "loading"?<p>Loading...</p>:
+                    <></>
+                }
             </Box>
-            <Box sx={{ '&:hover': {
-                boxShadow: `0px 0px 4px 2px rgba(49, 125, 49, 0.05)`,
-                cursor: 'pointer',
-            }}} mt="32px" width={{xl: "22%", md: "30%", sm: "47%", xs: "100%"}} display=" flex" justifyContent="flex-start" gap="16px" alignItems="center">
-                <Box borderRadius="8px" width="90px" height="90px">
-                    <img src={resent_photo1} width="100%" height="100%" style={{objectFit: "cover"}} alt="Hotel" />
-                </Box>
-                <Box>
-                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>Sydney, Australia</GlobalParagraph>
-                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>325 places</GlobalParagraph>
-                </Box>
-            </Box>
-            <Box sx={{ '&:hover': {
-                boxShadow: `0px 0px 4px 2px rgba(49, 125, 49, 0.05)`,
-                cursor: 'pointer',
-            }}} mt="32px" width={{xl: "22%", md: "30%", sm: "47%", xs: "100%"}} display=" flex" justifyContent="flex-start" gap="16px" alignItems="center">
-                <Box borderRadius="8px" width="90px" height="90px">
-                    <img src={resent_photo3} width="100%" height="100%" style={{objectFit: "cover"}} alt="Hotel" />
-                </Box>
-                <Box>
-                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>Malé, Maldives</GlobalParagraph>
-                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>325 places</GlobalParagraph>
-                </Box>
-            </Box>
-            <Box sx={{ '&:hover': {
-                boxShadow: `0px 0px 4px 2px rgba(49, 125, 49, 0.05)`,
-                cursor: 'pointer',
-            }}} mt="32px" width={{xl: "22%", md: "30%", sm: "47%", xs: "100%"}} display=" flex" justifyContent="flex-start" gap="16px" alignItems="center">
-                <Box borderRadius="8px" width="90px" height="90px">
-                    <img src={resent_photo2} width="100%" height="100%" style={{objectFit: "cover"}} alt="Hotel" />
-                </Box>
-                <Box>
-                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>Baku, Azerbaijan</GlobalParagraph>
-                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>325 places</GlobalParagraph>
-                </Box>
-            </Box>
-        </Box>
-    </Stack>
-  )
+        </Stack>
+    )
 }
 
 export default ResentSearch

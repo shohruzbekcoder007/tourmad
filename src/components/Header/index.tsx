@@ -6,6 +6,8 @@ import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 import LocalTaxiIcon from '@mui/icons-material/LocalTaxi';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CastleIcon from '@mui/icons-material/Castle';
+import ResponsiveMenu from "../ResponsiveMenu";
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
     auth?: React.ReactElement;
@@ -15,16 +17,23 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false }: HeaderProps) => {
+    const navigate = useNavigate()
     return (
         <HeaderWrapper>
+            <Box display={{xl: "none", md: "none", sm: "block", xs: "block"}}>
+                <ResponsiveMenu />
+            </Box>
+
             {
                 logo ?
-                    <WelcomeLogo>
+                    <WelcomeLogo onClick={() => navigate("/")}>
                         <img src={Logo} alt="" />
                     </WelcomeLogo> :
-                    <Box></Box>
+                    <WelcomeLogo onClick={() => navigate("/")}>
+                        <img src={Logo} alt="" />
+                    </WelcomeLogo>
             }
-
+            
            
             <HeadeMenuList>
                 <HeaderMenuListItem to="/" type={type} 
@@ -41,19 +50,19 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     divider? <Divider orientation="vertical" variant="middle" flexItem/> : <></>
                 }
                 
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/my-driver" type={type}>
                     <HeaderMenuListItemIconc>
                         <LocalTaxiIcon />
                     </HeaderMenuListItemIconc>
                     <HeaderMenuListItemText>My Driver</HeaderMenuListItemText>
                 </HeaderMenuListItem>
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/consulting" type={type}>
                     <HeaderMenuListItemIconc>
                         <ManageAccountsIcon />
                     </HeaderMenuListItemIconc>
                     <HeaderMenuListItemText>Consulting</HeaderMenuListItemText>
                 </HeaderMenuListItem>
-                <HeaderMenuListItem to="/" type={type}>
+                <HeaderMenuListItem to="/history" type={type}>
                     <HeaderMenuListItemIconc>
                         <CastleIcon />
                     </HeaderMenuListItemIconc>
