@@ -90,7 +90,7 @@ const HotelDetail: React.FC = () => {
                 <DetailDescription />
                 <HotelRooms />
                 <DetailMap />
-                <DetailReviews />   
+                {/* <DetailReviews />    */}
             </Container>
             <Box
                 paddingTop="170px"

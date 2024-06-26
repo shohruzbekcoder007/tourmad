@@ -85,7 +85,7 @@ const RestaurantDetail: React.FC = () => {
                 <DetailBanner bgimage='' />
                 <DetailDescription />
                 <DetailMap />
-                <DetailReviews />   
+                {/* <DetailReviews />    */}
             </Container>
             <Box
                 paddingTop="170px"

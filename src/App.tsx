@@ -35,7 +35,9 @@ const App: React.FC = () => {
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />
             <Route path='my-driver' element={<MyDriver />} />
-            <Route path='my-driver-detail' element={<MyDriverDetail />} />
+            <Route path='my-driver-detail'>
+              <Route path=':id'  element={<MyDriverDetail />} />
+            </Route>
             <Route path="protected" element={<Protected/>}>
               <Route index element={<Navigate to="hotel"/>}/>
               <Route path="hotel" element={<Hotel/>} />
