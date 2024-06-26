@@ -8,6 +8,7 @@ export type RoomStyle = {
     style: 'basic' | 'premium' | null,
     price: number | null,
     card: string | null,
+    title?: string | null
 }
 
 export type LocationType = {
