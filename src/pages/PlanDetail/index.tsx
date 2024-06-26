@@ -12,7 +12,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailMap from '../../components/DetailMap';
-import DetailReviews from '../../components/DetailReviews';
+// import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();

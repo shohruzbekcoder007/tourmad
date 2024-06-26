@@ -8,7 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
-import DetailReviews from '../../components/DetailReviews';
+// import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DriveOrder from '../../components/DriveOrder';
 import { useAppSelector } from '../../redux/hooks';

@@ -13,7 +13,7 @@ import DetailBanner from '../../components/DetailBanner'
 import DetailDescription from '../../components/DetailDescription'
 import HotelRooms from '../../components/HotelRooms'
 import DetailMap from '../../components/DetailMap'
-import DetailReviews from '../../components/DetailReviews'
+// import DetailReviews from '../../components/DetailReviews'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelDetail, getHotelDetailInfo } from '../../redux/slices/hotelSlice'
 import { useParams } from 'react-router-dom'
@@ -105,13 +105,8 @@ const HotelDetail: React.FC = () => {
                     {parse((hotel?.body as string)||"")}
                 </DetailDescription>
                 <HotelRooms />
-<<<<<<< HEAD
                 <DetailMap longitude={hotel?.longitude} latitude={hotel?.latitude}/>
-                <DetailReviews />   
-=======
-                <DetailMap />
                 {/* <DetailReviews />    */}
->>>>>>> ibrakhimov
             </Container>
             <Box
                 paddingTop="170px"

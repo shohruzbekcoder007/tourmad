@@ -13,7 +13,6 @@ const PlanCategory: React.FC = () => (
                 </Grid>
             </Grid>
             <Stack display='flex' flexWrap="wrap" flexDirection="row" justifyContent="flex-start" gap="10px">
-<<<<<<< HEAD
                 <Chip sx={{bgcolor: "#fff", 
                     '&:hover': {
                         boxShadow: `0px 0px 5px 5px rgba(37, 69, 37, 0.217)`,
@@ -78,32 +77,6 @@ const PlanCategory: React.FC = () => (
                     icon={<LocationCityIcon />}
                     label="City Tower (22)"
                     variant="outlined" />
-=======
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower (22)" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
-                <Chip sx={{bgcolor: "#fff",}} icon={<LocationCityIcon />} label="City Tower" variant="outlined" />
->>>>>>> ibrakhimov
             </Stack>
         </Container>
     </Stack>
