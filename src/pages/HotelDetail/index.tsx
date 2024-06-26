@@ -105,8 +105,13 @@ const HotelDetail: React.FC = () => {
                     {parse((hotel?.body as string)||"")}
                 </DetailDescription>
                 <HotelRooms />
+<<<<<<< HEAD
                 <DetailMap longitude={hotel?.longitude} latitude={hotel?.latitude}/>
                 <DetailReviews />   
+=======
+                <DetailMap />
+                {/* <DetailReviews />    */}
+>>>>>>> ibrakhimov
             </Container>
             <Box
                 paddingTop="170px"

@@ -9,6 +9,7 @@ import { AutoModel, AutoNumber, Language, Location, UserDrivers } from "../../ut
 import TranslateIcon from '@mui/icons-material/Translate';
 
 type DriveFilterProps = {
+  id: number | null
   user: UserDrivers | null,
   auto_number: AutoNumber | null,
   avg_rate: number | null,
@@ -21,7 +22,7 @@ type DriveFilterProps = {
   orders_count: number,
 }
 
-const DriveFilterCard: React.FC<DriveFilterProps> = ({time, price, languages, auto_model, auto_number, auto_photo, location, avg_rate, user, orders_count}) => {
+const DriveFilterCard: React.FC<DriveFilterProps> = ({id, time, price, languages, auto_model, auto_number, auto_photo, location, avg_rate, user, orders_count}) => {
   const navigate = useNavigate();
 
   return (
@@ -96,7 +97,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({time, price, languages, au
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button onClick={() => navigate("/drive-detail")} variant="contained" fullWidth>
+                <Button onClick={() => navigate(`/my-driver-detail/${id}`)} variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>

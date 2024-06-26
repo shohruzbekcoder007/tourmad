@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import DriverService from "../../services/DriverService";
 import { AxiosError } from "axios";
-import { DriverType, RecommendationType } from "../../utils/response_types";
+import { DriveDetailType, DriverType, RecommendationType, ReviewsType } from "../../utils/response_types";
 
 export interface DriverState {
     statusLastRecommendationDriver: "idle" | "loading" | "succeeded" | "failed",
@@ -21,6 +21,18 @@ export interface DriverState {
     driverCurrentPage: number,
     driverTotalPage: number,
     driversStyle: "all" | "business" | "comfort",
+    driveDetail: {
+        status: "idle" | "loading" | "succeeded" | "failed",
+        error: null,
+        driver: DriveDetailType | null,
+    }
+    driveReview: {
+        status: "idle" | "loading" | "succeeded" | "failed",
+        error: null,
+        review: ReviewsType [] | null,
+        reviewCurrentPage: number,
+        reviewTotelPage: number,
+    }
 }
 
 const initialState: DriverState = {
@@ -40,6 +52,18 @@ const initialState: DriverState = {
     driverCurrentPage: 1,
     driverTotalPage: 1,
     driversStyle: 'all',
+    driveDetail: {
+        status: "idle" ,
+        error: null,
+        driver: null,
+    },
+    driveReview: {
+        status: "idle",
+        error: null,
+        review: null,
+        reviewCurrentPage: 1,
+        reviewTotelPage: 1,
+    }
 }
 
 export const getRecommendationDriverList = createAsyncThunk('recommendation-trip-driver',
@@ -76,6 +100,24 @@ export const getDriverList = createAsyncThunk('driver-list',
         }
     }
 )
+
+export const getDriverDetailAction = createAsyncThunk('driver-detail',
+    async (id: string, { rejectWithValue }) => {
+        try {
+            const response = await DriverService.getDriveDtail(id);
+            const driver_detail_data: DriveDetailType = response.data;
+            return driver_detail_data;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+
 
 export const driverSlice = createSlice({
     name: 'driver',
@@ -154,6 +196,18 @@ export const driverSlice = createSlice({
                 state.statusDriverList = "failed"
                 state.showMessage = true
             })
+            .addCase(getDriverDetailAction.pending, (state) => {
+                state.driveDetail.error = null
+                state.driveDetail.status = "loading"
+            })
+            .addCase(getDriverDetailAction.rejected, (state, _) => {
+                state.driveDetail.status = "failed"
+                state.driveDetail.error = null
+            })
+            .addCase(getDriverDetailAction.fulfilled, (state, action) => {
+                state.driveDetail.driver = action?.payload
+                state.driveDetail.status = 'succeeded'
+            })
     }
 })
 
@@ -174,6 +228,7 @@ export const getDriverPriceFrom = (state: RootState) => state.driver.driverPrice
 export const getDriverPriceto = (state: RootState) => state.driver.driverPriceTo;
 export const getDriverCurrentPage = (state: RootState) => state.driver.driverCurrentPage;
 export const getDriverTotalPage = (state: RootState) => state.driver.driverTotalPage;
-export const getDriversStyle = (state: RootState) => state.driver.driversStyle
+export const getDriversStyle = (state: RootState) => state.driver.driversStyle;
+export const getDriverDetail = (state: RootState) => state.driver.driveDetail;
 
 export default driverSlice.reducer

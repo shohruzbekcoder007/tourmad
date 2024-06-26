@@ -75,15 +75,17 @@ const App: React.FC = () => {
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />
             <Route path='my-driver' element={<MyDriver />} />
-            <Route path='my-driver-detail' element={<MyDriverDetail />} />
-            <Route path="protected" element={<Protected />}>
-              <Route index element={<Navigate to="hotel" />} />
-              <Route path="hotel" element={<Hotel />} />
-              <Route path="ticket" element={<Ticket />} />
-              <Route path="restaurant" element={<Restaurant />} />
-              <Route path="drive" element={<Drive />} />
-              <Route path="plan" element={<Plan />} />
-              <Route path='favourites' element={<Favourites />} />
+            <Route path='my-driver-detail'>
+              <Route path=':id'  element={<MyDriverDetail />} />
+            </Route>
+            <Route path="protected" element={<Protected/>}>
+              <Route index element={<Navigate to="hotel"/>}/>
+              <Route path="hotel" element={<Hotel/>} />
+              <Route path="ticket" element={<Ticket/>}/>
+              <Route path="restaurant" element={<Restaurant/>}/>
+              <Route path="drive" element={<Drive/>}/>
+              <Route path="plan" element={<Plan/>}/>
+              <Route path='favourites' element={<Favourites/>}/>
             </Route>
           </Route>
           <Route path="users" element={<Users />}>

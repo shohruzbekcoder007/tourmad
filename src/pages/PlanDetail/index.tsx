@@ -88,7 +88,7 @@ const PlanDetail: React.FC = () => {
                 <DetailBanner />
                 <DetailDescription />
                 <DetailMap />
-                <DetailReviews />   
+                {/* <DetailReviews />    */}
             </Container>
             <Box
                 paddingTop="170px"
