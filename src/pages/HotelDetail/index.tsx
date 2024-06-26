@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelDetail, getHotelDetailInfo } from '../../redux/slices/hotelSlice'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser';
+import SwipeDrawer from '../../components/SwipeDrawer'
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
@@ -68,7 +69,7 @@ const HotelDetail: React.FC = () => {
                     <div role="presentation" onClick={handleClick}>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link underline="hover" color="inherit" href="/">
-                            {hotel?.location?.name}
+                                {hotel?.location?.name}
                             </Link>
                             <Typography color="text.primary">{hotel?.name}</Typography>
                         </Breadcrumbs>
@@ -91,21 +92,25 @@ const HotelDetail: React.FC = () => {
                             {/* <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph> */}
                         </Box>
                     </Box>
-                    <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
+                    <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
                         <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">{hotel?.room_style?.[0]?.price}$</GlobalParagraph>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
-                            <Button variant='contained'>Book Now</Button>
+                            <SwipeDrawer
+                                hotel_id={parseInt(id as string)}
+                                addType={'hotel'}
+                                button={<Button variant='contained'>Book Now</Button>}
+                            />
                         </Box>
                     </Box>
                 </Box>
                 <DetailBanner bgimage={`${hotel?.banner}`} />
                 <DetailDescription>
-                    {parse((hotel?.body as string)||"")}
+                    {parse((hotel?.body as string) || "")}
                 </DetailDescription>
                 <HotelRooms />
-                <DetailMap longitude={hotel?.longitude} latitude={hotel?.latitude}/>
+                <DetailMap longitude={hotel?.longitude} latitude={hotel?.latitude} />
                 {/* <DetailReviews />    */}
             </Container>
             <Box
