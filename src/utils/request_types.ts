@@ -13,3 +13,10 @@ export type HotelToTripType = {
     start_time: string,
     end_time: string
 }
+
+export type RestaurantToTripType = {
+    id?: number | null
+    trip: number,
+    restaurant: number,
+    time: string
+}

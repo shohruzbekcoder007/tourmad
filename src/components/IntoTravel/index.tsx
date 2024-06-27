@@ -56,7 +56,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily }) => {
                                         </Box>
                                         <SwipeDrawer
                                             hotel_id={item?.id}
-                                            addType={'hotel'}
+                                            addType={'restaurant'}
                                             button={<Button
                                                 sx={{ height: "48px" }}
                                                 fullWidth

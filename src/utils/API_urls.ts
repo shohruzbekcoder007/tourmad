@@ -22,3 +22,5 @@ export const driver_list = "drive/drivers"
 export const driver_detail= "/drive/driver/"
 
 export const common_language = "common/language"
+
+export const trip_restaurant_oder = "trip/trip-restaurant-oder"

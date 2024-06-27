@@ -130,8 +130,15 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     My Trips
                 </WelcomeMainText>
                 {
+                    props.addType === "hotel" &&
                     trips?.tripList?.map((elem: TripType, index: number) => {
                         return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => {addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
+                    })
+                }
+                {
+                    props.addType === "restaurant" &&
+                    trips?.tripList?.map((elem: TripType, index: number) => {
+                        return <SimpleTripRestaurant addRestaurantToTripFunction={(id, startDate) => {console.log(id, startDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
                     })
                 }
             </Box>
@@ -328,6 +335,111 @@ const SimpleTrip = ({
                                     <DatePicker
                                         label="End Date"
                                         onChange={changeEndDate}
+                                    />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseModal} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={addHotelAndCloseModal} color="primary" autoFocus>
+                        Add
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Box borderRadius={{ xl: '8px 0 0 8px', md: '8px 0 0 8px', sm: '8px 0 0 8px', xs: '8px 8px 0 0' }}
+                width={{ xl: "35%", md: "35%", sm: "100%", xs: "100%" }} height='100%' overflow="hidden">
+                <img src={`${location?.[0].photo}`} width='100%' height='100%' style={{ objectFit: "cover" }} alt={`${location?.[0].name}`} />
+            </Box>
+            <Box width={{ xl: "45%", md: "45%", sm: "100%", xs: "100%" }} pb={{ xl: 0, md: 0, sm: "8px", xs: '8px' }} ml={{ xl: 0, md: 0, sm: '20px', xs: "20px" }}>
+                <GlobalParagraph fontSize='24px' fontWeight='700' mediafontsize='16px'>{title}</GlobalParagraph>
+                <Box mt='16px' display='flex' justifyContent='flex-start' flexWrap='wrap' gap='16px'>
+                    <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
+                        <CalendarMonthIcon />
+                        <GlobalParagraph fontSize='14px' fontWeight='400'>{time}</GlobalParagraph>
+                    </Box>
+                    <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
+                        <LocationOnIcon />
+                        <GlobalParagraph fontSize='14px' fontWeight='400'>{location?.[0]?.name}</GlobalParagraph>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+    )
+}
+
+const SimpleTripRestaurant = ({
+    id,
+    title,
+    time,
+    location,
+    addRestaurantToTripFunction
+}: {
+    id: number | null,
+    title?: string | null,
+    time?: string,
+    location?: LocationType[] | null
+    addRestaurantToTripFunction: (id: number | null, time: string | null) => void
+}) => {
+
+    const [openModal, setOpenModal] = useState(false);
+    const [startDate, setStartDate] = useState<string | null>(null)
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    }
+
+    const handleCloseModal = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        setOpenModal(false);
+    }
+
+    const addHotelAndCloseModal = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+        setOpenModal(false);
+        addRestaurantToTripFunction(id, startDate);
+    }
+
+    const changeStartDate = (date: dayjs.Dayjs | null) => {
+        if(date !== null) {
+            const start_date = date.toISOString().substring(0, 10) || null;
+            setStartDate(start_date);
+        }
+    }
+
+    return (
+        <Box
+            borderRadius='8px'
+            display='flex'
+            justifyContent='flex-start'
+            gap={{ xl: '32px', md: '32px', sm: 0, xs: 0 }}
+            sx={{ cursor: 'pointer', "&:hover": { boxShadow: 3 } }}
+            flexWrap='wrap'
+            boxShadow={1}
+            mt='32px'
+            width='100%'
+            height={{ xl: "150px", md: "150px", sm: "auto", xs: "auto" }}
+            onClick={handleOpenModal}
+        >
+            <Dialog
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="dialog-title"
+                aria-describedby="dialog-description"
+            >
+                <DialogTitle id="dialog-title">Confirm Action</DialogTitle>
+                <DialogContent>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Choose your time frame to stay</GlobalParagraph>
+                    <Grid container spacing={2}>
+                        <Grid item xl={12} md={12} sm={12} xs={12}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker
+                                        label="Start Date"
+                                        onChange={changeStartDate}
                                     />
                                 </DemoContainer>
                             </LocalizationProvider>

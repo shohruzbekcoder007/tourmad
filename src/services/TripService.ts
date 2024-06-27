@@ -1,6 +1,6 @@
-import { trip_hotel_oder, trip_list } from "../utils/API_urls"
+import { trip_hotel_oder, trip_list, trip_restaurant_oder } from "../utils/API_urls"
 import { getRequest, postRequest } from "../utils/request"
-import { HotelToTripType, TripCreateType } from "../utils/request_types"
+import { HotelToTripType, RestaurantToTripType, TripCreateType } from "../utils/request_types"
 
 class TripService {
 
@@ -14,6 +14,10 @@ class TripService {
 
     static addHotelToTrip = (dto: HotelToTripType) => {
         return postRequest(trip_hotel_oder, dto)
+    }
+
+    static addRestaurant = (dto: RestaurantToTripType) => {
+        return postRequest(trip_restaurant_oder, dto)
     }
 
 }
