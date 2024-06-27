@@ -5,7 +5,6 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 const PlanCategory: React.FC = () => (
     <Stack p="40px" mb="40px"  bgcolor="#edececee">
-        <Container>
             <Grid container pb="32px">
                 <Grid item xl={8} md={8} sm={6} xs={8}>
                     <WelcomeMainText paddingbottom={"16px"} texttransform='capitalize' fontSize={"24px"} part="true">Explore popolar experiences</WelcomeMainText>
@@ -78,7 +77,6 @@ const PlanCategory: React.FC = () => (
                     label="City Tower (22)"
                     variant="outlined" />
             </Stack>
-        </Container>
     </Stack>
 )
 
