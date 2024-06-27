@@ -15,6 +15,10 @@ class RestaurantService {
         return getRequest(`${trip_restaurant}?size=${restaurantListPageSize}&page=${restaurantListCurrentPage}&location=${searchLocation || ""}&search=${searchText}`)
 
     }
+
+    static getRestaurantDetail = (id: string) => {
+        return getRequest(`${trip_restaurant}/${id}`)
+    }
 }
 
 export default RestaurantService
