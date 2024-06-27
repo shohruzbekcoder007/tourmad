@@ -85,12 +85,16 @@ export const addHotelToTrip = createAsyncThunk('add-hotel-to-trip',
             const response = await TripService.addHotelToTrip(hotelToTrip)
             const new_order: HotelToTripType = response.data
             return new_order
-        } catch (error) {
+        } catch (error: AxiosError | any) {
             let errorMessage = 'Error'
+            let errorList: string[] = []
+            Object.entries(error?.response?.data).forEach(([key, value]) => {
+                errorList.push(`${key}: ${value}`)
+            })
             if (error instanceof AxiosError && error.response?.data?.message) {
                 errorMessage = error.response.data.message
             }
-            return rejectWithValue({ message: errorMessage })
+            return rejectWithValue({ message: errorMessage, errorList })
         }
     }
 )
@@ -141,13 +145,15 @@ export const tripSlice = createSlice({
             state.addHotel.newOrderedHotel = action.payload
             state.addHotel.status = true
             state.addHotel.loading = false
-            state.addHotel.message = ""
+            state.addHotel.message = "Mehmonhona muvofaqqiyali qushildi!!!"
         })
-        .addCase(addHotelToTrip.rejected, (state, _) => {
+        .addCase(addHotelToTrip.rejected, (state, action) => {
             state.addHotel.status = true
             state.addHotel.loading = false
             state.addHotel.error = true
-            state.addHotel.message = "Xatolik yuzaga keldi"
+            const errorpayload: any = action?.payload
+            state.addHotel.message = errorpayload.errorList?.join(",\n")
+            // state.addHotel.message = "Xatolik yuzaga keldi"
         })
     }
 })

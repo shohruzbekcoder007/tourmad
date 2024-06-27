@@ -129,7 +129,6 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 <WelcomeMainText fontSize='32px' part="true" mediafontsize='24px'>
                     My Trips
                 </WelcomeMainText>
-                <p>{`${addHotel.status}`}</p> 
                 {
                     trips?.tripList?.map((elem: TripType, index: number) => {
                         return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => {addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
@@ -218,7 +217,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                         {newTrip.newTripCreateLoading ? "Loading..." : 'Create Trip'}
                     </Button>
                 </Box>
-                <NotificationAlert alert={addHotel.status} alertType={addHotel.error?"error":"success"}/>
+                <NotificationAlert alert={addHotel.status} alertType={addHotel.error?"error":"success"} alertMessage={addHotel.message}/>
             </Box>
         </Box>
     );
