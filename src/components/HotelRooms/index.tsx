@@ -1,8 +1,8 @@
 import { Box, Button, Divider, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
-import photo from "./../../media/images/detail-banner-photo.jpg";
 import { RoomStyle } from '../../utils/response_types';
+import SwipeDrawer from '../SwipeDrawer';
 
 interface HotelRoomsProps {
     room_style: RoomStyle[] | null | undefined
@@ -28,7 +28,12 @@ const HotelRooms: React.FC<HotelRoomsProps> = ({ room_style }) => {
                                 </Box>
                                 <Box display="flex" alignItems='center' justifyContent="flex-end" gap="64px">
                                     <GlobalParagraph fontSize='14px' fontWeight='600'>${item?.price}/night | {item.style}</GlobalParagraph>
-                                    <Button variant='contained'>Book Now</Button>
+                                    <SwipeDrawer
+                                        hotel_id={parseInt(("" + item?.id) as string)}
+                                        addType={'hotel'}
+                                        button={<Button variant='contained'>Book Now</Button>}
+                                    />
+                                    {/* <Button variant='contained'>Book Now</Button> */}
                                 </Box>
                             </Box>
                             <Divider />

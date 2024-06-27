@@ -62,7 +62,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily }) => {
                                                 fullWidth
                                                 variant='contained'
                                             >
-                                                Book a Hotel
+                                                Book a restaurant
                                             </Button>}
                                         />
                                     </Box>
