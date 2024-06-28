@@ -9,7 +9,6 @@ import CastleIcon from '@mui/icons-material/Castle';
 import ResponsiveMenu from "../ResponsiveMenu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 type HeaderProps = {
     auth?: React.ReactElement;
     logo: boolean,
