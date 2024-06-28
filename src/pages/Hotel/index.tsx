@@ -39,7 +39,7 @@ const Hotel: React.FC = () => {
                         <Button onClick={() => navigate("/hotel-filter")} variant="outlined" >See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={hotelRecommendationList}/>
+                <IntoTravel data={hotelRecommendationList} type="hotel"/>
             </Container>
         </>
     )
