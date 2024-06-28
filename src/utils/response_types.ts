@@ -177,4 +177,19 @@ export type DriveDetailType = {
     description: string | null,
     location: CommonLocationType | null,
   }
-  
+
+export type RestaurantDetailType = {
+    id: number | null,
+    location: LocationType | null,
+    banner: string | null,
+    card: string | null,
+    name: string | null,
+    desc: string | null,
+    body: string | null,
+    longitude: number | null,
+    latitude: number | null,
+    rate: number | null,
+    grade: number | null,
+    gallery: GalleryType[] | null,
+    reviews_count: number | null,
+}

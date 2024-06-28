@@ -19,10 +19,6 @@ const DetailMap: React.FC<PropsType> = ({ longitude, latitude }) => {
         <Box>
             <iframe title='Anor Plaza' src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es;z=${14}&output=embed`} width="100%" height="450" style={{border: 0, borderRadius: "16px"}} allowFullScreen loading="lazy" referrerPolicy='no-referrer-when-downgrade' />
         </Box>
-        <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
-            <LocationOnIcon />
-            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">Toshkent</GlobalParagraph>
-        </Box>
     </Stack>
   )
 }
