@@ -1,6 +1,7 @@
 import { DriverState } from "../redux/slices/driverSliser"
-import { driver_detail, driver_list, my_driver_review, recommendation_trip_drive } from "../utils/API_urls"
-import { getRequest } from "../utils/request"
+import { drive_client_review, driver_detail, driver_list, my_driver_review, recommendation_trip_drive } from "../utils/API_urls"
+import { getRequest, putRequest } from "../utils/request"
+import { DriveClientReviewType } from "../utils/response_types"
 
 class DriverService {
     static recommendationDrive = () => {
@@ -16,9 +17,15 @@ class DriverService {
     static getDriveDtail = (id: string) => {
         return getRequest(`${driver_detail}${id}/`);
     }
-    
-    static getMyDriverReviews = (id: string) => {
-        return getRequest(`${my_driver_review}${id}/`);
+
+    static getMyDriverReviews = (id: string, state: any) => {
+        let driver: DriverState = state.driver as DriverState;
+        const { reviewCurrentPage } = driver.driveReview
+        return getRequest(`${my_driver_review}${id}/?page=${reviewCurrentPage}`);
+    }
+
+    static getDriverClientReview = (id: string, review: DriveClientReviewType) => {
+        return putRequest(`${drive_client_review}${id}/`, review)
     }
 }
 

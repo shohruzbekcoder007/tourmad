@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { AuthUserInfo, Footer, Header, ProtectedLinks, } from '../../components'
-import { Box, Button, Container, Stack } from '@mui/material'
+import { Box, Button, Container, Divider, Pagination, Stack } from '@mui/material'
 import { HeaderWrapper } from './styles'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
-import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DriveOrder from '../../components/DriveOrder';
 import { useAppSelector } from '../../redux/hooks';
-import { getDriverDetail, getDriverDetailAction } from '../../redux/slices/driverSliser';
+import { changeReviewPage, getDriverDetail, getDriverDetailAction, getDriverReview, getMyDriverReviews, getNewReview, getNewReviewAction } from '../../redux/slices/driverSliser';
 import { AppDispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import TranslateIcon from '@mui/icons-material/Translate';
 import parse from 'html-react-parser';
+import InputReview from '../../components/InputReview';
+import DriverDetailBanner from '../../components/DriverDetailBanner';
+import { DriveClientReviewType } from '../../utils/response_types';
 // import { ReviewsType } from '../../utils/response_types';
 
 const MyDriverDetail: React.FC = () => {
@@ -42,13 +44,24 @@ const MyDriverDetail: React.FC = () => {
 
     // redux
     const driverDetail = useAppSelector(getDriverDetail)
+    const driverReview = useAppSelector(getDriverReview)
+    const newReview = useAppSelector(getNewReview)
 
     // redux dispatch
     const dispatch: AppDispatch = useDispatch()
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(getDriverDetailAction(id as string))
+        dispatch(getMyDriverReviews(id as string))
     }, [])
+
+    const changePageHandler = (page: number) => {
+        dispatch(changeReviewPage(page))
+      }
+
+    function reviewSend (data: {id: string, review: DriveClientReviewType}) {
+        dispatch(getNewReviewAction(data))
+    }
 
     return (
         <Stack>
@@ -89,15 +102,15 @@ const MyDriverDetail: React.FC = () => {
                             <LocationOnIcon />
                             <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">{driverDetail.driver?.location?.name}</GlobalParagraph>
                         </Box>
-                        <Box  display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
-                        <TranslateIcon />
-                        <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">
-                            {
-                            driverDetail.driver?.languages?.map((lang) => {
-                                return `${lang.lang}, `
-                            })
-                            }
-                        </GlobalParagraph>
+                        <Box display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
+                            <TranslateIcon />
+                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">
+                                {
+                                    driverDetail.driver?.languages?.map((lang) => {
+                                        return `${lang.lang}, `
+                                    })
+                                }
+                            </GlobalParagraph>
                         </Box>
                         <Box display="flex" mt={2} alignItems="center" justifyContent="flex-start" gap="5px">
                             <Button variant="outlined">{driverDetail.driver?.avg_rate}</Button>
@@ -116,23 +129,41 @@ const MyDriverDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner bgimage={driverDetail.driver?.banner} />
+                <DriverDetailBanner bgimage={driverDetail.driver?.banner} />
                 <DetailDescription >
-                    {parse((driverDetail.driver?.description as string)||"")}
+                    {parse((driverDetail.driver?.description as string) || "")}
                 </DetailDescription>
-                {/* {
-                    driverDetail.driver?.orders.map((item: ReviewsType, index: number) => {
-                        return (
-                            <DetailReviews 
-                            key={index+1}
-                            avg_rate={driverDetail.driver?.avg_rate}
-                            user={item.user}
-                            rate={item.rate}
-                            id={item.id}
-                            review={item.review}/>
-                        )
-                    })
-                } */}
+                <Stack>
+                    <Box pb="64px">
+                        <Divider />
+                    </Box>
+                    <Box pb="24px" display="flex" justifyContent="space-between">
+                        <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px'>Reviews</GlobalParagraph>
+                        <InputReview btnText='Give your review' reviewSend={reviewSend} id={id}  message={newReview.NewReviewMessage} />
+                    </Box>
+                    <Box display='flex' justifyContent='flex-start' gap="16px" alignItems="center">
+                        <GlobalParagraph fontSize='50px' mediafontsize='32px' fontWeight='700'>{driverDetail.driver?.avg_rate}</GlobalParagraph>
+                        <Box>
+                            <GlobalParagraph paddingbottom='8px' fontSize='20px' mediafontsize='16px' fontWeight='600'>Very Good</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400'>{driverDetail.driver?.orders_count} verified reviews</GlobalParagraph>
+                        </Box>
+                    </Box>
+                    {
+                        driverReview.review?.map((item, index) => {
+                            return (
+                                <DetailReviews key={index + 1}
+                                id={item.id}
+                                created_at={item.created_at}
+                                user={item.user}
+                                rate={item.rate}
+                                review={item.review} />
+                            )
+                        })
+                    }
+                    <Box display="flex" justifyContent="center">
+                        <Pagination count={driverReview.reviewTotelPage} page={driverReview.reviewCurrentPage} color="primary" onChange={(_, page) => { changePageHandler(page)}} />
+                    </Box>
+                </Stack>
             </Container>
             <Box
                 paddingTop="170px"

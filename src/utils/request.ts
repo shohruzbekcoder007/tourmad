@@ -32,3 +32,18 @@ export const postRequest = (url: string, data: any): Promise<AxiosResponse> => {
         });
     });
 }
+
+export const putRequest = (url: string, data: any): Promise<AxiosResponse> => {
+    return new Promise((resolve, reject) => {
+        axios.put(
+            url,
+            data
+        ).then((response) => {
+            resolve(response)
+        })
+        .catch((error) => {
+            console.log(error)
+            reject(error)
+        });
+    });
+}

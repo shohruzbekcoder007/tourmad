@@ -19,5 +19,6 @@ export const trip_list = "/trip/trip-list"
 export const driver_list = "drive/drivers"
 export const driver_detail= "/drive/driver/"
 export const my_driver_review= '/drive/reviews/'
+export const drive_client_review= '/drive/client-review/'
 
 export const common_language = "common/language"
