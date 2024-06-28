@@ -5,7 +5,7 @@ import ResentSearch from '../../components/ResentSearch'
 import IntoTravel from '../../components/IntoTravel'
 import banner_photo from './../../media/images/banner-hotel.jpg'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice'
+import { getHotelLocationList, getHotelRecommendationList, getLoacationList, getRecommendationTripHotel, getStatusLastRecommendationHotel, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,6 +22,15 @@ const Hotel: React.FC = () => {
         }
     }, [statusLastRecommendationHotel, dispatch])
 
+    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
+    const hotelLocationList = useAppSelector(getHotelLocationList)
+
+    useEffect(() => {
+        if (statusLastSearchHotel === 'idle') {
+            dispatch(getLoacationList())
+        }
+    }, [statusLastSearchHotel, dispatch])
+
     return (
         <>
             <Banner heightprops='400px' 
@@ -29,7 +38,7 @@ const Hotel: React.FC = () => {
             bannertitle='Make your travel whishlist, we’ll do the rest'
             bannersubtitle='Special offers to suit your plan'/>
             <Container>
-                <ResentSearch />
+                <ResentSearch statusLastSearch={statusLastSearchHotel} locationList={hotelLocationList}/>
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">Fall into travel</WelcomeMainText>
