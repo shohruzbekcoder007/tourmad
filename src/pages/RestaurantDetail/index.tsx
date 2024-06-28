@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { getRestaurantDetail, getRestaurantDetailInfo } from '../../redux/slices/restaurantSlice';
+import SwipeDrawer from '../../components/SwipeDrawer';
 // import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -27,7 +28,7 @@ const RestaurantDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-    const { restaurant }  = useAppSelector(getRestaurantDetail);
+    const { restaurant } = useAppSelector(getRestaurantDetail);
 
     const { id } = useParams<{ id: string }>();
 
@@ -86,11 +87,15 @@ const RestaurantDetail: React.FC = () => {
                             <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant?.reviews_count} reviews</GlobalParagraph>
                         </Box>
                     </Box>
-                    <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
+                    <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
-                            <Button variant='contained'>Book Now</Button>
+                            <SwipeDrawer
+                                restaurant_id={parseInt(("" + restaurant?.id) as string)}
+                                addType={'restaurant'}
+                                button={<Button variant='contained'>Book Now</Button>}
+                            />
                         </Box>
                     </Box>
                 </Box>
@@ -107,7 +112,7 @@ const RestaurantDetail: React.FC = () => {
                 <Footer />
             </Box>
         </Stack>
-    )  
+    )
 }
 
 export default RestaurantDetail
