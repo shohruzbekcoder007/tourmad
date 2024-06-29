@@ -25,6 +25,10 @@ class TripHotelService {
     static recommendationTripHotel = () => {
         return getRequest(recommendation_trip_hotel)
     }
+
+    static getHotelDetail = (id: string) => {
+        return getRequest(`${trip_hotel}/${id}`)
+    }
 }
 
 export default TripHotelService

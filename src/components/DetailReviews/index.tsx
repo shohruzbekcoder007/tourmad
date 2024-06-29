@@ -1,9 +1,18 @@
 import { Box, Button, Divider, Pagination, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
-import photo from './../../media/images/users.png';
+import photo from './../../media/images/users.jpg';
+import { newUserType } from '../../utils/response_types';
 
-const DetailReviews: React.FC = () => {
+type ReviewsType = {
+    id: number | null,
+    user: newUserType | null,
+    rate: number | null,
+    review: string | null,
+    avg_rate: number | null | undefined,
+}
+
+const DetailReviews: React.FC <ReviewsType> = ({user, id, review, rate, avg_rate}) => {
   return (
     <Stack mt="48px">
         <Box pb="64px">
@@ -14,7 +23,7 @@ const DetailReviews: React.FC = () => {
             <Button variant='contained'>Give your review</Button>
         </Box>
         <Box display='flex' justifyContent='flex-start' gap="16px" alignItems="center">
-            <GlobalParagraph fontSize='50px' mediafontsize='32px' fontWeight='700'>4.2</GlobalParagraph>
+            <GlobalParagraph fontSize='50px' mediafontsize='32px' fontWeight='700'>{avg_rate}</GlobalParagraph>
             <Box>
                 <GlobalParagraph paddingbottom='8px' fontSize='20px' mediafontsize='16px' fontWeight='600'>Very Good</GlobalParagraph>
                 <GlobalParagraph fontSize='14px' fontWeight='400'>371 verified reviews</GlobalParagraph>

@@ -13,5 +13,19 @@ const room_styles = [
         value: "premium"
     }
 ]
+export default room_styles;
 
-export default room_styles
+export const driver_styles = [
+    {
+        label: "all", 
+        value: "all"
+    },
+    {
+        label: "business", 
+        value: "business"
+    },
+    {
+        label: "comfort", 
+        value: "comfort"
+    }
+]

@@ -16,7 +16,8 @@ const AuthUserInfo: React.FC = () => {
             <>
             <AuthUser>
             <LanguageSelect/>
-                <Link to="sign-in">
+                {/* <Link to="sign-in"> */}
+                <Link to="/sign-in">
                     <Button
                         color="secondary"
                         sx={{

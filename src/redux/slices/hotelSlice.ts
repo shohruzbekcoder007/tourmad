@@ -23,6 +23,11 @@ export interface HotelState {
     hotelPriceTo: number,
     room_style: "basic" | "premium" | "all",
     searchLocation: string | null,
+    hotelDetail: {
+        hotel: RecommendationType | null,
+        status: 'idle' | "loading" | "succeeded" | "failed",
+        error: string | null
+    }
 }
 
 const initialState: HotelState = {
@@ -44,6 +49,11 @@ const initialState: HotelState = {
     hotelPriceTo: 100,
     room_style: "all",
     searchLocation: "",
+    hotelDetail: {
+        hotel: null,
+        status: "idle",
+        error: null
+    }
 }
 
 export const getLoacationList = createAsyncThunk("get-location-hotel",
@@ -95,6 +105,22 @@ export const getTripHotelList = createAsyncThunk('get-trip-hotel-list',
             return rejectWithValue({ message: errorMessage });
         }
     }
+)
+
+export const getHotelDetailInfo = createAsyncThunk('get-hotel-detail',
+async (id: string, { rejectWithValue }) => {
+    try {
+        const response = await TripHotelService.getHotelDetail(id);
+        const hotel_detail: RecommendationType = response.data;
+        return hotel_detail;
+    } catch (error) {
+        let errorMessage = 'Error';
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+        }
+        return rejectWithValue({ message: errorMessage });
+    }
+}
 )
 
 
@@ -185,6 +211,19 @@ export const hotelSlice = createSlice({
                 state.statusHotelList = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
+            .addCase(getHotelDetailInfo.pending, (state) => {
+                state.hotelDetail.status = "loading"
+                state.hotelDetail.error = ''
+            })
+            .addCase(getHotelDetailInfo.fulfilled, (state, action) => {
+                state.hotelDetail.status = "succeeded"
+                state.hotelDetail.hotel = action.payload
+            })
+            .addCase(getHotelDetailInfo.rejected, (state, _) => {
+                state.hotelDetail.status = "failed"
+                state.hotelDetail.error = 'Xatolik yuzaga keldi'
+                // state.error = action.payload?.message || 'Failed to fetch hotel';
+            })
     }
 })
 
@@ -207,5 +246,6 @@ export const getHotelGrade = (state: RootState) => state.hotel.hotelGrade
 export const getHotelPriceFrom = (state: RootState) => state.hotel.hotelPriceFrom
 export const getHotelPriceTo = (state: RootState) => state.hotel.hotelPriceTo
 export const getRoomStyle = (state: RootState) => state.hotel.room_style
+export const getHotelDetail = (state: RootState) => state.hotel.hotelDetail
 
 export default hotelSlice.reducer

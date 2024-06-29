@@ -8,6 +8,8 @@ import commonLocationSlice from './slices/commonLocationSlicer'
 import historySlice from './slices/historySlice'
 import consultingSlice from './slices/consultingSlice'
 import i18nSlice from './slices/i18nSlice'
+import tripSlice from './slices/tripSlice'
+import commonLanguageSlice from './slices/commonLanguage'
 
 const store = configureStore({
   reducer: {
@@ -19,7 +21,9 @@ const store = configureStore({
     commonLocation: commonLocationSlice,
     history: historySlice,
     consulting: consultingSlice,
-    i18n: i18nSlice
+    i18n: i18nSlice,
+    trip: tripSlice,
+    commonlanguage: commonLanguageSlice,
   },
 })
 

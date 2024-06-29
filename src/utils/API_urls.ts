@@ -15,3 +15,14 @@ export const common_location = "common/location"
 export const history_trip_history = "history/trip-history"
 export const consulting_list = "consulting/list"
 export const consulting_category_list = "consulting/categories"
+
+export const trip_restaurant = "trip/trip-restaurant"
+
+export const trip_list = "/trip/trip-list"
+
+export const driver_list = "drive/drivers"
+export const driver_detail= "/drive/driver/"
+
+export const common_language = "common/language"
+
+export const trip_restaurant_oder = "trip/trip-restaurant-oder"

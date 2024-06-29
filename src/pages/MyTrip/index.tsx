@@ -46,7 +46,7 @@ const MyTrip: React.FC = () => {
             <Container>
                 <Box display='flex' alignItems="center" mt={{xl: 0, md: 0, sm: "32px", xs: "32px"}} justifyContent='space-between'>
                     <GlobalParagraph fontSize='32px' fontWeight='700' mediafontsize='18px'>My Trips</GlobalParagraph>
-                    <SwipeDrawer btnText='Create Trip' />
+                    <SwipeDrawer button='Create Trip' />
                 </Box>
                 <Box textAlign='center'>
                     <img src={none_trip} width='300px' alt="" />
