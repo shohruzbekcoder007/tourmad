@@ -1,8 +1,6 @@
 import { Box, Stack } from '@mui/material'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { getHotelLocationList, getLoacationList, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 import { LocationType } from '../../utils/response_types'
 
 type ResentSearchPropsType =  {
@@ -12,16 +10,6 @@ type ResentSearchPropsType =  {
 }
 
 const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch, locationList}) => {
-
-    // const dispatch = useAppDispatch()
-    // const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
-    // const hotelLocationList = useAppSelector(getHotelLocationList)
-
-    // useEffect(() => {
-    //     if (statusLastSearchHotel === 'idle') {
-    //         dispatch(getLoacationList())
-    //     }
-    // }, [statusLastSearchHotel, dispatch])
 
     return (
         <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
@@ -68,7 +56,7 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch,
                                 </Box>
                                 <Box>
                                     <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{location?.name}</GlobalParagraph>
-                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.hotels} places</GlobalParagraph>
+                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.hotels || location?.restaurants || location?.drivers || 0} places</GlobalParagraph>
                                 </Box>
                             </Box>
                         )

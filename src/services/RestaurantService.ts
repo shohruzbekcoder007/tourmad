@@ -1,8 +1,9 @@
 import { RestaurantStateI } from "../redux/slices/restaurantSlice"
-import { recommendation_trip_restaurant, trip_restaurant } from "../utils/API_urls"
+import { location_restaurant, recommendation_trip_restaurant, trip_restaurant } from "../utils/API_urls"
 import { getRequest } from "../utils/request"
 
 class RestaurantService {
+
     static recommendationRestaurant = () => {
         return getRequest(recommendation_trip_restaurant)
     }
@@ -18,6 +19,10 @@ class RestaurantService {
 
     static getRestaurantDetail = (id: string) => {
         return getRequest(`${trip_restaurant}/${id}`)
+    }
+
+    static locationRestaurants = () => {
+        return getRequest(location_restaurant)
     }
 }
 

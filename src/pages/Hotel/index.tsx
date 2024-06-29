@@ -14,6 +14,8 @@ const Hotel: React.FC = () => {
     const navigate = useNavigate();
     const statusLastRecommendationHotel = useAppSelector(getStatusLastRecommendationHotel)
     const hotelRecommendationList = useAppSelector(getHotelRecommendationList)
+    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
+    const hotelLocationList = useAppSelector(getHotelLocationList)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -21,9 +23,6 @@ const Hotel: React.FC = () => {
             dispatch(getRecommendationTripHotel())
         }
     }, [statusLastRecommendationHotel, dispatch])
-
-    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
-    const hotelLocationList = useAppSelector(getHotelLocationList)
 
     useEffect(() => {
         if (statusLastSearchHotel === 'idle') {

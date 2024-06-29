@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import DriverService from "../../services/DriverService";
 import { AxiosError } from "axios";
-import { DriveDetailType, DriverType, RecommendationType, ReviewsType } from "../../utils/response_types";
+import { DriveDetailType, DriverType, LocationType, RecommendationType, ReviewsType } from "../../utils/response_types";
 
 export interface DriverState {
     statusLastRecommendationDriver: "idle" | "loading" | "succeeded" | "failed",
@@ -32,7 +32,9 @@ export interface DriverState {
         review: ReviewsType [] | null,
         reviewCurrentPage: number,
         reviewTotelPage: number,
-    }
+    },
+    locationList: LocationType[] | null,
+    statusLastSearchDriver: 'idle' | "loading" | "succeeded" | "failed",
 }
 
 const initialState: DriverState = {
@@ -63,7 +65,9 @@ const initialState: DriverState = {
         review: null,
         reviewCurrentPage: 1,
         reviewTotelPage: 1,
-    }
+    },
+    locationList: [],
+    statusLastSearchDriver: "idle",
 }
 
 export const getRecommendationDriverList = createAsyncThunk('recommendation-trip-driver',
@@ -117,7 +121,21 @@ export const getDriverDetailAction = createAsyncThunk('driver-detail',
     }
 )
 
-
+export const getLoacationList = createAsyncThunk("get-location-driver",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await DriverService.locationDrivers();
+            const location_list: LocationType[] = response.data?.results;
+            return location_list;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
 
 export const driverSlice = createSlice({
     name: 'driver',
@@ -208,6 +226,24 @@ export const driverSlice = createSlice({
                 state.driveDetail.driver = action?.payload
                 state.driveDetail.status = 'succeeded'
             })
+            .addCase(getLoacationList.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.statusLastSearchDriver = "loading"
+            })
+            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<LocationType[]>) => {
+                state.loading = false
+                let locationList = action?.payload
+                console.log(locationList, "<-- shuda")
+                state.statusLastSearchDriver = "succeeded"
+                state.locationList = locationList
+                state.error = null
+            })
+            .addCase(getLoacationList.rejected, (state, _) => {
+                state.loading = false
+                state.statusLastSearchDriver = "failed"
+                // state.error = action.payload?.message || 'Failed to fetch user';
+            })
     }
 })
 
@@ -230,5 +266,7 @@ export const getDriverCurrentPage = (state: RootState) => state.driver.driverCur
 export const getDriverTotalPage = (state: RootState) => state.driver.driverTotalPage;
 export const getDriversStyle = (state: RootState) => state.driver.driversStyle;
 export const getDriverDetail = (state: RootState) => state.driver.driveDetail;
+export const getLocationList = (state: RootState) => state.driver.locationList;
+export const getStatusLastSearchDriver = (state: RootState) => state.driver.statusLastSearchDriver;
 
 export default driverSlice.reducer

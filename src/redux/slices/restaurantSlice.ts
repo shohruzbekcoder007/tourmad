@@ -1,10 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RecommendationType, RestaurantDetailType, RestaurantType } from "../../utils/response_types";
+import { LocationType, RecommendationType, RestaurantDetailType, RestaurantType } from "../../utils/response_types";
 import RestaurantService from "../../services/RestaurantService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
 
 export interface RestaurantStateI {
+    statusLastSearchRestaurant: 'idle' | "loading" | "succeeded" | "failed",
     statusLastRecommendationRestaurant: 'idle' | "loading" | "succeeded" | "failed",
     statusRestaurantList: 'idle' | "loading" | "succeeded" | "failed",
     restaurantRecommendationList: RecommendationType[] | null
@@ -12,6 +13,7 @@ export interface RestaurantStateI {
     message: string,
     showMessage: boolean,
     error: null,
+    locationList: LocationType[] | null,
     restaurantList: RestaurantType[] | null,
     restaurantListPageSize: number,
     restaurantListCurrentPage: number,
@@ -26,6 +28,7 @@ export interface RestaurantStateI {
 };
 
 const initialState: RestaurantStateI = {
+    statusLastSearchRestaurant: "idle",
     statusLastRecommendationRestaurant: "idle",
     statusRestaurantList: "idle",
     loading: false,
@@ -33,6 +36,7 @@ const initialState: RestaurantStateI = {
     showMessage: false,
     restaurantRecommendationList: [],
     error: null,
+    locationList: [],
     restaurantList: [],
     restaurantListPageSize: 8,
     restaurantListCurrentPage: 1,
@@ -87,6 +91,22 @@ export const getRestaurantDetailInfo = createAsyncThunk('get-restaurant-detail',
             const response = await RestaurantService.getRestaurantDetail(id);
             const restaurant_detail: RestaurantDetailType = response.data;
             return restaurant_detail;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getLoacationList = createAsyncThunk("get-location-restaurant",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await RestaurantService.locationRestaurants();
+            const location_list: LocationType[] = response.data?.results;
+            return location_list;
         } catch (error) {
             let errorMessage = 'Error';
             if (error instanceof AxiosError && error.response?.data?.message) {
@@ -162,6 +182,23 @@ export const restaurantSlice = createSlice({
                 state.restaurantDetail.error = 'Xatolik yuzaga keldi'
                 // state.error = action.payload?.message || 'Failed to fetch hotel';
             })
+            .addCase(getLoacationList.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.statusLastSearchRestaurant = "loading"
+            })
+            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<LocationType[]>) => {
+                state.loading = false
+                let locationList = action?.payload
+                state.locationList = locationList
+                state.error = null
+                state.statusLastSearchRestaurant = "succeeded"
+            })
+            .addCase(getLoacationList.rejected, (state, _) => {
+                state.loading = false
+                state.statusLastSearchRestaurant = "failed"
+                // state.error = action.payload?.message || 'Failed to fetch user';
+            })
     }
 })
 
@@ -182,6 +219,8 @@ export const getRestaurantListCurrentPage = (state: RootState) => state.restaura
 export const getRestaurantListTotalPages = (state: RootState) => state.restaurant.restaurantListTotalPages;
 export const getStatusRestaurantList = (state: RootState) => state.restaurant.statusRestaurantList
 export const getRestaurantDetail = (state: RootState) => state.restaurant.restaurantDetail
+export const getLocationList = (state: RootState) => state.restaurant.locationList;
+export const getStatusLastSearchRestaurant = (state: RootState) => state.restaurant.statusLastSearchRestaurant;
 
 
 export default restaurantSlice.reducer

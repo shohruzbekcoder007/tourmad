@@ -16,7 +16,9 @@ export type LocationType = {
     name: string | null,
     parent: number | null,
     photo: string | null,
-    hotels?: number | null
+    hotels?: number | null,
+    restaurants?: number | null,
+    drivers: number | null
 }
 
 export type UserType = {
