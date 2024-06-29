@@ -12,6 +12,11 @@ import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailMap from '../../components/DetailMap';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
+import { getRestaurantDetail, getRestaurantDetailInfo } from '../../redux/slices/restaurantSlice';
+import SwipeDrawer from '../../components/SwipeDrawer';
 // import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -21,6 +26,15 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 
 const RestaurantDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+    const { restaurant } = useAppSelector(getRestaurantDetail);
+
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        dispatch(getRestaurantDetailInfo(id as string))
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,39 +66,44 @@ const RestaurantDetail: React.FC = () => {
                     <div role="presentation" onClick={handleClick}>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link underline="hover" color="inherit" href="/">
-                                Toshkent
+                                {restaurant?.location?.name}
                             </Link>
-                            <Typography color="text.primary">BeyOglu</Typography>
+                            <Typography color="text.primary">{restaurant?.name}</Typography>
                         </Breadcrumbs>
                     </div>
                 </Box>
                 <Box pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
                     <Box>
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
-                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>CVK Park Bosphorus Hotel Istanbul</WelcomeMainText>
+                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>{restaurant?.name}</WelcomeMainText>
                         </Box>
                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                             <LocationOnIcon />
-                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">Toshkent</GlobalParagraph>
+                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">{restaurant?.location?.name}</GlobalParagraph>
                         </Box>
                         <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
-                            <Button variant="outlined">4.2</Button>
+                            <Button variant="outlined">{restaurant?.rate}</Button>
                             <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
-                            <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph>
+                            <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant?.reviews_count} reviews</GlobalParagraph>
                         </Box>
                     </Box>
-                    <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
-                        <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/night</GlobalParagraph>
+                    <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
-                            <Button variant='contained'>Book Now</Button>
+                            <SwipeDrawer
+                                restaurant_id={parseInt(("" + restaurant?.id) as string)}
+                                addType={'restaurant'}
+                                button={<Button variant='contained'>Book Now</Button>}
+                            />
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner bgimage='' />
-                <DetailDescription />
-                <DetailMap />
+                <DetailBanner bgimage={`${restaurant?.banner}`} />
+                <DetailDescription>
+                    {parse((restaurant?.body as string) || "")}
+                </DetailDescription>
+                <DetailMap longitude={restaurant?.longitude} latitude={restaurant?.latitude} />
                 {/* <DetailReviews />    */}
             </Container>
             <Box
@@ -93,7 +112,7 @@ const RestaurantDetail: React.FC = () => {
                 <Footer />
             </Box>
         </Stack>
-    )  
+    )
 }
 
 export default RestaurantDetail

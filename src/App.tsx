@@ -52,7 +52,7 @@ const App: React.FC = () => {
       <MuiTheme theme={lightTheme}>
         <CssBaseline />
         <ThemeProvider theme={theme}>
-          <Routes>
+          {/* <Routes>
             <Route path="/" element={<Main/>}>
               <Route index element={<Welcome/>}/>
               <Route path='consulting' element={<Consulting/>}/>
@@ -65,18 +65,21 @@ const App: React.FC = () => {
               <Route path='hotel-detail' element={<HotelDetail />} >
               <Route path=':id' element={<HotelDetail />} />
               </Route>
-              <Route path='restaurant-filter' element={<ReataurantFilter />} />
-              <Route path='restaurant-detail' element={<ReataurantDetail />} />
-              <Route path='drive-filter' element={<DriveFilter />} />
-              <Route path='drive-detail' element={<DriveDetail />} />
-              {/* <Route path='history' element={<History />} /> */}
-              {/* <Route path='history-detail' element={<HistoryDetail />} /> */}
-              <Route path='plan-detail' element={<PlanDetail />} />
-              <Route path='plan-filter' element={<PlanFilter />} />
-              <Route path='my-trip' element={<MyTrip />} />
-              <Route path='trip-detail' element={<TripDetail />} />
-              <Route path='my-driver' element={<MyDriver />} />
-              <Route path='my-driver-detail' element={<MyDriverDetail />} >
+            </Route>
+            <Route path='restaurant-filter' element={<ReataurantFilter />} />
+            <Route path='restaurant-detail'>
+              <Route path=':id' element={<ReataurantDetail />} />
+            </Route>
+            <Route path='drive-filter' element={<DriveFilter />} />
+            <Route path='drive-detail' element={<DriveDetail />} />
+            <Route path='history' element={<History />} />
+            <Route path='history-detail' element={<HistoryDetail />} />
+            <Route path='plan-detail' element={<PlanDetail />} />
+            <Route path='plan-filter' element={<PlanFilter />} />
+            <Route path='my-trip' element={<MyTrip />} />
+            <Route path='trip-detail' element={<TripDetail />} />
+            <Route path='my-driver' element={<MyDriver />} />
+            <Route path='my-driver-detail'>
               <Route path=':id'  element={<MyDriverDetail />} />
               </Route>
               <Route path="protected" element={<Protected/>}>
@@ -101,68 +104,65 @@ const App: React.FC = () => {
             <Route path="forgot-password" element={<ForgotPassword/>}/>
             <Route path="verify" element={<Verify/>}/>
             <Route path='*' element={<Error/>}/>
-          </Routes>
+          </Routes> */}
+           <Routes>
+          <Route path="/" element={<Main />}>
+            <Route index element={<Welcome />} />
+            <Route path='consulting' element={<Consulting />} />
+            <Route path='consulting-detail' element={<ConsultingDetail />} />
+            <Route index element={<Welcome />} />
+            <Route path='history' element={<History />} />
+            <Route path='history-detail'>
+              <Route path=':id' element={<HistoryDetail />} />
+            </Route>
+            <Route path="public" element={<Welcome/>}/>
+            <Route path='hotel-filter' element={<HotelFilter />} />
+            <Route path='hotel-detail'>
+              <Route path=':id' element={<HotelDetail />} />
+            </Route>
+            <Route path='restaurant-filter' element={<ReataurantFilter />} />
+            <Route path='restaurant-detail'>
+              <Route path=':id' element={<ReataurantDetail />} />
+            </Route>
+            <Route path='drive-filter' element={<DriveFilter />} />
+            <Route path='drive-detail' element={<DriveDetail />} />
+            <Route path='history' element={<History />} />
+            <Route path='history-detail' element={<HistoryDetail />} />
+            <Route path='plan-detail' element={<PlanDetail />} />
+            <Route path='plan-filter' element={<PlanFilter />} />
+            <Route path='my-trip' element={<MyTrip />} />
+            <Route path='trip-detail' element={<TripDetail />} />
+            <Route path='my-driver' element={<MyDriver />} />
+            <Route path='my-driver-detail'>
+              <Route path=':id'  element={<MyDriverDetail />} />
+            </Route>
+            <Route path="protected" element={<Protected/>}>
+              <Route index element={<Navigate to="hotel"/>}/>
+              <Route path="hotel" element={<Hotel/>} />
+              <Route path="ticket" element={<Ticket/>}/>
+              <Route path="restaurant" element={<Restaurant/>}/>
+              <Route path="drive" element={<Drive/>}/>
+              <Route path="plan" element={<Plan/>}/>
+              <Route path='favourites' element={<Favourites/>}/>
+            </Route>
+          </Route>
+          <Route path="users" element={<Users />}>
+            <Route index element={<UserAccount />} />
+            <Route path='users-account' element={<UserAccount />} />
+            <Route path='users-History' element={<UserHistory />} />
+            <Route path='users-payment' element={<p>Users Payments</p>} />
+          </Route>
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="set-password" element={<SetPassword />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="verify" element={<Verify />} />
+          <Route path='*' element={<Error />} />
+        </Routes>
         </ThemeProvider>
       </MuiTheme>
     </I18nextProvider>
 
-    // <MuiTheme theme={lightTheme}>
-    //   <CssBaseline />
-    //   <ThemeProvider theme={theme}>
-    //     <Routes>
-    //       <Route path="/" element={<Main />}>
-    //         <Route index element={<Welcome />} />
-    //         <Route path='consulting' element={<Consulting />} />
-    //         <Route path='consulting-detail' element={<ConsultingDetail />} />
-    //         <Route index element={<Welcome />} />
-    //         <Route path='history' element={<History />} />
-    //         <Route path='history-detail'>
-    //           <Route path=':id' element={<HistoryDetail />} />
-    //         </Route>
-    //         <Route path="public" element={<Welcome/>}/>
-    //         <Route path='hotel-filter' element={<HotelFilter />} />
-    //         <Route path='hotel-detail'>
-    //           <Route path=':id' element={<HotelDetail />} />
-    //         </Route>
-    //         <Route path='restaurant-filter' element={<ReataurantFilter />} />
-    //         <Route path='restaurant-detail' element={<ReataurantDetail />} />
-    //         <Route path='drive-filter' element={<DriveFilter />} />
-    //         <Route path='drive-detail' element={<DriveDetail />} />
-    //         <Route path='history' element={<History />} />
-    //         <Route path='history-detail' element={<HistoryDetail />} />
-    //         <Route path='plan-detail' element={<PlanDetail />} />
-    //         <Route path='plan-filter' element={<PlanFilter />} />
-    //         <Route path='my-trip' element={<MyTrip />} />
-    //         <Route path='trip-detail' element={<TripDetail />} />
-    //         <Route path='my-driver' element={<MyDriver />} />
-    //         <Route path='my-driver-detail'>
-    //           <Route path=':id'  element={<MyDriverDetail />} />
-    //         </Route>
-    //         <Route path="protected" element={<Protected/>}>
-    //           <Route index element={<Navigate to="hotel"/>}/>
-    //           <Route path="hotel" element={<Hotel/>} />
-    //           <Route path="ticket" element={<Ticket/>}/>
-    //           <Route path="restaurant" element={<Restaurant/>}/>
-    //           <Route path="drive" element={<Drive/>}/>
-    //           <Route path="plan" element={<Plan/>}/>
-    //           <Route path='favourites' element={<Favourites/>}/>
-    //         </Route>
-    //       </Route>
-    //       <Route path="users" element={<Users />}>
-    //         <Route index element={<UserAccount />} />
-    //         <Route path='users-account' element={<UserAccount />} />
-    //         <Route path='users-History' element={<UserHistory />} />
-    //         <Route path='users-payment' element={<p>Users Payments</p>} />
-    //       </Route>
-    //       <Route path="sign-in" element={<SignIn />} />
-    //       <Route path="sign-up" element={<SignUp />} />
-    //       <Route path="set-password" element={<SetPassword />} />
-    //       <Route path="forgot-password" element={<ForgotPassword />} />
-    //       <Route path="verify" element={<Verify />} />
-    //       <Route path='*' element={<Error />} />
-    //     </Routes>
-    //   </ThemeProvider>
-    // </MuiTheme>
   );
 }
 

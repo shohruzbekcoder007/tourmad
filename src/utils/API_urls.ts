@@ -26,3 +26,6 @@ export const driver_detail= "/drive/driver/"
 export const common_language = "common/language"
 
 export const trip_restaurant_oder = "trip/trip-restaurant-oder"
+
+export const location_restaurant = "/common/location-restaurant"
+export const location_drive = "common/location-drive"

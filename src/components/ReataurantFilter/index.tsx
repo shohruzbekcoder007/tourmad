@@ -166,7 +166,7 @@ const RestaurantFilter: React.FC = () => {
                                                                 <FavoriteBorderIcon />
                                                             </Button>
                                                             <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
-                                                                <Button onClick={() => navigate("/restaurant-detail")} variant="contained" fullWidth>
+                                                                <Button onClick={() => navigate(`/restaurant-detail/${restaurant.id}`)} variant="contained" fullWidth>
                                                                     View Deals
                                                                 </Button>
                                                             </Box>

@@ -16,7 +16,9 @@ export type LocationType = {
     name: string | null,
     parent: number | null,
     photo: string | null,
-    hotels?: number | null
+    hotels?: number | null,
+    restaurants?: number | null,
+    drivers: number | null
 }
 
 export type UserType = {
@@ -193,3 +195,19 @@ export type DriveDetailType = {
     location: CommonLocationType | null,
   }
   
+
+export type RestaurantDetailType = {
+    id: number | null,
+    location: LocationType | null,
+    banner: string | null,
+    card: string | null,
+    name: string | null,
+    desc: string | null,
+    body: string | null,
+    longitude: number | null,
+    latitude: number | null,
+    rate: number | null,
+    grade: number | null,
+    gallery: GalleryType[] | null,
+    reviews_count: number | null,
+}
