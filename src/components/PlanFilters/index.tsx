@@ -1,4 +1,4 @@
-import { Box, Button,  Pagination, Paper, Stack } from '@mui/material'
+import { Box, Button,  Pagination, Paper, Stack, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { WelcomeMainText } from '../../global_styles/styles'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -9,31 +9,60 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HotelFilterCard from '../HotelFilterCard';
 import { useNavigate } from 'react-router-dom';
 import PlanCategory from '../PlanCategory';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer';
+import { changePage, getCategoryPlanList, getPlanCategoryList, getPlanListCurrentPage, getPlanListTotalPages, getStatusPlanCategory } from '../../redux/slices/planSliser';
 
 type Option = {
     label: string,
     value: string
 }
 
-const RestaurantFilter: React.FC = () => {
+const PlanFilter: React.FC = () => {
     const [from, setFrom] = useState<Option | null>(null)
-    const navigate = useNavigate()
+    const [text, setText] = useState<string>("")
 
-    const options: Option[] = [
-        { label: 'The Shawshank Redemption', value: "1994" },
-        { label: 'The Godfather', value: "1972" },
-        { label: 'The Godfather: Part II', value: "1974" },
-        { label: 'The Dark Knight', value: "2008" },
-        { label: '12 Angry Men', value: "1957" },
-        { label: "Schindler's List", value: "1993" },
-        { label: 'Pulp Fiction', value: "1994" },
-    ]
+    const navigate = useNavigate()
+    const statusCommonLocation = useAppSelector(getStatusCommonLocation)
+    const commonLocationList = useAppSelector(getCommonLocations)
+
+    const statusCategory = useAppSelector(getStatusPlanCategory)
+    const categoryList = useAppSelector(getPlanCategoryList)
+
+    
+    const planListTotalPages = useAppSelector(getPlanListTotalPages)
+    const planListCurrentPage = useAppSelector(getPlanListCurrentPage)
+
+    const dispatch = useAppDispatch()
+    const changePageHandler = (page: number) => {
+        dispatch(changePage(page))
+    }
 
     useEffect(() => { }, [from]) //for error fixed
+    useEffect(() => {
+        if (statusCommonLocation === 'idle') {
+            dispatch(getCommonLocationList())
+        }
+    }, [statusCommonLocation, dispatch])
+
+    useEffect(() => {
+        if (statusCategory === 'idle') {
+            dispatch(getCategoryPlanList())
+        }
+    }, [statusCategory, dispatch])
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
     }
+
+    const filterLocation = commonLocationList?.filter((item) => {
+        return item.parent !== null
+    })
+
+    const newOption: Option[] | undefined = filterLocation?.map((item) => {
+        return { label: item.name, value: "" + item.id }
+    })
+
 
     return (
         <Stack mt='40px'>
@@ -57,19 +86,14 @@ const RestaurantFilter: React.FC = () => {
                 >
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
-                            options={options}
+                            options={newOption === undefined ? [] : newOption}
                             placeholder="Location"
                             getChange={getChangeOptionFrom}
                             icon={<LocationOnIcon />}
                         />
                     </Box>
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
-                        <CustomAutocomplete
-                            options={options}
-                            placeholder="Restaurant Name"
-                            getChange={getChangeOptionFrom}
-                            icon={<RestaurantIcon />}
-                        />
+                        <TextField value={text} onChange={e => {setText(e.target.value)}} fullWidth id="outlined-basic" label="Plan Name" variant="outlined" />
                     </Box>
                     <Box mt="16px" width={{ xl: '56px', md: '56px', sm: '56px', xs: "100%" }}>
                         <Button sx={{ height: '56px' }} fullWidth variant='contained'>
@@ -78,15 +102,16 @@ const RestaurantFilter: React.FC = () => {
                     </Box>
                 </Box>
             </Paper>
-            <PlanCategory />
+            <PlanCategory dataCategory={categoryList || []} />
             <Box width='100%'>
                 <HotelFilterCard />
             </Box>
             <Box display="flex" justifyContent="flex-end">
-                <Pagination count={10} color="primary" />
+                <Pagination count={planListTotalPages} page={planListCurrentPage} color="primary" onChange={(_, page) => { changePageHandler(page) }} />
+
             </Box>
         </Stack>
     )
 }
 
-export default RestaurantFilter
+export default PlanFilter

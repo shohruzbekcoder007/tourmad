@@ -158,8 +158,8 @@ const HistoryService: React.FC = () => {
                                         <Box width="100%">
                                             <Box pb="16px" width="100%" display="flex" justifyContent="space-between" alignItems="flex-end">
                                                 <Box>
-                                                    <GlobalParagraph fontSize='24px' fontWeight='600' mediafontsize='18px' color='neutrals'>{history.location?.name}</GlobalParagraph>
-                                                    <GlobalParagraph fontSize='14px' fontWeight='400' mediafontsize='12px' color='neutrals'>{history.title}</GlobalParagraph>
+                                                    <GlobalParagraph fontSize='24px' fontWeight='600' mediafontsize='18px' color='neutrals'>{history?.name}</GlobalParagraph>
+                                                    <GlobalParagraph fontSize='14px' fontWeight='400' mediafontsize='12px' color='neutrals'>{history?.desc}</GlobalParagraph>
                                                 </Box>
                                             </Box>
                                             <Button sx={{ height: "48px" }} fullWidth variant='contained' onClick={() => navigate("/history-detail")}>View History</Button>

@@ -22,3 +22,7 @@ export const driver_list = "drive/drivers"
 export const driver_detail= "/drive/driver/"
 
 export const common_language = "common/language"
+
+export const recommendation_trip_palan = "trip/recommendation-trip-plan"
+export const history_trip_category = "history/trip-category"
+export const trip_history_or_place = "history/trip-history-or-place"

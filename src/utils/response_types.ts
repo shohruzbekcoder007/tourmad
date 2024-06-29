@@ -1,3 +1,5 @@
+import exp from "constants"
+
 export type GalleryType = {
     id: number | null,
     image: string | null
@@ -71,9 +73,11 @@ export type HistoryOrPlaceCategryType = {
 
 export type HistoryType = {
     id: number | null,
-    title: string | null,
+    name: string | null,
+    desc: string | null,
     banner: string | null,
     card: string | null,
+    galleryType: GalleryType[] | null,
     category: HistoryOrPlaceCategryType | null,
     body: string | null,
     audio: string | null,
@@ -192,4 +196,17 @@ export type RestaurantDetailType = {
     grade: number | null,
     gallery: GalleryType[] | null,
     reviews_count: number | null,
+}
+
+export type RecommendationPlanType = {
+    id: number | null,
+    location: LocationType | null,
+    category: HistoryOrPlaceCategryType | null,
+    banner: string | null,
+    card: string | null,
+    name: string | null,
+    body: string | null,
+    audio: string | null,
+    longitude: number | null,
+    latitude: number | null
 }
