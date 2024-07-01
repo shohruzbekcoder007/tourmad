@@ -95,6 +95,23 @@ export const getTripPlanList = createAsyncThunk('get-trip-plan-list',
 )
 
 
+// export const getPlanDetailInfo = createAsyncThunk('get-plan-detail',
+//     async (id: string, { rejectWithValue }) => {
+//         try {
+//             const response = await PlanService.getPlanDetail(id);
+//             const plan_detail: RestaurantDetailType = response.data;
+//             return plan_detail;
+//         } catch (error) {
+//             let errorMessage = 'Error';
+//             if (error instanceof AxiosError && error.response?.data?.message) {
+//                 errorMessage = error.response.data.message;
+//             }
+//             return rejectWithValue({ message: errorMessage });
+//         }
+//     }
+// )
+
+
 export const planSlice = createSlice({
     name: 'plan',
     initialState,

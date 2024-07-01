@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import PlanCategory from '../PlanCategory';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer';
-import { changePage, getCategoryPlanList, getPlanCategoryList, getPlanListCurrentPage, getPlanListTotalPages, getStatusPlanCategory } from '../../redux/slices/planSliser';
+import { changePage, changeSearchLocation, getCategoryPlanList, getPlanCategoryList, getPlanListCurrentPage, getPlanListTotalPages, getStatusPlanCategory } from '../../redux/slices/planSliser';
 
 type Option = {
     label: string,
@@ -44,6 +44,7 @@ const PlanFilter: React.FC = () => {
             dispatch(getCommonLocationList())
         }
     }, [statusCommonLocation, dispatch])
+
 
     useEffect(() => {
         if (statusCategory === 'idle') {
@@ -96,7 +97,17 @@ const PlanFilter: React.FC = () => {
                         <TextField value={text} onChange={e => {setText(e.target.value)}} fullWidth id="outlined-basic" label="Plan Name" variant="outlined" />
                     </Box>
                     <Box mt="16px" width={{ xl: '56px', md: '56px', sm: '56px', xs: "100%" }}>
-                        <Button sx={{ height: '56px' }} fullWidth variant='contained'>
+                        <Button
+                            sx={{ height: '56px' }}
+                            fullWidth
+                            variant='contained'
+                            onClick={() => {
+                                dispatch(changeSearchLocation({
+                                    location: from?.value,
+                                    search: text
+                                }))
+                              }}
+                            >
                             <SearchIcon />
                         </Button>
                     </Box>

@@ -67,7 +67,7 @@ const HotelFilterCard: React.FC = () => {
                             <FavoriteBorderIcon />
                           </Button>
                           <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
-                            <Button onClick={() => navigate("/restaurant-detail")} variant="contained" fullWidth>
+                            <Button onClick={() => navigate(`/plan-detail/${plan.id}`)} variant="contained" fullWidth>
                               View Deals
                             </Button>
                           </Box>

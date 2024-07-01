@@ -72,7 +72,9 @@ const App: React.FC = () => {
             <Route path='drive-detail' element={<DriveDetail />} />
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail />} />
-            <Route path='plan-detail' element={<PlanDetail />} />
+            <Route path='plan-detail'>
+              <Route path=':id' element={<PlanDetail />} />
+            </Route>
             <Route path='plan-filter' element={<PlanFilter />} />
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />

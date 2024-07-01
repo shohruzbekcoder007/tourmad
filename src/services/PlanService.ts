@@ -21,9 +21,9 @@ class PlanService {
 
     }
 
-    // static getPlanDetail = (id: string) => {
-    //     return getRequest(`${trip_restaurant}/${id}`)
-    // }
+    static getPlanDetail = (id: string) => {
+        return getRequest(`${trip_history_or_place}/${id}`)
+    }
 }
 
 export default PlanService
