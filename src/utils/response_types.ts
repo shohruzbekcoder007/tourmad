@@ -171,4 +171,10 @@ export type DriveDetailType = {
     rate: number | null,
     review: string | null
   }
+
+  export type HomeBannerType = {
+    banner: string | null,
+    history: string | null,
+    hotels: string | null,
+  }
   

@@ -22,3 +22,5 @@ export const my_driver_review= '/drive/reviews/'
 export const drive_client_review= '/drive/client-review/'
 
 export const common_language = "common/language"
+
+export const home_banner = "/home/images/"

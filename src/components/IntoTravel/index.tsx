@@ -49,8 +49,8 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({data, daily}) => {
                                             </Box>
                                             {
                                                 daily?
-                                                (item?.price)?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph>:<></>:
-                                                (item?.room_style)?<GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price} $</GlobalParagraph>:<></>
+                                                (item?.price)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>day/ {item?.price}$</GlobalParagraph>:<></>:
+                                                (item?.room_style)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price}$</GlobalParagraph>:<></>
                                             }
                                         </Box>
                                         <Button sx={{ height: "48px" }} fullWidth variant='contained'>Book a Hotel</Button>

@@ -1,6 +1,5 @@
 import { Stack } from '@mui/material'
 import React from 'react'
-import detail_banner_img from "./../../media/images/detail-banner-photo.jpg";
 import { useAppSelector } from '../../redux/hooks';
 import { getDriverDetail } from '../../redux/slices/driverSliser';
 import ImgListDrawer from '../ImgListDrawer';
@@ -15,7 +14,7 @@ const DriverDetailBanner: React.FC<PropsType> = (props) => {
 
   return (
     <Stack width="100%" position="relative">
-        <img src={props?.bgimage||detail_banner_img} width="100%" style={{objectFit: "cover", borderRadius: "12px"}} alt="" />
+        <img src={props?.bgimage||""} width="100%" style={{objectFit: "cover", borderRadius: "12px"}} alt="" />
         <ImgListDrawer
         name={`${driverDetail.driver?.user?.first_name} ${driverDetail.driver?.user?.last_name}`} galeryList={driverDetail.driver?.galleries?.map((item)=>{
           return {

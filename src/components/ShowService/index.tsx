@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { Container, GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
-import ShowFlight from "./../../media/images/Rectangle 40.png";
 import ShowHotels from "./../../media/images/Rectangle 41.png";
 import { Box, Button, Grid } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { getHomeBanner, getHomeBannerPhotos } from "../../redux/slices/homeSlice";
+import { useNavigate } from "react-router-dom";
 
 const ShowService: React.FC = () => {
+    const navigate = useNavigate()
+    const homeBanner = useAppSelector(getHomeBannerPhotos)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getHomeBanner())
+    },[])
+    
     return (
         <Container>
             <Box pb="70px">
                 <Grid container spacing={2}>
                     <Grid item xl={6} md={6} sm={6} xs={12}>
                            <Box sx={{ 
-                                backgroundImage: `url("${ShowFlight}")`,
+                                backgroundImage: `url("${homeBanner.banner?.history}")`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 borderRadius: "20px",
@@ -25,19 +36,19 @@ const ShowService: React.FC = () => {
                                 sx={{height: "100%", background: "linear-gradient(180deg, #00000017, #00000073)"}}>
                                 <Box textAlign="center">
                                         <WelcomeMainText fontSize="40px" paddingbottom="8px">
-                                            Flights
+                                            History
                                         </WelcomeMainText>
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
-                                            Search Flights & Places Hire to our most popular <br/> destinations
+                                            The study of history helps people to deepen their understanding of their own culture and relationships.
                                         </GlobalParagraph>
-                                        <Button  variant="contained" startIcon={<TelegramIcon />}>Show Filghts</Button>
+                                        <Button onClick={() => navigate("/history")}  variant="contained" startIcon={<TelegramIcon />}>Show History</Button>
                                     </Box>
                                </Box>
                            </Box> 
                     </Grid>
                     <Grid item xl={6} md={6} sm={6} xs={12}>
                            <Box  sx={{ 
-                                backgroundImage: `url("${ShowHotels}")`,
+                                backgroundImage: `url("${homeBanner.banner?.hotels}")`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 borderRadius: "20px",
@@ -55,7 +66,7 @@ const ShowService: React.FC = () => {
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
                                             Search hotels & Places Hire to our most popular <br/> destinations
                                         </GlobalParagraph>
-                                        <Button variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>
+                                        <Button onClick={() => navigate("/hotel-filter")} variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>
                                     </Box>
                                 </Box>
                            </Box> 
