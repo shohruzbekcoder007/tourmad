@@ -55,15 +55,15 @@ const ResponsiveMenu: React.FC = () => {
             <img src={Logo} width="120px" alt="" />
         </Box>
       <List>
-          <ListItem disablePadding>
+          <ListItem disablePadding onClick={() => navigate('/protected/hotel')}>
             <ListItemButton>
               <ListItemIcon>
                 <AirplaneTicketIcon />
               </ListItemIcon>
-              <ListItemText primary="Trip Advisor" />
+              <ListItemText primary="Trip Advisor"  />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding onClick={() => navigate('/my-driver')}>
             <ListItemButton>
               <ListItemIcon>
                 <LocalTaxiIcon />
@@ -71,7 +71,7 @@ const ResponsiveMenu: React.FC = () => {
               <ListItemText primary="My Driver" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding onClick={() => navigate('/consulting')}>
             <ListItemButton>
               <ListItemIcon>
                 <ManageAccountsIcon />
@@ -79,7 +79,7 @@ const ResponsiveMenu: React.FC = () => {
               <ListItemText primary="Consulting" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding onClick={() => navigate('/history')}>
             <ListItemButton>
               <ListItemIcon>
                 <CastleIcon />
