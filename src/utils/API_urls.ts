@@ -4,15 +4,17 @@ export const login: string = 'accounts/login/'
 export const token_refresh: string = 'accounts/TokenRefresh/'
 export const me: string = 'accounts/me/'
 
-export const trip_hotel = "trip/trip-hotel"
-export const trip_hotel_oder = "trip/trip-hotel-oder"
-export const location_hotel = "common/location-hotel"
-export const recommendation_trip_hotel = "trip/recommendation-trip-hotel"
+export const trip_hotel: string = "trip/trip-hotel"
+export const trip_hotel_oder: string = "trip/trip-hotel-oder"
+export const location_hotel: string = "common/location-hotel"
+export const recommendation_trip_hotel: string = "trip/recommendation-trip-hotel"
 
 export const recommendation_trip_restaurant = "trip/recommendation-trip-restaurant"
 export const recommendation_trip_drive = "/trip/recommendation-trip-drive"
 export const common_location = "common/location"
 export const history_trip_history = "history/trip-history"
+export const consulting_list = "consulting/list"
+export const consulting_category_list = "consulting/categories"
 
 export const trip_restaurant = "trip/trip-restaurant"
 

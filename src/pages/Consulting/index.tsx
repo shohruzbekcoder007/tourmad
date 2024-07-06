@@ -5,8 +5,11 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Box, Button } from "@mui/material";
 import { HeaderWrapper } from "../../components/Header/styles";
 import BannerMain from "../../components/BannerMain";
+import consultingbannerimage from '../../media/images/consulting-banner.jpeg'
+import { useNavigate } from "react-router-dom";
 const Consulting: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+    const navigate = useNavigate()
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY <= 400) {
@@ -32,12 +35,12 @@ const Consulting: React.FC = () => {
                 }
             </Container>
         </HeaderWrapper>
-            <BannerMain bgimage='https://media.istockphoto.com/id/1213916289/photo/ancient-city-walls-of-khiva-uzbekistan-in-sunset-twilight.jpg?s=612x612&w=0&k=20&c=Ey6m_BCjsI1PsO7WzZYouN0dQPMJKKrsKydm5OX0E44=' heightprops="400px"
+            <BannerMain bgimage={consultingbannerimage} heightprops="400px"
                 bannersubtitle="Turizm Biznesingizni Rivojlantirishda Bizning Konsalting Xizmatlarimizdan Foydalaning" bannertitle="Turizm Konsalting Xizmatlari" />
             <Container>
                 <Box pt="40px" display="flex" justifyContent="space-between">
                     <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Consulting</WelcomeMainText>
-                    <Button variant="outlined"><KeyboardBackspaceIcon /></Button>
+                    <Button variant="outlined" onClick={() => navigate(-1)}><KeyboardBackspaceIcon /></Button>
                 </Box>
                 <ConsultingSearch />
             </Container>

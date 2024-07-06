@@ -8,7 +8,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CastleIcon from '@mui/icons-material/Castle';
 import ResponsiveMenu from "../ResponsiveMenu";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 type HeaderProps = {
     auth?: React.ReactElement;
     logo: boolean,
@@ -18,6 +18,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false }: HeaderProps) => {
     const navigate = useNavigate()
+    const {t} = useTranslation()
     return (
         <HeaderWrapper>
             <Box display={{xl: "none", md: "none", sm: "block", xs: "block"}}>
@@ -44,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     <HeaderMenuListItemIconc>
                        <AirplaneTicketIcon />
                     </HeaderMenuListItemIconc>
-                    <HeaderMenuListItemText>Trip Advisor</HeaderMenuListItemText>
+                    <HeaderMenuListItemText>{t("trip_advisor")}</HeaderMenuListItemText>
                 </HeaderMenuListItem>
                 {
                     divider? <Divider orientation="vertical" variant="middle" flexItem/> : <></>
@@ -54,19 +55,19 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     <HeaderMenuListItemIconc>
                         <LocalTaxiIcon />
                     </HeaderMenuListItemIconc>
-                    <HeaderMenuListItemText>My Driver</HeaderMenuListItemText>
+                    <HeaderMenuListItemText>{t("my_driver")}</HeaderMenuListItemText>
                 </HeaderMenuListItem>
                 <HeaderMenuListItem to="/consulting" type={type}>
                     <HeaderMenuListItemIconc>
                         <ManageAccountsIcon />
                     </HeaderMenuListItemIconc>
-                    <HeaderMenuListItemText>Consulting</HeaderMenuListItemText>
+                    <HeaderMenuListItemText>{t("consulting")}</HeaderMenuListItemText>
                 </HeaderMenuListItem>
                 <HeaderMenuListItem to="/history" type={type}>
                     <HeaderMenuListItemIconc>
                         <CastleIcon />
                     </HeaderMenuListItemIconc>
-                    <HeaderMenuListItemText>History</HeaderMenuListItemText>
+                    <HeaderMenuListItemText>{t("history")}</HeaderMenuListItemText>
                 </HeaderMenuListItem>
             </HeadeMenuList>
             {

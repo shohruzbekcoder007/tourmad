@@ -21,10 +21,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Logo from './../../media/images/logo2.png'
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type Anchor = 'left';
 
 const ResponsiveMenu: React.FC = () => {
+  const {t} = useTranslation()
   const [state, setState] = React.useState({
     left: false,
   });
@@ -68,7 +70,7 @@ const ResponsiveMenu: React.FC = () => {
               <ListItemIcon>
                 <LocalTaxiIcon />
               </ListItemIcon>
-              <ListItemText primary="My Driver" />
+              <ListItemText primary={t("my_driver")} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding onClick={() => navigate('/consulting')}>
@@ -76,7 +78,7 @@ const ResponsiveMenu: React.FC = () => {
               <ListItemIcon>
                 <ManageAccountsIcon />
               </ListItemIcon>
-              <ListItemText primary="Consulting" />
+              <ListItemText primary={t("consulting")} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding onClick={() => navigate('/history')}>
@@ -84,7 +86,7 @@ const ResponsiveMenu: React.FC = () => {
               <ListItemIcon>
                 <CastleIcon />
               </ListItemIcon>
-              <ListItemText primary="History" />
+              <ListItemText primary={t("history")} />
             </ListItemButton>
           </ListItem>
           <Box display={{xl: "none", md: "none", sm: "none", xs: "block"}}>

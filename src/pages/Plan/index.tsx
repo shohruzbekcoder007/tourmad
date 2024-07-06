@@ -3,7 +3,7 @@ import { Container, GlobalParagraph, WelcomeMainText } from '../../global_styles
 import Banner from '../../components/Banner'
 import banner_photo from './../../media/images/banner-plan.jpg';
 import IntoTravel from '../../components/IntoTravel';
-import { Box, Button, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import ResentSearch from '../../components/ResentSearch';
 import { useNavigate } from 'react-router-dom'
 import { getPlanRecommendationList, getRecommendationPlanList, getStatusLastRecommendationPlan } from '../../redux/slices/planSliser';
