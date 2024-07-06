@@ -18,7 +18,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from "react-router-dom";
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changePage, getHistoryList, getHistoryListCurrentPage, getHistoryListTotalPages, getHistoryLoading, getStatusHistoryList, getTripHistoryList } from "../../redux/slices/historySlice";
+import { changePage, changeSearchLocation, getHistoryList, getHistoryListCurrentPage, getHistoryListTotalPages, getHistoryLoading, getStatusHistoryList, getTripHistoryList } from "../../redux/slices/historySlice";
 import { HistoryType } from "../../utils/response_types";
 
 
@@ -106,7 +106,13 @@ const HistoryService: React.FC = () => {
                         />
                     </Box>
                     <Box mt="16px" width={'56px'}>
-                        <Button sx={{ height: '56px' }} fullWidth variant='contained'>
+                        <Button
+                            sx={{ height: '56px' }}
+                            fullWidth
+                            variant='contained'
+                            onClick={() => {
+                                dispatch(changeSearchLocation(from?.value))
+                              }}>
                             <SearchIcon />
                         </Button>
                     </Box>

@@ -14,6 +14,8 @@ export const recommendation_trip_drive = "/trip/recommendation-trip-drive"
 export const common_location = "common/location"
 export const history_trip_history = "history/trip-history"
 
+export const trip_restaurant = "trip/trip-restaurant"
+
 export const trip_list = "/trip/trip-list"
 
 export const driver_list = "drive/drivers"

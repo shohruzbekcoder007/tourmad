@@ -80,9 +80,7 @@ const HotelFilters: React.FC = () => {
   const hotelPriceTo = useAppSelector(getHotelPriceTo)
   const statusCommonLocation = useAppSelector(getStatusCommonLocation)
   const commonLocationList = useAppSelector(getCommonLocations)
-  // const hotelRoomStyle = useAppSelector(getRoomStyle)
 
-  // redux dispatch
   const dispatch: AppDispatch = useAppDispatch()
 
   const handleChangeSort = (event: SelectChangeEvent) => {
@@ -359,6 +357,7 @@ const HotelFilters: React.FC = () => {
                         room_style={hotel.room_style}
                         rate={hotel.rate}
                         card={hotel.card}
+                        id={hotel.id}
                       />
                     )
                   })

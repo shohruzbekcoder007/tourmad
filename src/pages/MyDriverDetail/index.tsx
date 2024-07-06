@@ -7,7 +7,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import DetailDescription from '../../components/DetailDescription';
-import DetailReviews from '../../components/DetailReviews';
+// import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DriveOrder from '../../components/DriveOrder';
 import { useAppSelector } from '../../redux/hooks';
@@ -20,6 +20,7 @@ import parse from 'html-react-parser';
 import InputReview from '../../components/InputReview';
 import DriverDetailBanner from '../../components/DriverDetailBanner';
 import { DriveClientReviewType } from '../../utils/response_types';
+import DetailReviews from '../../components/DetailReviews';
 // import { ReviewsType } from '../../utils/response_types';
 
 const MyDriverDetail: React.FC = () => {
