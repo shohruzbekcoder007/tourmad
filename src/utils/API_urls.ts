@@ -31,3 +31,7 @@ export const trip_restaurant_oder = "trip/trip-restaurant-oder"
 
 export const location_restaurant = "/common/location-restaurant"
 export const location_drive = "common/location-drive"
+
+export const recommendation_trip_palan = "trip/recommendation-trip-plan"
+export const history_trip_category = "history/trip-category"
+export const trip_history_or_place = "history/trip-history-or-place"

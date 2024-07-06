@@ -8,6 +8,7 @@ import commonLocationSlice from './slices/commonLocationSlicer'
 import historySlice from './slices/historySlice'
 import tripSlice from './slices/tripSlice'
 import commonLanguageSlice from './slices/commonLanguage'
+import planSlice from './slices/planSliser'
 import homeSlice from './slices/homeSlice'
 
 const store = configureStore({
@@ -22,6 +23,7 @@ const store = configureStore({
     trip: tripSlice,
     commonlanguage: commonLanguageSlice,
     home: homeSlice,
+    plan: planSlice
   },
 })
 
