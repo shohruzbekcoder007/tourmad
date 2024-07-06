@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import DriverService from "../../services/DriverService";
 import { AxiosError } from "axios";
-import { DriveDetailType, DriverType, LocationType, RecommendationType, ReviewsType } from "../../utils/response_types";
+import { DriveClientReviewType, DriveDetailType, DriverType, LocationType, RecommendationType, ReviewsType } from "../../utils/response_types";
 
 export interface DriverState {
     statusLastRecommendationDriver: "idle" | "loading" | "succeeded" | "failed",
@@ -32,6 +32,11 @@ export interface DriverState {
         review: ReviewsType [] | null,
         reviewCurrentPage: number,
         reviewTotelPage: number,
+    }
+    newReview: {
+        newReviewCreate: DriveClientReviewType | null,
+        newReviewLoading: boolean | null,
+        NewReviewMessage: string | null
     },
     locationList: LocationType[] | null,
     statusLastSearchDriver: 'idle' | "loading" | "succeeded" | "failed",
@@ -65,6 +70,11 @@ const initialState: DriverState = {
         review: null,
         reviewCurrentPage: 1,
         reviewTotelPage: 1,
+    },
+    newReview: {
+        newReviewCreate: null,
+        newReviewLoading: false,
+        NewReviewMessage: ""
     },
     locationList: [],
     statusLastSearchDriver: "idle",
@@ -105,22 +115,6 @@ export const getDriverList = createAsyncThunk('driver-list',
     }
 )
 
-export const getDriverDetailAction = createAsyncThunk('driver-detail',
-    async (id: string, { rejectWithValue }) => {
-        try {
-            const response = await DriverService.getDriveDtail(id);
-            const driver_detail_data: DriveDetailType = response.data;
-            return driver_detail_data;
-        } catch (error) {
-            let errorMessage = 'Error';
-            if (error instanceof AxiosError && error.response?.data?.message) {
-                errorMessage = error.response.data.message;
-            }
-            return rejectWithValue({ message: errorMessage });
-        }
-    }
-)
-
 export const getLoacationList = createAsyncThunk("get-location-driver",
     async (_, { rejectWithValue }) => {
         try {
@@ -137,6 +131,59 @@ export const getLoacationList = createAsyncThunk("get-location-driver",
     }
 )
 
+export const getDriverDetailAction = createAsyncThunk('driver-detail',
+    async (id: string, { rejectWithValue }) => {
+        try {
+            const response = await DriverService.getDriveDtail(id);
+            const driver_detail_data: DriveDetailType = response.data;
+            return driver_detail_data;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getMyDriverReviews = createAsyncThunk('driver-reviews',
+    async (id: string, { rejectWithValue, getState}) => {
+        try {
+            let state = getState();
+            const response = await DriverService.getMyDriverReviews(id, state);
+            const review_list: ReviewsType[] = response.data?.results;
+            const total_pages: number = response.data?.total_pages || 1;
+            const current_page: number = response.data?.current_page || 1;
+            return {review_list, total_pages, current_page };
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getNewReviewAction = createAsyncThunk('new-review',
+    async (data: {id: string, review: DriveClientReviewType}, { rejectWithValue }) => {
+        try {
+            const response = await DriverService.getDriverClientReview(data.id, data.review);
+            const new_review: DriveClientReviewType = response.data?.results;
+            return new_review;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+
+
 export const driverSlice = createSlice({
     name: 'driver',
     initialState,
@@ -144,6 +191,10 @@ export const driverSlice = createSlice({
         changePage: (state, action) => {
             state.driverCurrentPage = action.payload
             state.statusDriverList = "idle"
+        },
+        changeReviewPage: (state, action) => {
+            state.driveReview.reviewCurrentPage = action.payload
+            state.driveReview.status = "idle"
         },
         changeDriversStyle: (state, action) => {
             state.driversStyle = action.payload
@@ -202,7 +253,7 @@ export const driverSlice = createSlice({
             })
             .addCase(getDriverList.fulfilled, (state, action: PayloadAction<{driver_list: DriverType[], total_pages: number, current_page: number }>) => {
                 state.loading = false
-                let { driver_list, total_pages, current_page } = action?.payload || { hotel_list: [], total_pages: 1, current_page: 1 };
+                let { driver_list, total_pages, current_page } = action?.payload || { driver_list: [], total_pages: 1, current_page: 1 };
                 state.driverList = driver_list
                 state.driverTotalPage = total_pages
                 state.driverCurrentPage = current_page
@@ -225,30 +276,42 @@ export const driverSlice = createSlice({
             .addCase(getDriverDetailAction.fulfilled, (state, action) => {
                 state.driveDetail.driver = action?.payload
                 state.driveDetail.status = 'succeeded'
+
             })
-            .addCase(getLoacationList.pending, (state) => {
-                state.loading = true
-                state.error = null
-                state.statusLastSearchDriver = "loading"
+            .addCase(getMyDriverReviews.pending, (state) => {
+                state.driveReview.error = null
+                state.driveReview.status = "loading"
             })
-            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<LocationType[]>) => {
+            .addCase(getMyDriverReviews.rejected, (state, _) => {
+                state.driveReview.status = "failed"
+                state.driveReview.error = null
+            })
+            .addCase(getMyDriverReviews.fulfilled, (state, action: PayloadAction<{review_list: ReviewsType[], total_pages: number, current_page: number }>) => {
                 state.loading = false
-                let locationList = action?.payload
-                console.log(locationList, "<-- shuda")
-                state.statusLastSearchDriver = "succeeded"
-                state.locationList = locationList
-                state.error = null
-            })
-            .addCase(getLoacationList.rejected, (state, _) => {
-                state.loading = false
-                state.statusLastSearchDriver = "failed"
+                let { review_list, total_pages, current_page } = action?.payload || { review_list: [], total_pages: 1, current_page: 1 };
+                state.driveReview.review = review_list
+                state.driveReview.reviewTotelPage = total_pages
+                state.driveReview.reviewCurrentPage = current_page
+                state.driveReview.status = "succeeded"
                 // state.error = action.payload?.message || 'Failed to fetch user';
+            })
+            builder.addCase(getNewReviewAction.pending, (state) => {
+                state.newReview.newReviewLoading = true;
+            })
+            .addCase(getNewReviewAction.fulfilled, (state, action) => {
+                state.newReview.newReviewCreate = action.payload;
+                state.newReview.newReviewLoading = false;
+                state.newReview.NewReviewMessage = ""
+            })
+            .addCase(getNewReviewAction.rejected, (state, _) => {
+                state.newReview.newReviewLoading= false;
+                state.newReview.NewReviewMessage = "Siz bu foydalanuvchiga baxo berolmaysiz";
             })
     }
 })
 
 // export const { } = driverSlice.actions
-export const {changeGrade, changePriceFrom, changePriceTo, changeSearchLanguage, changeSearchLocation, changePage, changeDriversStyle} = driverSlice.actions
+export const {changeGrade, changePriceFrom, changePriceTo, changeSearchLanguage, changeSearchLocation, changePage, changeDriversStyle, changeReviewPage} = driverSlice.actions
 
 
 export const getStatusLastRecommendationDriver = (state: RootState) => state.driver.statusLastRecommendationDriver;
@@ -266,6 +329,8 @@ export const getDriverCurrentPage = (state: RootState) => state.driver.driverCur
 export const getDriverTotalPage = (state: RootState) => state.driver.driverTotalPage;
 export const getDriversStyle = (state: RootState) => state.driver.driversStyle;
 export const getDriverDetail = (state: RootState) => state.driver.driveDetail;
+export const getDriverReview = (state: RootState) => state.driver.driveReview;
+export const getNewReview = (state: RootState) => state.driver.newReview;
 export const getLocationList = (state: RootState) => state.driver.locationList;
 export const getStatusLastSearchDriver = (state: RootState) => state.driver.statusLastSearchDriver;
 

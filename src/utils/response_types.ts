@@ -136,7 +136,8 @@ export type ReviewsType = {
     id: number | null,
     user: newUserType | null,
     rate: number | null,
-    review: string | null
+    review: string | null,   
+    created_at: string | null,
 }
 
 export type DriverType = {
@@ -155,12 +156,18 @@ export type DriverType = {
 }
 
 export type newUserType = {
+    avatar: string | null,
     id: number | null,
     first_name: string | null,
     last_name: string | null,
     email: string | null,
     gender: string | null,
     phone_number: string | null,
+}
+
+export type gallery = {
+    id: string | "",
+    image: string | "",
 }
 
 export type DriveDetailType = {
@@ -178,6 +185,18 @@ export type DriveDetailType = {
     avg_rate: number | null,
     description: string | null,
     location: CommonLocationType | null,
+    galleries: gallery [] | null
+  }
+
+  export type DriveClientReviewType = {
+    rate: number | null,
+    review: string | null
+  }
+
+  export type HomeBannerType = {
+    banner: string | null,
+    history: string | null,
+    hotels: string | null,
   }
 
 export type RestaurantDetailType = {

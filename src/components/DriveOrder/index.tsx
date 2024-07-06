@@ -10,6 +10,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { CustomAutocomplete } from '../../helper_components';
 import dayjs from 'dayjs';
+import SimpleMap from '../SimpleMap';
 
 type PropsType = {
     btnText: string
@@ -75,15 +76,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
 
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Destination</GlobalParagraph>
-                <CustomAutocomplete
-                    options={options}
-                    placeholder="Location"
-                    getChange={getChangeOptionFrom}
-                    icon={<LocationOnIcon />}
-                />
-                <Box display='flex' justifyContent='flex-end'>
-                    <Button variant='contained' sx={{mt: '10px'}}>View Map</Button>
-                </Box>
+                <SimpleMap />
             </Box>
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Start Data</GlobalParagraph>

@@ -1,13 +1,22 @@
 import { Box } from '@mui/material'
-import React from 'react'
-import welcome_bg from './../../media/images/body-bg.jpg'
+import React, { useEffect } from 'react'
 import Header from '../Header'
 import { WelcomeMainText } from '../../global_styles/styles'
 import AuthUserInfo from './AuthUserInfo'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getHomeBanner, getHomeBannerPhotos } from '../../redux/slices/homeSlice'
 
 // shu joyiga ruyhatdan utgan utmagani tugirlandi
 
 const Welcome: React.FC = () => {
+    const homeBanner = useAppSelector(getHomeBannerPhotos)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getHomeBanner())
+    },[])
+
     return (
         <Box
             padding="30px"
@@ -15,7 +24,7 @@ const Welcome: React.FC = () => {
             <Box
                 borderRadius="24px"
                 sx={{
-                    backgroundImage: `url(${welcome_bg})`,
+                    backgroundImage: `url(${homeBanner.banner?.banner})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     height: {xl: '600px', md: "500px", sm: "400px", xs: "400px" }

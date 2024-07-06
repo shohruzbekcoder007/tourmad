@@ -24,7 +24,6 @@ const Drive: React.FC = () => {
     }, [statusLastRecommendationDriver, dispatch])
 
     useEffect(() => {
-        console.log(statusLastSearchDriver, "<--statusLastSearchDriver")
         if (statusLastSearchDriver === 'idle') {
             dispatch(getLoacationList())
         }

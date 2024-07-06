@@ -50,9 +50,9 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type }) => {
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
                                             {
-                                                daily ?
-                                                    (item?.price) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph> : <></> :
-                                                    (item?.room_style) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price} $</GlobalParagraph> : <></>
+                                                daily?
+                                                (item?.price)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>day/ {item?.price}$</GlobalParagraph>:<></>:
+                                                (item?.room_style)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price}$</GlobalParagraph>:<></>
                                             }
                                         </Box>
                                         {
