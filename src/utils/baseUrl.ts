@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { host } from "./API_urls";
 import { getStorage, getStorageR, removeStorage, setStorage, setStorageR } from "./storage" 
-import { postRequest } from "./request" 
 import { token_refresh } from "./API_urls"
 
 const instance: AxiosInstance = axios.create({

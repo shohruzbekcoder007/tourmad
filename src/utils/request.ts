@@ -47,3 +47,17 @@ export const putRequest = (url: string, data: any): Promise<AxiosResponse> => {
         });
     });
 }
+
+export const deleteRequest = (url: string): Promise<AxiosResponse> => {
+    return new Promise((resolve, reject) => {
+        axios.delete(
+            url
+        ).then((response) => {
+            resolve(response)
+        })
+        .catch((error) => {
+            console.log(error)
+            reject(error)
+        });
+    });
+}
