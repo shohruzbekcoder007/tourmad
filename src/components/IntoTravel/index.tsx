@@ -7,9 +7,10 @@ import SwipeDrawer from '../SwipeDrawer'
 
 type IntoTravelPropsType = {
     data: RecommendationType[] | null,
-    daily?: boolean
+    daily?: boolean,
+    type?: "hotel" | "restaurant"
 }
-const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily }) => {
+const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type }) => {
 
     if (data) {
         return (
@@ -49,22 +50,39 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily }) => {
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
                                             {
-                                                daily ?
-                                                    (item?.price) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/ {item?.price} $</GlobalParagraph> : <></> :
-                                                    (item?.room_style) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price} $</GlobalParagraph> : <></>
+                                                daily?
+                                                (item?.price)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>day/ {item?.price}$</GlobalParagraph>:<></>:
+                                                (item?.room_style)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price}$</GlobalParagraph>:<></>
                                             }
                                         </Box>
-                                        <SwipeDrawer
-                                            hotel_id={item?.id}
-                                            addType={'hotel'}
-                                            button={<Button
-                                                sx={{ height: "48px" }}
-                                                fullWidth
-                                                variant='contained'
-                                            >
-                                                Book a Hotel
-                                            </Button>}
-                                        />
+                                        {
+                                            type === "hotel" &&
+                                            <SwipeDrawer
+                                                hotel_id={item?.id}
+                                                addType={'hotel'}
+                                                button={<Button
+                                                        sx={{ height: "48px" }}
+                                                        fullWidth
+                                                        variant='contained'
+                                                    >
+                                                        Book a hotel
+                                                    </Button>}
+                                            />
+                                        }
+                                        {
+                                            type === "restaurant" &&
+                                            <SwipeDrawer
+                                                restaurant_id={item?.id}
+                                                addType={'restaurant'}
+                                                button={<Button
+                                                        sx={{ height: "48px" }}
+                                                        fullWidth
+                                                        variant='contained'
+                                                    >
+                                                        Book a hotel
+                                                    </Button>}
+                                            />
+                                        }
                                     </Box>
                                 </Box>
                             )

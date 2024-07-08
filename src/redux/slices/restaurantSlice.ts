@@ -1,10 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RecommendationType, RestaurantType } from "../../utils/response_types";
+import { LocationType, RecommendationType, RestaurantDetailType, RestaurantType } from "../../utils/response_types";
 import RestaurantService from "../../services/RestaurantService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
 
 export interface RestaurantStateI {
+    statusLastSearchRestaurant: 'idle' | "loading" | "succeeded" | "failed",
     statusLastRecommendationRestaurant: 'idle' | "loading" | "succeeded" | "failed",
     statusRestaurantList: 'idle' | "loading" | "succeeded" | "failed",
     restaurantRecommendationList: RecommendationType[] | null
@@ -12,15 +13,22 @@ export interface RestaurantStateI {
     message: string,
     showMessage: boolean,
     error: null,
+    locationList: LocationType[] | null,
     restaurantList: RestaurantType[] | null,
     restaurantListPageSize: number,
     restaurantListCurrentPage: number,
     restaurantListTotalPages: number,
     searchLocation: string | null,
     searchText: string | null,
+    restaurantDetail: {
+        restaurant: RestaurantDetailType | null,
+        status: 'idle' | "loading" | "succeeded" | "failed",
+        error: string | null
+    }
 };
 
 const initialState: RestaurantStateI = {
+    statusLastSearchRestaurant: "idle",
     statusLastRecommendationRestaurant: "idle",
     statusRestaurantList: "idle",
     loading: false,
@@ -28,12 +36,18 @@ const initialState: RestaurantStateI = {
     showMessage: false,
     restaurantRecommendationList: [],
     error: null,
+    locationList: [],
     restaurantList: [],
     restaurantListPageSize: 8,
     restaurantListCurrentPage: 1,
     restaurantListTotalPages: 1,
     searchLocation: "",
     searchText: "",
+    restaurantDetail: {
+        restaurant: null,
+        status: "idle",
+        error: null
+    }
 }
 
 export const getRecommendationRestaurantList = createAsyncThunk('recommendation-trip-restaurant',
@@ -61,6 +75,38 @@ export const getTripRestaurantList = createAsyncThunk('get-trip-restaurant-list'
             const total_pages: number = response.data?.total_pages || 1;
             const current_page: number = response.data?.current_page || 1;
             return { restaurant_list, total_pages, current_page };
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getRestaurantDetailInfo = createAsyncThunk('get-restaurant-detail',
+    async (id: string, { rejectWithValue }) => {
+        try {
+            const response = await RestaurantService.getRestaurantDetail(id);
+            const restaurant_detail: RestaurantDetailType = response.data;
+            return restaurant_detail;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getLoacationList = createAsyncThunk("get-location-restaurant",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await RestaurantService.locationRestaurants();
+            const location_list: LocationType[] = response.data?.results;
+            return location_list;
         } catch (error) {
             let errorMessage = 'Error';
             if (error instanceof AxiosError && error.response?.data?.message) {
@@ -123,6 +169,36 @@ export const restaurantSlice = createSlice({
                 state.statusRestaurantList = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
+            .addCase(getRestaurantDetailInfo.pending, (state) => {
+                state.restaurantDetail.status = "loading"
+                state.restaurantDetail.error = ''
+            })
+            .addCase(getRestaurantDetailInfo.fulfilled, (state, action) => {
+                state.restaurantDetail.status = "succeeded"
+                state.restaurantDetail.restaurant = action.payload
+            })
+            .addCase(getRestaurantDetailInfo.rejected, (state, _) => {
+                state.restaurantDetail.status = "failed"
+                state.restaurantDetail.error = 'Xatolik yuzaga keldi'
+                // state.error = action.payload?.message || 'Failed to fetch hotel';
+            })
+            .addCase(getLoacationList.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.statusLastSearchRestaurant = "loading"
+            })
+            .addCase(getLoacationList.fulfilled, (state, action: PayloadAction<LocationType[]>) => {
+                state.loading = false
+                let locationList = action?.payload
+                state.locationList = locationList
+                state.error = null
+                state.statusLastSearchRestaurant = "succeeded"
+            })
+            .addCase(getLoacationList.rejected, (state, _) => {
+                state.loading = false
+                state.statusLastSearchRestaurant = "failed"
+                // state.error = action.payload?.message || 'Failed to fetch user';
+            })
     }
 })
 
@@ -142,6 +218,9 @@ export const getRestaurantListPageSize = (state: RootState) => state.restaurant.
 export const getRestaurantListCurrentPage = (state: RootState) => state.restaurant.restaurantListCurrentPage;
 export const getRestaurantListTotalPages = (state: RootState) => state.restaurant.restaurantListTotalPages;
 export const getStatusRestaurantList = (state: RootState) => state.restaurant.statusRestaurantList
+export const getRestaurantDetail = (state: RootState) => state.restaurant.restaurantDetail
+export const getLocationList = (state: RootState) => state.restaurant.locationList;
+export const getStatusLastSearchRestaurant = (state: RootState) => state.restaurant.statusLastSearchRestaurant;
 
 
 export default restaurantSlice.reducer

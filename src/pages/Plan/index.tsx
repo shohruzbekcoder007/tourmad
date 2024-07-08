@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import Banner from '../../components/Banner'
 import banner_photo from './../../media/images/banner-plan.jpg';
 import IntoTravel from '../../components/IntoTravel';
-import { Box, Button, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import ResentSearch from '../../components/ResentSearch';
 import { useNavigate } from 'react-router-dom'
+import { getPlanRecommendationList, getRecommendationPlanList, getStatusLastRecommendationPlan } from '../../redux/slices/planSliser';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 const Plan: React.FC = () => {
     const navigate = useNavigate();
+    const statusLastRecommendationPlan = useAppSelector(getStatusLastRecommendationPlan)
+    const planRecommendationList = useAppSelector(getPlanRecommendationList)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (statusLastRecommendationPlan === 'idle') {
+            dispatch(getRecommendationPlanList())
+        }
+    }, [statusLastRecommendationPlan, dispatch])
+
     return (
         <>
             <Banner bgimage={banner_photo} heightprops='400px'
@@ -24,7 +36,7 @@ const Plan: React.FC = () => {
                         <Button onClick={() => navigate('/plan-filter')} variant="outlined" >See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={null}/>
+                <IntoTravel data={planRecommendationList}/>
             </Container>
            
             

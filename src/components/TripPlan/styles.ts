@@ -44,5 +44,4 @@ export const TripCardTitle = styled.h3`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding-bottom: 8px;
 `

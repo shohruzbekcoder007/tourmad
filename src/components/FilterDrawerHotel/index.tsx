@@ -7,7 +7,7 @@ import { Collapse, Divider, List,  ListItemButton, ListItemText, Slider, Typogra
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useAppSelector } from '../../redux/hooks';
-import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverPriceFrom, getDriverPriceto, getDrivers, getLoadingDriver, getStatusDriverList } from '../../redux/slices/driverSliser';
+import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverPriceFrom, getDriverPriceto } from '../../redux/slices/driverSliser';
 import { useDebounce } from 'use-debounce';
 import { AppDispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
@@ -54,10 +54,10 @@ const FilterDrawerHotel: React.FC = () => {
     };
 
     // redux
-    const statusDriverList = useAppSelector(getStatusDriverList);
-    const drivers = useAppSelector(getDrivers);
+    // const statusDriverList = useAppSelector(getStatusDriverList);
+    // const drivers = useAppSelector(getDrivers);
     const driversGrade = useAppSelector(getDriverGrade);
-    const loadingDriver = useAppSelector(getLoadingDriver);
+    // const loadingDriver = useAppSelector(getLoadingDriver);
     const driverPriceFrom = useAppSelector(getDriverPriceFrom)
     const driverPriceTo = useAppSelector(getDriverPriceto) 
     // const showMessageDriver = useAppSelector(getShowMessageDriver);

@@ -8,8 +8,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
-import DetailReviews from '../../components/DetailReviews';
+// import DetailReviews from '../../components/DetailReviews';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import DriveOrder from '../../components/DriveOrder';
 
 const MyDriveDetail: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
@@ -29,6 +30,9 @@ const MyDriveDetail: React.FC = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    
+
     return (
         <Stack>
             <HeaderWrapper>
@@ -78,13 +82,13 @@ const MyDriveDetail: React.FC = () => {
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
                             <Button variant='outlined'><ShareIcon /></Button>
-                            <Button variant='contained'>Book Now</Button>
+                            <DriveOrder btnText='Book Now' />
                         </Box>
                     </Box>
                 </Box>
                 <DetailBanner bgimage='' />
                 <DetailDescription />
-                <DetailReviews />
+                {/* <DetailReviews /> */}
             </Container>
             <Box
                 paddingTop="170px"

@@ -43,13 +43,16 @@ import {
   ThemeProvider as MuiTheme
 } from "@mui/material/styles";
 import { lightTheme } from './theme/mui/light';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 
 const App: React.FC = () => {
   return (
-    <MuiTheme theme={lightTheme}>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>
-        <Routes>
+    <I18nextProvider i18n={i18n}>
+      <MuiTheme theme={lightTheme}>
+        <CssBaseline />
+        <ThemeProvider theme={theme}>
+           <Routes>
           <Route path="/" element={<Main />}>
             <Route index element={<Welcome />} />
             <Route path='consulting' element={<Consulting />} />
@@ -65,25 +68,31 @@ const App: React.FC = () => {
               <Route path=':id' element={<HotelDetail />} />
             </Route>
             <Route path='restaurant-filter' element={<ReataurantFilter />} />
-            <Route path='restaurant-detail' element={<ReataurantDetail />} />
+            <Route path='restaurant-detail'>
+              <Route path=':id' element={<ReataurantDetail />} />
+            </Route>
             <Route path='drive-filter' element={<DriveFilter />} />
             <Route path='drive-detail' element={<DriveDetail />} />
             <Route path='history' element={<History />} />
             <Route path='history-detail' element={<HistoryDetail />} />
-            <Route path='plan-detail' element={<PlanDetail />} />
+            <Route path='plan-detail'>
+              <Route path=':id' element={<PlanDetail />} />
+            </Route>
             <Route path='plan-filter' element={<PlanFilter />} />
             <Route path='my-trip' element={<MyTrip />} />
             <Route path='trip-detail' element={<TripDetail />} />
             <Route path='my-driver' element={<MyDriver />} />
-            <Route path='my-driver-detail' element={<MyDriverDetail />} />
-            <Route path="protected" element={<Protected />}>
-              <Route index element={<Navigate to="hotel" />} />
-              <Route path="hotel" element={<Hotel />} />
-              <Route path="ticket" element={<Ticket />} />
-              <Route path="restaurant" element={<Restaurant />} />
-              <Route path="drive" element={<Drive />} />
-              <Route path="plan" element={<Plan />} />
-              <Route path='favourites' element={<Favourites />} />
+            <Route path='my-driver-detail'>
+              <Route path=':id'  element={<MyDriverDetail />} />
+            </Route>
+            <Route path="protected" element={<Protected/>}>
+              <Route index element={<Navigate to="hotel"/>}/>
+              <Route path="hotel" element={<Hotel/>} />
+              <Route path="ticket" element={<Ticket/>}/>
+              <Route path="restaurant" element={<Restaurant/>}/>
+              <Route path="drive" element={<Drive/>}/>
+              <Route path="plan" element={<Plan/>}/>
+              <Route path='favourites' element={<Favourites/>}/>
             </Route>
           </Route>
           <Route path="users" element={<Users />}>
@@ -99,8 +108,10 @@ const App: React.FC = () => {
           <Route path="verify" element={<Verify />} />
           <Route path='*' element={<Error />} />
         </Routes>
-      </ThemeProvider>
-    </MuiTheme>
+        </ThemeProvider>
+      </MuiTheme>
+    </I18nextProvider>
+
   );
 }
 

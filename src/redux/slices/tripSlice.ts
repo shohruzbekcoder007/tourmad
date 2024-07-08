@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { HotelToTripType, TripCreateType } from "../../utils/request_types"
+import { HotelToTripType, RestaurantToTripType, TripCreateType } from "../../utils/request_types"
 import TripService from "../../services/TripService"
 import { AxiosError } from "axios"
 import { RootState } from "../store"
@@ -23,6 +23,13 @@ export interface TripState {
         message: string | null,
         loading: boolean,
         error: boolean | null
+    },
+    addRestaurant: {
+        newOrderedRestaurant: RestaurantToTripType | null,
+        status: boolean | null,
+        message: string | null,
+        loading: boolean,
+        error: boolean | null
     }
 }
 
@@ -40,6 +47,13 @@ const initialState: TripState = {
     },
     addHotel: {
         newOrderedHotel: null,
+        status: null,
+        message: null,
+        loading: false,
+        error: null
+    },
+    addRestaurant: {
+        newOrderedRestaurant: null,
         status: null,
         message: null,
         loading: false,
@@ -99,6 +113,45 @@ export const addHotelToTrip = createAsyncThunk('add-hotel-to-trip',
     }
 )
 
+export const deleteTrip = createAsyncThunk('delete-trip',
+    async (trip_id: number, { rejectWithValue }) => {
+        try {
+            const response = await TripService.deleteTrip(trip_id)
+            return response.data
+        } catch (error: AxiosError | any) {
+            let errorMessage = 'Error'
+            let errorList: string[] = []
+            Object.entries(error?.response?.data).forEach(([key, value]) => {
+                errorList.push(`${key}: ${value}`)
+            })
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message
+            }
+            return rejectWithValue({ message: errorMessage, errorList })
+        }
+    }
+)
+
+export const addRestourantToTrip = createAsyncThunk('add-restourant-to-trip',
+async (restaurantToTrip: RestaurantToTripType, { rejectWithValue }) => {
+    try {
+        const response = await TripService.addRestaurant(restaurantToTrip)
+        const new_order: RestaurantToTripType = response.data
+        return new_order
+    } catch (error: AxiosError | any) {
+        let errorMessage = 'Error'
+        let errorList: string[] = []
+        Object.entries(error?.response?.data).forEach(([key, value]) => {
+            errorList.push(`${key}: ${value}`)
+        })
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            errorMessage = error.response.data.message
+        }
+        return rejectWithValue({ message: errorMessage, errorList })
+    }
+}
+)
+
 export const tripSlice = createSlice({
     name: 'trip',
     initialState,
@@ -155,6 +208,40 @@ export const tripSlice = createSlice({
             state.addHotel.message = errorpayload.errorList?.join(",\n")
             // state.addHotel.message = "Xatolik yuzaga keldi"
         })
+        .addCase(addRestourantToTrip.pending, (state) => {
+            state.addRestaurant.loading = true
+            state.addRestaurant.status = false
+            state.addRestaurant.error = false
+        })
+        .addCase(addRestourantToTrip.fulfilled, (state, action) => {
+            state.addRestaurant.newOrderedRestaurant = action.payload
+            state.addRestaurant.status = true
+            state.addRestaurant.loading = false
+            state.addRestaurant.message = "Restoran muvofaqqiyali qushildi!!!"
+        })
+        .addCase(addRestourantToTrip.rejected, (state, action) => {
+            state.addRestaurant.status = true
+            state.addRestaurant.loading = false
+            state.addRestaurant.error = true
+            const errorpayload: any = action?.payload
+            state.addRestaurant.message = errorpayload.errorList?.join(",\n")
+            // state.addHotel.message = "Xatolik yuzaga keldi"
+        })
+        .addCase(deleteTrip.pending, (state) => {
+            state.tripList.tripListLoading = true;
+            state.tripList.tripListStatus = "loading";
+        })
+        .addCase(deleteTrip.fulfilled, (state, action) => {
+            state.tripList.tripList = state.tripList.tripList?.filter((trip: TripType) => trip.id !== action.payload) || []
+            state.tripList.tripListLoading = false;
+            state.tripList.tripListMessage = "";
+            state.tripList.tripListStatus = "succeeded";
+        })
+        .addCase(deleteTrip.rejected, (state, _) => {
+            state.tripList.tripListLoading = false;
+            state.tripList.tripListMessage = "Xatolik yuzaga keldi";
+            state.tripList.tripListStatus = "failed";
+        })
     }
 })
 
@@ -163,5 +250,6 @@ export const tripSlice = createSlice({
 export const getNewTrip = (state: RootState) => state.trip.newTrip
 export const getTrips = (state: RootState) => state.trip.tripList
 export const getAddHotel = (state: RootState) => state.trip.addHotel
+export const getAddRestaurant = (state: RootState) => state.trip.addRestaurant
 
 export default tripSlice.reducer

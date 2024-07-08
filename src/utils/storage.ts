@@ -15,3 +15,23 @@ export const getStorageR = () => {
 export const setStorageR = (token: string) => {
     localStorage.setItem('tour-refresh', token);
 }
+
+export const removeStorage = () => {
+    localStorage.removeItem('tour-access');
+    localStorage.removeItem('tour-refresh');
+}
+
+export const saveLogin = (password: string) => {
+    localStorage.setItem('login-tourmad', password);
+}
+
+export const savePassword = (password: string) => {
+    localStorage.setItem('password-tourmad', password);
+}
+
+export const getLoginPassword = () => {
+    return {
+        login: localStorage.getItem('login-tourmad'),
+        password: localStorage.getItem('password-tourmad'),
+    }
+}

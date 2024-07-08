@@ -1,24 +1,15 @@
 import { Box, Stack } from '@mui/material'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { getHotelLocationList, getLoacationList, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
+import { LocationType } from '../../utils/response_types'
 
 type ResentSearchPropsType =  {
-    title?: string
+    title?: string,
+    statusLastSearch?: string,
+    locationList?: LocationType[] | null
 }
 
-const ResentSearch: React.FC<ResentSearchPropsType> = ({title}) => {
-
-    const dispatch = useAppDispatch()
-    const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
-    const hotelLocationList = useAppSelector(getHotelLocationList)
-
-    useEffect(() => {
-        if (statusLastSearchHotel === 'idle') {
-            dispatch(getLoacationList())
-        }
-    }, [statusLastSearchHotel, dispatch])
+const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch, locationList}) => {
 
     return (
         <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
@@ -38,7 +29,7 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title}) => {
                 flexWrap="wrap"
             >
                 {
-                    statusLastSearchHotel === "succeeded"? hotelLocationList?.map((hotelLocation, index) => {
+                    statusLastSearch === "succeeded"? locationList?.map((location, index) => {
                         return (
                             <Box
                                 key={index}
@@ -61,16 +52,16 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title}) => {
                                     width="90px" 
                                     height="90px"
                                 >
-                                    <img src={`${hotelLocation?.photo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
+                                    <img src={`${location?.photo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
                                 </Box>
                                 <Box>
-                                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{hotelLocation?.name}</GlobalParagraph>
-                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{hotelLocation?.hotels} places</GlobalParagraph>
+                                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{location?.name}</GlobalParagraph>
+                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.hotels || location?.restaurants || location?.drivers || 0} places</GlobalParagraph>
                                 </Box>
                             </Box>
                         )
                     }):
-                    statusLastSearchHotel === "loading"?<p>Loading...</p>:
+                    statusLastSearch === "loading"?<p>Loading...</p>:
                     <></>
                 }
             </Box>
