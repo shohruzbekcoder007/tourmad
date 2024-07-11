@@ -8,6 +8,9 @@ import BannerMain from '../../components/BannerMain'
 import { GlobalParagraph } from '../../global_styles/styles'
 import SwipeDrawer from '../../components/SwipeDrawer'
 import MyTripCard from '../../components/MyTripCard'
+import { getTripList, getTrips } from '../../redux/slices/tripSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { TripType } from '../../utils/response_types'
 
 const MyTrip: React.FC = () => {
 
@@ -15,44 +18,61 @@ const MyTrip: React.FC = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-          if(window.scrollY <= 400){
-            setTopNavbar(false)
-          }else if (window.scrollY >= 450){
-            setTopNavbar(true)
-          }
+            if (window.scrollY <= 400) {
+                setTopNavbar(false)
+            } else if (window.scrollY >= 450) {
+                setTopNavbar(true)
+            }
         };
-    
+
         window.addEventListener('scroll', handleScroll);
-    
+
         return () => {
-          window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
-      }, []);
+    }, []);
+
+    const dispatch = useAppDispatch()
+    const trips = useAppSelector(getTrips)
+
+    useEffect(() => {
+        if (trips.tripListStatus === "idle") {
+            dispatch(getTripList())
+        }
+    }, [trips, dispatch])
 
     return (
         <>
             <HeaderWrapper>
                 <Container>
-                    <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<FavouritesUser/>} />
+                    <Header logo={require("../../media/images/logo2.png")} type="dark" auth={<FavouritesUser />} />
                     {
-                        topNavbar && <ProtectedLinks/>
+                        topNavbar && <ProtectedLinks />
                     }
                 </Container>
             </HeaderWrapper>
-            <BannerMain bgimage={banner_trip} 
-            bannersubtitle='Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.' 
-            bannertitle='Join Us on an Unforgettable Adventure!' heightprops='400px'/>
+            <BannerMain bgimage={banner_trip}
+                bannersubtitle='Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.'
+                bannertitle='Join Us on an Unforgettable Adventure!' heightprops='400px' />
             <ServicesLink />
             <Container>
-                <Box display='flex' alignItems="center" mt={{xl: 0, md: 0, sm: "32px", xs: "32px"}} justifyContent='space-between'>
-                    <GlobalParagraph fontSize='32px' fontWeight='700' mediafontsize='18px'>My Trips</GlobalParagraph>
-                    <SwipeDrawer button='Create Trip' />
-                </Box>
-                <Box textAlign='center'>
-                    <img src={none_trip} width='300px' alt="" />
-                    <GlobalParagraph fontSize='14px' fontWeight='400' oposity='0.75'>You haven't created a trip yet</GlobalParagraph>
-                </Box>
-                <MyTripCard />
+                {
+                    (trips?.tripListLoading || trips?.tripList?.length === 0) && <>
+                        <Box display='flex' alignItems="center" mt={{ xl: 0, md: 0, sm: "32px", xs: "32px" }} justifyContent='space-between'>
+                            <GlobalParagraph fontSize='32px' fontWeight='700' mediafontsize='18px'>My Trips</GlobalParagraph>
+                            <SwipeDrawer button='Create Trip' />
+                        </Box>
+                        <Box textAlign='center'>
+                            <img src={none_trip} width='300px' alt="" />
+                            <GlobalParagraph fontSize='14px' fontWeight='400' oposity='0.75'>You haven't created a trip yet</GlobalParagraph>
+                        </Box>
+                    </>
+                }
+                {
+                    trips?.tripList?.map((elem: TripType, index: number) => {
+                        return <MyTripCard trip={elem} key={index} />
+                    })
+                }
             </Container>
             <Box
                 paddingTop="170px"

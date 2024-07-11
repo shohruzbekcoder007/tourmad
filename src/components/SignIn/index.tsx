@@ -1,11 +1,11 @@
 import { Box, FormControl, FormGroup, Stack, TextField, FormControlLabel, Checkbox, Button, Divider } from '@mui/material'
 import logo from "./../../media/images/logo2.png"
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FooterLogoImg } from '../Footer/styles'
 import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import LoginWith from '../LoginWith'
 import LoginCarousel from '../LoginCarousel'
-import { setStorage, setStorageR } from '../../utils/storage'
+import { getLoginPassword, saveLogin, savePassword, setStorage, setStorageR } from '../../utils/storage'
 import { useNavigate } from 'react-router-dom'
 import UserService from '../../services/UserService'
 import { enqueueSnackbar } from 'notistack'
@@ -15,6 +15,25 @@ const SignIn: React.FC = () => {
   let navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
+
+  const inputLogin = useRef<HTMLInputElement>(null);
+  const inputPassword = useRef<HTMLInputElement>(null);
+  const [defLoginPassword, setDefLoginPassword] = useState({
+    login: '',
+    password: ''
+  })
+
+  useEffect(() => {
+    const loginPassword = getLoginPassword()
+    const login = loginPassword?.login
+    const password = loginPassword?.password
+    if(login && password){
+      setDefLoginPassword({
+        login: login,
+        password: password
+      })
+    }
+  }, [])
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     
@@ -46,6 +65,13 @@ const SignIn: React.FC = () => {
 
   }
 
+  const rememberPasswordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(event.target.checked){
+      saveLogin(inputLogin.current?.querySelector('input')?.value as string)
+      savePassword(inputPassword.current?.querySelector('input')?.value as string)
+    }
+  }
+
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
       <Box component={"form"} onSubmit={submitHandler} display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>
@@ -63,14 +89,14 @@ const SignIn: React.FC = () => {
             <Box>
               <FormControl fullWidth>
                 <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='text' label='Email' variant='outlined' name="email"/>
+                  <TextField ref={inputLogin} type='text' label='Email' variant='outlined' name="email" defaultValue={defLoginPassword.login} />
                 </FormGroup>
                 <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='password' label='Password' variant='outlined' name="password"/>
+                  <TextField ref={inputPassword} type='password' label='Password' variant='outlined' name="password" defaultValue={defLoginPassword.password}/>
                 </FormGroup>
                 <FormGroup sx={{pb: '40px', display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: "space-between"}}>
                   <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
+                    control={<Checkbox value="remember" color="primary" onChange={rememberPasswordHandler}/>}
                     label="Remember me"
                   />
                   <GlobalLink fontSize='14px' fontWeight='500'>

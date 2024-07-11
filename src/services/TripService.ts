@@ -20,6 +20,10 @@ class TripService {
         return postRequest(trip_restaurant_oder, dto)
     }
 
+    static deleteTrip = (trip_id: number) => {
+        return getRequest(`${trip_list}/${trip_id}`)
+    }
+
 }
 
 export default TripService

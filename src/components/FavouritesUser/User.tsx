@@ -9,8 +9,6 @@ const User = () => {
 
     const userInfo = useAppSelector(getUserInfo)
 
-    console.log(userInfo)
-    
     return (
         <Stack direction="row" spacing={1} alignItems="center" gap="5px" sx={{cursor: "pointer"}}>
             <Box

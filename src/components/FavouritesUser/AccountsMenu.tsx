@@ -2,12 +2,15 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
 interface AccountMenuI {
     children: React.ReactNode
 }
 
 const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
+
+  let navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,7 +41,7 @@ const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My trips</MenuItem>
+        <MenuItem onClick={() => { handleClose(); navigate('/my-trip') }}>My trips</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>

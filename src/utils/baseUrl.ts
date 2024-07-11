@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { host } from "./API_urls";
-import { getStorage, getStorageR, setStorage } from "./storage" 
-import { postRequest } from "./request" 
+import { getStorage, getStorageR, removeStorage, setStorage, setStorageR } from "./storage" 
 import { token_refresh } from "./API_urls"
 
 const instance: AxiosInstance = axios.create({
@@ -22,29 +21,29 @@ instance.interceptors.request.use(
 );
 
 
-instance.interceptors.response.use( 
-  (response) => response, 
-  async (error) => { 
-    const originalRequest = error.config; 
- 
-    if ((error.response.status === 401 || error.response.code === 'token_not_valid') && !originalRequest._retry) { 
+instance.interceptors.response.use(
+  response => response,
+  async error => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
- 
-      try { 
+      try {
         const refresh = getStorageR();
-        const response = await postRequest(token_refresh, { refresh }); 
-        const { access } = response.data; 
-        setStorage(access); 
-        originalRequest.headers.Authorization = `Bearer ${access}`; 
-        return axios(originalRequest); 
-      } catch (error: any) { 
-        error.toLogin = true 
-        return Promise.reject(error); 
-      } 
-    } 
- 
-    return Promise.reject(error); 
-  } 
+        const response = await axios.post(token_refresh, { refresh });
+        const { access: accessToken, refresh: newRefreshToken } = response.data;
+        setStorage(accessToken)
+        setStorageR(newRefreshToken)
+        instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        return instance(originalRequest);
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError);
+        removeStorage();
+        window.location.href = '/';
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
 ); 
 
 

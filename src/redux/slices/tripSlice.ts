@@ -113,6 +113,25 @@ export const addHotelToTrip = createAsyncThunk('add-hotel-to-trip',
     }
 )
 
+export const deleteTrip = createAsyncThunk('delete-trip',
+    async (trip_id: number, { rejectWithValue }) => {
+        try {
+            const response = await TripService.deleteTrip(trip_id)
+            return response.data
+        } catch (error: AxiosError | any) {
+            let errorMessage = 'Error'
+            let errorList: string[] = []
+            Object.entries(error?.response?.data).forEach(([key, value]) => {
+                errorList.push(`${key}: ${value}`)
+            })
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message
+            }
+            return rejectWithValue({ message: errorMessage, errorList })
+        }
+    }
+)
+
 export const addRestourantToTrip = createAsyncThunk('add-restourant-to-trip',
 async (restaurantToTrip: RestaurantToTripType, { rejectWithValue }) => {
     try {
@@ -207,6 +226,21 @@ export const tripSlice = createSlice({
             const errorpayload: any = action?.payload
             state.addRestaurant.message = errorpayload.errorList?.join(",\n")
             // state.addHotel.message = "Xatolik yuzaga keldi"
+        })
+        .addCase(deleteTrip.pending, (state) => {
+            state.tripList.tripListLoading = true;
+            state.tripList.tripListStatus = "loading";
+        })
+        .addCase(deleteTrip.fulfilled, (state, action) => {
+            state.tripList.tripList = state.tripList.tripList?.filter((trip: TripType) => trip.id !== action.payload) || []
+            state.tripList.tripListLoading = false;
+            state.tripList.tripListMessage = "";
+            state.tripList.tripListStatus = "succeeded";
+        })
+        .addCase(deleteTrip.rejected, (state, _) => {
+            state.tripList.tripListLoading = false;
+            state.tripList.tripListMessage = "Xatolik yuzaga keldi";
+            state.tripList.tripListStatus = "failed";
         })
     }
 })
