@@ -152,7 +152,7 @@ const ConsultingCards: React.FC = () => {
                           </Box>
                           <Button
                             sx={{ height: "48px" }}
-                            onClick={() => navigate("/consulting-detail")}
+                            onClick={() => navigate(`/consulting-detail/${consulting.id}`)}
                             fullWidth
                             variant="contained"
                           >
