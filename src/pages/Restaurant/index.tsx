@@ -44,7 +44,7 @@ const Restaurant: React.FC = () => {
             <Button variant="outlined" onClick={() => navigate("/restaurant-filter")}>See All</Button>
           </Grid>
         </Grid>
-        <IntoTravel data={restaurantRecommendationList} type='restaurant' />
+        <IntoTravel link='restaurant' data={restaurantRecommendationList} type='restaurant' />
       </Container>
     </>
   )

@@ -58,7 +58,7 @@ const Welcome: React.FC = () => {
                         <Button onClick={() => navigate("/hotel-filter")} variant="outlined" >See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={hotelRecommendationList} />
+                <IntoTravel link="hotel" data={hotelRecommendationList} />
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">The best restaurant</WelcomeMainText>
@@ -68,7 +68,7 @@ const Welcome: React.FC = () => {
                         <Button variant="outlined" onClick={() => navigate("/restaurant-filter")}>See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={restaurantRecommendationList}/>
+                <IntoTravel link="restaurant" data={restaurantRecommendationList}/>
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">The best drivers</WelcomeMainText>
@@ -78,7 +78,7 @@ const Welcome: React.FC = () => {
                         <Button variant="outlined" onClick={() => navigate("/drive-filter")}>See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={driverRecommendationList} daily={true}/>
+                <IntoTravel link="driver" data={driverRecommendationList} daily={true}/>
             </Container>
             <Box
                 paddingTop="120px"

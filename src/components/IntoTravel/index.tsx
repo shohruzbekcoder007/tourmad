@@ -4,13 +4,16 @@ import { GlobalParagraph } from '../../global_styles/styles'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { RecommendationType } from '../../utils/response_types'
 import SwipeDrawer from '../SwipeDrawer'
+import { useNavigate } from 'react-router-dom'
 
 type IntoTravelPropsType = {
     data: RecommendationType[] | null,
     daily?: boolean,
-    type?: "hotel" | "restaurant"
+    type?: "hotel" | "restaurant",
+    link: string
 }
-const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type }) => {
+const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) => {
+    const navigate = useNavigate();
 
     if (data) {
         return (
@@ -21,6 +24,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type }) => {
                         data?.map((item, index) => {
                             return (
                                 <Box
+                                    onClick={() => navigate(`/${link}-detail/${item.id}`)}
                                     key={index}
                                     sx={{
                                         backgroundImage: `url(${item?.card})`,

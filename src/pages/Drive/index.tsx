@@ -48,7 +48,7 @@ const Drive: React.FC = () => {
                         <Button variant="outlined" onClick={() => navigate("/drive-filter")}>See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={driverRecommendationList} daily={true} />
+                <IntoTravel link="drive" data={driverRecommendationList} daily={true} />
                 {/* <DriverCard /> */}
             </Container>
         </>

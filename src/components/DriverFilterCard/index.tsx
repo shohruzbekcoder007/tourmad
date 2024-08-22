@@ -97,7 +97,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({id, time, price, languages
                 <FavoriteBorderIcon />
               </Button>
               <Box width={{xl: "85%", md: "75%", sm: "75%", xs: "75%"}}>
-                <Button onClick={() => navigate(`/my-driver-detail/${id}`)} variant="contained" fullWidth>
+                <Button onClick={() => navigate(`/driver-detail/${id}`)} variant="contained" fullWidth>
                   View Deals
                 </Button>
               </Box>

@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { HistoryOrPlaceCategryType, HistoryType, RecommendationPlanType, RecommendationType } from "../../utils/response_types";
+import { HistoryOrPlaceCategryType, HistoryType, RecommendationType } from "../../utils/response_types";
 import PlanService from "../../services/PlanService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
