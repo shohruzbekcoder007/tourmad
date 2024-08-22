@@ -36,7 +36,7 @@ const Plan: React.FC = () => {
                         <Button onClick={() => navigate('/plan-filter')} variant="outlined" >See All</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel data={planRecommendationList}/>
+                <IntoTravel link='plan' data={planRecommendationList}/>
             </Container>
            
             
