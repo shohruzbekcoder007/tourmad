@@ -15,6 +15,11 @@ export interface HistoryState {
     historyListCurrentPage: number,
     historyListTotalPages: number,
     searchLocation: string | null,
+    hotelDetail: {
+        history: HistoryType | null,
+        status: 'idle' | "loading" | "succeeded" | "failed",
+        error: string | null
+    }
 }
 
 const initialState: HistoryState = {
@@ -28,6 +33,11 @@ const initialState: HistoryState = {
     historyListCurrentPage: 1,
     historyListTotalPages: 1,
     searchLocation: "",
+    hotelDetail: {
+        history: null,
+        status: "idle",
+        error: null
+    }
 }
 
 export const getTripHistoryList = createAsyncThunk('get-trip-history-list',

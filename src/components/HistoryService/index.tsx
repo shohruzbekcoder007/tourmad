@@ -162,7 +162,7 @@ const HistoryService: React.FC = () => {
                                                     <GlobalParagraph fontSize='14px' fontWeight='400' mediafontsize='12px' color='neutrals'>{history?.desc}</GlobalParagraph>
                                                 </Box>
                                             </Box>
-                                            <Button sx={{ height: "48px" }} fullWidth variant='contained' onClick={() => navigate("/history-detail")}>View History</Button>
+                                            <Button sx={{ height: "48px" }} fullWidth variant='contained' onClick={() => navigate(`/history-detail/${history?.id}`)}>View History</Button>
                                         </Box>
                                     </Box>
                                 )
