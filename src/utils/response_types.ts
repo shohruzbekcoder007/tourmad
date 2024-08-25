@@ -81,6 +81,20 @@ export type HistoryOrPlaceCategryType = {
   count: number | null;
 };
 
+export type CommonLocationHistoryType = {
+  id: number | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+  history: number | null
+  hotels?: number | null;
+  restaurants?: number | null;
+  drivers: number | null;
+  logo: string | null;
+  title: string | null;
+  count: number | null;
+}
+
 export type HistoryType = {
   id: number | null;
   name: string | null;

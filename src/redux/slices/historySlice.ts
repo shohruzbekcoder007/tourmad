@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { HistoryType } from "../../utils/response_types";
+import { CommonLocationHistoryType, HistoryType } from "../../utils/response_types";
 import { AxiosError } from "axios";
 import HistoryService from "../../services/HistoryService"
 import { RootState } from "../store";
@@ -15,6 +15,7 @@ export interface HistoryState {
     historyListCurrentPage: number,
     historyListTotalPages: number,
     searchLocation: string | null,
+    commonLocationHistory: CommonLocationHistoryType[] | null
 }
 
 const initialState: HistoryState = {
@@ -28,6 +29,7 @@ const initialState: HistoryState = {
     historyListCurrentPage: 1,
     historyListTotalPages: 1,
     searchLocation: "",
+    commonLocationHistory: []
 }
 
 export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
@@ -45,6 +47,22 @@ export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
                 errorMessage = error.response.data.message;
             }
             return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getCommonLocationHistory = createAsyncThunk('common-location-history', 
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await HistoryService.commonHistoryLocation();
+            const common_location_history: CommonLocationHistoryType[] =response.data?.results
+            return common_location_history
+        } catch (error) {
+            let errorMessage = "Error";
+      if (error instanceof AxiosError && error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+      return rejectWithValue({ message: errorMessage });
         }
     }
 )
@@ -83,6 +101,19 @@ export const historySlice = createSlice({
                 state.statusHistoryList = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
+
+            .addCase(getCommonLocationHistory.pending, (state) => {
+                state.error = null;
+            })
+            .addCase(getCommonLocationHistory.fulfilled, 
+                (state, action: PayloadAction<CommonLocationHistoryType[]>) => {
+                    let commonLocationHistory = action?.payload;
+                    state.commonLocationHistory = commonLocationHistory;
+                }
+            )
+            .addCase(getCommonLocationHistory.rejected, (state, _) => {
+                state.showMessage = true
+            })
     }
 })
 
@@ -97,6 +128,6 @@ export const getHistoryList = (state: RootState) => state.history.historyList
 export const getHistoryListPageSize = (state: RootState) => state.history.historyListPageSize
 export const getHistoryListCurrentPage = (state: RootState) => state.history.historyListCurrentPage
 export const getHistoryListTotalPages = (state: RootState) => state.history.historyListTotalPages
-
+export const getCommonLocationHistoryList = (state: RootState) => state.history.commonLocationHistory
 
 export default historySlice.reducer

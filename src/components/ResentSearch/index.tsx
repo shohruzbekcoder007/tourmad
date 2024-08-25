@@ -10,7 +10,6 @@ type ResentSearchPropsType =  {
 }
 
 const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch, locationList}) => {
-    console.log(locationList, "ich")
 
     return (
         <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
@@ -53,10 +52,10 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch,
                                     width="90px" 
                                     height="90px"
                                 >
-                                    <img src={`${location?.logo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
+                                    <img src={`${location?.logo || location?.photo}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "8px" }} alt="Hotel" />
                                 </Box>
                                 <Box>
-                                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{location?.title}</GlobalParagraph>
+                                    <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{location?.title || location?.name}</GlobalParagraph>
                                     <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.count || location?.restaurants || location?.drivers || 0} places</GlobalParagraph>
                                 </Box>
                             </Box>

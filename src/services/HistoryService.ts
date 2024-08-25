@@ -1,5 +1,5 @@
 import { HistoryState } from "../redux/slices/historySlice"
-import { history_trip_history } from "../utils/API_urls"
+import { common_location_history, history_trip_history } from "../utils/API_urls"
 import { getRequest } from "../utils/request"
 
 class HistoryService {
@@ -11,6 +11,10 @@ class HistoryService {
         const { historyListPageSize,  historyListCurrentPage, searchLocation } = history
 
         return getRequest(`${history_trip_history}?size=${historyListPageSize}&page=${historyListCurrentPage}&location=${searchLocation || ""}`)
+    }
+
+    static commonHistoryLocation = () => {
+        return getRequest(common_location_history)
     }
 
     static createHotelOrder = () => {

@@ -36,7 +36,6 @@ const Plan: React.FC = () => {
     }
   }, [statusLastRecommendationPlan, dispatch]);
 
-  console.log(getPlanCategoryListt)
   return (
     <>
       <Banner

@@ -18,7 +18,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useNavigate } from "react-router-dom";
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { changePage, changeSearchLocation, getHistoryList, getHistoryListCurrentPage, getHistoryListTotalPages, getHistoryLoading, getStatusHistoryList, getTripHistoryList } from "../../redux/slices/historySlice";
+import { changePage, changeSearchLocation, getCommonLocationHistory, getCommonLocationHistoryList, getHistoryList, getHistoryListCurrentPage, getHistoryListTotalPages, getHistoryLoading, getStatusHistoryList, getTripHistoryList } from "../../redux/slices/historySlice";
 import { HistoryType } from "../../utils/response_types";
 
 
@@ -43,19 +43,18 @@ const HistoryService: React.FC = () => {
     const statusHistoryList = useAppSelector(getStatusHistoryList)
     const historyList = useAppSelector(getHistoryList)
     const historyLoading = useAppSelector(getHistoryLoading)
-
+    const commonLocationHistoryList = useAppSelector(getCommonLocationHistoryList)
 
     const changePageHandler = (page: number) => {
         dispatch(changePage(page))
       }
 
-
     useEffect(() => {
         if (statusCommonLocation === 'idle') {
             dispatch(getCommonLocationList())
+            dispatch(getCommonLocationHistory())
         }
     }, [statusCommonLocation, dispatch])
-
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
@@ -118,7 +117,7 @@ const HistoryService: React.FC = () => {
                     </Box>
                 </Box>
             </Paper>
-            <ResentSearch />
+            <ResentSearch statusLastSearch="succeeded" locationList={commonLocationHistoryList}/>
             <Grid container>
                 <Grid item xl={8} md={8} sm={6} xs={8}>
                     <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">Fall into travel</WelcomeMainText>
