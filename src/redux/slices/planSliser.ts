@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  CommonLocationHistoryType,
   HistoryOrPlaceCategryType,
   HistoryType,
   RecommendationType,
@@ -26,8 +25,6 @@ export interface PlantStateI {
   searchLocation: string | null;
   categoryID: string | null;
   searchText: string | null;
-  commonLocationHistory: CommonLocationHistoryType[] | null;
-  statusCommonLocationPlan: "idle" | "loading" | "succeeded" | "failed";
 }
 
 const initialState: PlantStateI = {
@@ -47,8 +44,6 @@ const initialState: PlantStateI = {
   searchLocation: "",
   categoryID: "",
   searchText: "",
-  commonLocationHistory: [],
-  statusCommonLocationPlan: "idle",
 };
 
 export const getRecommendationPlanList = createAsyncThunk(
@@ -68,23 +63,6 @@ export const getRecommendationPlanList = createAsyncThunk(
   }
 );
 
-export const getCommonLocationHistory = createAsyncThunk(
-  "get-common-location-history",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await PlanService.getCommonLocationHistory();
-      const common_location_history: CommonLocationHistoryType[] =
-        response.data?.results;
-      return common_location_history;
-    } catch (error) {
-      let errorMessage = "Error";
-      if (error instanceof AxiosError && error.response?.data?.message) {
-        errorMessage = error.response.data.message;
-      }
-      return rejectWithValue({ message: errorMessage });
-    }
-  }
-);
 export const getCategoryPlanList = createAsyncThunk(
   "category-trip-plan",
   async (_, { rejectWithValue }) => {
@@ -177,26 +155,6 @@ export const planSlice = createSlice({
         state.showMessage = true;
       })
 
-      .addCase(getCommonLocationHistory.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-        state.statusCommonLocationPlan = "loading";
-      })
-      .addCase(
-        getCommonLocationHistory.fulfilled,
-        (state, action: PayloadAction<CommonLocationHistoryType[]>) => {
-          state.loading = false;
-          let commonLocationHistory = action?.payload;
-          state.commonLocationHistory = commonLocationHistory;
-          state.statusCommonLocationPlan = "succeeded";
-        }
-      )
-      .addCase(getCommonLocationHistory.rejected, (state, _) => {
-        state.loading = false;
-        state.statusCommonLocationPlan = "failed";
-        state.showMessage = true;
-      })
-
       .addCase(getCategoryPlanList.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -258,8 +216,6 @@ export const getStatusLastRecommendationPlan = (state: RootState) =>
   state.plan.statusLastRecommendationPlan;
 export const getPlanRecommendationList = (state: RootState) =>
   state.plan.planRecommendationList;
-export const getCommonLocationHistoryList = (state: RootState) =>
-  state.plan.commonLocationHistory;
 export const getPlanloading = (state: RootState) => state.plan.loading;
 export const getPlanmessage = (state: RootState) => state.plan.message;
 export const getPlanshowMessage = (state: RootState) => state.plan.showMessage;

@@ -11,8 +11,8 @@ import { Button, Grid } from "@mui/material";
 import ResentSearch from "../../components/ResentSearch";
 import { useNavigate } from "react-router-dom";
 import {
-  getCommonLocationHistory,
-  getCommonLocationHistoryList,
+  getCategoryPlanList,
+  getPlanCategoryList,
   getPlanRecommendationList,
   getRecommendationPlanList,
   getStatusLastRecommendationPlan,
@@ -25,17 +25,18 @@ const Plan: React.FC = () => {
     getStatusLastRecommendationPlan
   );
   const planRecommendationList = useAppSelector(getPlanRecommendationList);
-  const commonLocationHistoryList = useAppSelector(
-    getCommonLocationHistoryList
+  const getPlanCategoryListt = useAppSelector(
+    getPlanCategoryList
   );
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (statusLastRecommendationPlan === "idle") {
       dispatch(getRecommendationPlanList());
-      dispatch(getCommonLocationHistory());
+      dispatch(getCategoryPlanList())
     }
   }, [statusLastRecommendationPlan, dispatch]);
 
+  console.log(getPlanCategoryListt)
   return (
     <>
       <Banner
@@ -47,7 +48,7 @@ const Plan: React.FC = () => {
       <Container>
         <ResentSearch
           title="Your Location for plan"
-          locationList={commonLocationHistoryList}
+          locationList={getPlanCategoryListt}
           statusLastSearch="succeeded"
         />
         <Grid container>

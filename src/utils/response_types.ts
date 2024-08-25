@@ -19,6 +19,9 @@ export type LocationType = {
   hotels?: number | null;
   restaurants?: number | null;
   drivers: number | null;
+  logo: string | null;
+  title: string | null;
+  count: number | null;
 };
 
 export type UserType = {
@@ -57,16 +60,6 @@ export type RecommendationType = {
   price: number | null;
 };
 
-export type CommonLocationHistoryType = {
-  id: number;
-  name: string;
-  parent: number | null;
-  photo: string;
-  history: number | null;
-  hotels?: number | null;
-  restaurants?: number | null;
-  drivers: number | null;
-};
 
 export type CommonLocationType = {
   id: number;
@@ -77,8 +70,14 @@ export type CommonLocationType = {
 
 export type HistoryOrPlaceCategryType = {
   id: number | null;
-  title: string | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+  hotels?: number | null;
+  restaurants?: number | null;
+  drivers: number | null;
   logo: string | null;
+  title: string | null;
   count: number | null;
 };
 
