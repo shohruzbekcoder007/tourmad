@@ -16,8 +16,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useParams } from 'react-router-dom';
 import { getHistoryDetail, getHistoryDetailInfo } from '../../redux/slices/historySlice';
 import parse from 'html-react-parser';
-// import { LocationType } from '../../utils/response_types';
-// import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
@@ -26,7 +24,6 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 
 const HistoryDetail: React.FC = () => {
 
-    const value: number | null = 5;
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
@@ -53,8 +50,6 @@ const HistoryDetail: React.FC = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    console.log(history, "<-history")
 
     return (
         <Stack>
