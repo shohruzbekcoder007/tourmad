@@ -13,18 +13,9 @@ class HistoryService {
         return getRequest(`${history_trip_history}?size=${historyListPageSize}&page=${historyListCurrentPage}&location=${searchLocation || ""}`)
     }
 
-    static createHotelOrder = () => {
-
+    static getHistoryDetail = (id: string) => {
+        return getRequest(`${history_trip_history}/${id}`)
     }
-
-    static updateHotelOrderDetail = () => {
-
-    }
-
-    static hotelDetail = () => {
-        
-    }
-
    
 }
 

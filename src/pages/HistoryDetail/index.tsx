@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AuthUserInfo, Footer, Header, ProtectedLinks, } from '../../components'
-import { Box, Button, Container, Rating, Stack } from '@mui/material'
+import { Box, Button, Container, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -12,6 +12,11 @@ import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailMap from '../../components/DetailMap';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useParams } from 'react-router-dom';
+import { getHistoryDetail, getHistoryDetailInfo } from '../../redux/slices/historySlice';
+import parse from 'html-react-parser';
+// import { LocationType } from '../../utils/response_types';
 // import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -20,8 +25,18 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const HistoryDetail: React.FC = () => {
+
     const value: number | null = 5;
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+    const { history } = useAppSelector(getHistoryDetail);
+
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        dispatch(getHistoryDetailInfo(id as string))
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,6 +53,9 @@ const HistoryDetail: React.FC = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    console.log(history, "<-history")
+
     return (
         <Stack>
             <HeaderWrapper>
@@ -53,30 +71,23 @@ const HistoryDetail: React.FC = () => {
                     <div role="presentation" onClick={handleClick}>
                         <Breadcrumbs aria-label="breadcrumb">
                             <Link underline="hover" color="inherit" href="/">
-                                Samarqand
+                                {history?.location?.name}
                             </Link>
-                            <Typography color="text.primary">Registan square</Typography>
+                            <Typography color="text.primary">{history?.name}</Typography>
                         </Breadcrumbs>
                     </div>
                 </Box>
                 <Box pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
                     <Box>
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
-                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>Registan square</WelcomeMainText>
-                            <Rating name="disabled" value={value} disabled />
-                            <GlobalParagraph fontSize="12px" fontWeight="500">5 Star History</GlobalParagraph>
+                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>{history?.name}</WelcomeMainText>
                         </Box>
                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                             <LocationOnIcon />
-                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">Samarqand</GlobalParagraph>
-                        </Box>
-                        <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
-                            <Button variant="outlined">4.2</Button>
-                            <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
-                            <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph>
+                            <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">{history?.location?.name}</GlobalParagraph>
                         </Box>
                     </Box>
-                    <Box textAlign={{xl: 'right', md: "left", sm: "left", xs: "left"}}>
+                    <Box textAlign={{ xl: 'right', md: "left", sm: "left", xs: "left" }}>
                         <GlobalParagraph paddingbottom='16px' fontSize="24px" fontWeight="700" color="slamon">$240/night</GlobalParagraph>
                         <Box display="flex" justifyContent="flex-start" gap="16px">
                             <Button variant='outlined'><FavoriteBorderIcon /></Button>
@@ -85,8 +96,10 @@ const HistoryDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner />
-                <DetailDescription />
+                <DetailBanner bgimage={history?.banner as string} />
+                <DetailDescription>
+                    {parse((history?.body as string) || "")}
+                </DetailDescription>
                 <DetailMap />
                 {/* <DetailReviews />    */}
             </Container>

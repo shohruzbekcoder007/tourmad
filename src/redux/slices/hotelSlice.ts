@@ -108,19 +108,19 @@ export const getTripHotelList = createAsyncThunk('get-trip-hotel-list',
 )
 
 export const getHotelDetailInfo = createAsyncThunk('get-hotel-detail',
-async (id: string, { rejectWithValue }) => {
-    try {
-        const response = await TripHotelService.getHotelDetail(id);
-        const hotel_detail: RecommendationType = response.data;
-        return hotel_detail;
-    } catch (error) {
-        let errorMessage = 'Error';
-        if (error instanceof AxiosError && error.response?.data?.message) {
-            errorMessage = error.response.data.message;
+    async (id: string, { rejectWithValue }) => {
+        try {
+            const response = await TripHotelService.getHotelDetail(id);
+            const hotel_detail: RecommendationType = response.data;
+            return hotel_detail;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
         }
-        return rejectWithValue({ message: errorMessage });
     }
-}
 )
 
 
