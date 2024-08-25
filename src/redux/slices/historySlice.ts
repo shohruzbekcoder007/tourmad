@@ -15,6 +15,11 @@ export interface HistoryState {
     historyListCurrentPage: number,
     historyListTotalPages: number,
     searchLocation: string | null,
+    historyDetail: {
+        history: HistoryType | null,
+        status: 'idle' | "loading" | "succeeded" | "failed",
+        error: string | null
+    }
     commonLocationHistory: CommonLocationHistoryType[] | null
 }
 
@@ -29,7 +34,12 @@ const initialState: HistoryState = {
     historyListCurrentPage: 1,
     historyListTotalPages: 1,
     searchLocation: "",
-    commonLocationHistory: []
+    commonLocationHistory: [],
+    historyDetail: {
+        history: null,
+        status: "idle",
+        error: null
+    }
 }
 
 export const getTripHistoryList = createAsyncThunk('get-trip-history-list',
@@ -63,6 +73,22 @@ export const getCommonLocationHistory = createAsyncThunk('common-location-histor
         errorMessage = error.response.data.message;
       }
       return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getHistoryDetailInfo = createAsyncThunk('get-history-detail',
+    async (id: string, { rejectWithValue }) => {
+        try {
+            const response = await HistoryService.getHistoryDetail(id);
+            const history_detail: HistoryType = response.data;
+            return history_detail;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
         }
     }
 )
@@ -101,6 +127,19 @@ export const historySlice = createSlice({
                 state.statusHistoryList = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
+            .addCase(getHistoryDetailInfo.pending, (state) => {
+                state.historyDetail.status = "loading"
+                state.historyDetail.error = ''
+            })
+            .addCase(getHistoryDetailInfo.fulfilled, (state, action) => {
+                state.historyDetail.status = "succeeded"
+                state.historyDetail.history = action.payload
+            })
+            .addCase(getHistoryDetailInfo.rejected, (state, _) => {
+                state.historyDetail.status = "failed"
+                state.historyDetail.error = 'Xatolik yuzaga keldi'
+                // state.error = action.payload?.message || 'Failed to fetch hotel';
+            })
 
             .addCase(getCommonLocationHistory.pending, (state) => {
                 state.error = null;
@@ -128,6 +167,7 @@ export const getHistoryList = (state: RootState) => state.history.historyList
 export const getHistoryListPageSize = (state: RootState) => state.history.historyListPageSize
 export const getHistoryListCurrentPage = (state: RootState) => state.history.historyListCurrentPage
 export const getHistoryListTotalPages = (state: RootState) => state.history.historyListTotalPages
+export const getHistoryDetail = (state: RootState) => state.history.historyDetail
 export const getCommonLocationHistoryList = (state: RootState) => state.history.commonLocationHistory
 
 export default historySlice.reducer

@@ -25,10 +25,9 @@ class HistoryService {
 
     }
 
-    static hotelDetail = () => {
-        
+    static getHistoryDetail = (id: string) => {
+        return getRequest(`${history_trip_history}/${id}`)
     }
-
    
 }
 
