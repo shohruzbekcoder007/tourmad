@@ -1,5 +1,5 @@
 import { ConsultingState } from '../redux/slices/consultingSlice'
-import { consulting_category_list, consulting_list } from '../utils/API_urls'
+import { consulting_category_list, consulting_detail, consulting_list } from '../utils/API_urls'
 import { getRequest } from '../utils/request'
 
 class ConsultingService {
@@ -11,6 +11,10 @@ class ConsultingService {
 
     static tripConsultingCategory = () => {
         return getRequest(consulting_category_list)
+    }
+
+    static getConsultingDetail = (id: string) => {
+        return getRequest(`${consulting_detail}/${id}`)
     }
 }
 

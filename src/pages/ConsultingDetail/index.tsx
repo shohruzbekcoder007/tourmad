@@ -12,6 +12,9 @@ import ShareIcon from '@mui/icons-material/Share';
 import DetailBanner from '../../components/DetailBanner';
 import DetailDescription from '../../components/DetailDescription';
 import DetailMap from '../../components/DetailMap';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getConsultingDetail, getConsultingDetailInfo } from '../../redux/slices/consultingSlice';
 // import DetailReviews from '../../components/DetailReviews';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -22,6 +25,13 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 const ConsultingDetail: React.FC = () => {
     const value: number | null = 5;
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+    const dispatch = useAppDispatch()
+    const {consulting} = useAppSelector(getConsultingDetail)
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        dispatch(getConsultingDetailInfo(id as string))
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,14 +65,14 @@ const ConsultingDetail: React.FC = () => {
                             <Link underline="hover" color="inherit" href="/">
                                 Samarqand
                             </Link>
-                            <Typography color="text.primary">Registan square</Typography>
+                            <Typography color="text.primary">{consulting?.name}</Typography>
                         </Breadcrumbs>
                     </div>
                 </Box>
                 <Box pb="32px" display="flex" justifyContent="space-between" gap="16px" flexWrap="wrap">
                     <Box>
                         <Box pb="12px" display="flex" justifyContent="flex-start" gap="5px" alignItems="center" flexWrap="wrap">
-                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>Registan square</WelcomeMainText>
+                            <WelcomeMainText fontSize='24px' mediafontsize='18px' part="true" texttransform='capitalize'>{consulting?.name}</WelcomeMainText>
                             <Rating name="disabled" value={value} disabled />
                             <GlobalParagraph fontSize="12px" fontWeight="500">5 Star consulting</GlobalParagraph>
                         </Box>

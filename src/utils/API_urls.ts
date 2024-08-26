@@ -41,3 +41,4 @@ export const history_trip_category = "history/trip-category";
 export const trip_history_or_place = "history/trip-history-or-place";
 
 export const common_location_history = "common/location-history";
+export const consulting_detail = "consulting/detail"
