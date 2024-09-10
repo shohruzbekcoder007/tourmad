@@ -48,6 +48,7 @@ const ConsultingDetail: React.FC = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    console.log(consulting, "consulting detail")
     return (
         <Stack>
             <HeaderWrapper>

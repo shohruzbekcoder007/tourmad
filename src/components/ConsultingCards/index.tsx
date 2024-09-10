@@ -55,7 +55,6 @@ const ConsultingCards: React.FC = () => {
   return (
     <>
       <Stack pb="80px" mb="80px">
-        <div>{t("hello")}</div>
         <Grid container>
           <Grid item xl={8} md={8} sm={6} xs={8}>
             <WelcomeMainText
