@@ -108,6 +108,7 @@ export type HistoryType = {
   location: LocationType | null;
   latitude: number | null;
   longitude: number | null;
+  gallery: GalleryType[] | null
 };
 
 export type ConsultingCategoryType = {
