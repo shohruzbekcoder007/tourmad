@@ -242,6 +242,8 @@ const DriveFilter: React.FC = () => {
                                         onChange={handleChange}
                                         valueLabelDisplay="auto"
                                         getAriaValueText={valuetext}
+                                        min={MIN}
+                                        max={MAX}
                                     />
                                     <Box
                                         sx={{ display: "flex", justifyContent: "space-between" }}
