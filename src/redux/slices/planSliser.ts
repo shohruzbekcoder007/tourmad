@@ -87,6 +87,7 @@ export const getTripPlanList = createAsyncThunk(
     try {
       let state = getState();
       const response = await PlanService.plantList(state);
+      console.log(response, "response")
       const plan_list: HistoryType[] = response.data?.results;
       const total_pages: number = response.data?.total_pages || 1;
       const current_page: number = response.data?.current_page || 1;
