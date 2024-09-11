@@ -5,7 +5,6 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { CustomAutocomplete } from '../../helper_components';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HotelFilterCard from '../HotelFilterCard';
 import { useNavigate } from 'react-router-dom';
 import PlanCategory from '../PlanCategory';
@@ -68,7 +67,7 @@ const PlanFilter: React.FC = () => {
     return (
         <Stack mt='40px'>
             <Box pb="40px" display="flex" justifyContent="space-between">
-                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Restaurant Filter</WelcomeMainText>
+                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Plan Filter</WelcomeMainText>
                 <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
             </Box>
             <Paper

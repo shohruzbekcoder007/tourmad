@@ -28,7 +28,7 @@ class PlanService {
     } = plan;
 
     return getRequest(
-      `${trip_history_or_place}?size=${planListPageSize || ""}&page=${
+      `${trip_history_or_place}?size=${10}&page=${
         planListCurrentPage || ""
       }&location=${searchLocation || ""}&search=${searchText}&category=${
         categoryID || ""
