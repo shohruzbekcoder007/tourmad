@@ -34,7 +34,7 @@ const History: React.FC = () => {
                 </Container>
             </HeaderWrapper>
             <BannerMain bgimage={banner_photo} heightprops='400px'
-                bannersubtitle='Hitory' bannertitle='Hitory.' />
+                bannersubtitle="From the ancient Silk Road to modern independence, Uzbekistan's history is a vibrant tapestry of culture, trade, and empire" bannertitle='Explore the Rich History of Uzbekistan.' />
             <Container>
                 <HistoryService />
             </Container>
