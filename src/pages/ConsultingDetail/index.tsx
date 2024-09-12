@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AuthUserInfo, Footer, Header, ProtectedLinks, } from '../../components'
-import { Box, Button, Container, IconButton, Popover, Rating, Snackbar, Stack } from '@mui/material'
+import { Box, Button, Container, IconButton, Popover, Snackbar, Stack } from '@mui/material'
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { HeaderWrapper } from './styles'
