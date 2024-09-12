@@ -162,7 +162,7 @@ const DriveFilter: React.FC = () => {
         if(driverPriceTo !== sliderValue[1]) {
           dispatch(changePriceTo(sliderValue[1]))
         }
-      }, [value, dispatch])
+      }, [sliderValue, dispatch, driverPriceFrom, driverPriceTo])
 
 
     const search = () => {
