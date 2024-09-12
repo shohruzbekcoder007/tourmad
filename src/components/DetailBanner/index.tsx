@@ -7,6 +7,7 @@ import { GalleryType } from '../../utils/response_types';
 type PropsType = {
   bgimage?: string
   gallery?: GalleryType[] | null;
+  name?: string
 }
 
 const DetailBanner: React.FC<PropsType> = (props) => {
@@ -15,7 +16,7 @@ const DetailBanner: React.FC<PropsType> = (props) => {
     <Stack width="100%" position="relative">
       <img src={props?.bgimage || detail_banner_img} width="100%" style={{ objectFit: "cover", borderRadius: "12px" }} alt="" />
       {
-        props?.gallery?.length !== 0 && (
+        props?.name!=="consulting" && props?.gallery?.length !== 0 && (
           <ImgListDrawer name="Gallery" galeryList={props?.gallery?.map((item) => {
             return {
               image: item.image,
