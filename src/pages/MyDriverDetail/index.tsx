@@ -58,11 +58,19 @@ const MyDriverDetail: React.FC = () => {
 
     const changePageHandler = (page: number) => {
         dispatch(changeReviewPage(page))
-      }
+    }
 
-    function reviewSend (data: {id: string, review: DriveClientReviewType}) {
+    function reviewSend(data: { id: string, review: DriveClientReviewType }) {
         dispatch(getNewReviewAction(data))
     }
+
+    const galleries = driverDetail.driver?.galleries?.map((gallery) => ({
+        ...gallery,
+        id: Number(gallery.id), // Convert id to number
+    })) || [];
+
+
+    console.log(driverDetail, "driverDetail")
 
     return (
         <Stack>
@@ -130,7 +138,7 @@ const MyDriverDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DriverDetailBanner bgimage={driverDetail.driver?.banner} />
+                <DriverDetailBanner bgimage={driverDetail.driver?.banner} gallery={galleries} />
                 <DetailDescription >
                     {parse((driverDetail.driver?.description as string) || "")}
                 </DetailDescription>
@@ -140,7 +148,7 @@ const MyDriverDetail: React.FC = () => {
                     </Box>
                     <Box pb="24px" display="flex" justifyContent="space-between">
                         <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px'>Reviews</GlobalParagraph>
-                        <InputReview btnText='Give your review' reviewSend={reviewSend} id={id}  message={newReview.NewReviewMessage} />
+                        <InputReview btnText='Give your review' reviewSend={reviewSend} id={id} message={newReview.NewReviewMessage} />
                     </Box>
                     <Box display='flex' justifyContent='flex-start' gap="16px" alignItems="center">
                         <GlobalParagraph fontSize='50px' mediafontsize='32px' fontWeight='700'>{driverDetail.driver?.avg_rate}</GlobalParagraph>
@@ -153,16 +161,16 @@ const MyDriverDetail: React.FC = () => {
                         driverReview.review?.map((item, index) => {
                             return (
                                 <DetailReviews key={index + 1}
-                                id={item.id}
-                                created_at={item.created_at}
-                                user={item.user}
-                                rate={item.rate}
-                                review={item.review} />
+                                    id={item.id}
+                                    created_at={item.created_at}
+                                    user={item.user}
+                                    rate={item.rate}
+                                    review={item.review} />
                             )
                         })
                     }
                     <Box display="flex" justifyContent="center">
-                        <Pagination count={driverReview.reviewTotelPage} page={driverReview.reviewCurrentPage} color="primary" onChange={(_, page) => { changePageHandler(page)}} />
+                        <Pagination count={driverReview.reviewTotelPage} page={driverReview.reviewCurrentPage} color="primary" onChange={(_, page) => { changePageHandler(page) }} />
                     </Box>
                 </Stack>
             </Container>
