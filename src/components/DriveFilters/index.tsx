@@ -157,10 +157,10 @@ const DriveFilter: React.FC = () => {
 
     useEffect(() => {
         if(driverPriceFrom !== sliderValue[0]) {
-          dispatch(changePriceFrom(sliderValue[0]*10))
+          dispatch(changePriceFrom(sliderValue[0]))
         }
         if(driverPriceTo !== sliderValue[1]) {
-          dispatch(changePriceTo(sliderValue[1]*10))
+          dispatch(changePriceTo(sliderValue[1]))
         }
       }, [value, dispatch])
 
