@@ -1,6 +1,6 @@
 import React from 'react'
 import "./styles.css";
-import Particles from 'react-tsparticles';
+// import Particles from 'react-tsparticles';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const Error: React.FC = () => {
 			
 
 			<div id="particles-js">
-			<Particles
+			{/* <Particles
 				id="tsparticles"
 				options={{
 				particles: {
@@ -95,7 +95,7 @@ const Error: React.FC = () => {
 				},
 				retina_detect: true
 				}}
-			/>
+			/> */}
 			</div>
 			<Button sx={{width: "100%"}} onClick={() => naigate("/")}>Back to homepage</Button>
 		</div>
