@@ -18,6 +18,7 @@ const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    navigate('/users')
   };
 
   return (
