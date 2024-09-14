@@ -3,6 +3,7 @@ import "./styles.css";
 import { Link } from 'react-router-dom';
 
 const Error: React.FC = () => {
+
   return (
     <div id="notfound">
 		<div className="notfound">
@@ -14,6 +15,7 @@ const Error: React.FC = () => {
 		</div>
 	</div>
   )
+
 }
 
 export default Error

@@ -56,7 +56,7 @@ const marks = [
 ];
 
 function valuetext(value: number) {
-    return `${value}°C`;
+    return `${value}`;
 }
 
 const DriveFilter: React.FC = () => {
@@ -65,7 +65,7 @@ const DriveFilter: React.FC = () => {
     const [fromLanguage, setFromLanguage] = useState<Option | null>(null)
     const [openPrice, setOpenPrice] = React.useState(true);
     const [openRating, setOpenRating] = React.useState(true);
-    const [value, setValue] = React.useState<number[]>([0, 100]);
+    const [value, setValue] = React.useState<number[]>([0, 1000]);
     const [age, setAge] = React.useState(driver_styles[0].value);
 
     const [sliderValue] =useDebounce(value, 1000)
@@ -237,7 +237,8 @@ const DriveFilter: React.FC = () => {
                                 <List component="div" sx={{ pt: "16px" }} disablePadding>
                                     <Slider
                                         marks={marks}
-                                        getAriaLabel={() => "Temperature range"}
+                                        getAriaLabel={() => "Temperature"}
+                                        
                                         value={value}
                                         onChange={handleChange}
                                         valueLabelDisplay="auto"
@@ -348,7 +349,7 @@ const DriveFilter: React.FC = () => {
                         pb="24px"
                     >
                         <GlobalParagraph fontSize="14px" mediafontsize="12px" fontWeight="600">
-                            Showing 4 of <span style={{ color: `#FF8682` }}>257 places</span>
+                            {/* Showing 4 of <span style={{ color: `#FF8682` }}>{} places</span> */}
                         </GlobalParagraph>
                         <Box width="250px" display={{ xl: "block", md: "block", sm: "none", xs: "none" }}>
                             <FormControl fullWidth size="small">
