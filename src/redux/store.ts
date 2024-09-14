@@ -12,6 +12,7 @@ import tripSlice from './slices/tripSlice'
 import commonLanguageSlice from './slices/commonLanguage'
 import planSlice from './slices/planSliser'
 import homeSlice from './slices/homeSlice'
+import accountSlice from './slices/accountSlice'
 
 const store = configureStore({
   reducer: {
@@ -27,7 +28,8 @@ const store = configureStore({
     trip: tripSlice,
     commonlanguage: commonLanguageSlice,
     home: homeSlice,
-    plan: planSlice
+    plan: planSlice,
+    account: accountSlice
   },
 })
 

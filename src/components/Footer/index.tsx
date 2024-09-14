@@ -8,8 +8,24 @@ import logoFooter from './../../media/images/logo2.png'
 import React from "react";
 import { FooterBottom, FooterBox, FooterLink, FooterList, FooterLogo, FooterLogoImg, FooterSubscribe, FooterTop, FooterTopPhoto } from "./styles";
 import { Container, GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
+import { AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { getAccountSubscribe } from "../../redux/slices/accountSlice";
+import { enqueueSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
+    const [email, setEmail] = React.useState('');
+    const dispatch: AppDispatch = useDispatch()
+
+    function accountSubscribe () {
+        dispatch(getAccountSubscribe({email: email}))
+        setEmail("")
+        enqueueSnackbar(`Rahmat sizga so'rovingiz qabul qilindi!`, {
+            variant: "success"
+          })
+    }
+
     return (
         <FooterBox>
             <Container>
@@ -26,13 +42,18 @@ const Footer: React.FC = () => {
                                 Get inspired! Receive travel discounts, tips and behind the scenes stories.
                             </GlobalParagraph>
                             <Box>
-                                <TextField id="outlined-basic" label="Your email address" variant="outlined" sx={{
+                                <TextField id="outlined-basic" type="email" label="Your email address" 
+                                    value={email}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                      setEmail(event.target.value);
+                                    }}
+                                variant="outlined" sx={{
                                     background: "#fff",
                                     border: "none",
                                     borderRadius: "4px",
                                     width: {xl: "450px", md: "450px", sm: "250px", xs: "100%"},
                                 }}/>
-                                <Button  variant="contained" sx={{
+                                <Button onClick={accountSubscribe}  variant="contained" sx={{
                                     color: "#fff",
                                     background: "#000", 
                                     marginLeft: {xl: "24px", md: "24px", sm: "24px", xs: 0},
@@ -69,87 +90,45 @@ const Footer: React.FC = () => {
                                     <InstagramIcon fontSize="small" sx={{color: '#112211'}} />
                                 </IconButton>
                                 </Stack>
-                        </FooterLogo>
-                        <FooterLink>
-                            <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                Our Destinations
-                            </GlobalParagraph>
-                            <ul typeof="none">
-                                <li>
-                                    <FooterList>Canada</FooterList>
-                                </li>
-                                <li>
-                                    <FooterList>Alaksa</FooterList>
-                                </li>
-                                <li>
-                                    <FooterList>France</FooterList>
-                                </li>
-                                <li>
-                                    <FooterList>Iceland</FooterList>
-                                </li>
-                            </ul>
-                        </FooterLink>  
+                        </FooterLogo>  
                         <FooterLink>
                             <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
                                 Our Activities
                             </GlobalParagraph>
                             <ul typeof="none">
                                 <li>
-                                    <FooterList>Northern Lights</FooterList>
+                                    <FooterList><Link to="/protected">Trip Advisor</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Cruising & sailing</FooterList>
+                                    <FooterList><Link to="/my-driver">My Driver</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Multi-activities</FooterList>
+                                    <FooterList><Link to="/consulting">Consulting</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Kayaing</FooterList>
+                                    <FooterList><Link to="/history">History</Link></FooterList>
                                 </li>
                             </ul>
-                        </FooterLink>
+                        </FooterLink> 
                         <FooterLink>
                             <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                Travel Blogs
+                                Trips
                             </GlobalParagraph>
                             <ul typeof="none">
                                 <li>
-                                    <FooterList>Bali Travel Guide</FooterList>
+                                    <FooterList><Link to="/protected/hotel">Hotel</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Sri Lanks Travel Guide</FooterList>
+                                    <FooterList><Link to="/protected/ticket">Ticket</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Peru Travel Guide</FooterList>
+                                    <FooterList><Link to="/protected/restaurant">Restaurant</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Bali Travel Guide</FooterList>
-                                </li>
-                            </ul>
-                        </FooterLink>
-                        <FooterLink>
-                            <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                About Us
-                            </GlobalParagraph>
-                            <ul typeof="none">
-                                <li>
-                                    <FooterList>Our Story</FooterList>
+                                    <FooterList><Link to="/protected/drive">Driver</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList>Work with us</FooterList>
-                                </li>
-                            </ul>
-                        </FooterLink>
-                        <FooterLink>
-                            <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                Contact Us
-                            </GlobalParagraph>
-                            <ul typeof="none">
-                                <li>
-                                    <FooterList>Our Story</FooterList>
-                                </li>
-                                <li>
-                                    <FooterList>Work with us</FooterList>
+                                    <FooterList><Link to="/protected/plan">Plan</Link></FooterList>
                                 </li>
                             </ul>
                         </FooterLink>  

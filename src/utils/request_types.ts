@@ -20,3 +20,7 @@ export type RestaurantToTripType = {
     restaurant: number,
     time: string
 }
+
+export type SubscribeType = {
+    email: string | ""
+}
