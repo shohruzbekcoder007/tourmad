@@ -11,7 +11,6 @@ import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useTranslation } from "react-i18next";
 import {
   changePage,
   getConsultingList,
@@ -24,7 +23,6 @@ import {
 import { ConsultingType } from "../../utils/response_types";
 
 const ConsultingCards: React.FC = () => {
-  const {t} = useTranslation()
   
   const navigate = useNavigate();
 
