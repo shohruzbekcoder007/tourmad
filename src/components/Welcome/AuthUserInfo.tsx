@@ -5,7 +5,6 @@ import { Button, Paper } from '@mui/material'
 import { useAppSelector } from '../../redux/hooks'
 import { getUserStatus } from '../../redux/slices/userSlice'
 import FavouritesUser from '../FavouritesUser'
-import LanguageSelect from '../LanguageSelect'
 
 const AuthUserInfo: React.FC = () => {
 
@@ -15,7 +14,6 @@ const AuthUserInfo: React.FC = () => {
         return (
             <>
             <AuthUser>
-            <LanguageSelect/>
                 {/* <Link to="sign-in"> */}
                 <Link to="/sign-in">
                     <Button

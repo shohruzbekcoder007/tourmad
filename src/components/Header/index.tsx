@@ -9,6 +9,7 @@ import CastleIcon from '@mui/icons-material/Castle';
 import ResponsiveMenu from "../ResponsiveMenu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import LanguageSelect from "../LanguageSelect";
 type HeaderProps = {
     auth?: React.ReactElement;
     logo: boolean,
@@ -70,9 +71,14 @@ const Header: React.FC<HeaderProps> = ({ auth, logo, type="white", divider=false
                     <HeaderMenuListItemText>{t("history")}</HeaderMenuListItemText>
                 </HeaderMenuListItem>
             </HeadeMenuList>
-            {
-                auth ?? <Box></Box>
-            }
+            <Box
+                display="flex"
+            >
+                <LanguageSelect/>
+                {
+                    auth ?? <Box></Box>
+                }
+            </Box>
         </HeaderWrapper>
     );
 };
