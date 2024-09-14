@@ -21,6 +21,7 @@ export const consulting_category_list = "consulting/categories";
 export const trip_restaurant = "trip/trip-restaurant";
 
 export const trip_list = "/trip/trip-list";
+export const trip_trip = "/trip/trip";
 
 export const driver_list = "drive/drivers";
 export const driver_detail = "/drive/driver/";

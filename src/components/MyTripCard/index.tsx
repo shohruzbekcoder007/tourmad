@@ -13,6 +13,8 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TripType } from '../../utils/response_types';
+import { deleteTrip } from '../../redux/slices/tripSlice';
+import { useAppDispatch } from '../../redux/hooks';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -50,15 +52,21 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
     const handleOpenDelete = () => setOpenDelete(true);
     const handleCloseDelete = () => setOpenDelete(false);
     const [openEdit, setOpenEdit] = React.useState(false);
-    const handleOpenEdit = () => setOpenEdit(true);
+    // const handleOpenEdit = () => setOpenEdit(true);
     const handleCloseEdit = () => setOpenEdit(false);
     const [from, setFrom] = useState<Option | null>(null)
+
+    const dispatch = useAppDispatch();
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
     }
 
     useEffect(() => { }, [from]) 
+
+    const deleteTripHandler = (trip_id: number) => {
+        dispatch(deleteTrip(trip_id))
+    }
     
     return (
         <Stack>
@@ -93,11 +101,11 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                             icon={<DeleteIcon />}
                             tooltipTitle="Delete"
                         />
-                        <SpeedDialAction
+                        {/* <SpeedDialAction
                             onClick={handleOpenEdit}
                             icon={<EditIcon />}
                             tooltipTitle="Edit"
-                        />
+                        /> */}
                     </SpeedDial>
                 </Box>
                 <Modal
@@ -113,7 +121,13 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                             Are you sure you want to delete?
                         </Typography>
-                        <Button sx={{ mt: '20px' }} color='warning'>Delete</Button>
+                        <Button 
+                            sx={{ mt: '20px' }}
+                            color='warning'
+                            onClick={() => {deleteTripHandler(trip?.id as number)}}
+                        >
+                            Delete
+                        </Button>
                     </Box>
                 </Modal>
                 <Modal

@@ -1,5 +1,5 @@
-import { trip_hotel_oder, trip_list, trip_restaurant_oder } from "../utils/API_urls"
-import { getRequest, postRequest } from "../utils/request"
+import { trip_hotel_oder, trip_list, trip_restaurant_oder, trip_trip } from "../utils/API_urls"
+import { deleteRequest, getRequest, postRequest } from "../utils/request"
 import { HotelToTripType, RestaurantToTripType, TripCreateType } from "../utils/request_types"
 
 class TripService {
@@ -21,7 +21,7 @@ class TripService {
     }
 
     static deleteTrip = (trip_id: number) => {
-        return getRequest(`${trip_list}/${trip_id}`)
+        return deleteRequest(`${trip_trip}/${trip_id}`)
     }
 
 }
