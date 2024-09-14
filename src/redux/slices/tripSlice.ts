@@ -117,7 +117,7 @@ export const deleteTrip = createAsyncThunk('delete-trip',
     async (trip_id: number, { rejectWithValue }) => {
         try {
             const response = await TripService.deleteTrip(trip_id)
-            return response.data
+            return {response: response, trip_id}
         } catch (error: AxiosError | any) {
             let errorMessage = 'Error'
             let errorList: string[] = []
@@ -232,7 +232,7 @@ export const tripSlice = createSlice({
             state.tripList.tripListStatus = "loading";
         })
         .addCase(deleteTrip.fulfilled, (state, action) => {
-            state.tripList.tripList = state.tripList.tripList?.filter((trip: TripType) => trip.id !== action.payload) || []
+            state.tripList.tripList = state.tripList.tripList?.filter((trip: TripType) => trip.id !== action.payload?.trip_id) || []
             state.tripList.tripListLoading = false;
             state.tripList.tripListMessage = "";
             state.tripList.tripListStatus = "succeeded";

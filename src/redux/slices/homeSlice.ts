@@ -25,7 +25,6 @@ export const getHomeBanner = createAsyncThunk('home-banner',
         try {
             const response = await HomeService.getBanner();
             const home_banner_data: HomeBannerType = response.data.results[0];
-            console.log(home_banner_data);
             return home_banner_data;
         } catch (error) {
             let errorMessage = 'Error';

@@ -157,12 +157,12 @@ const DriveFilter: React.FC = () => {
 
     useEffect(() => {
         if(driverPriceFrom !== sliderValue[0]) {
-          dispatch(changePriceFrom(sliderValue[0]*10))
+          dispatch(changePriceFrom(sliderValue[0]))
         }
         if(driverPriceTo !== sliderValue[1]) {
-          dispatch(changePriceTo(sliderValue[1]*10))
+          dispatch(changePriceTo(sliderValue[1]))
         }
-      }, [value, dispatch])
+      }, [sliderValue, dispatch, driverPriceFrom, driverPriceTo])
 
 
     const search = () => {
@@ -243,6 +243,8 @@ const DriveFilter: React.FC = () => {
                                         onChange={handleChange}
                                         valueLabelDisplay="auto"
                                         getAriaValueText={valuetext}
+                                        min={MIN}
+                                        max={MAX}
                                     />
                                     <Box
                                         sx={{ display: "flex", justifyContent: "space-between" }}
