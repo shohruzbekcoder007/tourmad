@@ -45,3 +45,5 @@ export const common_location_history = "common/location-history";
 export const consulting_detail = "consulting/detail"
 
 export const accounts_subscribe_create = "accounts/subscribe";
+
+export const accounts_profile = "accounts/profile/"

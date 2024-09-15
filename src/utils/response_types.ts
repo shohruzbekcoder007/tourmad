@@ -34,6 +34,20 @@ export type UserType = {
   role: "user" | "admin";
 };
 
+export type AccountType = {
+  email: string | null;
+  username: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  middle_name: string | null;
+  gender: string | null;
+  role: string | null;
+  phone_number: string | null;
+  birth_date: string | null;
+  address: string | null;
+  avatar: string | null
+}
+
 export type UserDrivers = {
   birth_date: Date | null;
   email: string | null;

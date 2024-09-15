@@ -6,8 +6,11 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import EditIcon from '@mui/icons-material/Edit';
 import { BoxStyle } from './stayles';
 import { GlobalParagraph } from '../../global_styles/styles';
+import { useAppSelector } from '../../redux/hooks';
+import { getAccountInfo } from '../../redux/slices/userSlice';
 
 const UsersBanner: React.FC = () => {
+  const userInfo = useAppSelector(getAccountInfo)
   return (
     <Stack mt='48px'>
       <Box sx={{
@@ -27,7 +30,7 @@ const UsersBanner: React.FC = () => {
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{transform: "translateY(-80px)"}}>
         <BoxStyle>
-            <img src={users} alt='User Name' style={{
+            <img src={`${userInfo?.avatar}`} alt='User Name' style={{
             width: "100%", 
             height: "100%", 
             objectFit: "cover", 
@@ -43,8 +46,8 @@ const UsersBanner: React.FC = () => {
             </Button>
         </BoxStyle>
         <Box mt="24px" textAlign="center">
-            <GlobalParagraph fontSize='24px' fontWeight='600' paddingbottom='8px'>Sevda</GlobalParagraph>
-            <GlobalParagraph fontSize='16' fontWeight='400' oposity='0.75'>sevda@gmail.com</GlobalParagraph>
+            <GlobalParagraph fontSize='24px' fontWeight='600' paddingbottom='8px'>{userInfo?.username}</GlobalParagraph>
+            <GlobalParagraph fontSize='16' fontWeight='400' oposity='0.75'>{userInfo?.email}</GlobalParagraph>
         </Box>
       </Box>
     </Stack>
