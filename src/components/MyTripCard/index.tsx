@@ -6,7 +6,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CustomAutocomplete } from '../../helper_components';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';

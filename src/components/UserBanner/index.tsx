@@ -1,7 +1,6 @@
 import { Box, Button, Stack } from '@mui/material';
 import React from 'react';
 import photo_banner from "./../../media/images/user-banner.jpg";
-import users from "./../../media/images/users.png";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import EditIcon from '@mui/icons-material/Edit';
 import { BoxStyle } from './stayles';

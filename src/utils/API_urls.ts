@@ -42,8 +42,10 @@ export const history_trip_category = "history/trip-category";
 export const trip_history_or_place = "history/trip-history-or-place";
 
 export const common_location_history = "common/location-history";
-export const consulting_detail = "consulting/detail"
+export const consulting_detail = "consulting/detail";
 
 export const accounts_subscribe_create = "accounts/subscribe";
 
-export const accounts_profile = "accounts/profile/"
+export const accounts_profile = "accounts/profile/";
+
+export const trip_trip_drive = "trip/trip-drive/";

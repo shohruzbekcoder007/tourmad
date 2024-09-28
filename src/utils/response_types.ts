@@ -45,8 +45,8 @@ export type AccountType = {
   phone_number: string | null;
   birth_date: string | null;
   address: string | null;
-  avatar: string | null
-}
+  avatar: string | null;
+};
 
 export type UserDrivers = {
   birth_date: Date | null;
@@ -74,7 +74,6 @@ export type RecommendationType = {
   price: number | null;
 };
 
-
 export type CommonLocationType = {
   id: number;
   name: string;
@@ -100,14 +99,14 @@ export type CommonLocationHistoryType = {
   name: string | null;
   parent: number | null;
   photo: string | null;
-  history: number | null
+  history: number | null;
   hotels?: number | null;
   restaurants?: number | null;
   drivers: number | null;
   logo: string | null;
   title: string | null;
   count: number | null;
-}
+};
 
 export type HistoryType = {
   id: number | null;
@@ -122,7 +121,7 @@ export type HistoryType = {
   location: LocationType | null;
   latitude: number | null;
   longitude: number | null;
-  gallery: GalleryType[] | null
+  gallery: GalleryType[] | null;
 };
 
 export type ConsultingCategoryType = {
@@ -282,4 +281,34 @@ export type RecommendationPlanType = {
   audio: string | null;
   longitude: number | null;
   latitude: number | null;
+};
+export type TripDriveDetailUser = {
+  first_name: string | null;
+  last_name: string | null;
+  middle_name: string | null;
+  gender: string | null;
+  birth_date: string | null;
+  email: string | null;
+  avatar: string | null;
+};
+export type TripDriveDetailLocation = {
+  id: number | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+};
+export type TripDriveDetail = {
+  id: number | null;
+  user: TripDriveDetailUser | null;
+  name: string | null;
+  card: string | null;
+  banner: string | null;
+  price: number | null;
+  location: TripDriveDetailLocation | null;
+  auto_model: string | null;
+  auto_number: string | null;
+  auto_photo: string | null;
+  trip_drive_reviews: string[] | null;
+  reviews_count: number | null;
+  avg_rate: number | null;
 };
