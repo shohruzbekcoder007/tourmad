@@ -240,7 +240,7 @@ const RestaurantDetail: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <DetailBanner bgimage={`${restaurant?.banner}`} />
+        <DetailBanner bgimage={`${restaurant?.banner}`} gallery={restaurant?.gallery} name={restaurant?.name} />
         <DetailDescription>
           {parse((restaurant?.body as string) || "")}
         </DetailDescription>

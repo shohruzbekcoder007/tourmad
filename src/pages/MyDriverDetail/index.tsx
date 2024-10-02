@@ -328,7 +328,7 @@ const MyDriverDetail: React.FC = () => {
         </Box>
         <DriverDetailBanner
           bgimage={driverDetail.driver?.banner}
-          gallery={galleries}
+          gallery={galleries}    
         />
         <DetailDescription>
           {parse((driverDetail.driver?.description as string) || "")}

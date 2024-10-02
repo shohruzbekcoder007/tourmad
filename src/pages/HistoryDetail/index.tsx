@@ -167,7 +167,7 @@ const HistoryDetail: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
-                <DetailBanner bgimage={history?.banner as string} gallery={history?.gallery} />
+                <DetailBanner bgimage={history?.banner as string} gallery={history?.gallery} name={history?.name}/>
                 <DetailDescription>
                     {parse((history?.body as string) || "")}
                 </DetailDescription>

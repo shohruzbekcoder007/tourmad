@@ -253,7 +253,7 @@ const HotelDetail: React.FC = () => {
             </Box>
           </Box>
         </Box>
-        <DetailBanner bgimage={`${hotel?.banner}`} />
+        <DetailBanner bgimage={`${hotel?.banner}`} gallery={hotel?.gallery} name={hotel?.name}/>
         <DetailDescription>
           {parse((hotel?.body as string) || "")}
         </DetailDescription>
