@@ -22,7 +22,8 @@ type PropsType = {
     button: React.ReactNode,
     hotel_id?: number | null,
     restaurant_id?: number | null,
-    addType?: "hotel" | "restaurant" | "history"
+    plan_id?: number | null,
+    addType?: "hotel" | "restaurant" | "history" | "plan-detail"
 }
 
 type Anchor = 'right';

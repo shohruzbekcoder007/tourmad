@@ -2,6 +2,7 @@ import { PlantStateI } from "../redux/slices/planSliser";
 import {
   common_location_history,
   history_trip_category,
+  history_trip_history,
   recommendation_trip_palan,
   trip_history_or_place,
 } from "../utils/API_urls";
@@ -37,7 +38,7 @@ class PlanService {
   };
 
   static getPlanDetail = (id: string) => {
-    return getRequest(`${trip_history_or_place}/${id}`);
+    return getRequest(`${history_trip_history}/${id}`);
   };
 
   static getCommonLocationHistory = () => {

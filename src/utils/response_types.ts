@@ -93,6 +93,33 @@ export type HistoryOrPlaceCategryType = {
   title: string | null;
   count: number | null;
 };
+export type PlanDetailTypeCategory = {
+  id: number | null;
+  title: string | null;
+  logo: string | null;
+  count: number | null
+}
+export type PlanDetailTypeLocation = {
+  id: number | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+}
+export type PlanDetailType = {
+  id: number | null;
+  name: string | null;
+  desc: string | null;
+  banner: string | null;
+  card: string | null;
+  category: PlanDetailTypeCategory | null;
+  body: string | null;
+  audio: string | null;
+  location: PlanDetailTypeLocation | null;
+  latitude: number | null;
+  longitude: number | null;
+  gallery_count: number | null;
+  gallery: GalleryType[] | null;
+}
 
 export type CommonLocationHistoryType = {
   id: number | null;

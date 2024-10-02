@@ -6,7 +6,6 @@ import {
   Container,
   IconButton,
   Popover,
-  Rating,
   Snackbar,
   Stack,
 } from "@mui/material";
@@ -22,6 +21,7 @@ import DetailBanner from "../../components/DetailBanner";
 import DetailDescription from "../../components/DetailDescription";
 import DetailMap from "../../components/DetailMap";
 // import DetailReviews from '../../components/DetailReviews';
+import parse from 'html-react-parser';
 import LinkIcon from "@mui/icons-material/Link";
 import {
   FacebookIcon,
@@ -32,6 +32,10 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useParams } from "react-router-dom";
+import { getPlanDetail, getPlanDetailInfo } from "../../redux/slices/planSliser";
+import SwipeDrawer from "../../components/SwipeDrawer";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -39,11 +43,12 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const PlanDetail: React.FC = () => {
-  const value: number | null = 5;
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
+  const dispatch = useAppDispatch()
+  const { id } = useParams<{ id: string }>()
+  const plan_detail = useAppSelector(getPlanDetail)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 400) {
@@ -80,6 +85,11 @@ const PlanDetail: React.FC = () => {
   const open = Boolean(anchorEl);
   const popoverId = open ? "share-popover" : undefined;
 
+
+  useEffect(() => {
+    dispatch(getPlanDetailInfo(id as string))
+  }, [id, dispatch])
+
   return (
     <Stack>
       <HeaderWrapper>
@@ -97,9 +107,9 @@ const PlanDetail: React.FC = () => {
           <div role="presentation" onClick={handleClick}>
             <Breadcrumbs aria-label="breadcrumb">
               <Link underline="hover" color="inherit" href="/">
-                Samarqand
+                {plan_detail?.plan_detail?.location?.name}
               </Link>
-              <Typography color="text.primary">Registan square</Typography>
+              <Typography color="text.primary">{plan_detail?.plan_detail?.name}</Typography>
             </Breadcrumbs>
           </div>
         </Box>
@@ -125,12 +135,8 @@ const PlanDetail: React.FC = () => {
                 part="true"
                 texttransform="capitalize"
               >
-                Registan square
+                {plan_detail?.plan_detail?.name}
               </WelcomeMainText>
-              <Rating name="disabled" value={value} disabled />
-              <GlobalParagraph fontSize="12px" fontWeight="500">
-                5 Star plan
-              </GlobalParagraph>
             </Box>
             <Box
               pb="12px"
@@ -141,33 +147,12 @@ const PlanDetail: React.FC = () => {
             >
               <LocationOnIcon />
               <GlobalParagraph fontSize="12px" fontWeight="500" oposity="0.75">
-                Samarqand
-              </GlobalParagraph>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-start"
-              gap="5px"
-            >
-              <Button variant="outlined">4.2</Button>
-              <GlobalParagraph fontSize="12px" fontWeight="700">
-                Very Good
-              </GlobalParagraph>
-              <GlobalParagraph fontSize="12px" fontWeight="500">
-                371 reviews
+                {plan_detail?.plan_detail?.location?.name}
               </GlobalParagraph>
             </Box>
           </Box>
           <Box textAlign={{ xl: "right", md: "left", sm: "left", xs: "left" }}>
-            <GlobalParagraph
-              paddingbottom="16px"
-              fontSize="24px"
-              fontWeight="700"
-              color="slamon"
-            >
-              $240/night
-            </GlobalParagraph>
+
             <Box display="flex" justifyContent="flex-start" gap="16px">
               <Button variant="outlined">
                 <FavoriteBorderIcon />
@@ -195,7 +180,6 @@ const PlanDetail: React.FC = () => {
                   padding="16px"
                   gap="8px"
                 >
-                  {/* Social media share buttons */}
                   <FacebookShareButton url={window.location.href}>
                     <IconButton color="primary">
                       <FacebookIcon />
@@ -212,7 +196,6 @@ const PlanDetail: React.FC = () => {
                     </IconButton>
                   </WhatsappShareButton>
 
-                  {/* Copy to clipboard button */}
                   <CopyToClipboard
                     text={window.location.href}
                     onCopy={handleCopyLink}
@@ -230,14 +213,17 @@ const PlanDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <Button variant="contained">Add trip</Button>
+              <SwipeDrawer
+                plan_id={parseInt(("" + plan_detail?.plan_detail?.id) as string)}
+                addType={'plan-detail'}
+                button={<Button variant='contained'>Add trip</Button>}
+              />
             </Box>
           </Box>
         </Box>
-        <DetailBanner />
-        <DetailDescription />
-        <DetailMap />
-        {/* <DetailReviews />    */}
+        <DetailBanner bgimage={plan_detail?.plan_detail?.banner as string} gallery={plan_detail?.plan_detail?.gallery} name={plan_detail?.plan_detail?.name} />
+        <DetailDescription > {parse((plan_detail?.plan_detail?.body as string) || "")} </DetailDescription>
+        <DetailMap longitude={plan_detail?.plan_detail?.longitude} latitude={plan_detail?.plan_detail?.latitude} />
       </Container>
       <Box paddingTop="170px">
         <Footer />

@@ -80,7 +80,7 @@ const App: React.FC = () => {
               </Route>
               <Route path="plan-filter" element={<PlanFilter />} />
               <Route path="my-trip" element={<MyTrip />} />
-              <Route path="trip-detail" element={<TripDetail />} />
+              <Route path="trip-detail/:id" element={<TripDetail />} />
               <Route path="my-driver" element={<MyDriver />} />
               <Route path="driver-detail">
                 <Route path=":id" element={<MyDriverDetail />} />

@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   HistoryOrPlaceCategryType,
   HistoryType,
+  PlanDetailType,
   RecommendationType,
 } from "../../utils/response_types";
 import PlanService from "../../services/PlanService";
@@ -25,6 +26,11 @@ export interface PlantStateI {
   searchLocation: string | null;
   categoryID: string | null;
   searchText: string | null;
+  planDetail: {
+    plan_detail: PlanDetailType | null,
+    status: 'idle' | "loading" | "succeeded" | "failed",
+    error: string | null
+  }
 }
 
 const initialState: PlantStateI = {
@@ -44,6 +50,11 @@ const initialState: PlantStateI = {
   searchLocation: "",
   categoryID: "",
   searchText: "",
+  planDetail: {
+    plan_detail: null,
+    status: "idle",
+    error: null
+  }
 };
 
 export const getRecommendationPlanList = createAsyncThunk(
@@ -101,21 +112,21 @@ export const getTripPlanList = createAsyncThunk(
   }
 );
 
-// export const getPlanDetailInfo = createAsyncThunk('get-plan-detail',
-//     async (id: string, { rejectWithValue }) => {
-//         try {
-//             const response = await PlanService.getPlanDetail(id);
-//             const plan_detail: RestaurantDetailType = response.data;
-//             return plan_detail;
-//         } catch (error) {
-//             let errorMessage = 'Error';
-//             if (error instanceof AxiosError && error.response?.data?.message) {
-//                 errorMessage = error.response.data.message;
-//             }
-//             return rejectWithValue({ message: errorMessage });
-//         }
-//     }
-// )
+export const getPlanDetailInfo = createAsyncThunk('get-plan-detail',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await PlanService.getPlanDetail(id);
+      const plan_detail: PlanDetailType = response.data;
+      return plan_detail;
+    } catch (error) {
+      let errorMessage = 'Error';
+      if (error instanceof AxiosError && error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+)
 
 export const planSlice = createSlice({
   name: "plan",
@@ -206,7 +217,22 @@ export const planSlice = createSlice({
         state.loading = false;
         state.statusPlanList = "failed";
         // state.error = action.payload?.message || 'Failed to fetch user';
-      });
+      })
+
+
+      // detail
+      .addCase(getPlanDetailInfo.pending, (state) => {
+        state.planDetail.status = "loading"
+        state.planDetail.error = ""
+      })
+      .addCase(getPlanDetailInfo.fulfilled, (state, action) => {
+        state.planDetail.plan_detail = action.payload
+        state.planDetail.status = "succeeded"
+      })
+      .addCase(getPlanDetailInfo.rejected, (state, _) => {
+        state.planDetail.status = "failed"
+        state.planDetail.error = "Xatolik yuzaga keldi"
+      })
   },
 });
 
@@ -233,5 +259,7 @@ export const getPlanCategoryList = (state: RootState) =>
   state.plan.planCategoryList;
 export const getStatusPlanCategory = (state: RootState) =>
   state.plan.statusCategoryPlan;
+export const getPlanDetail = (state: RootState) => state.plan.planDetail
+
 
 export default planSlice.reducer;

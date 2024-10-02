@@ -14,6 +14,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TripType } from '../../utils/response_types';
 import { deleteTrip } from '../../redux/slices/tripSlice';
 import { useAppDispatch } from '../../redux/hooks';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -46,6 +47,7 @@ interface PropsType {
 }
 
 const MyTripCard: React.FC<PropsType> = ({ trip }) => {
+    const navigate= useNavigate()
     
     const [openDelete, setOpenDelete] = React.useState(false);
     const handleOpenDelete = () => setOpenDelete(true);
@@ -66,9 +68,13 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
     const deleteTripHandler = (trip_id: number) => {
         dispatch(deleteTrip(trip_id))
     }
+
+    function navigateFunc() {
+        navigate(`/trip-detail/${trip?.id}`)
+    }
     
     return (
-        <Stack>
+        <Stack onClick={navigateFunc} sx={{cursor: "pointer"}}>
             <Box borderRadius='8px' display='flex' justifyContent='flex-start' gap='32px'
                 flexWrap='wrap' boxShadow={1} mt='32px' width='100%'
                 height={{ xl: "250px", md: "250px", sm: "250px", xs: "auto" }}>
