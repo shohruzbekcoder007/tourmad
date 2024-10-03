@@ -49,3 +49,4 @@ export const accounts_subscribe_create = "accounts/subscribe";
 export const accounts_profile = "accounts/profile/";
 
 export const trip_trip_drive = "trip/trip-drive/";
+export const trip_trip_daily_plans = (id: string) => `trip/trip/${id}/daily-plans`;

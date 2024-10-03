@@ -3,6 +3,7 @@ import {
   trip_list,
   trip_restaurant_oder,
   trip_trip,
+  trip_trip_daily_plans,
   trip_trip_drive,
 } from "../utils/API_urls";
 import { deleteRequest, getRequest, postRequest } from "../utils/request";
@@ -36,6 +37,10 @@ class TripService {
   static getTripDriveDetail = (id: string) => {
     return getRequest(`${trip_trip_drive}${id}`);
   };
+
+  static getTripDailyPlanDetail = (id: string) => {
+    return getRequest(`${trip_trip_daily_plans(id)}`)
+  }
 }
 
 export default TripService;

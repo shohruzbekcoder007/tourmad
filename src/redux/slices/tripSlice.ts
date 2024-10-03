@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  DailyPlanType,
   HotelToTripType,
   RestaurantToTripType,
   TripCreateType,
@@ -40,6 +41,11 @@ export interface TripState {
     status: "idle" | "loading" | "succeeded" | "failed";
     error: string | null;
   };
+  dailyPlan : {
+    daily_plan: DailyPlanType | null;
+    status: "idle" | "loading" | "succeeded" | "failed";
+    error: string | null
+  }
 }
 
 const initialState: TripState = {
@@ -73,6 +79,11 @@ const initialState: TripState = {
     status: "idle",
     error: null,
   },
+  dailyPlan: {
+    daily_plan: null,
+    status: "idle",
+    error: null
+  }
 };
 
 export const createTrip = createAsyncThunk(
@@ -188,6 +199,24 @@ export const getDriveDetail = createAsyncThunk(
   }
 );
 
+export const getDailyPlan = createAsyncThunk(
+  "trip-daily-plan-detail",
+  async (id: string, {rejectWithValue}) => {
+    try {
+      const response = await TripService.getTripDailyPlanDetail(id)
+      const daily_plan: DailyPlanType = response.data
+      return daily_plan
+    }
+    catch (error) {
+      let errorMessage = "Error"
+      if(error instanceof AxiosError && error.response?.data?.message) {
+        errorMessage = error.response?.data?.message
+      }
+      return rejectWithValue({message: errorMessage})
+    }
+  }
+)
+
 export const tripSlice = createSlice({
   name: "trip",
   initialState,
@@ -292,7 +321,22 @@ export const tripSlice = createSlice({
       .addCase(getDriveDetail.rejected, (state, _) => {
         state.driveDetail.status = "failed";
         state.driveDetail.error = "Xatolik yuzaga keldi";
-      });
+      })
+
+      // daily-plan
+
+      .addCase(getDailyPlan.pending, (state) => {
+        state.dailyPlan.status = "loading";
+        state.dailyPlan.error = ""
+      })
+      .addCase(getDailyPlan.fulfilled, (state, action) => {
+        state.dailyPlan.status = "succeeded";
+        state.dailyPlan.daily_plan = action.payload
+      })
+      .addCase(getDailyPlan.rejected, (state, _) => {
+        state.dailyPlan.status = "failed";
+        state.dailyPlan.error = "Xatolik yuzaga keldi"
+      })
   },
 });
 
@@ -303,4 +347,5 @@ export const getTrips = (state: RootState) => state.trip.tripList;
 export const getAddHotel = (state: RootState) => state.trip.addHotel;
 export const getAddRestaurant = (state: RootState) => state.trip.addRestaurant;
 export const getDriveDriveDetail = (state: RootState) => state.trip.driveDetail;
+export const getDailyPlanDetailData = (state: RootState) => state.trip.dailyPlan;
 export default tripSlice.reducer;

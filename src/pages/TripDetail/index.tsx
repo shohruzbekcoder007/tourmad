@@ -8,10 +8,23 @@ import { GlobalParagraph } from '../../global_styles/styles'
 import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getDailyPlan, getDailyPlanDetailData } from '../../redux/slices/tripSlice'
 
 const MyTrip: React.FC = () => {
 
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
+
+    const {id} = useParams<{id: string}>()
+    const dailyPlans = useAppSelector(getDailyPlanDetailData)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getDailyPlan(id as string))
+    }, [dispatch, id])
+
+    console.log(dailyPlans, "dailyPlans")
 
     useEffect(() => {
         const handleScroll = () => {

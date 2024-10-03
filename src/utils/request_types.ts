@@ -24,3 +24,19 @@ export type RestaurantToTripType = {
 export type SubscribeType = {
     email: string | ""
 }
+export type DailyPlanDataType = {
+    date: string | null,
+    hotels: string[] | null,
+    restaurants: string[] | null,
+    drivers: string[] | null,
+    history_or_places: string[] | null
+}
+export type DailyPlanType = {
+    id: number | null,
+    title: string | null,
+    location: number[],
+    start_time: string | null,
+    end_time: string | null,
+    price: string | null,
+    daily_plans: DailyPlanDataType[] | null
+}
