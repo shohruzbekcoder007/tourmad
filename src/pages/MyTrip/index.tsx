@@ -41,6 +41,8 @@ const MyTrip: React.FC = () => {
         }
     }, [trips, dispatch])
 
+    console.log(trips, "trips")
+
     return (
         <>
             <HeaderWrapper>

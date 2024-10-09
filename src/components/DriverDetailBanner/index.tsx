@@ -10,6 +10,7 @@ type PropsType = {
 
 const DriverDetailBanner: React.FC<PropsType> = ({bgimage, gallery}) => {
 
+
   return (
     <Stack width="100%" position="relative">
       <img src={bgimage || ""} width="100%" style={{ objectFit: "cover", borderRadius: "12px" }} alt="" />
