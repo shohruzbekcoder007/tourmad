@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 type IntoTravelPropsType = {
     data: RecommendationType[] | null,
     daily?: boolean,
-    type?: "hotel" | "restaurant",
+    type?: "hotel" | "restaurant" | "daily",
     link: string
 }
 const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) => {

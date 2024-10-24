@@ -13,6 +13,11 @@ import { Paper } from '@mui/material'
 
 let items: sublink[] = [
     {
+        name: "Daily",
+        to: "daily",
+        iconc: <HotelIcon />
+    },
+    {
         name: "Hotel",
         to: "hotel",
         iconc: <HotelIcon />

@@ -115,6 +115,9 @@ const Footer: React.FC = () => {
                                 Trips
                             </GlobalParagraph>
                             <ul typeof="none">
+                            <li>
+                                    <FooterList><Link to="/protected/daily">Daily</Link></FooterList>
+                                </li>
                                 <li>
                                     <FooterList><Link to="/protected/hotel">Hotel</Link></FooterList>
                                 </li>

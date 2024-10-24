@@ -50,3 +50,6 @@ export const accounts_profile = "accounts/profile/";
 
 export const trip_trip_drive = "trip/trip-drive/";
 export const trip_trip_daily_plans = (id: string) => `trip/trip/${id}/daily-plans`;
+export const location_daily = "common/location-hotel"
+export const recommendation_trip_daily = "trip/recommendation-trip-hotel"
+// export const trip_daily = ""

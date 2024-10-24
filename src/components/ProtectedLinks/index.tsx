@@ -5,6 +5,10 @@ import { sublink } from './types'
 
 let items: sublink[] = [
     {
+        name: "Daily",
+        to: "daily"
+    },
+    {
         name: "Hotel",
         to: "hotel"
     },
