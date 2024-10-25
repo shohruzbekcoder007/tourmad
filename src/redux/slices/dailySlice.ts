@@ -23,11 +23,6 @@ export interface DailyState {
     dailyPriceTo: number,
     room_style: "basic" | "premium" | "all",
     searchLocation: string | null,
-    dailyDetail: {
-        daily: RecommendationType | null,
-        status: 'idle' | "loading" | "succeeded" | "failed",
-        error: string | null
-    }
 }
 
 const initialState: DailyState = {
@@ -48,12 +43,7 @@ const initialState: DailyState = {
     dailyPriceFrom: 20,
     dailyPriceTo: 100,
     room_style: "all",
-    searchLocation: "",
-    dailyDetail: {
-        daily: null,
-        status: "idle",
-        error: null
-    }
+    searchLocation: ""
 }
 
 export const getLoacationList = createAsyncThunk("get-location-daily",
@@ -87,42 +77,6 @@ export const getRecommendationTripDaily = createAsyncThunk('recommendation-trip-
         }
     }
 )
-
-// export const getTripDailyList = createAsyncThunk('get-trip-daily-list',
-//     async (_, { rejectWithValue, getState }) => {
-//         try {
-//             let state = getState();
-//             const response = await TripDailyService.tripDailys(state);
-//             const daily_list: RecommendationType[] = response.data?.results;
-//             const total_pages: number = response.data?.total_pages || 1;
-//             const current_page: number = response.data?.current_page || 1;
-//             return { daily_list, total_pages, current_page };
-//         } catch (error) {
-//             let errorMessage = 'Error';
-//             if (error instanceof AxiosError && error.response?.data?.message) {
-//                 errorMessage = error.response.data.message;
-//             }
-//             return rejectWithValue({ message: errorMessage });
-//         }
-//     }
-// )
-
-// export const getDailyDetailInfo = createAsyncThunk('get-daily-detail',
-//     async (id: string, { rejectWithValue }) => {
-//         try {
-//             const response = await TripDailyService.getDailyDetail(id);
-//             const daily_detail: RecommendationType = response.data;
-//             return daily_detail;
-//         } catch (error) {
-//             let errorMessage = 'Error';
-//             if (error instanceof AxiosError && error.response?.data?.message) {
-//                 errorMessage = error.response.data.message;
-//             }
-//             return rejectWithValue({ message: errorMessage });
-//         }
-//     }
-// )
-
 
 export const dailySlice = createSlice({
     name: 'daily',
@@ -193,37 +147,6 @@ export const dailySlice = createSlice({
                 state.statusLastRecommendationDaily = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
-            // .addCase(getTripDailyList.pending, (state) => {
-            //     state.loading = true
-            //     state.error = null
-            //     state.statusDailyList = "loading"
-            // })
-            // .addCase(getTripDailyList.fulfilled, (state, action: PayloadAction<{ daily_list: RecommendationType[], total_pages: number, current_page: number }>) => {
-            //     state.loading = false
-            //     let { daily_list, total_pages, current_page } = action?.payload || { daily_list: [], total_pages: 1, current_page: 1 };
-            //     state.dailyList = daily_list
-            //     state.dailyListTotalPages = total_pages
-            //     state.dailyListCurrentPage = current_page
-            //     state.statusDailyList = "succeeded"
-            // })
-            // .addCase(getTripDailyList.rejected, (state, _) => {
-            //     state.loading = false
-            //     state.statusDailyList = "failed"
-            //     // state.error = action.payload?.message || 'Failed to fetch user';
-            // })
-            // .addCase(getDailyDetailInfo.pending, (state) => {
-            //     state.dailyDetail.status = "loading"
-            //     state.dailyDetail.error = ''
-            // })
-            // .addCase(getDailyDetailInfo.fulfilled, (state, action) => {
-            //     state.dailyDetail.status = "succeeded"
-            //     state.dailyDetail.daily = action.payload
-            // })
-            // .addCase(getDailyDetailInfo.rejected, (state, _) => {
-            //     state.dailyDetail.status = "failed"
-            //     state.dailyDetail.error = 'Xatolik yuzaga keldi'
-            //     // state.error = action.payload?.message || 'Failed to fetch daily';
-            // })
     }
 })
 
@@ -246,6 +169,5 @@ export const getDailyGrade = (state: RootState) => state.daily.dailyGrade
 export const getDailyPriceFrom = (state: RootState) => state.daily.dailyPriceFrom
 export const getDailyPriceTo = (state: RootState) => state.daily.dailyPriceTo
 export const getRoomStyle = (state: RootState) => state.daily.room_style
-export const getDailyDetail = (state: RootState) => state.daily.dailyDetail
 
 export default dailySlice.reducer
