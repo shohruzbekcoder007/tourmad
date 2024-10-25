@@ -31,7 +31,7 @@ const Daily: React.FC = () => {
             dispatch(getLoacationList())
         }
     }, [statusLastSearchDaily, dispatch])
-    
+    console.log(dailyLocationList, "dailyLocationList")
 
     return (
         <>

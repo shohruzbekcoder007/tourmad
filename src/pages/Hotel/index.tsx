@@ -30,6 +30,7 @@ const Hotel: React.FC = () => {
         }
     }, [statusLastSearchHotel, dispatch])
 
+
     return (
         <>
             <Banner heightprops='400px' 
