@@ -66,7 +66,7 @@ export const getRecommendationTripDaily = createAsyncThunk('recommendation-trip-
     async (_, { rejectWithValue }) => {
         try {
             const response = await TripDailyService.recommendationTripDaily();
-            const location_list: RecommendationType[] = response.data?.results;
+            const location_list: RecommendationType[] = response.data;
             return location_list;
         } catch (error) {
             let errorMessage = 'Error';
