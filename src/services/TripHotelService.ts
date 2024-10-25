@@ -5,7 +5,7 @@ import { getRequest } from "../utils/request"
 class TripHotelService {
 
     static locationHotels = () => {
-        return getRequest(location_hotel)
+        return getRequest(`${location_hotel}?status=1`)
     }
 
     static tripHotels = (state: any) => {
@@ -23,7 +23,7 @@ class TripHotelService {
     }
 
     static recommendationTripHotel = () => {
-        return getRequest(recommendation_trip_hotel)
+        return getRequest(`${recommendation_trip_hotel}?status=1`)
     }
 
     static getHotelDetail = (id: string) => {

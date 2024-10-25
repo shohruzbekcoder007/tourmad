@@ -13,12 +13,14 @@ import commonLanguageSlice from './slices/commonLanguage'
 import planSlice from './slices/planSliser'
 import homeSlice from './slices/homeSlice'
 import accountSlice from './slices/accountSlice'
+import dailySlice from './slices/dailySlice'
 
 const store = configureStore({
   reducer: {
     language: langSlice,
     user: userSlice,
     hotel: hotelSlice,
+    daily: dailySlice,
     restaurant: restaurantSlice,
     driver: driverSlice,
     commonLocation: commonLocationSlice,

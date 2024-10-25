@@ -15,7 +15,7 @@ const Welcome: React.FC = () => {
 
     useEffect(() => {
         dispatch(getHomeBanner())
-    },[])
+    },[dispatch])
 
     return (
         <Box
