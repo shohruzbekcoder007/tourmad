@@ -1,3 +1,5 @@
+import { MyTripDailyDriversType, MyTripDailyHistoryOrPlacesType, MyTripDailyHotelsType, MyTripDailyLocationType, MyTripDailyRestaurantsType } from "./response_types"
+
 export type TripCreateType = {
     id?: number | null,
     title: string | null,
@@ -26,15 +28,17 @@ export type SubscribeType = {
 }
 export type DailyPlanDataType = {
     date: string | null,
-    hotels: string[] | null,
-    restaurants: string[] | null,
-    drivers: string[] | null,
-    history_or_places: string[] | null
+    daily_price: number | null,
+    hotels: MyTripDailyHotelsType[] | null,
+    restaurants: MyTripDailyRestaurantsType[] | null,
+    drivers: MyTripDailyDriversType[] | null,
+    history_or_places: MyTripDailyHistoryOrPlacesType[] | null
 }
+
 export type DailyPlanType = {
     id: number | null,
     title: string | null,
-    location: number[],
+    location: MyTripDailyLocationType[],
     start_time: string | null,
     end_time: string | null,
     price: string | null,

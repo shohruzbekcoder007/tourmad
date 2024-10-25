@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { FavouritesUser, Footer, Header, ProtectedLinks, ServicesLink } from '../../components'
-import { Box, Container, Stack } from '@mui/material'
+import { Box, Button, Container, Stack } from '@mui/material'
 import { HeaderWrapper } from './styles'
 import banner_trip from './../../media/images/banner-trip.jpg'
 import BannerMain from '../../components/BannerMain'
 import { GlobalParagraph } from '../../global_styles/styles'
-import trip_photo from './../../media/images/trip-card-phot.webp'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getDailyPlan, getDailyPlanDetailData } from '../../redux/slices/tripSlice'
+import MyTripDailyPlan from '../../components/MyTripDailyPlan'
 
 const MyTrip: React.FC = () => {
 
@@ -24,7 +24,7 @@ const MyTrip: React.FC = () => {
         dispatch(getDailyPlan(id as string))
     }, [dispatch, id])
 
-    console.log(dailyPlans, "dailyPlans")
+    console.log(dailyPlans, "dailyPlans");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -62,25 +62,43 @@ const MyTrip: React.FC = () => {
                         <Box width={{ xl: "55%", md: "55%", sm: "100%", xs: "100%" }}>             
                             <Box  boxShadow={1} borderRadius="8px" position='relative'
                                 width="100%" height='250px'>
-                                <img src={trip_photo} width='100%' height='100%' style={{ objectFit: "cover", borderRadius: "8px" }} alt="" />           
+                                <img src={`${dailyPlans.daily_plan?.location[0].photo}`} width='100%' height='100%' style={{ objectFit: "cover", borderRadius: "8px" }} alt={`${dailyPlans.daily_plan?.location[0].name}`} />           
                                 <Box position='absolute' top='0' borderRadius='8px' width='100%' height='100%' bgcolor='#00000050'>
                                     <Box position='absolute' bottom='10px' left='10px'>
-                                        <GlobalParagraph color='neutrals' fontSize='24px' fontWeight='700' mediafontsize='16px'>Samarqand</GlobalParagraph>
+                                        <GlobalParagraph color='neutrals' fontSize='24px' fontWeight='700' mediafontsize='16px'>{dailyPlans.daily_plan?.title}</GlobalParagraph>
                                         <Box mt='16px' display='flex' flexWrap='wrap' justifyContent='flex-start' gap='16px'>
                                             <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
                                                 <CalendarMonthIcon />
-                                                <GlobalParagraph color='neutrals' fontSize='14px' fontWeight='400'>Jun 6 → Jun 14, 2024</GlobalParagraph>
+                                                <GlobalParagraph color='neutrals' fontSize='14px' fontWeight='400'>{dailyPlans.daily_plan?.start_time} → {dailyPlans.daily_plan?.end_time}</GlobalParagraph>
                                             </Box>
                                             <Box display='flex' width={{ xl: "auto", md: "auto", sm: "auto", xs: "100%" }} alignItems='center' justifyContent='flex-start' gap='5px'>
                                                 <LocationOnIcon />
-                                                <GlobalParagraph color='neutrals' fontSize='14px' fontWeight='400'>Samarqand</GlobalParagraph>
+                                                <GlobalParagraph color='neutrals' fontSize='14px' fontWeight='400'>{dailyPlans.daily_plan?.location[0].name}</GlobalParagraph>
                                             </Box>
                                         </Box>
                                     </Box>
                                 </Box>
                             </Box>
                             <Box mt='32px'>
-                                <GlobalParagraph fontSize='24px' mediafontsize='16px' fontWeight='600' paddingbottom='16px'>Date: Year</GlobalParagraph>
+                                <Box display="flex" justifyContent="space-between" alignItems="center">
+                                    <GlobalParagraph fontSize='24px' mediafontsize='16px' fontWeight='600' paddingbottom='16px'>What is this trip about?</GlobalParagraph>
+                                    <Button href='#' variant='contained'>${dailyPlans.daily_plan?.price}</Button>
+                                </Box>
+                                <Box my='32px'>
+                                    {
+                                        dailyPlans.daily_plan?.daily_plans?.map((item, index) => {
+                                            return (
+                                                <MyTripDailyPlan key={index + 1} 
+                                                hotels={item.hotels}
+                                                restaurants={item.restaurants}
+                                                drivers={item.drivers}
+                                                date={item.date}
+                                                daily_price={item.daily_price}
+                                                history_or_places={item.history_or_places} />
+                                            )
+                                        })
+                                    }
+                                </Box>
                             </Box>
                         </Box>
                         <Box width={{xl: "40%", md: "40%", sm: '100%', xs: "100%"}} height={{xl: "600px", md: '600px', sm: "auto", xs: "auto"}} 

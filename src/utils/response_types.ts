@@ -81,6 +81,41 @@ export type CommonLocationType = {
   photo: string;
 };
 
+export type MyTripDailyLocationType = {
+  id: number | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+  latitude: number | null;
+  longitude: number | null;
+};
+
+export type MyTripDailyHotelsType = {
+  title: string | null;
+  card: string | null;
+  description: string | null;
+};
+
+export type MyTripDailyRestaurantsType = {
+  title: string | null;
+  card: string | null;
+  description: string | null;
+};
+
+export type MyTripDailyHistoryOrPlacesType = {
+  title: string | null;
+  card: string | null;
+  description: string | null;
+};
+
+export type MyTripDailyDriversType = {
+  driver: string | null;
+  auto_model: string | null;
+  auto_number: string | null;
+  card: string | null;
+};
+
+
 export type HistoryOrPlaceCategryType = {
   id: number | null;
   name: string | null;
