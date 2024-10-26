@@ -41,6 +41,11 @@ let items: sublink[] = [
         name: "Plan",
         to: "plan",
         iconc: <BookmarkAddIcon />
+    },
+    {
+        name: "Map",
+        to: "map",
+        iconc: <BookmarkAddIcon />
     }
 ];
 

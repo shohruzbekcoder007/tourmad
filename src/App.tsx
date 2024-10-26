@@ -38,6 +38,7 @@ import {
   Daily,
   DailyFilter,
   LoginGoogle,
+  Map,
 } from "./pages";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme/theme";
@@ -97,7 +98,9 @@ const App: React.FC = () => {
                 <Route path="drive" element={<Drive />} />
                 <Route path="plan" element={<Plan />} />
                 <Route path="favourites" element={<Favourites />} />
+                <Route path="map" element={<Map/>}/>
               </Route>
+
               <Route path="daily-detail/:id" element={<HotelDetail/>}/>
               <Route path="daily-filter" element={<DailyFilter />} />
             </Route>

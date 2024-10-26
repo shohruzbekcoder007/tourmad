@@ -27,6 +27,10 @@ let items: sublink[] = [
     {
         name: "Plan",
         to: "plan"
+    },
+    {
+        name: "Map",
+        to: "map"
     }
 ];
 
