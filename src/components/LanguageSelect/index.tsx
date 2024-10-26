@@ -1,40 +1,34 @@
-import { useAppDispatch } from '../../redux/hooks';
-import { changeLanguage } from '../../redux/slices/i18nSlice';
-import React, { useEffect, useState } from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+import React from "react";
+import { FormControl, MenuItem, Select } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function LanguageSelect() {
-
-    const dispatch = useAppDispatch()
-    const [language, setLanguage] = useState<any>("");
-    const handleChangeLanguage = (event: any) => {
-        setLanguage(event.target.value);
-        dispatch(changeLanguage(event.target.value))
-    };
-    useEffect(() => {
-      setLanguage(localStorage.getItem("i18nextLng"));
-    }, [])
+  const { i18n } = useTranslation();
+  const handleChangeLanguage = (event: any) => {
+    i18n.changeLanguage(event.target.value);
+  };
 
   return (
     <>
-    <FormControl required sx={{ m: 1, minWidth: 120 }}>
+      <FormControl required sx={{ m: 1, minWidth: 120 }}>
         <Select
           labelId="demo-simple-select-required-label"
           id="demo-simple-select-required"
-          value={language === "" ? "en-US" : language} onChange={handleChangeLanguage}
+          defaultValue={i18n.language}
+          onChange={handleChangeLanguage}
           sx={{
             outline: "none",
             background: "white",
             border: "none",
-            borderRadius: "10px"
+            borderRadius: "10px",
           }}
         >
-          <MenuItem value="uz-GB">Uzb</MenuItem>
-          <MenuItem value="en-US">Eng</MenuItem>
-          <MenuItem value="ru-GB">Rus</MenuItem>
+          <MenuItem value="uz">Uzb</MenuItem>
+          <MenuItem value="en">Eng</MenuItem>
+          <MenuItem value="ru">Rus</MenuItem>
         </Select>
       </FormControl>
     </>
   );
 }
-export default LanguageSelect
+export default LanguageSelect;
