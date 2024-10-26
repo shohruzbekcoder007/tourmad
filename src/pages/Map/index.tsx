@@ -10,43 +10,41 @@ import restaurant from "../../media/images/restaurant.png";
 import history from "../../media/images/history.png";
 import place from "../../media/images/place.png";
 import daily from "../../media/images/daily.png";
-import { Modal, Box, Typography, Button, CircularProgress } from "@mui/material";
+import { Modal, Box, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { GlobalParagraph } from "../../global_styles/styles";
 
-// Define the Location interface
 interface Location {
-  id: number; // Adjust this type based on your API response
+  id: number; 
   name: string;
   latitude: number;
   longitude: number;
-  value: string; // This should correspond to the icon type
+  value: string;
 }
 
-// Define the icons object
 const icons: Record<string, L.Icon> = {
   hotel: new L.Icon({
-    iconUrl: hotel, // Ensure this path is correct
+    iconUrl: hotel, 
     iconSize: [50, 50],
   }),
   restaurant: new L.Icon({
-    iconUrl: restaurant, // Ensure this path is correct
+    iconUrl: restaurant, 
     iconSize: [50, 50],
   }),
   history: new L.Icon({
-    iconUrl: history, // Ensure this path is correct
+    iconUrl: history, 
     iconSize: [50, 50],
   }),
   place: new L.Icon({
-    iconUrl: place, // Ensure this path is correct
+    iconUrl: place, 
     iconSize: [50, 50],
   }),
   daily: new L.Icon({
-    iconUrl: daily, // Ensure this path is correct
+    iconUrl: daily, 
     iconSize: [50, 50],
   }),
 };
 
-// Default icon in case location.value does not match
 const defaultIcon = L.icon({
   iconUrl: markerIcon,
   iconSize: [25, 41],
@@ -148,13 +146,13 @@ const Map = () => {
         aria-describedby="modal-description"
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-title" variant="h6" component="h2">
+          {/* <GlobalParagraph fontSize='18px' color='black' mediafontsize='14px' fontWeight='400'>
             Location Details
-          </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
+          </GlobalParagraph> */}
+          <GlobalParagraph id="modal-description" fontSize='20px' color='black' mediafontsize='14px' fontWeight='700' style={{textAlign: "center"}}>
             {selectedLocation ? selectedLocation.name : ""}
-          </Typography>
-          <Button onClick={navigateFunc} color="primary" sx={{ mt: 2, border: "1px solid gray" }}>
+          </GlobalParagraph>
+          <Button onClick={navigateFunc} variant="contained" fullWidth sx={{marginTop: "30px"}}>
             View
           </Button>
         </Box>

@@ -10,6 +10,7 @@ import { ServicesLinks } from './styles'
 import { sublink } from './types'
 import { Container } from '../../global_styles/styles'
 import { Paper } from '@mui/material'
+import MapIcon from '@mui/icons-material/Map';
 
 let items: sublink[] = [
     {
@@ -45,7 +46,7 @@ let items: sublink[] = [
     {
         name: "Map",
         to: "map",
-        iconc: <BookmarkAddIcon />
+        iconc: <MapIcon />
     }
 ];
 
