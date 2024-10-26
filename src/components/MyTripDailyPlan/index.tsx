@@ -26,8 +26,11 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
         <AccordionDetails >
 
           {
-            hotels?.length !== 0 && drivers?.length !== 0 && restaurants?.length !== 0 && history_or_places?.length !== 0 ? 
+            hotels?.length !== 0 || drivers?.length !== 0 || restaurants?.length !== 0 || history_or_places?.length !== 0 ?
             <>
+            {
+                hotels?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>Hotels</GlobalParagraph>
+            }
               {
                 hotels?.map((item, index) => {
                   return (
@@ -43,6 +46,9 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
                   )
                 })
               }
+            {
+                restaurants?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>Restaurants</GlobalParagraph>
+            }
               {
                 restaurants?.map((item, index) => {
                   return (
@@ -58,6 +64,9 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
                   )
                 })
               }
+            {
+                drivers?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>Drivers</GlobalParagraph>
+            }
               {
                 drivers?.map((item, index) => {
                   return (
@@ -98,6 +107,9 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
                   )
                 })
               }
+            {
+                history_or_places?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>History or Places</GlobalParagraph>
+            }
               {
                 history_or_places?.map((item, index) => {
                   return (
