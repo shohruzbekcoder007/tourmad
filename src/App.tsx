@@ -47,6 +47,7 @@ import { ThemeProvider as MuiTheme } from "@mui/material/styles";
 import { lightTheme } from "./theme/mui/light";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import 'leaflet/dist/leaflet.css';
 
 const App: React.FC = () => {
   return (
