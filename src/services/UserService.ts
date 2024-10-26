@@ -1,4 +1,4 @@
-import { accounts_profile, login, me } from "../utils/API_urls";
+import { accounts_profile, login, me, with_google } from "../utils/API_urls";
 import { getRequest, postRequest } from "../utils/request";
 
 type LoginWithEmailPasswordType = {
@@ -18,6 +18,10 @@ class UserService{
 
     static account = () => {
         return getRequest(accounts_profile)
+    }
+
+    static withGoogle = () => {
+        return getRequest(with_google)
     }
 }
 

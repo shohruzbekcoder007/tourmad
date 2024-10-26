@@ -1,4 +1,5 @@
-import { location_daily, recommendation_trip_daily } from "../utils/API_urls"
+import { DailyState } from "../redux/slices/dailySlice"
+import { location_daily, recommendation_trip_daily, trip_hotel } from "../utils/API_urls"
 import { getRequest } from "../utils/request"
 
 class TripDailyService {
@@ -7,19 +8,19 @@ class TripDailyService {
         return getRequest(`${location_daily}?status=0`)
     }
 
-    // static tripDailys = (state: any) => {
+    static tripDailys = (state: any) => {
 
-    //     let daily: DailyState = state?.daily as DailyState
+        let daily: DailyState = state?.daily as DailyState
 
-    //     const { dailyListPageSize,  dailyListCurrentPage, dailyGrade, dailyPriceFrom, dailyPriceTo, searchLocation, room_style } = daily
+        const { dailyListPageSize,  dailyListCurrentPage, dailyGrade, dailyPriceFrom, dailyPriceTo, searchLocation, room_style } = daily
 
-    //     let room_style_query: string = room_style
-    //     if (room_style === "all") {
-    //         room_style_query = ""
-    //     }
+        let room_style_query: string = room_style
+        if (room_style === "all") {
+            room_style_query = ""
+        }
 
-    //     return getRequest(`${trip_daily}?size=${dailyListPageSize}&page=${dailyListCurrentPage}&grade=${dailyGrade}&price_from=${dailyPriceFrom}&price_to=${dailyPriceTo}&location=${searchLocation || ""}&room_style=${room_style_query || ""}`)
-    // }
+        return getRequest(`${trip_hotel}?status=0&size=${dailyListPageSize}&page=${dailyListCurrentPage}&grade=${dailyGrade}&price_from=${dailyPriceFrom}&price_to=${dailyPriceTo}&location=${searchLocation || ""}&room_style=${room_style_query || ""}`)
+    }
 
     static recommendationTripDaily = () => {
         return getRequest(`${recommendation_trip_daily}?status=0`)

@@ -39,6 +39,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -46,6 +47,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const RestaurantDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -235,7 +237,7 @@ const RestaurantDetail: React.FC = () => {
               <SwipeDrawer
                 restaurant_id={parseInt(("" + restaurant?.id) as string)}
                 addType={"restaurant"}
-                button={<Button variant="contained">Book Now</Button>}
+                button={<Button variant="contained">{t("Book Now")}</Button>}
               />
             </Box>
           </Box>

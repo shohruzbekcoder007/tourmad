@@ -6,6 +6,7 @@ import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import { Divider, Rating, TextField } from '@mui/material';
 import { DriveClientReviewType } from '../../utils/response_types';
 import Alert from '@mui/material/Alert';
+import { useTranslation } from 'react-i18next';
 
 type PropsType = {
     btnText: string,
@@ -19,6 +20,7 @@ type Anchor = 'right';
 
 
 const InputReview: React.FC<PropsType> = (props) => {
+    const {t} = useTranslation()
     const [state, setState] = React.useState({
         right: false,
     });
@@ -54,10 +56,10 @@ const InputReview: React.FC<PropsType> = (props) => {
         // onKeyDown={toggleDrawer(anchor, false)}
         >
             <WelcomeMainText fontSize='32px' paddingbottom='44px' part="true" mediafontsize='24px'>
-                Give your Review
+                {t("Give your Review")}
             </WelcomeMainText>
             <Box pb="44px">
-                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Comment</GlobalParagraph>
+                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Comment")}</GlobalParagraph>
                 <TextField fullWidth value={comment} onChange={(e) => setComment(e.target.value)} type='text' variant='outlined' label="Comment" />
             </Box>
             <Box pb='44px'>
@@ -77,7 +79,7 @@ const InputReview: React.FC<PropsType> = (props) => {
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
-                }}>Cancel</Button>
+                }}>{t("Cancel")}</Button>
                 <Button variant='contained' onClick={newReview} sx={{
                     width: '120px',
                     height: "40px",

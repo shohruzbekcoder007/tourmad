@@ -6,6 +6,7 @@ import { GlobalParagraph } from '../../global_styles/styles';
 import { Checkbox, Collapse, Divider, FormControl, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Slider, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const MAX = 1200;
 const MIN = 50;
@@ -27,6 +28,7 @@ function valuetext(value: number) {
 type Anchor = 'left';
 
 const FilterDrawerTrip: React.FC = () => {
+    const {t} = useTranslation()
     const [state, setState] = React.useState({
         left: false,
     });
@@ -133,10 +135,10 @@ const FilterDrawerTrip: React.FC = () => {
                   label="Sort by Recommended"
                   onChange={handleChangeSort}
                 >
-                  <MenuItem value={10}>Cheapest</MenuItem>
-                  <MenuItem value={20}>Best</MenuItem>
-                  <MenuItem value={30}>Quickest</MenuItem>
-                  <MenuItem value={40}>Other Sort</MenuItem>
+                  <MenuItem value={10}>{t("Cheapest")}</MenuItem>
+                  <MenuItem value={20}>{t("Best")}</MenuItem>
+                  <MenuItem value={30}>{t("Quickest")}</MenuItem>
+                  <MenuItem value={40}>{t("Other Sort")}</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -325,7 +327,7 @@ const FilterDrawerTrip: React.FC = () => {
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
-                }}>Cancel</Button>
+                }}>{t("Cancel")}</Button>
                 <Button variant='contained' sx={{
                     width: '120px',
                     height: "40px",

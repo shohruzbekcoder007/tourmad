@@ -6,8 +6,10 @@ import photo2 from "./../../media/images/driver-2.jpg";
 import photo3 from "./../../media/images/dricer-3.png";
 import photo4 from "./../../media/images/driver-4.jpg";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useTranslation } from 'react-i18next';
 
 const DriverCard: React.FC = () => {
+    const {t} = useTranslation()
   return (
     <Stack pb="80px">
         <Grid container>
@@ -50,7 +52,7 @@ const DriverCard: React.FC = () => {
                         </Box>
                         <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>day/$ 30</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Driver</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>{t("Book a Driver")}</Button>
                 </Box>
             </Box>
             <Box  
@@ -81,7 +83,7 @@ const DriverCard: React.FC = () => {
                         </Box>
                         <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 5</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a Driver</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>{t("Book a Driver")}</Button>
                 </Box>
             </Box>
             <Box
@@ -112,7 +114,7 @@ const DriverCard: React.FC = () => {
                         </Box>
                         <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 20</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a driver</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>{t("Book a Driver")}</Button>
                 </Box>
             </Box>
             <Box
@@ -143,7 +145,7 @@ const DriverCard: React.FC = () => {
                         </Box>
                         <GlobalParagraph fontSize='24px' fontWeight='600' color='neutrals'>day/$ 10</GlobalParagraph>
                     </Box>
-                    <Button sx={{height: "48px"}} fullWidth variant='contained'>Book a driver</Button>
+                    <Button sx={{height: "48px"}} fullWidth variant='contained'>{t("Book a Driver")}</Button>
                 </Box>
             </Box>
         </Box>

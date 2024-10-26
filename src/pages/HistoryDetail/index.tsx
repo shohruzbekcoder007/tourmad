@@ -23,6 +23,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkIcon from '@mui/icons-material/Link';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import SwipeDrawer from '../../components/SwipeDrawer';
+import { useTranslation } from 'react-i18next';
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
@@ -30,6 +31,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const HistoryDetail: React.FC = () => {
+    const {t} = useTranslation()
 
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -161,7 +163,7 @@ const HistoryDetail: React.FC = () => {
                             <SwipeDrawer
                                 restaurant_id={parseInt(("" + history?.id) as string)}
                                 addType={'history'}
-                                button={<Button variant='contained'>Add trip</Button>}
+                                button={<Button variant='contained'>{t("Add trip")}</Button>}
                             />
                             {/* <Button variant='contained'>Add trip</Button> */}
                         </Box>

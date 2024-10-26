@@ -5,11 +5,13 @@ import { WelcomeMainText } from '../../global_styles/styles'
 import AuthUserInfo from './AuthUserInfo'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHomeBanner, getHomeBannerPhotos } from '../../redux/slices/homeSlice'
+import { useTranslation } from 'react-i18next'
 
 // shu joyiga ruyhatdan utgan utmagani tugirlandi
 
 const Welcome: React.FC = () => {
     const homeBanner = useAppSelector(getHomeBannerPhotos)
+    const {t} = useTranslation()
 
     const dispatch = useAppDispatch()
 
@@ -51,9 +53,9 @@ const Welcome: React.FC = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <WelcomeMainText fontSize={"45px"} mediafontsize='20px' paddingbottom="4px">Helping Others</WelcomeMainText>
-                        <WelcomeMainText fontSize={"80px"} mediafontsize='28px' paddingbottom="16px">Live & Travel</WelcomeMainText>
-                        <WelcomeMainText fontSize={"20px"} mediafontsize='12px'>Special offers to suit your plan</WelcomeMainText>
+                        <WelcomeMainText fontSize={"45px"} mediafontsize='20px' paddingbottom="4px">{t("Helping Others")}</WelcomeMainText>
+                        <WelcomeMainText fontSize={"80px"} mediafontsize='28px' paddingbottom="16px">{t("Live & Travel")}</WelcomeMainText>
+                        <WelcomeMainText fontSize={"20px"} mediafontsize='12px'>{t("Special offers to suit your plan")}</WelcomeMainText>
                     </Box>
                 </Box>
             </Box>

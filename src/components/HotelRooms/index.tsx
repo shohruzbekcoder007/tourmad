@@ -3,18 +3,20 @@ import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
 import { RoomStyle } from '../../utils/response_types';
 import SwipeDrawer from '../SwipeDrawer';
+import { useTranslation } from 'react-i18next';
 
 interface HotelRoomsProps {
     room_style: RoomStyle[] | null | undefined
 }
 
 const HotelRooms: React.FC<HotelRoomsProps> = ({ room_style }) => {
+    const {t} = useTranslation()
     return (
         <Stack mt="32px">
             <Box pb="32px">
                 <Divider />
             </Box>
-            <GlobalParagraph fontSize='20px' fontWeight='700' paddingbottom='16px' mediafontsize='16px'>Available Rooms</GlobalParagraph>
+            <GlobalParagraph fontSize='20px' fontWeight='700' paddingbottom='16px' mediafontsize='16px'>{t("Available Rooms")}</GlobalParagraph>
             {
                 room_style?.map((item, index) => {
                     return (
@@ -31,7 +33,7 @@ const HotelRooms: React.FC<HotelRoomsProps> = ({ room_style }) => {
                                     <SwipeDrawer
                                         hotel_id={parseInt(("" + item?.id) as string)}
                                         addType={'hotel'}
-                                        button={<Button variant='contained'>Book Now</Button>}
+                                        button={<Button variant='contained'>{t("Book Now")}</Button>}
                                     />
                                     {/* <Button variant='contained'>Book Now</Button> */}
                                 </Box>
