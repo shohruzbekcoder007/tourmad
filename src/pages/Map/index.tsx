@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -10,37 +8,38 @@ import restaurant from "../../media/images/restaurant.png";
 import history from "../../media/images/history.png";
 import place from "../../media/images/place.png";
 import daily from "../../media/images/daily.png";
-import { Modal, Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { GlobalParagraph } from "../../global_styles/styles";
 
 interface Location {
-  id: number; 
+  id: number;
   name: string;
   latitude: number;
   longitude: number;
   value: string;
+  card: string;
 }
 
 const icons: Record<string, L.Icon> = {
   hotel: new L.Icon({
-    iconUrl: hotel, 
+    iconUrl: hotel,
     iconSize: [50, 50],
   }),
   restaurant: new L.Icon({
-    iconUrl: restaurant, 
+    iconUrl: restaurant,
     iconSize: [50, 50],
   }),
   history: new L.Icon({
-    iconUrl: history, 
+    iconUrl: history,
     iconSize: [50, 50],
   }),
   place: new L.Icon({
-    iconUrl: place, 
+    iconUrl: place,
     iconSize: [50, 50],
   }),
   daily: new L.Icon({
-    iconUrl: daily, 
+    iconUrl: daily,
     iconSize: [50, 50],
   }),
 };
@@ -55,16 +54,15 @@ const defaultIcon = L.icon({
 
 const Map = () => {
   const [locations, setLocations] = useState<Location[]>([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
-  const [forDetail, setForDetail] = useState<Location | null>(null);
   const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch("https://api.tourmad.uz/api/v1/trip/maps-coordinates"); // Replace with your API endpoint
+        const response = await fetch(
+          "https://api.tourmad.uz/api/v1/trip/maps-coordinates"
+        ); // Replace with your API endpoint
         const data: Location[] = await response.json(); // Specify the type for data
         setLocations(data);
       } catch (error) {
@@ -77,20 +75,9 @@ const Map = () => {
     fetchLocations();
   }, []);
 
-  const openModal = (location: Location) => {
-    setSelectedLocation(location);
-    setModalOpen(true);
-    setForDetail(location);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedLocation(null);
-  };
-
-  const navigateFunc = () => {
+  const navigateFunc = (forDetail: Location) => {
     if (forDetail) {
-      if(forDetail.value==='place') {
+      if (forDetail.value === "place") {
         navigate(`/history-detail/${forDetail.id}`);
       } else {
         navigate(`/${forDetail.value}-detail/${forDetail.id}`);
@@ -98,18 +85,6 @@ const Map = () => {
     }
   };
 
-  const modalStyle = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    borderRadius: "10px",
-    boxShadow: 24,
-    p: 4,
-  };
 
   if (loading) {
     return <CircularProgress />; // Show a loading spinner while fetching
@@ -131,34 +106,36 @@ const Map = () => {
             key={location.id}
             position={[location.latitude, location.longitude]}
             icon={icons[location.value] || defaultIcon} // Use defaultIcon if location.value is not in icons
-            eventHandlers={{
-              click: () => openModal(location), // Open modal on marker click
-            }}
           >
-            <Popup>{location.name}</Popup>
+            <Popup>
+              <Box>
+                <img src={`${location.card}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "12px" }} alt="" />
+                <GlobalParagraph
+                  id="modal-description"
+                  fontSize="20px"
+                  color="black"
+                  mediafontsize="14px"
+                  fontWeight="700"
+                  style={{ textAlign: "center" }}
+                >
+                  {location.name}
+                </GlobalParagraph>
+                <Button
+                  onClick={() =>navigateFunc(location)}
+                  variant="contained"
+                  fullWidth
+                  sx={{ marginTop: "10px" }}
+                >
+                  View
+                </Button>
+              </Box>
+            </Popup>
           </Marker>
         ))}
       </MapContainer>
-      <Modal
-        open={modalOpen}
-        onClose={closeModal}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box sx={modalStyle}>
-          {/* <GlobalParagraph fontSize='18px' color='black' mediafontsize='14px' fontWeight='400'>
-            Location Details
-          </GlobalParagraph> */}
-          <GlobalParagraph id="modal-description" fontSize='20px' color='black' mediafontsize='14px' fontWeight='700' style={{textAlign: "center"}}>
-            {selectedLocation ? selectedLocation.name : ""}
-          </GlobalParagraph>
-          <Button onClick={navigateFunc} variant="contained" fullWidth sx={{marginTop: "30px"}}>
-            View
-          </Button>
-        </Box>
-      </Modal>
     </>
   );
 };
 
 export default Map;
+
