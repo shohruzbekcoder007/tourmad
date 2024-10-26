@@ -11,6 +11,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { CustomAutocomplete } from '../../helper_components';
 import dayjs from 'dayjs';
 import SimpleMap from '../SimpleMap';
+import { useTranslation } from 'react-i18next';
 
 type PropsType = {
     btnText: string
@@ -34,6 +35,7 @@ const options: Option[] = [
 ]
 
 const DriveOrder: React.FC<PropsType> = (props) => {
+    const {t} = useTranslation()
     const [state, setState] = React.useState({
         right: false,
     });
@@ -75,7 +77,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
             </WelcomeMainText>
 
             <Box pb="44px">
-                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Destination</GlobalParagraph>
+                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Destination")}</GlobalParagraph>
                 <SimpleMap />
             </Box>
             <Box pb="44px">
@@ -99,7 +101,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
                 </Grid>
             </Box>
             <Box pb="44px">
-                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Comment</GlobalParagraph>
+                <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Comment")}</GlobalParagraph>
                 <TextField fullWidth type='text' variant='outlined' label="Comment" />
             </Box>
             <Divider />
@@ -108,7 +110,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
-                }}>Cancel</Button>
+                }}>{t("Cancel")}</Button>
                 <Button variant='contained' sx={{
                     width: '120px',
                     height: "40px",

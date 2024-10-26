@@ -11,6 +11,7 @@ import { changeGrade, changePriceFrom, changePriceTo, getDriverGrade, getDriverP
 import { useDebounce } from 'use-debounce';
 import { AppDispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const MAX = 1000;
 const MIN = 0;
@@ -32,6 +33,7 @@ function valuetext(value: number) {
 type Anchor = 'left';
 
 const FilterDrawerHotel: React.FC = () => {
+    const {t} = useTranslation()
     const [state, setState] = React.useState({
         left: false,
     });
@@ -179,7 +181,7 @@ const FilterDrawerHotel: React.FC = () => {
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
-                }}>Cancel</Button>
+                }}>{t("Cancel")}</Button>
                 <Button variant='contained' onClick={toggleDrawer(anchor, false)} sx={{
                     width: '120px',
                     height: "40px",

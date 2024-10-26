@@ -15,6 +15,7 @@ import { TripType } from '../../utils/response_types';
 import { deleteTrip } from '../../redux/slices/tripSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -47,6 +48,7 @@ interface PropsType {
 }
 
 const MyTripCard: React.FC<PropsType> = ({ trip }) => {
+    const {t} = useTranslation()
     const navigate= useNavigate()
     
     const [openDelete, setOpenDelete] = React.useState(false);

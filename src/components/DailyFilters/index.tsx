@@ -34,6 +34,7 @@ import {
   import { RecommendationType } from "../../utils/response_types";
   import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
 import DailyCard from "./DailyCard";
+import { useTranslation } from "react-i18next";
   
   type Option = {
     label: string,
@@ -59,7 +60,7 @@ import DailyCard from "./DailyCard";
   }
   
   const DailyFilters: React.FC = () => {
-  
+  const {t} = useTranslation()
     const navigate = useNavigate()
     const [from, setFrom] = useState<Option | null>(null)
     const [openPrice, setOpenPrice] = React.useState(true)
@@ -150,7 +151,7 @@ import DailyCard from "./DailyCard";
     return (
       <Stack mt="40px">
         <Box pb="40px" display="flex" justifyContent="space-between">
-          <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Daily Filter</WelcomeMainText>
+          <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">{t("Daily Filter")}</WelcomeMainText>
           <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
         </Box>
         <Paper

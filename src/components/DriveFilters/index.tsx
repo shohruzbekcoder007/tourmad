@@ -36,6 +36,7 @@ import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 import { useDebounce } from "use-debounce";
 import { getCommonLanguageList, getLanguageList, getStatusCommonLanguage } from "../../redux/slices/commonLanguage";
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
+import { useTranslation } from "react-i18next";
 
 type Option = {
     label: string,
@@ -60,6 +61,7 @@ function valuetext(value: number) {
 }
 
 const DriveFilter: React.FC = () => {
+    const {t} = useTranslation()
     const navigate = useNavigate();
     const [fromLocation, setFromLocation] = useState<Option | null>(null)
     const [fromLanguage, setFromLanguage] = useState<Option | null>(null)
@@ -173,7 +175,7 @@ const DriveFilter: React.FC = () => {
     return (
         <Stack mt="40px">
             <Box pb="40px" display="flex" justifyContent="space-between">
-                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Drive Filter</WelcomeMainText>
+                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">{t("Drive Filter")}</WelcomeMainText>
                 <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
             </Box>
             <Paper

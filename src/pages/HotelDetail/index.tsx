@@ -41,6 +41,7 @@ import {
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
 import LinkIcon from "@mui/icons-material/Link";
+import { useTranslation } from "react-i18next";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -48,6 +49,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const HotelDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -248,7 +250,7 @@ const HotelDetail: React.FC = () => {
               <SwipeDrawer
                 hotel_id={parseInt(id as string)}
                 addType={"hotel"}
-                button={<Button variant="contained">Book Now</Button>}
+                button={<Button variant="contained">{t("Book Now")}</Button>}
               />
             </Box>
           </Box>

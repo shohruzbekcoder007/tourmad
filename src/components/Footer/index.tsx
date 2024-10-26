@@ -13,8 +13,10 @@ import { useDispatch } from "react-redux";
 import { getAccountSubscribe } from "../../redux/slices/accountSlice";
 import { enqueueSnackbar } from "notistack";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer: React.FC = () => {
+    const {t} = useTranslation()
     const [email, setEmail] = React.useState('');
     const dispatch: AppDispatch = useDispatch()
 
@@ -33,13 +35,13 @@ const Footer: React.FC = () => {
                     <FooterTop>
                         <FooterSubscribe>
                             <WelcomeMainText mediafontsize="24px" fontSize="44px" paddingbottom="24px" part="true">
-                                Subscribe <br /> Newsletter
+                                {t("Subscribe")} <br /> {t("Newsletter")}
                             </WelcomeMainText>
                             <GlobalParagraph oposity="0.8" fontSize="20px" fontWeight="700" paddingbottom="8px">
-                                The Travel
+                                {t("The Travel")}
                             </GlobalParagraph>
                             <GlobalParagraph fontSize="16px" fontWeight="500" paddingbottom="16px" oposity="0.7">
-                                Get inspired! Receive travel discounts, tips and behind the scenes stories.
+                                {t("Get inspired! Receive travel discounts, tips and behind the scenes stories.")}
                             </GlobalParagraph>
                             <Box>
                                 <TextField id="outlined-basic" type="email" label="Your email address" 
@@ -61,7 +63,7 @@ const Footer: React.FC = () => {
                                     width: {xl: "auto", md: "auto", sm: "auto", xs: "100%"},
                                     height: "56px"
                                 }}>
-                                    Subscribe
+                                    {t("Subscribe")}
                                 </Button>
                             </Box>
                         </FooterSubscribe>
@@ -93,45 +95,45 @@ const Footer: React.FC = () => {
                         </FooterLogo>  
                         <FooterLink>
                             <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                Our Activities
+                                {t("Our Activities")}
                             </GlobalParagraph>
                             <ul typeof="none">
                                 <li>
-                                    <FooterList><Link to="/protected">Trip Advisor</Link></FooterList>
+                                    <FooterList><Link to="/protected">{t("Trip Advisor")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/my-driver">My Driver</Link></FooterList>
+                                    <FooterList><Link to="/my-driver">{t("My Driver")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/consulting">Consulting</Link></FooterList>
+                                    <FooterList><Link to="/consulting">{t("Consulting")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/history">History</Link></FooterList>
+                                    <FooterList><Link to="/history">{t("History")}</Link></FooterList>
                                 </li>
                             </ul>
                         </FooterLink> 
                         <FooterLink>
                             <GlobalParagraph fontSize="16px" fontWeight="700" paddingbottom="16px">
-                                Trips
+                                {t("Trips")}
                             </GlobalParagraph>
                             <ul typeof="none">
                             <li>
-                                    <FooterList><Link to="/protected/daily">Daily</Link></FooterList>
+                                    <FooterList><Link to="/protected/daily">{t("Daily")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/protected/hotel">Hotel</Link></FooterList>
+                                    <FooterList><Link to="/protected/hotel">{t("Hotel")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/protected/ticket">Ticket</Link></FooterList>
+                                    <FooterList><Link to="/protected/ticket">{t("Ticket")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/protected/restaurant">Restaurant</Link></FooterList>
+                                    <FooterList><Link to="/protected/restaurant">{t("Restaurant")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/protected/drive">Driver</Link></FooterList>
+                                    <FooterList><Link to="/protected/drive">{t("Driver")}</Link></FooterList>
                                 </li>
                                 <li>
-                                    <FooterList><Link to="/protected/plan">Plan</Link></FooterList>
+                                    <FooterList><Link to="/protected/plan">{t("Plan")}</Link></FooterList>
                                 </li>
                             </ul>
                         </FooterLink>  

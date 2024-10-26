@@ -7,6 +7,7 @@ import { HeaderWrapper } from "../../components/Header/styles";
 import BannerMain from "../../components/BannerMain";
 import consultingbannerimage from '../../media/images/consulting-banner.jpeg'
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 const Consulting: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
     const navigate = useNavigate()
@@ -39,7 +40,7 @@ const Consulting: React.FC = () => {
                 bannersubtitle="Turizm Biznesingizni Rivojlantirishda Bizning Konsalting Xizmatlarimizdan Foydalaning" bannertitle="Turizm Konsalting Xizmatlari" />
             <Container>
                 <Box pt="40px" display="flex" justifyContent="space-between">
-                    <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Consulting</WelcomeMainText>
+                    <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">{t("Consulting")}</WelcomeMainText>
                     <Button variant="outlined" onClick={() => navigate(-1)}><KeyboardBackspaceIcon /></Button>
                 </Box>
                 <ConsultingSearch />

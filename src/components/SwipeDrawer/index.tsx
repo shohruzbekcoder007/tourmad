@@ -17,6 +17,7 @@ import { LocationType, TripType } from '../../utils/response_types'
 import dayjs from 'dayjs'
 import { HotelToTripType, RestaurantToTripType } from '../../utils/request_types'
 import NotificationAlert from '../../helper_components/NotificationAlert'
+import { useTranslation } from 'react-i18next'
 
 type PropsType = {
     button: React.ReactNode,
@@ -34,6 +35,8 @@ type Option = {
 }
 
 const SwipeDrawer: React.FC<PropsType> = (props) => {
+
+    const {t} = useTranslation()
 
     const [state, setState] = React.useState({
         right: false,
@@ -224,7 +227,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                         width: '120px',
                         height: "40px",
                         borderRadius: "25px"
-                    }}>Cancel</Button>
+                    }}>{t("Cancel")}</Button>
                     <Button
                         disabled={newTrip.newTripCreateLoading as boolean}
                         variant='contained'
@@ -277,6 +280,7 @@ const SimpleTrip = ({
     addHotelToTripFunction: (id: number | null, startDate: string | null, endDate: string | null) => void
 }) => {
 
+    const {t} = useTranslation()
     const [openModal, setOpenModal] = useState(false);
     const [startDate, setStartDate] = useState<string | null>(null)
     const [endDate, setEndDate] = useState<string | null>(null)
@@ -330,9 +334,9 @@ const SimpleTrip = ({
                 aria-labelledby="dialog-title"
                 aria-describedby="dialog-description"
             >
-                <DialogTitle id="dialog-title">Confirm Action</DialogTitle>
+                <DialogTitle id="dialog-title">{t("Confirm Action")}</DialogTitle>
                 <DialogContent>
-                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Choose your time frame to stay</GlobalParagraph>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Choose your time frame to stay")}</GlobalParagraph>
                     <Grid container spacing={2}>
                         <Grid item xl={6} md={6} sm={12} xs={12}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -358,10 +362,10 @@ const SimpleTrip = ({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseModal} color="primary">
-                        Cancel
+                        {t("Cancel")}
                     </Button>
                     <Button onClick={addHotelAndCloseModal} color="primary" autoFocus>
-                        Add
+                        {t("Add")}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -399,7 +403,7 @@ const SimpleTripRestaurant = ({
     location?: LocationType[] | null
     addRestaurantToTripFunction: (id: number | null, time: string | null) => void
 }) => {
-
+const {t} = useTranslation()
     const [openModal, setOpenModal] = useState(false);
     const [startDate, setStartDate] = useState<string | null>(null)
 
@@ -445,9 +449,9 @@ const SimpleTripRestaurant = ({
                 aria-labelledby="dialog-title"
                 aria-describedby="dialog-description"
             >
-                <DialogTitle id="dialog-title">Confirm Action</DialogTitle>
+                <DialogTitle id="dialog-title">{t("Confirm Action")}</DialogTitle>
                 <DialogContent>
-                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Choose your time frame to stay</GlobalParagraph>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Choose your time frame to stay")}</GlobalParagraph>
                     <Grid container spacing={2}>
                         <Grid item xl={12} md={12} sm={12} xs={12}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -463,10 +467,10 @@ const SimpleTripRestaurant = ({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseModal} color="primary">
-                        Cancel
+                        {t("Cancel")}
                     </Button>
                     <Button onClick={addHotelAndCloseModal} color="primary" autoFocus>
-                        Add
+                        {t("Add")}
                     </Button>
                 </DialogActions>
             </Dialog>

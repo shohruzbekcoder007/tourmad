@@ -36,6 +36,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useParams } from "react-router-dom";
 import { getPlanDetail, getPlanDetailInfo } from "../../redux/slices/planSliser";
 import SwipeDrawer from "../../components/SwipeDrawer";
+import { useTranslation } from "react-i18next";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -43,6 +44,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const PlanDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -216,7 +218,7 @@ const PlanDetail: React.FC = () => {
               <SwipeDrawer
                 plan_id={parseInt(("" + plan_detail?.plan_detail?.id) as string)}
                 addType={'plan-detail'}
-                button={<Button variant='contained'>Add trip</Button>}
+                button={<Button variant='contained'>{t("Add trip")}</Button>}
               />
             </Box>
           </Box>
