@@ -19,7 +19,7 @@ class TripHotelService {
             room_style_query = ""
         }
 
-        return getRequest(`${trip_hotel}?size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}&location=${searchLocation || ""}&room_style=${room_style_query || ""}`)
+        return getRequest(`${trip_hotel}?status=1&size=${hotelListPageSize}&page=${hotelListCurrentPage}&grade=${hotelGrade}&price_from=${hotelPriceFrom}&price_to=${hotelPriceTo}&location=${searchLocation || ""}&room_style=${room_style_query || ""}`)
     }
 
     static recommendationTripHotel = () => {

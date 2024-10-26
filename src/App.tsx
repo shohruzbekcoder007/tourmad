@@ -36,6 +36,7 @@ import {
   PlanDetail,
   PlanFilter,
   Daily,
+  DailyFilter,
 } from "./pages";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme/theme";
@@ -96,6 +97,8 @@ const App: React.FC = () => {
                 <Route path="plan" element={<Plan />} />
                 <Route path="favourites" element={<Favourites />} />
               </Route>
+              <Route path="daily-detail/:id" element={<HotelDetail/>}/>
+              <Route path="daily-filter" element={<DailyFilter />} />
             </Route>
             <Route path="users" element={<Users />}>
               <Route index element={<UserAccount />} />
