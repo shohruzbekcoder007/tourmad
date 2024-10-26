@@ -47,6 +47,7 @@ export const consulting_detail = "consulting/detail";
 export const accounts_subscribe_create = "accounts/subscribe";
 
 export const accounts_profile = "accounts/profile/";
+export const with_google = "accounts/social_auth/google/"
 
 export const trip_trip_drive = "trip/trip-drive/";
 export const trip_trip_daily_plans = (id: string) => `trip/trip/${id}/daily-plans`;

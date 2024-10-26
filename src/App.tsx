@@ -37,6 +37,7 @@ import {
   PlanFilter,
   Daily,
   DailyFilter,
+  LoginGoogle,
 } from "./pages";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme/theme";
@@ -106,6 +107,7 @@ const App: React.FC = () => {
               <Route path="users-History" element={<UserHistory />} />
               <Route path="users-payment" element={<p>Users Payments</p>} />
             </Route>
+            <Route path="oauth/callback" element={<LoginGoogle/>}/>
             <Route path="sign-in" element={<SignIn />} />
             <Route path="sign-up" element={<SignUp />} />
             <Route path="set-password" element={<SetPassword />} />
