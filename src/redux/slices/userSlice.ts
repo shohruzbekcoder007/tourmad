@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getStorage } from '../../utils/storage'
+import { getStorage, removeStorage } from '../../utils/storage'
 import UserService from '../../services/UserService'
 import { AccountType, UserType } from '../../utils/response_types'
 import { RootState } from '../store'
@@ -60,6 +60,20 @@ export const getAccount = createAsyncThunk("account",
     }
 )
 
+export const logOut = createAsyncThunk('logout', async (_, { rejectWithValue }) => {
+    try {
+        // const response = await UserService.logOut()
+        removeStorage();
+        return null;
+    }
+    catch (error) {
+        let errorMessage = 'Error';
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+        }
+        return rejectWithValue({ message: errorMessage });
+    }
+})
 
 export const userSlice = createSlice({
     name: 'user',
@@ -85,8 +99,6 @@ export const userSlice = createSlice({
                 state.status = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
             })
-
-
             .addCase(getAccount.pending, (state) => {
                 state.loading = true
                 state.error = null
@@ -102,6 +114,18 @@ export const userSlice = createSlice({
                 state.loading = false
                 state.status = "failed"
                 // state.error = action.payload?.message || 'Failed to fetch user';
+            })
+            .addCase(logOut.fulfilled, (state) => {
+                state.loading = false
+                state.token = null
+                state.user = null
+                state.account = null
+                state.status = "idle"
+            })
+            .addCase(logOut.rejected, (state, action) => {
+                state.loading = false
+                state.status = "failed"
+                // state.error = action.payload?.message || 'Failed to log out';
             })
     }
 })
