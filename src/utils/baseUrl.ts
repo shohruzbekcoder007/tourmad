@@ -38,7 +38,7 @@ instance.interceptors.response.use(
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
         removeStorage();
-        window.location.href = '/';
+        window.location.href = '/sign-in';
         return Promise.reject(refreshError);
       }
     }
