@@ -3,6 +3,7 @@ import facebook from "./../../media/images/facebook.svg";
 import google from "./../../media/images/google.svg";
 import apple from "./../../media/images/apple.svg";
 import React from "react";
+import { host } from "../../utils/API_urls";
 
 const LoginWith: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const LoginWith: React.FC = () => {
         <Avatar sx={{ width: 24, height: 24 }} src={facebook} alt="Facebook" />
       </Button>
       <a
-        href="https://api.tourmad.uz/api/v1/accounts/social_auth/google/"
+        href={`${host}/api/v1/accounts/social_auth/google/`}
         style={{ width: "30%" }}
       >
         <Button sx={{ width: "100%", height: "50px" }} variant="outlined">
