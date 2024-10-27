@@ -36,12 +36,13 @@ type Option = {
 
 const SwipeDrawer: React.FC<PropsType> = (props) => {
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const [state, setState] = React.useState({
         right: false,
     });
     const [from, setFrom] = useState<Option | null>(null)
+    const [openModalF, setOpenModalF] = useState(false);
 
     const dispatch = useAppDispatch()
     const statusCommonLocation = useAppSelector(getStatusCommonLocation)
@@ -84,7 +85,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
             start_time: startDate as string,
             end_time: endDate as string
         }
-        if(props?.addType === "hotel"){
+        if (props?.addType === "hotel") {
             dispatch(addHotelToTrip(newTrip))
         }
     }
@@ -95,22 +96,26 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
             trip: trip_id as number,
             time: time as string,
         }
-        if(props?.addType === "restaurant"){
+        if (props?.addType === "restaurant") {
             dispatch(addRestourantToTrip(newTrip))
         }
     }
 
     useEffect(() => {
-        if (statusCommonLocation === 'idle') {
-            dispatch(getCommonLocationList())
+        if(openModalF){
+            if (statusCommonLocation === 'idle') {
+                dispatch(getCommonLocationList())
+            }
         }
-    }, [statusCommonLocation, dispatch])
+    }, [statusCommonLocation, dispatch, openModalF])
 
     useEffect(() => {
-        if (trips.tripListStatus === "idle") {
-            dispatch(getTripList())
+        if(openModalF){
+            if (trips.tripListStatus === "idle") {
+                dispatch(getTripList())
+            }
         }
-    }, [trips, dispatch])
+    }, [trips, dispatch, openModalF])
 
     const filterLocation = commonLocationList?.filter((item) => {
         return item.parent !== null
@@ -122,6 +127,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
+            
             (event: React.KeyboardEvent | React.MouseEvent) => {
                 if (
                     event &&
@@ -131,7 +137,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 ) {
                     return;
                 }
-
+                setOpenModalF(open);
                 setState({ ...state, [anchor]: open });
             };
 
@@ -149,13 +155,13 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 {
                     props.addType === "hotel" &&
                     trips?.tripList?.map((elem: TripType, index: number) => {
-                        return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => {addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
+                        return <SimpleTrip addHotelToTripFunction={(id, startDate, endDate) => { addToTrip(id, startDate, endDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
                     })
                 }
                 {
                     props.addType === "restaurant" &&
                     trips?.tripList?.map((elem: TripType, index: number) => {
-                        return <SimpleTripRestaurant addRestaurantToTripFunction={(id, startDate) => {addToTripRestaurant(id, startDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
+                        return <SimpleTripRestaurant addRestaurantToTripFunction={(id, startDate) => { addToTripRestaurant(id, startDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
                     })
                 }
             </Box>
@@ -241,8 +247,8 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                         {newTrip.newTripCreateLoading ? "Loading..." : 'Create Trip'}
                     </Button>
                 </Box>
-                <NotificationAlert alert={addHotel.status} alertType={addHotel.error?"error":"success"} alertMessage={addHotel.message}/>
-                <NotificationAlert alert={addRestaurant.status} alertType={addRestaurant.error?"error":"success"} alertMessage={addRestaurant.message}/>
+                <NotificationAlert alert={addHotel.status} alertType={addHotel.error ? "error" : "success"} alertMessage={addHotel.message} />
+                <NotificationAlert alert={addRestaurant.status} alertType={addRestaurant.error ? "error" : "success"} alertMessage={addRestaurant.message} />
             </Box>
         </Box>
     );
@@ -271,16 +277,16 @@ const SimpleTrip = ({
     title,
     time,
     location,
-    addHotelToTripFunction
+    addHotelToTripFunction,
 }: {
     id: number | null,
     title?: string | null,
     time?: string,
-    location?: LocationType[] | null
+    location?: LocationType[] | null,
     addHotelToTripFunction: (id: number | null, startDate: string | null, endDate: string | null) => void
 }) => {
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
     const [openModal, setOpenModal] = useState(false);
     const [startDate, setStartDate] = useState<string | null>(null)
     const [endDate, setEndDate] = useState<string | null>(null)
@@ -301,14 +307,14 @@ const SimpleTrip = ({
     }
 
     const changeStartDate = (date: dayjs.Dayjs | null) => {
-        if(date !== null) {
+        if (date !== null) {
             const start_date = date.toISOString().substring(0, 10) || null;
             setStartDate(start_date);
         }
     }
 
     const changeEndDate = (date: dayjs.Dayjs | null) => {
-        if(date !== null){
+        if (date !== null) {
             const end_date = date.toISOString().substring(0, 10) || null;
             setEndDate(end_date);
         }
@@ -400,10 +406,11 @@ const SimpleTripRestaurant = ({
     id: number | null,
     title?: string | null,
     time?: string,
-    location?: LocationType[] | null
+    location?: LocationType[] | null,
     addRestaurantToTripFunction: (id: number | null, time: string | null) => void
 }) => {
-const {t} = useTranslation()
+
+    const { t } = useTranslation()
     const [openModal, setOpenModal] = useState(false);
     const [startDate, setStartDate] = useState<string | null>(null)
 
@@ -423,7 +430,7 @@ const {t} = useTranslation()
     }
 
     const changeStartDate = (date: dayjs.Dayjs | null) => {
-        if(date !== null) {
+        if (date !== null) {
             const start_date = date.toISOString().substring(0, 10) || null;
             setStartDate(start_date);
         }
