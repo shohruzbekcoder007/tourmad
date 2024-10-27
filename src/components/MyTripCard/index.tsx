@@ -86,6 +86,7 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                 </Box>
                 <Box width={{ xl: "45%", md: "45%", sm: "45%", xs: "100%" }} pt={{ xl: '40px', md: '40px', sm: '40px', xs: 0 }} ml={{ xl: 0, md: 0, sm: 0, xs: "32px" }}>
                     <GlobalParagraph fontSize='24px' fontWeight='700' mediafontsize='16px'>{trip?.title}</GlobalParagraph>
+                    <GlobalParagraph fontSize='20px' fontWeight='700'  mediafontsize='16px' paddingbottom='12px' paddingtop='24px'>{trip?.price}$</GlobalParagraph>
                     <Box mt='16px' display='flex' flexWrap='wrap' justifyContent='flex-start' gap='16px'>
                         <Box display='flex' alignItems='center' justifyContent='flex-start' gap='5px'>
                             <CalendarMonthIcon />
