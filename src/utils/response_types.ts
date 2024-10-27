@@ -94,18 +94,24 @@ export type MyTripDailyHotelsType = {
   title: string | null;
   card: string | null;
   description: string | null;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 export type MyTripDailyRestaurantsType = {
   title: string | null;
   card: string | null;
   description: string | null;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 export type MyTripDailyHistoryOrPlacesType = {
   title: string | null;
   card: string | null;
   description: string | null;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 export type MyTripDailyDriversType = {
@@ -224,6 +230,7 @@ export type TripType = {
   location: LocationType[] | null;
   start_time: Date | string | null;
   end_time: Date | string | null;
+  price: number | null;
 };
 export type Location = {
   id: number | null;
