@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getDailyPlan, getDailyPlanDetailData } from '../../redux/slices/tripSlice'
 import MyTripDailyPlan from '../../components/MyTripDailyPlan'
-import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import {MapContainer, Marker, TileLayer} from "react-leaflet";
 import L from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import hotel from "../../media/images/hotel.png";
