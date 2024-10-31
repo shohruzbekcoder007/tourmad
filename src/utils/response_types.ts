@@ -18,6 +18,7 @@ export type LocationType = {
   photo: string | null;
   hotels?: number | null;
   restaurants?: number | null;
+  history?: number | null;
   drivers: number | null;
   logo: string | null;
   title: string | null;

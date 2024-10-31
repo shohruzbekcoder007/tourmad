@@ -30,7 +30,7 @@ const initialState: HistoryState = {
     showMessage: false,
     historyList: [],
     error: null,
-    historyListPageSize: 8,
+    historyListPageSize: 12,
     historyListCurrentPage: 1,
     historyListTotalPages: 1,
     searchLocation: "",
