@@ -19,6 +19,7 @@ import restaurant from "../../media/images/restaurant.png";
 import history from "../../media/images/history.png";
 import place from "../../media/images/place.png";
 import daily from "../../media/images/daily.png";
+import { postRequest } from '../../utils/request'
 
 
 
@@ -65,7 +66,6 @@ const MyTrip: React.FC = () => {
         dispatch(getDailyPlan(id as string))
     }, [dispatch, id])
 
-    console.log(dailyPlans, "dailyPlans");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -81,8 +81,24 @@ const MyTrip: React.FC = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
-
+    }, [])
+    
+    function handleClick(id: number) {
+        postRequest("order/payze/", { trip: id }) 
+            .then((response) => {
+                // Ensure payment_url exists and is a valid URL
+                const paymentUrl = response.data?.payment_url;
+                if (paymentUrl) {
+                    console.log('Response:', response.data);
+                    window.location.href = paymentUrl; // Using window.location.href for external navigation
+                } else {
+                    console.error('Payment URL not found in response.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error occurred:', error);
+            });
+    }
     return (
         <>
             <HeaderWrapper>
@@ -123,7 +139,7 @@ const MyTrip: React.FC = () => {
                             <Box mt='32px'>
                                 <Box display="flex" justifyContent="space-between" alignItems="center">
                                     <GlobalParagraph fontSize='24px' mediafontsize='16px' fontWeight='600' paddingbottom='16px'>What is this trip about?</GlobalParagraph>
-                                    <Button href='#' variant='contained'>${dailyPlans.daily_plan?.price}</Button>
+                                    <Button onClick={() => handleClick(dailyPlans.daily_plan?.id as number)} variant='contained'>${dailyPlans.daily_plan?.price}</Button>
                                 </Box>
                                 <Box my='32px'>
                                     {
