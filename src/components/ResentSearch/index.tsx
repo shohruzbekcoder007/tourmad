@@ -56,7 +56,7 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch,
                                 </Box>
                                 <Box>
                                     <GlobalParagraph paddingbottom='8px' fontSize='16px' fontWeight='600'>{location?.title || location?.name}</GlobalParagraph>
-                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.count || location?.restaurants || location?.drivers || location?.hotels || 0} places</GlobalParagraph>
+                                    <GlobalParagraph fontSize='12px' fontWeight='400' oposity='0.75'>{location?.count || location?.restaurants || location?.drivers || location?.hotels || location?.history || 0} places</GlobalParagraph>
                                 </Box>
                             </Box>
                         )
