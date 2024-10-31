@@ -6,7 +6,16 @@ import { Button } from "@mui/material";
 
 const FailedPayment: React.FC = () => {
   return (
-    <Box>
+    <Box sx={{
+      width: "40%",
+      margin: "0 auto",
+      border: "1px solid gray",
+      borderRadius: "20px",
+      paddingBottom: "50px",
+      paddingTop: "30px",
+      marginTop: "50px",
+      boxShadow: "2px 10px 10px gray"
+    }}>
       <Box display="flex" justifyContent="center">
         <img width="300px" height="300px" src={img_gif} alt="gif_ing" />
       </Box>
