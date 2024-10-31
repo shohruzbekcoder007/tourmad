@@ -42,5 +42,6 @@ export type DailyPlanType = {
     start_time: string | null,
     end_time: string | null,
     price: string | null,
-    daily_plans: DailyPlanDataType[] | null
+    daily_plans: DailyPlanDataType[] | null,
+    is_paid: boolean | null
 }
