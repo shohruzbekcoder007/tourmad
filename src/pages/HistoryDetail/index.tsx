@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AuthUserInfo, Footer, Header, ProtectedLinks } from "../../components";
 import {
   Box,
@@ -39,7 +39,8 @@ import LinkIcon from "@mui/icons-material/Link";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import SwipeDrawer from "../../components/SwipeDrawer";
 import { useTranslation } from "react-i18next";
-
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
@@ -95,8 +96,77 @@ const HistoryDetail: React.FC = () => {
 
   const open = Boolean(anchorEl);
   const popoverId = open ? "share-popover" : undefined; // Renamed to popoverId
+
+  const audioUrl = history?.audio;
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Initialize audioRef only once
+    audioRef.current = new Audio(audioUrl as string);
+
+    // Event listener to reset `isPlaying` when the audio ends
+    const handleAudioEnd = () => setIsPlaying(false);
+    audioRef.current.addEventListener("ended", handleAudioEnd);
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("ended", handleAudioEnd);
+        audioRef.current.pause(); // Stop audio if the component is unmounted
+      }
+    };
+  }, [audioUrl]);
+
+  const handlePlayPause = () => {
+    const audio = audioRef.current;
+
+    if (audio) {
+      // Use paused state directly to avoid conflicting play/pause calls
+      if (audio.paused) {
+        audio
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+          });
+      } else {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
   return (
     <Stack>
+      {audioUrl && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: "50px",
+            right: "50px",
+            zIndex: "1000",
+            cursor: "pointer",
+            width: "50px",
+            height: "50px",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            borderRadius: "50%",
+          }}
+          onClick={handlePlayPause}
+        >
+          {isPlaying ? (
+            <PauseCircleOutlineIcon
+              sx={{ width: "70px", height: "70px", color: "#1B1464" }}
+            />
+          ) : (
+            <PlayCircleOutlineIcon
+              sx={{ width: "70px", height: "70px", color: "#1B1464" }}
+            />
+          )}
+        </Box>
+      )}
+
       <HeaderWrapper>
         <Container>
           <Header
