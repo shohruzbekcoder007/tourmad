@@ -13,6 +13,7 @@ export type WelcomeMainTextType = {
 export type GlobalParagraphType = {
     fontSize: string,
     paddingbottom?: string,
+    paddingtop?: string,
     color?: string,
     fontWeight: string,
     mediafontsize?: string,

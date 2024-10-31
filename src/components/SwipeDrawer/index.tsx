@@ -103,6 +103,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
 
     useEffect(() => {
         if(openModalF){
+            console.log("statusCommonLocation")
             if (statusCommonLocation === 'idle') {
                 dispatch(getCommonLocationList())
             }
@@ -111,6 +112,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
 
     useEffect(() => {
         if(openModalF){
+            console.log("tripListStatus")
             if (trips.tripListStatus === "idle") {
                 dispatch(getTripList())
             }
@@ -162,6 +164,12 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     props.addType === "restaurant" &&
                     trips?.tripList?.map((elem: TripType, index: number) => {
                         return <SimpleTripRestaurant addRestaurantToTripFunction={(id, startDate) => { addToTripRestaurant(id, startDate) }} key={index} id={elem.id} title={elem?.title} time={`${elem.start_time} → ${elem.end_time}`} location={elem.location} />
+                    })
+                }
+                {
+                    props.addType === "history" &&
+                    trips?.tripList?.map((elem: TripType, index: number) => {
+                        return <p key={index}>salom</p>
                     })
                 }
             </Box>

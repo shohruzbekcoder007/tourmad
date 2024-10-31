@@ -23,6 +23,10 @@ class UserService{
     static withGoogle = () => {
         return getRequest(with_google)
     }
+
+    static logOut = () => {
+        return getRequest(with_google)
+    }
 }
 
 

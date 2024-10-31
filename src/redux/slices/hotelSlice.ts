@@ -123,7 +123,6 @@ export const getHotelDetailInfo = createAsyncThunk('get-hotel-detail',
     }
 )
 
-
 export const hotelSlice = createSlice({
     name: 'hotel',
     initialState,
@@ -249,3 +248,4 @@ export const getRoomStyle = (state: RootState) => state.hotel.room_style
 export const getHotelDetail = (state: RootState) => state.hotel.hotelDetail
 
 export default hotelSlice.reducer
+

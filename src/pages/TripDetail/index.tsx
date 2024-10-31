@@ -11,6 +11,47 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getDailyPlan, getDailyPlanDetailData } from '../../redux/slices/tripSlice'
 import MyTripDailyPlan from '../../components/MyTripDailyPlan'
+import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import hotel from "../../media/images/hotel.png";
+import restaurant from "../../media/images/restaurant.png";
+import history from "../../media/images/history.png";
+import place from "../../media/images/place.png";
+import daily from "../../media/images/daily.png";
+
+
+
+const defaultIcon = L.icon({
+  iconUrl: markerIcon,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const icons: Record<string, L.Icon> = {
+  hotel: new L.Icon({
+    iconUrl: hotel,
+    iconSize: [50, 50],
+  }),
+  restaurant: new L.Icon({
+    iconUrl: restaurant,
+    iconSize: [50, 50],
+  }),
+  history: new L.Icon({
+    iconUrl: history,
+    iconSize: [50, 50],
+  }),
+  place: new L.Icon({
+    iconUrl: place,
+    iconSize: [50, 50],
+  }),
+  daily: new L.Icon({
+    iconUrl: daily,
+    iconSize: [50, 50],
+  }),
+};
 
 const MyTrip: React.FC = () => {
 
@@ -101,10 +142,75 @@ const MyTrip: React.FC = () => {
                                 </Box>
                             </Box>
                         </Box>
-                        <Box width={{xl: "40%", md: "40%", sm: '100%', xs: "100%"}} height={{xl: "600px", md: '600px', sm: "auto", xs: "auto"}} 
+                        <Box width={{xl: "40%", md: "40%", sm: '100%', xs: "100%"}} height={{xl: "800px", md: '800px', sm: "auto", xs: "auto"}}
                         position={{xl: 'sticky', md: 'sticky', sm: "static", xs: "static"}} top={{xl: '120px', md: '120px', sm: "0", xs: 0 }} right="0">
-                            <iframe title='Anor Plaza' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11979.44075980614!2d69.2852827!3d41.3553925!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8d11aa1a6c3f%3A0x376ab77baf387727!2z0JDQvdC-0YAg0LzQsNGA0LrQtdGC!5e0!3m2!1sru!2s!4v1717198941300!5m2!1sru!2s" width="100%" height="100%" style={{border: 0, borderRadius: "16px"}} allowFullScreen loading="lazy" referrerPolicy='no-referrer-when-downgrade' />
+                            {/*<iframe title='Anor Plaza' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11979.44075980614!2d69.2852827!3d41.3553925!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8d11aa1a6c3f%3A0x376ab77baf387727!2z0JDQvdC-0YAg0LzQsNGA0LrQtdGC!5e0!3m2!1sru!2s!4v1717198941300!5m2!1sru!2s" width="100%" height="100%" style={{border: 0, borderRadius: "16px"}} allowFullScreen loading="lazy" referrerPolicy='no-referrer-when-downgrade' />*/}
+
+                            {
+                                dailyPlans.daily_plan?.location?.map((item, index) => {
+                                    return(
+                                        <MapContainer
+                                            center={[item?.latitude || 41.34090131239861, item?.longitude || 69.2866030679263]}
+                                            zoom={13}
+                                            style={{ height: "100%", width: "100%", border: 0, borderRadius: "16px" }}
+                                          >
+                                            <TileLayer
+                                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            />
+
+                                            {
+                                                dailyPlans.daily_plan?.daily_plans?.map((item, index) => {
+                                                    return (
+                                                        <>
+                                                            {
+                                                                item?.hotels?.map((hotel, index) => {
+                                                            return(
+                                                                <Marker
+                                                                    key={index}
+                                                                    position={[hotel.latitude || 0, hotel.longitude || 0]}
+                                                                    icon={icons.hotel || defaultIcon}
+                                                                ></Marker>
+                                                            )
+                                                        })
+                                                            }
+                                                            {
+                                                                item?.restaurants?.map((restaurant, index) => {
+                                                            return(
+                                                                <Marker
+                                                                    key={index}
+                                                                    position={[restaurant.latitude || 0, restaurant.longitude || 0]}
+                                                                    icon={icons.restaurant || defaultIcon}
+                                                                ></Marker>
+                                                            )
+                                                        })
+                                                            }
+                                                            {
+                                                                item?.history_or_places?.map((history, index) => {
+                                                                    return(
+                                                                        <Marker
+                                                                            key={index}
+                                                                            position={[history.latitude || 0, history.longitude || 0]}
+                                                                            icon={icons.history || defaultIcon}
+                                                                        ></Marker>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </>
+
+                                                    )
+                                                })
+                                            }
+
+
+                                          </MapContainer>
+
+                                    )
+                                })
+                            }
+
                         </Box>
+
                     </Box>
                 </Stack>
             </Container>
