@@ -48,6 +48,8 @@ import { lightTheme } from "./theme/mui/light";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import 'leaflet/dist/leaflet.css';
+import SuccessPayment from "./pages/SuccessPayment";
+import FailedPayment from "./pages/FailedPayment";
 
 const App: React.FC = () => {
   return (
@@ -117,6 +119,8 @@ const App: React.FC = () => {
             <Route path="set-password" element={<SetPassword />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="verify" element={<Verify />} />
+            <Route path="payment-success" element={<SuccessPayment/>}/>
+            <Route path="payment-failed" element={<FailedPayment/>}/>
             <Route path="*" element={<Error />} />
           </Routes>
         </ThemeProvider>
