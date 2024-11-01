@@ -7,6 +7,9 @@ export type WelcomeMainTextType = {
     paddingbottom?: string,
     part?: boolean | string,
     mediafontsize?: string,
+    mediaxlfontsize?: string,
+    mediamdfontsize? : string,
+    mediaxsfontsize? : string,
     texttransform?: string,
 }
 

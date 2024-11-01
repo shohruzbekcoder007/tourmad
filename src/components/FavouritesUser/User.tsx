@@ -14,7 +14,7 @@ const User = () => {
             <Box
                 position="relative"
             >
-                <Avatar alt="Remy Sharp" src={require("./../../media/images/Ellipse.png")} />
+                <Avatar  alt="Remy Sharp" src={require("./../../media/images/Ellipse.png")} />
                 <Box
                     position="absolute"
                     right="0"

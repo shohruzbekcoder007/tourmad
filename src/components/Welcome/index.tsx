@@ -53,8 +53,8 @@ const Welcome: React.FC = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <WelcomeMainText fontSize={"45px"} mediafontsize='20px' paddingbottom="4px">{t("Helping Others")}</WelcomeMainText>
-                        <WelcomeMainText fontSize={"80px"} mediafontsize='28px' paddingbottom="16px">{t("Live & Travel")}</WelcomeMainText>
+                        <WelcomeMainText fontSize={"45px"} mediamdfontsize='30px' mediafontsize='20px' mediaxsfontsize='14px' paddingbottom="4px">{t("Helping Others")}</WelcomeMainText>
+                        <WelcomeMainText fontSize={"80px"} mediaxlfontsize='60px' mediamdfontsize='40px' mediafontsize='24px' mediaxsfontsize='18px' paddingbottom="16px">{t("Live & Travel")}</WelcomeMainText>
                         <WelcomeMainText fontSize={"20px"} mediafontsize='12px'>{t("Special offers to suit your plan")}</WelcomeMainText>
                     </Box>
                 </Box>

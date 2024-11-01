@@ -29,8 +29,17 @@ export const WelcomeMainText = styled.h2<WelcomeMainTextType>`
     font-size: ${props => props.fontSize};
     padding-bottom: ${props => props.paddingbottom || "0px"};
     color: ${props => props.part ? props.theme.part_title : props.theme.neutrals};
+    @media (max-width: 1400px) {
+        font-size: ${props => props.mediaxlfontsize};
+    }
+    @media (max-width: 1200px) {
+        font-size: ${props => props.mediamdfontsize};
+    }
     @media (max-width: 768px) {
         font-size: ${props => props.mediafontsize};
+    }
+    @media (max-width: 475px) {
+        font-size: ${props => props.mediaxsfontsize};
     }
 `
 export const GlobalParagraph = styled.p<GlobalParagraphType>`
