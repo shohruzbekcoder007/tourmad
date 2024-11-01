@@ -225,7 +225,7 @@ const MyTrip: React.FC = () => {
                   >
                     What is this trip about?
                   </GlobalParagraph>
-                  {dailyPlans.daily_plan?.is_paid ? (
+                  {(dailyPlans.daily_plan?.is_paid && dailyPlans.daily_plan?.price !== "0") ? (
                     <GlobalParagraph
                       fontSize="24px"
                       mediafontsize="16px"
@@ -233,14 +233,14 @@ const MyTrip: React.FC = () => {
                     >
                       Payment made
                     </GlobalParagraph>
-                  ) : (
+                  ) : dailyPlans.daily_plan?.price === "0" ? <span></span> : (
                     <Button
                       onClick={() =>
                         handleClick(dailyPlans.daily_plan?.id as number)
                       }
                       variant="contained"
                     >
-                      ${dailyPlans.daily_plan?.price}
+                      {dailyPlans.daily_plan?.price === "0" ? <span></span> : `$${dailyPlans.daily_plan?.price}`}
                     </Button>
                   )}
                 </Box>
