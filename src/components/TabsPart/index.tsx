@@ -8,6 +8,8 @@ import Favourite from "../Favourite";
 import { GlobalParagraph } from "../../global_styles/styles";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getStatusWishList, getWishList, getWishListList } from "../../redux/slices/wishListSlice";
+import FavouriteTwo from "../FavouriteTwo";
+import FavouriteThree from "../FavouriteThree";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -88,27 +90,27 @@ export default function BasicTabs() {
             }}
           >
             <Tab sx={{
-              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
+              width: {xl: "120px", md: "120px", sm: "60px", xs: "40px"}
             }} label="Hotel" {...a11yProps(0)} />
             <Tab sx={{
-              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
-            }} label="Item Two" {...a11yProps(1)} />
+              width: {xl: "120px", md: "120px", sm: "60px", xs: "40px"}
+            }} label="Restaurant" {...a11yProps(1)} />
             <Tab sx={{
-              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
-            }} label="Item Three" {...a11yProps(2)} />
+              width: {xl: "120px", md: "120px", sm: "60px", xs: "40px"}
+            }} label="Driver" {...a11yProps(2)} />
             <Tab sx={{
-              width: {xl: "120px", md: "80px", sm: "60px", xs: "40px"}
-            }} label="Item four" {...a11yProps(3)} />
+              width: {xl: "120px", md: "200px", sm: "60px", xs: "40px"}
+            }} label="History or Place" {...a11yProps(3)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <Favourite />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Item Two
+        <FavouriteTwo />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Item Three
+          <FavouriteThree/>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
           Item four
