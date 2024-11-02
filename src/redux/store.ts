@@ -13,6 +13,7 @@ import planSlice from "./slices/planSliser";
 import homeSlice from "./slices/homeSlice";
 import accountSlice from "./slices/accountSlice";
 import dailySlice from "./slices/dailySlice";
+import wishListSlice from "./slices/wishListSlice";
 
 const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ const store = configureStore({
     home: homeSlice,
     plan: planSlice,
     account: accountSlice,
+    wishList: wishListSlice,
   },
 });
 

@@ -54,3 +54,5 @@ export const trip_trip_daily_plans = (id: string) => `trip/trip/${id}/daily-plan
 export const location_daily = "common/location-hotel"
 export const recommendation_trip_daily = "trip/recommendation-trip-hotel"
 // export const trip_daily = ""
+
+export const my_wishlist = "trip/my-wishlist"

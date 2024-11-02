@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import { Stack } from "@mui/material";
 import Favourite from "../Favourite";
 import { GlobalParagraph } from "../../global_styles/styles";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { getStatusWishList, getWishList, getWishListList } from "../../redux/slices/wishListSlice";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,6 +48,17 @@ export default function BasicTabs() {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const dispatch = useAppDispatch()
+  const statusWishList = useAppSelector(getStatusWishList)
+  const wishList = useAppSelector(getWishListList)
+  
+  React.useEffect(() => {
+    if(statusWishList==="idle") {
+      dispatch(getWishList())
+    }
+  }, [statusWishList, dispatch])
+  console.log(wishList, "wishList")
 
   return (
     <Stack>

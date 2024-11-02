@@ -192,6 +192,56 @@ export type HistoryType = {
   longitude: number | null;
   gallery: GalleryType[] | null;
 };
+export type WishLocationType = {
+  id: number | null;
+  name: string | null;
+  parent: number | null;
+  photo: string | null;
+  latitude: number | null;
+  longitude: number | null;
+}
+export type WishElementType = {
+  id: number | null;
+  location: WishLocationType | null;
+  status: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  is_active: boolean | null;
+  banner: string | null;
+  card: string | null;
+  name_uz: string | null;
+  name_ru: string | null;
+  name_en: string | null;
+  desc_uz: string | null;
+  desc_ru: string | null;
+  desc_en: string | null;
+  body_uz: string | null;
+  body_ru: string | null;
+  body_en: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  rate: number | null;
+  grade: number | null
+}
+export type HotelWish = {
+  hotel: WishElementType | null;
+};
+export type RestaurantWish = {
+  restaurant: WishElementType | null;
+};
+export type DriverWish = {
+  driver: WishElementType | null;
+};
+export type HistoryPlaceWish = {
+  history_or_place: WishElementType | null;
+};
+export type WishlistType = {
+  user_hotel_wishes: HotelWish[] | null;
+  user_restaurant_wishes: RestaurantWish[] | null;
+  driver_wishes: DriverWish[] | null;
+  user_trip_wishes: HistoryPlaceWish[] | null;
+  
+}
 
 export type ConsultingCategoryType = {
   id: number | null;
