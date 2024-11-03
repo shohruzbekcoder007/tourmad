@@ -10,7 +10,7 @@ import {
   getWishListList,
 } from "../../redux/slices/wishListSlice";
 
-const Favourite: React.FC = () => {
+const FavouriteFour: React.FC = () => {
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
@@ -25,7 +25,7 @@ const Favourite: React.FC = () => {
   return (
     <Box>
       {wishList &&
-        wishList[0]?.user_hotel_wishes?.map((item, index) => {
+        wishList[0]?.user_trip_wishes?.map((item, index) => {
           return (
             <Paper
               key={index}
@@ -50,7 +50,7 @@ const Favourite: React.FC = () => {
                   }}
                 >
                   <img
-                    src={item?.hotel?.banner || card_image}
+                    src={item?.history_or_place?.banner || card_image}
                     width="100%"
                     alt=""
                     style={{
@@ -81,7 +81,7 @@ const Favourite: React.FC = () => {
                         mediafontsize="18px"
                         fontWeight="700"
                       >
-                        {item?.hotel?.name_uz}
+                        {item?.history_or_place?.name_uz} 
                       </GlobalParagraph>
 
                       <Box display="flex" alignItems="center" marginTop="16px">
@@ -110,7 +110,7 @@ const Favourite: React.FC = () => {
                             marginLeft: "5px",
                           }}
                         >
-                          {item?.hotel?.location?.name}
+                          {item?.history_or_place?.location?.name}
                         </GlobalParagraph>
                       </Box>
                       <Box
@@ -128,7 +128,7 @@ const Favourite: React.FC = () => {
                           },
                         }}
                       >
-                        <Box
+                        {/* <Box
                           display="flex"
                           flexWrap="wrap"
                           justifyContent="space-between"
@@ -136,7 +136,7 @@ const Favourite: React.FC = () => {
                         >
                           <Rating
                             name="read-only"
-                            value={item?.hotel?.rate}
+                            value={item?.history_or_place?.avg_rate}
                             readOnly
                             style={{ color: "#FF8682" }}
                           />
@@ -148,9 +148,9 @@ const Favourite: React.FC = () => {
                               marginLeft: "5px",
                             }}
                           >
-                            {item?.hotel?.rate} Star Hotel
+                            {item?.driver?.avg_rate} Star Driver
                           </GlobalParagraph>
-                        </Box>
+                        </Box> */}
                         {/* <Box
                           display="flex"
                           justifyContent="space-between"
@@ -199,13 +199,13 @@ const Favourite: React.FC = () => {
                         gap="8px"
                         marginTop="12px"
                       >
-                        <Button variant="outlined">{item?.hotel?.grade}</Button>
+                        {/* <Button variant="outlined">{item?.history_or_place?.avg_rate}</Button> */}
                         <GlobalParagraph
                           fontSize="12px"
                           mediafontsize="10px"
                           fontWeight="700"
                         >
-                          Very Good
+                          {/* Very Good */}
                         </GlobalParagraph>
                         {/* <GlobalParagraph
                           fontSize="12px"
@@ -312,4 +312,4 @@ const Favourite: React.FC = () => {
   );
 };
 
-export default Favourite;
+export default FavouriteFour;
