@@ -196,8 +196,8 @@ export const getOrderCreateAction = createAsyncThunk('order-create',
     async (data: {orderCreate: DriveOrderType}, { rejectWithValue }) => {
         try {
             const response = await DriverService.getDriverOrderCrete(data.orderCreate);
-            const new_review: DriveOrderType = response.data?.results;
-            return new_review;
+            const order_create: DriveOrderType = response.data?.results;
+            return order_create;
         } catch (error) {
             let errorMessage = 'Error';
             if (error instanceof AxiosError && error.response?.data?.message) {
@@ -335,15 +335,15 @@ export const driverSlice = createSlice({
             })
             builder.addCase(getOrderCreateAction.pending, (state) => {
                         state.driverOrder.driverOrderLoading = true;
+                        state.driverOrder.driverOrderMessage = "Loading"
                     })
                     .addCase(getOrderCreateAction.fulfilled, (state, action) => {
                         state.driverOrder.driverOrderCreate = action.payload;
                         state.driverOrder.driverOrderLoading = false;
-                        state.driverOrder.driverOrderMessage = ""
+                        state.driverOrder.driverOrderMessage = "";
                     })
                     .addCase(getOrderCreateAction.rejected, (state, _) => {
-                        state.driverOrder.driverOrderLoading= false;
-                        state.driverOrder.driverOrderMessage = "Siz bu haydovchidan foydalana olmaysiz!";
+                        state.driverOrder.driverOrderMessage = "Driver is busy";
                     })
     }
 })

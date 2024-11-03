@@ -29,6 +29,7 @@ import {
   getMyDriverReviews,
   getNewReview,
   getNewReviewAction,
+  getOrderCreate,
   getOrderCreateAction,
 } from "../../redux/slices/driverSliser";
 import { AppDispatch } from "../../redux/store";
@@ -78,6 +79,7 @@ const MyDriverDetail: React.FC = () => {
   const driverDetail = useAppSelector(getDriverDetail);
   const driverReview = useAppSelector(getDriverReview);
   const newReview = useAppSelector(getNewReview);
+  const newOrder = useAppSelector(getOrderCreate);
 
   // redux dispatch
   const dispatch: AppDispatch = useDispatch();
@@ -327,7 +329,7 @@ const MyDriverDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder btnText="Book Now" id={id} orderSend={orderSend}/>
+              <DriveOrder btnText="Book Now" id={id} success={newOrder.driverOrderLoading} orderSend={orderSend} message={newOrder.driverOrderMessage}/>
             </Box>
           </Box>
         </Box>
