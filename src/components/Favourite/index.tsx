@@ -285,7 +285,7 @@ const Favourite: React.FC = () => {
                     justifyContent="space-between"
                     marginTop="24px"
                   >
-                    <Button variant="outlined">
+                    {/* <Button variant="outlined">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -298,7 +298,7 @@ const Favourite: React.FC = () => {
                           fill="#1B1464"
                         />
                       </svg>
-                    </Button>
+                    </Button> */}
                     <Box width="85%" paddingLeft="10px">
                       <Button variant="contained" fullWidth onClick={() => navigate(`/hotel-detail/${item?.hotel?.id}`)}>
                         View Deals
