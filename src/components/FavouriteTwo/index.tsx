@@ -9,11 +9,13 @@ import {
   getWishList,
   getWishListList,
 } from "../../redux/slices/wishListSlice";
+import { useNavigate } from "react-router-dom";
 
 const FavouriteTwo: React.FC = () => {
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (statusWishList === "idle") {
@@ -298,7 +300,7 @@ const FavouriteTwo: React.FC = () => {
                       </svg>
                     </Button>
                     <Box width="85%" paddingLeft="10px">
-                      <Button variant="contained" fullWidth>
+                      <Button variant="contained" fullWidth onClick={() => navigate(`/restaurant-detail/${item?.restaurant?.id}`)}>
                         View Deals
                       </Button>
                     </Box>

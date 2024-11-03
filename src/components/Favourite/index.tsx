@@ -9,18 +9,20 @@ import {
   getWishList,
   getWishListList,
 } from "../../redux/slices/wishListSlice";
+import { useNavigate } from "react-router-dom";
 
 const Favourite: React.FC = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
+
 
   React.useEffect(() => {
     if (statusWishList === "idle") {
       dispatch(getWishList());
     }
   }, [statusWishList, dispatch]);
-  console.log(wishList, "wishList");
 
   return (
     <Box>
@@ -298,7 +300,7 @@ const Favourite: React.FC = () => {
                       </svg>
                     </Button>
                     <Box width="85%" paddingLeft="10px">
-                      <Button variant="contained" fullWidth>
+                      <Button variant="contained" fullWidth onClick={() => navigate(`/hotel-detail/${item?.hotel?.id}`)}>
                         View Deals
                       </Button>
                     </Box>

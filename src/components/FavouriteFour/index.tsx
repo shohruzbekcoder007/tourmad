@@ -9,8 +9,10 @@ import {
   getWishList,
   getWishListList,
 } from "../../redux/slices/wishListSlice";
+import { useNavigate } from "react-router-dom";
 
 const FavouriteFour: React.FC = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
@@ -20,7 +22,6 @@ const FavouriteFour: React.FC = () => {
       dispatch(getWishList());
     }
   }, [statusWishList, dispatch]);
-  console.log(wishList, "wishList");
 
   return (
     <Box>
@@ -298,7 +299,7 @@ const FavouriteFour: React.FC = () => {
                       </svg>
                     </Button>
                     <Box width="85%" paddingLeft="10px">
-                      <Button variant="contained" fullWidth>
+                      <Button variant="contained" fullWidth onClick={() => navigate(`/plan-detail/${item?.history_or_place?.id}`)}>
                         View Deals
                       </Button>
                     </Box>
