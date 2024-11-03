@@ -223,6 +223,74 @@ export type WishElementType = {
   rate: number | null;
   grade: number | null
 }
+export type AutoModelType = {
+  id: number |  null;
+  name: string | null;
+  status: string | null;
+}
+export type AutoNumberType = {
+  country: string | null;
+  number: string | null;
+  region: string | null;
+}
+export type LanguageElemType = {
+  id: number | null;
+  lang: string | null
+}
+
+export type WishDriveUserType = {
+  avatar: string | null;
+  birth_date: string | null;
+  email: string | null;
+  first_name: string | null;
+  gender: string | null;
+  last_name: string | null;
+  middle_name: string | null;
+}
+
+export type WishElementDriverType = {
+  auto_doc1: string | null;
+  auto_doc2: string | null;
+  auto_model: AutoModelType | null;
+auto_number: AutoNumberType | null;
+auto_photo: string | null;
+avg_rate: number | null;
+id: number | null;
+languages: LanguageElemType[] | null;
+location: WishLocationType | null;
+orders_count: number | null;
+price: string | null;
+user: WishDriveUserType | null
+}
+export type WishHistoryCategory = {
+  count: number | null;
+  id: number | null;
+  logo: string | null;
+  title: string | null;
+}
+export type WishElementHistoryType = {
+  audio: string | null;
+  banner: string | null;
+  body_en: string | null;
+  body_ru: string | null;
+  body_uz: string | null;
+  card: string | null;
+  category: WishHistoryCategory | null;
+  created_at: string | null;
+  desc_en: string | null;
+  desc_ru: string | null;
+  desc_uz: string | null;
+  id: number | null;
+  is_active: boolean | null;
+  is_history: boolean | null;
+  latitude: number | null;
+  longitude: number | null;
+  location: WishLocationType | null;
+  name_en: string | null;
+  name_ru: string | null;
+  name_uz: string | null;
+  updated_at: string | null;
+}
 export type HotelWish = {
   hotel: WishElementType | null;
 };
@@ -230,17 +298,18 @@ export type RestaurantWish = {
   restaurant: WishElementType | null;
 };
 export type DriverWish = {
-  driver: WishElementType | null;
+  driver: WishElementDriverType | null;
 };
 export type HistoryPlaceWish = {
-  history_or_place: WishElementType | null;
+  history_or_place: WishElementHistoryType | null;
 };
+
 export type WishlistType = {
   user_hotel_wishes: HotelWish[] | null;
   user_restaurant_wishes: RestaurantWish[] | null;
   driver_wishes: DriverWish[] | null;
   user_trip_wishes: HistoryPlaceWish[] | null;
-  
+
 }
 
 export type ConsultingCategoryType = {

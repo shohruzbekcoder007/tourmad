@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getStatusWishList, getWishList, getWishListList } from "../../redux/slices/wishListSlice";
 import FavouriteTwo from "../FavouriteTwo";
 import FavouriteThree from "../FavouriteThree";
+import FavouriteFour from "../FavouriteFour";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -113,7 +114,7 @@ export default function BasicTabs() {
           <FavouriteThree/>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          Item four
+          <FavouriteFour/>
         </CustomTabPanel>
       </Box>
     </Stack>

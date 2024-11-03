@@ -10,7 +10,7 @@ import {
   getWishListList,
 } from "../../redux/slices/wishListSlice";
 
-const FavouriteThree: React.FC = () => {
+const FavouriteFour: React.FC = () => {
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
@@ -25,7 +25,7 @@ const FavouriteThree: React.FC = () => {
   return (
     <Box>
       {wishList &&
-        wishList[0]?.driver_wishes?.map((item, index) => {
+        wishList[0]?.user_trip_wishes?.map((item, index) => {
           return (
             <Paper
               key={index}
@@ -50,7 +50,7 @@ const FavouriteThree: React.FC = () => {
                   }}
                 >
                   <img
-                    src={item?.driver?.auto_photo || card_image}
+                    src={item?.history_or_place?.banner || card_image}
                     width="100%"
                     alt=""
                     style={{
@@ -81,7 +81,7 @@ const FavouriteThree: React.FC = () => {
                         mediafontsize="18px"
                         fontWeight="700"
                       >
-                        {item?.driver?.user?.first_name} {item?.driver?.user?.middle_name} {item?.driver?.user?.last_name}
+                        {item?.history_or_place?.name_uz} 
                       </GlobalParagraph>
 
                       <Box display="flex" alignItems="center" marginTop="16px">
@@ -110,7 +110,7 @@ const FavouriteThree: React.FC = () => {
                             marginLeft: "5px",
                           }}
                         >
-                          {item?.driver?.location?.name}
+                          {item?.history_or_place?.location?.name}
                         </GlobalParagraph>
                       </Box>
                       <Box
@@ -128,7 +128,7 @@ const FavouriteThree: React.FC = () => {
                           },
                         }}
                       >
-                        <Box
+                        {/* <Box
                           display="flex"
                           flexWrap="wrap"
                           justifyContent="space-between"
@@ -136,7 +136,7 @@ const FavouriteThree: React.FC = () => {
                         >
                           <Rating
                             name="read-only"
-                            value={item?.driver?.avg_rate}
+                            value={item?.history_or_place?.avg_rate}
                             readOnly
                             style={{ color: "#FF8682" }}
                           />
@@ -150,7 +150,7 @@ const FavouriteThree: React.FC = () => {
                           >
                             {item?.driver?.avg_rate} Star Driver
                           </GlobalParagraph>
-                        </Box>
+                        </Box> */}
                         {/* <Box
                           display="flex"
                           justifyContent="space-between"
@@ -199,13 +199,13 @@ const FavouriteThree: React.FC = () => {
                         gap="8px"
                         marginTop="12px"
                       >
-                        <Button variant="outlined">{item?.driver?.avg_rate}</Button>
+                        {/* <Button variant="outlined">{item?.history_or_place?.avg_rate}</Button> */}
                         <GlobalParagraph
                           fontSize="12px"
                           mediafontsize="10px"
                           fontWeight="700"
                         >
-                          Very Good
+                          {/* Very Good */}
                         </GlobalParagraph>
                         {/* <GlobalParagraph
                           fontSize="12px"
@@ -312,4 +312,4 @@ const FavouriteThree: React.FC = () => {
   );
 };
 
-export default FavouriteThree;
+export default FavouriteFour;
