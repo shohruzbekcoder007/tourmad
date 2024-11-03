@@ -66,7 +66,7 @@ const DailyCard: React.FC<DailyCardProps> = ({ id, card, galery, grade, name, lo
           }} />
           <Box pt="16px" display="flex" justifyContent="space-between">
             <Button variant="outlined">
-              <FavoriteBorderIcon />
+              {/* <FavoriteBorderIcon /> */}
             </Button>
             <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
               <Button onClick={() => navigate(`/daily-detail/${id}`)} variant="contained" fullWidth>

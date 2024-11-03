@@ -118,7 +118,7 @@ const ConsultingCards: React.FC = () => {
                         aria-label="favorite"
                         color="secondary"
                       >
-                        <FavoriteBorderIcon />
+                        {/* <FavoriteBorderIcon /> */}
                       </IconButton>
                       <Box width="100%">
                         <Box

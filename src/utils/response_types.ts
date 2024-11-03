@@ -73,6 +73,7 @@ export type RecommendationType = {
   rate: number | null;
   grade: number | null;
   price: number | null;
+  is_liked: boolean | null
 };
 
 export type CommonLocationType = {
@@ -161,6 +162,7 @@ export type PlanDetailType = {
   longitude: number | null;
   gallery_count: number | null;
   gallery: GalleryType[] | null;
+  is_liked: boolean | null
 }
 
 export type CommonLocationHistoryType = {
@@ -309,7 +311,6 @@ export type WishlistType = {
   user_restaurant_wishes: RestaurantWish[] | null;
   driver_wishes: DriverWish[] | null;
   user_trip_wishes: HistoryPlaceWish[] | null;
-
 }
 
 export type ConsultingCategoryType = {
@@ -397,6 +398,7 @@ export type DriverType = {
   languages: Language[];
   price: number;
   orders_count: number;
+  is_liked: boolean
 };
 
 export type newUserType = {
@@ -457,6 +459,7 @@ export type RestaurantDetailType = {
   grade: number | null;
   gallery: GalleryType[] | null;
   reviews_count: number | null;
+  is_liked: boolean | null
 };
 
 export type RecommendationPlanType = {

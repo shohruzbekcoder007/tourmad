@@ -41,12 +41,12 @@ import { DriveClientReviewType } from "../../utils/response_types";
 import DetailReviews from "../../components/DetailReviews";
 // import { ReviewsType } from '../../utils/response_types';
 import LinkIcon from "@mui/icons-material/Link";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import {
-  FacebookIcon,
   FacebookShareButton,
-  TwitterIcon,
   TwitterShareButton,
-  WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -300,7 +300,7 @@ const MyDriverDetail: React.FC = () => {
                   </TwitterShareButton>
                   <WhatsappShareButton url={window.location.href}>
                     <IconButton color="primary">
-                      <WhatsappIcon />
+                      <WhatsAppIcon />
                     </IconButton>
                   </WhatsappShareButton>
 

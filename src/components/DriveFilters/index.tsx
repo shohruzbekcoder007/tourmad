@@ -171,6 +171,7 @@ const DriveFilter: React.FC = () => {
         dispatch(changeSearchLanguage(fromLanguage?.value))
         dispatch(changeSearchLocation(fromLocation?.value))
     }
+    console.log(drivers, "drivers")
 
     return (
         <Stack mt="40px">
@@ -379,6 +380,7 @@ const DriveFilter: React.FC = () => {
                                     drivers?.map((drivers, index) => {
                                         return (
                                             <DriveFilterCard
+                                                is_liked={drivers?.is_liked}
                                                 key={index + 1}
                                                 id={drivers.id}
                                                 user={drivers.user}

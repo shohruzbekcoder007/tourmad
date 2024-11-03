@@ -56,3 +56,7 @@ export const recommendation_trip_daily = "trip/recommendation-trip-hotel"
 // export const trip_daily = ""
 
 export const my_wishlist = "trip/my-wishlist"
+export const post_like = "drive/wishlist-driver"
+export const post_like_r = "trip/wishlist-restaurant"
+export const post_like_h = "history/wishlist"
+export const post_like_ht = "trip/wishlist-hotel"

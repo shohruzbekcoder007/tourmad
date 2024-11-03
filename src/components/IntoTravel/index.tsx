@@ -45,7 +45,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) 
                                         }
                                     }}>
                                     <IconButton sx={{ position: 'absolute', top: "10px", right: "10px" }} aria-label="favorite" color="secondary">
-                                        <FavoriteBorderIcon />
+                                        {/* <FavoriteBorderIcon /> */}
                                     </IconButton>
                                     <Box width="100%">
                                         <Box pb="16px" width="100%" display="flex" justifyContent="space-between" gap="10px" alignItems="flex-end">
