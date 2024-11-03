@@ -59,10 +59,16 @@ const HotelDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
+  const [liked, setLiked] = useState<boolean | undefined | null>(undefined);
   useEffect(() => {
     dispatch(getHotelDetailInfo(id as string));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (hotel?.is_liked !== undefined) {
+      setLiked(hotel.is_liked);
+    }
+  }, [hotel]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,7 +105,6 @@ const HotelDetail: React.FC = () => {
 
   const open = Boolean(anchorEl);
   const popoverId = open ? "share-popover" : undefined;
-  const [liked, setLiked] = useState(hotel?.is_liked);
 
   function handleLikeFunc(id: number) {
     setLiked(!liked); 

@@ -52,6 +52,8 @@ const PlanDetail: React.FC = () => {
   const dispatch = useAppDispatch()
   const { id } = useParams<{ id: string }>()
   const plan_detail = useAppSelector(getPlanDetail)
+  const [liked, setLiked] = useState<boolean | undefined | null>(undefined);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 400) {
@@ -92,7 +94,11 @@ const PlanDetail: React.FC = () => {
   useEffect(() => {
     dispatch(getPlanDetailInfo(id as string))
   }, [id, dispatch])
-  const [liked, setLiked] = useState(plan_detail?.plan_detail?.is_liked);
+  useEffect(() => {
+    if (plan_detail?.plan_detail?.is_liked !== undefined) {
+      setLiked(plan_detail?.plan_detail?.is_liked);
+    }
+  }, [plan_detail]);
 
   function handleLikeFunc(id: number) {
     setLiked(!liked); 

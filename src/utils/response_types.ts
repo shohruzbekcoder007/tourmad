@@ -162,7 +162,7 @@ export type PlanDetailType = {
   longitude: number | null;
   gallery_count: number | null;
   gallery: GalleryType[] | null;
-  is_liked: boolean | null
+  is_liked: boolean | null;
 }
 
 export type CommonLocationHistoryType = {

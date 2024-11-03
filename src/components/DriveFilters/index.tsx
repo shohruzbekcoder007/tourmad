@@ -171,7 +171,6 @@ const DriveFilter: React.FC = () => {
         dispatch(changeSearchLanguage(fromLanguage?.value))
         dispatch(changeSearchLocation(fromLocation?.value))
     }
-    console.log(drivers, "drivers")
 
     return (
         <Stack mt="40px">
