@@ -318,6 +318,14 @@ export type DriveClientReviewType = {
   review: string | null;
 };
 
+export type DriveOrderType = {
+  driver: string | undefined,
+  start_time: string | null,
+  comment: string | null,
+  latitude: number | null,
+  longitude: number | null,
+};
+
 export type HomeBannerType = {
   banner: string | null;
   history: string | null;

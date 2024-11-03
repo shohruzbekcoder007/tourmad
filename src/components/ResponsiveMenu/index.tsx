@@ -19,6 +19,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import MapIcon from '@mui/icons-material/Map';
 import Logo from './../../media/images/logo2.png'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -110,7 +111,15 @@ const ResponsiveMenu: React.FC = () => {
       </List>
       <Divider />
       <List>
-        <ListItem onClick={() => navigate('/protected/hotel')} disablePadding>
+        <ListItem onClick={() => navigate('/protected/daily')} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <HotelIcon />
+              </ListItemIcon>
+              <ListItemText primary="Daily" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={() => navigate('/protected/hotel')} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <HotelIcon />
@@ -148,6 +157,14 @@ const ResponsiveMenu: React.FC = () => {
                 <BookmarkAddIcon />
               </ListItemIcon>
               <ListItemText primary="Plan" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={() => navigate('/protected/map')} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MapIcon />
+              </ListItemIcon>
+              <ListItemText primary="Map" />
             </ListItemButton>
           </ListItem>
       </List>

@@ -58,7 +58,7 @@ const AuthUserInfo: React.FC = () => {
     if (userStatus === "succeeded") {
         return (
             <Paper
-                sx={{padding: "5px 10px"}}
+                sx={{padding: "5px 10px",height:"60px", marginTop: "6px"}}
                 elevation={0}
             >
                 <FavouritesUser/>

@@ -7,6 +7,16 @@ export const HeaderWrapper = styled.div`
     padding-top: 10px;
     padding-bottom: 10px;
     justify-content: space-between;
+    @media (max-width: 600px) {
+        background-color: white;
+        width: 100%;
+        margin-left: -40px;
+        border-radius: 16px;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+    }
+
 `
 
 export const HeadeMenuList = styled.div`
@@ -68,6 +78,7 @@ export const WelcomeLogo = styled.div`
         }
         @media (max-width: 600px) {
             width: 90px;
+            display: none;
         }
     }
 `

@@ -29,6 +29,7 @@ import {
   getMyDriverReviews,
   getNewReview,
   getNewReviewAction,
+  getOrderCreateAction,
 } from "../../redux/slices/driverSliser";
 import { AppDispatch } from "../../redux/store";
 import { useDispatch } from "react-redux";
@@ -37,7 +38,7 @@ import TranslateIcon from "@mui/icons-material/Translate";
 import parse from "html-react-parser";
 import InputReview from "../../components/InputReview";
 import DriverDetailBanner from "../../components/DriverDetailBanner";
-import { DriveClientReviewType } from "../../utils/response_types";
+import { DriveClientReviewType, DriveOrderType } from "../../utils/response_types";
 import DetailReviews from "../../components/DetailReviews";
 // import { ReviewsType } from '../../utils/response_types';
 import LinkIcon from "@mui/icons-material/Link";
@@ -92,6 +93,10 @@ const MyDriverDetail: React.FC = () => {
 
   function reviewSend(data: { id: string; review: DriveClientReviewType }) {
     dispatch(getNewReviewAction(data));
+  }
+
+  function orderSend(data: {orderCreate: DriveOrderType }) {
+    dispatch(getOrderCreateAction(data));
   }
 
   const galleries =
@@ -322,7 +327,7 @@ const MyDriverDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder btnText="Book Now" />
+              <DriveOrder btnText="Book Now" id={id} orderSend={orderSend}/>
             </Box>
           </Box>
         </Box>

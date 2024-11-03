@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import DriverService from "../../services/DriverService";
 import { AxiosError } from "axios";
-import { DriveClientReviewType, DriveDetailType, DriverType, LocationType, RecommendationType, ReviewsType } from "../../utils/response_types";
+import { DriveClientReviewType, DriveDetailType, DriveOrderType, DriverType, LocationType, RecommendationType, ReviewsType } from "../../utils/response_types";
 
 export interface DriverState {
     statusLastRecommendationDriver: "idle" | "loading" | "succeeded" | "failed",
@@ -37,6 +37,11 @@ export interface DriverState {
         newReviewCreate: DriveClientReviewType | null,
         newReviewLoading: boolean | null,
         NewReviewMessage: string | null
+    },
+    driverOrder: {
+        driverOrderCreate: DriveOrderType | null,
+        driverOrderLoading: boolean | null,
+        driverOrderMessage: string | null
     },
     locationList: LocationType[] | null,
     statusLastSearchDriver: 'idle' | "loading" | "succeeded" | "failed",
@@ -75,6 +80,11 @@ const initialState: DriverState = {
         newReviewCreate: null,
         newReviewLoading: false,
         NewReviewMessage: ""
+    },
+    driverOrder: {
+        driverOrderCreate:  null,
+        driverOrderLoading: false,
+        driverOrderMessage: ""
     },
     locationList: [],
     statusLastSearchDriver: "idle",
@@ -171,6 +181,22 @@ export const getNewReviewAction = createAsyncThunk('new-review',
         try {
             const response = await DriverService.getDriverClientReview(data.id, data.review);
             const new_review: DriveClientReviewType = response.data?.results;
+            return new_review;
+        } catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
+export const getOrderCreateAction = createAsyncThunk('order-create',
+    async (data: {orderCreate: DriveOrderType}, { rejectWithValue }) => {
+        try {
+            const response = await DriverService.getDriverOrderCrete(data.orderCreate);
+            const new_review: DriveOrderType = response.data?.results;
             return new_review;
         } catch (error) {
             let errorMessage = 'Error';
@@ -307,6 +333,18 @@ export const driverSlice = createSlice({
                 state.newReview.newReviewLoading= false;
                 state.newReview.NewReviewMessage = "Siz bu foydalanuvchiga baxo berolmaysiz";
             })
+            builder.addCase(getOrderCreateAction.pending, (state) => {
+                        state.driverOrder.driverOrderLoading = true;
+                    })
+                    .addCase(getOrderCreateAction.fulfilled, (state, action) => {
+                        state.driverOrder.driverOrderCreate = action.payload;
+                        state.driverOrder.driverOrderLoading = false;
+                        state.driverOrder.driverOrderMessage = ""
+                    })
+                    .addCase(getOrderCreateAction.rejected, (state, _) => {
+                        state.driverOrder.driverOrderLoading= false;
+                        state.driverOrder.driverOrderMessage = "Siz bu haydovchidan foydalana olmaysiz!";
+                    })
     }
 })
 
@@ -331,6 +369,7 @@ export const getDriversStyle = (state: RootState) => state.driver.driversStyle;
 export const getDriverDetail = (state: RootState) => state.driver.driveDetail;
 export const getDriverReview = (state: RootState) => state.driver.driveReview;
 export const getNewReview = (state: RootState) => state.driver.newReview;
+export const getOrderCreate = (state: RootState) => state.driver.driverOrder;
 export const getLocationList = (state: RootState) => state.driver.locationList;
 export const getStatusLastSearchDriver = (state: RootState) => state.driver.statusLastSearchDriver;
 

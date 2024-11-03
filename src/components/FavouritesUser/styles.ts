@@ -27,7 +27,7 @@ export const FavouritesText = styled.span`
         display: none;
     }
     @media (max-width: 800px) {
-        display: block;
+        display: none;
         font-size: 12px;
     }
     @media (max-width: 600px) {
