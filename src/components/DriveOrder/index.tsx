@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
-import { Divider, Grid, TextField } from '@mui/material';
+import { Alert, Divider, Grid, TextField } from '@mui/material';
 import { LocalizationProvider, StaticDateTimePicker } from '@mui/x-date-pickers';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -15,6 +15,8 @@ import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 type PropsType = {
     btnText: string,
     id: string | undefined,
+    success: boolean | null,
+    message: String | null,
     orderSend: (data: {orderCreate: DriveOrderType}) => void
 }
 
@@ -41,6 +43,8 @@ const DriveOrder: React.FC<PropsType> = (props) => {
         right: false,
     });
 
+    console.log(props.message);
+
     const [from, setFrom] = useState<Option | null>(null)
     const [comment, setComment] = useState<string | null>(null);
     const [time, setTime] = useState<Dayjs | null | undefined>(null);
@@ -63,14 +67,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
         );
     }, []);
 
-    function orderCrete () {
-        props.orderSend({orderCreate: {
-            driver: props.id, 
-            start_time: `${time?.format()}`,
-            comment: comment,
-            latitude: 40.71550047598207,
-            longitude: 64.99960158539278 }})
-    }
+    
 
     useEffect(() => { }, [from])
 
@@ -88,6 +85,15 @@ const DriveOrder: React.FC<PropsType> = (props) => {
 
                 setState({ ...state, [anchor]: open });
             };
+
+            function orderCrete () {
+                props.orderSend({orderCreate: {
+                    driver: props.id, 
+                    start_time: `${time?.format()}`,
+                    comment: comment,
+                    latitude: 40.71550047598207,
+                    longitude: 64.99960158539278 }});
+            }
 
     const list = (anchor: Anchor) => (
         <Box
@@ -147,9 +153,12 @@ const DriveOrder: React.FC<PropsType> = (props) => {
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Comment")}</GlobalParagraph>
                 <TextField fullWidth type='text' value={comment} onChange={(e) => setComment(e.target.value)}  variant='outlined' label="Comment" />
             </Box>
+                {
+                    props.message === "" ? <></> : <Box pb="44px"><Alert severity="error">{props.message}</Alert></Box>
+                }
             <Divider />
             <Box py="44px" display="flex" justifyContent="space-between">
-                <Button variant='outlined' sx={{
+                <Button variant='outlined' onClick={toggleDrawer(anchor, false)} sx={{
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"

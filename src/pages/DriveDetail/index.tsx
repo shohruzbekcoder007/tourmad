@@ -265,7 +265,7 @@ const MyDriveDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder btnText="Book Now"  id={id} orderSend={orderSend} />
+              <DriveOrder message="" success={true} btnText="Book Now"  id={id} orderSend={orderSend} />
             </Box>
           </Box>
         </Box>
