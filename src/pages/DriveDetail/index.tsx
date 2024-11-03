@@ -35,6 +35,8 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { getOrderCreateAction } from "../../redux/slices/driverSliser";
+import { DriveOrderType } from "../../utils/response_types";
 
 const MyDriveDetail: React.FC = () => {
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
@@ -59,6 +61,10 @@ const MyDriveDetail: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  function orderSend(data: {orderCreate: DriveOrderType }) {
+    dispatch(getOrderCreateAction(data));
+  }
 
   useEffect(() => {
     dispatch(getDriveDetail(id as string));
@@ -259,7 +265,7 @@ const MyDriveDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder btnText="Book Now" />
+              <DriveOrder btnText="Book Now"  id={id} orderSend={orderSend} />
             </Box>
           </Box>
         </Box>

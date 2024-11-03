@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getHotelRecommendationList, getRecommendationTripHotel, getStatusLastRecommendationHotel } from '../../redux/slices/hotelSlice';
 import { getRecommendationRestaurantList, getRestaurantRecommendationList, getStatusLastRecommendationRestaurant } from '../../redux/slices/restaurantSlice';
 import { getDriverRecommendationList, getRecommendationDriverList, getStatusLastRecommendationDriver } from '../../redux/slices/driverSliser';
+import { getCategoryPlanList, getPlanRecommendationList, getRecommendationPlanList, getStatusLastRecommendationPlan } from '../../redux/slices/planSliser';
 
 const Welcome: React.FC = () => {
     const navigate = useNavigate();
@@ -20,8 +21,19 @@ const Welcome: React.FC = () => {
     const restaurantRecommendationList = useAppSelector(getRestaurantRecommendationList)
     const statusLastRecommendationDriver = useAppSelector(getStatusLastRecommendationDriver)
     const driverRecommendationList = useAppSelector(getDriverRecommendationList)
+    const statusLastRecommendationPlan = useAppSelector(
+        getStatusLastRecommendationPlan
+      );
+      const planRecommendationList = useAppSelector(getPlanRecommendationList);
 
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (statusLastRecommendationPlan === "idle") {
+          dispatch(getRecommendationPlanList());
+          dispatch(getCategoryPlanList())
+        }
+      }, [statusLastRecommendationPlan, dispatch]);
 
     useEffect(() => {
         if (statusLastRecommendationHotel === 'idle') {
@@ -69,6 +81,16 @@ const Welcome: React.FC = () => {
                     </Grid>
                 </Grid>
                 <IntoTravel link="restaurant" data={restaurantRecommendationList}/>
+                <Grid container>
+                    <Grid item xl={8} md={8} sm={6} xs={8}>
+                        <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">A Journey Through Time: Ancient and Beautiful Landmarks</WelcomeMainText>
+                        <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Embark on a journey to uncover the world's most ancient and beautiful historical landmarks</GlobalParagraph>
+                    </Grid>
+                    <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
+                        <Button variant="outlined" onClick={() => navigate("/plan-filter")}>See All</Button>
+                    </Grid>
+                </Grid>
+                <IntoTravel link="plan" data={planRecommendationList}/>
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">The best drivers</WelcomeMainText>

@@ -5,6 +5,15 @@ export const FavouritesUserWrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 32px;
+    @media (max-width: 1300px) {
+        gap: 0px;
+    }
+    @media (max-width: 800px) {
+        gap: 24px;
+    }
+    @media (max-width: 600px) {
+        gap: 0px;
+    }
 `
 
 export const FavouritesText = styled.span`
@@ -14,6 +23,13 @@ export const FavouritesText = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media (max-width: 1300px) {
+        display: none;
+    }
+    @media (max-width: 800px) {
+        display: none;
+        font-size: 12px;
+    }
     @media (max-width: 600px) {
         display: none;
     }

@@ -1,7 +1,7 @@
 import { DriverState } from "../redux/slices/driverSliser"
-import { drive_client_review, driver_detail, driver_list, location_drive, my_driver_review, recommendation_trip_drive } from "../utils/API_urls"
-import { getRequest, putRequest } from "../utils/request"
-import { DriveClientReviewType } from "../utils/response_types"
+import { drive_client_review, driver_detail, driver_list, driver_order_create, location_drive, my_driver_review, recommendation_trip_drive } from "../utils/API_urls"
+import { getRequest, postRequest, putRequest } from "../utils/request"
+import { DriveClientReviewType, DriveOrderType } from "../utils/response_types"
 
 class DriverService {
 
@@ -27,6 +27,10 @@ class DriverService {
 
     static getDriverClientReview = (id: string, review: DriveClientReviewType) => {
         return putRequest(`${drive_client_review}${id}/`, review)
+    }
+
+    static getDriverOrderCrete = (orderCreate: DriveOrderType) => {
+        return postRequest(driver_order_create, orderCreate)
     }
 
     static locationDrivers = () => {

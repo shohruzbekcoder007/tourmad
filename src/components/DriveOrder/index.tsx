@@ -4,17 +4,18 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import { Divider, Grid, TextField } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { LocalizationProvider, StaticDateTimePicker } from '@mui/x-date-pickers';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { CustomAutocomplete } from '../../helper_components';
-import dayjs from 'dayjs';
-import SimpleMap from '../SimpleMap';
+import dayjs, { Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import { DriveOrderType } from '../../utils/response_types';
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 
 type PropsType = {
-    btnText: string
+    btnText: string,
+    id: string | undefined,
+    orderSend: (data: {orderCreate: DriveOrderType}) => void
 }
 
 type Anchor = 'right';
@@ -41,9 +42,34 @@ const DriveOrder: React.FC<PropsType> = (props) => {
     });
 
     const [from, setFrom] = useState<Option | null>(null)
+    const [comment, setComment] = useState<string | null>(null);
+    const [time, setTime] = useState<Dayjs | null | undefined>(null);
 
     const getChangeOptionFrom = (newValue: Option | null) => {
         setFrom(newValue)
+    }
+    
+    const defaultPosition = { lat: 40.71550047598207, lng: 64.99960158539278 };
+    const [lat, setLat] = useState<number | null>(null);
+    const [lng, setLng] = useState<number | null>(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+        (position) => {
+            setLat(position.coords.latitude);
+            setLng(position.coords.longitude);
+        },
+        (error) => console.log(error)
+        );
+    }, []);
+
+    function orderCrete () {
+        props.orderSend({orderCreate: {
+            driver: props.id, 
+            start_time: `${time?.format()}`,
+            comment: comment,
+            latitude: 40.71550047598207,
+            longitude: 64.99960158539278 }})
     }
 
     useEffect(() => { }, [from])
@@ -78,7 +104,23 @@ const DriveOrder: React.FC<PropsType> = (props) => {
 
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Destination")}</GlobalParagraph>
-                <SimpleMap />
+                <APIProvider apiKey="AIzaSyC_Ln2i1HiEWym1znk-AnsXogQqRe-0pDA">
+                    <div style={{ height: "300px", width: "100%" }}>
+                        <Map
+                        zoom={5}
+                        center={lat && lng ? { lat, lng } : defaultPosition}
+                        mapTypeId="da9902056e735de7"
+                        onClick={(e: any) => {
+                            if (e && e.latLng) {
+                            setLat((e as google.maps.MapMouseEvent).latLng.lat);
+                            setLng((e as google.maps.MapMouseEvent).latLng.lng);
+                            }
+                        }}
+                        >
+                        {lat && lng && <Marker position={{ lat, lng }} />}
+                        </Map>
+                    </div>
+                </APIProvider>
             </Box>
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Start Data</GlobalParagraph>
@@ -91,7 +133,8 @@ const DriveOrder: React.FC<PropsType> = (props) => {
                                 ]}
                             >
                                 <DemoItem>
-                                    <StaticDateTimePicker componentsProps={{
+                                    <StaticDateTimePicker value={time}
+                                    onChange={(newTime) => setTime(newTime)} componentsProps={{
             actionBar: { actions: [] }
           }} defaultValue={dayjs('')} />
                                 </DemoItem>
@@ -102,7 +145,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
             </Box>
             <Box pb="44px">
                 <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Comment")}</GlobalParagraph>
-                <TextField fullWidth type='text' variant='outlined' label="Comment" />
+                <TextField fullWidth type='text' value={comment} onChange={(e) => setComment(e.target.value)}  variant='outlined' label="Comment" />
             </Box>
             <Divider />
             <Box py="44px" display="flex" justifyContent="space-between">
@@ -111,7 +154,7 @@ const DriveOrder: React.FC<PropsType> = (props) => {
                     height: "40px",
                     borderRadius: "25px"
                 }}>{t("Cancel")}</Button>
-                <Button variant='contained' sx={{
+                <Button onClick={orderCrete} variant='contained' sx={{
                     width: '120px',
                     height: "40px",
                     borderRadius: "25px"
