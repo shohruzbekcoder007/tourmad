@@ -5,8 +5,10 @@ import { FooterLogoImg } from '../Footer/styles';
 import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import LoginWith from '../LoginWith';
 import LoginCarousel from '../LoginCarousel';
+import {useNavigate} from "react-router-dom";
 
 const SignUp: React.FC = () => {
+  let navigate = useNavigate()
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
       <Box display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>      
@@ -43,13 +45,13 @@ const SignUp: React.FC = () => {
                     control={<Checkbox value="remember" color="primary" />}
                     label="I agree to all the"
                   />
-                  <GlobalLink fontSize='15px' fontWeight='500'>
-                    Terms
-                  </GlobalLink>
-                   and 
-                  <GlobalLink fontSize='15px' fontWeight='500'>
-                    Privacy Policies
-                  </GlobalLink>
+                  {/*<GlobalLink fontSize='15px' fontWeight='500'>*/}
+                  {/*  Terms*/}
+                  {/*</GlobalLink>*/}
+                  {/* and */}
+                  {/*<GlobalLink fontSize='15px' fontWeight='500'>*/}
+                  {/*  Privacy Policies*/}
+                  {/*</GlobalLink>*/}
                 </FormGroup>
               </FormControl>
             </Box>
@@ -60,7 +62,9 @@ const SignUp: React.FC = () => {
             </Box>
             <Box mb='40px' display='flex' flexDirection='row' alignItems='center' justifyContent='center' gap='5px'>
               <GlobalParagraph fontSize='14px' fontWeight='500'>Don’t have an account?</GlobalParagraph>
-              <GlobalLink fontSize='14px' fontWeight='600'>Sign In</GlobalLink>
+              <GlobalLink fontSize='14px' fontWeight='600' onClick={() => navigate('/sign-in')}>
+                Sign In
+              </GlobalLink>
             </Box>
             <Box pb='40px' textAlign='center'>
               <Divider/>

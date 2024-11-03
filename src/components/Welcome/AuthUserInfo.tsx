@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthUser } from './styles'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { Button, Paper } from '@mui/material'
 import { useAppSelector } from '../../redux/hooks'
 import { getUserStatus } from '../../redux/slices/userSlice'
@@ -26,19 +26,20 @@ const AuthUserInfo: React.FC = () => {
                         Login
                     </Button>
                 </Link>
-
-                <Button
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                        borderRadius: "8px",
-                        padding: "15px 24px"
-                    }}
-                >
-                    <span>
-                        Sign up
-                    </span>
-                </Button>
+                <Link to="sign-up">
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        sx={{
+                            borderRadius: "8px",
+                            padding: "15px 24px"
+                        }}
+                    >
+                        <span>
+                            Sign up
+                        </span>
+                    </Button>
+                </Link>
             </AuthUser>
         </>
         )
@@ -81,18 +82,21 @@ const AuthUserInfo: React.FC = () => {
                     </Button>
                 </Link>
 
-                <Button
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                        borderRadius: "8px",
-                        padding: "15px 24px"
-                    }}
-                >
-                    <span>
-                        Sign up
-                    </span>
-                </Button>
+                <Link to="sign-up">
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        sx={{
+                            borderRadius: "8px",
+                            padding: "15px 24px"
+                        }}
+
+                    >
+                        <span>
+                            Sign up
+                        </span>
+                    </Button>
+                </Link>
             </AuthUser>
         </>
     )

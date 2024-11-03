@@ -8,21 +8,22 @@ import { host } from "../../utils/API_urls";
 const LoginWith: React.FC = () => {
   return (
     <Box pb="40px" display="flex" justifyContent="space-between">
-      <Button sx={{ width: "30%", height: "50px" }} variant="outlined">
-        <Avatar sx={{ width: 24, height: 24 }} src={facebook} alt="Facebook" />
-      </Button>
+      <a
+        href={`${host}/api/v1/accounts/social_auth/facebook/`}
+        style={{ width: "45%" }}
+      >
+          <Button sx={{ width: "100%", height: "50px" }} variant="outlined">
+            <Avatar sx={{ width: 24, height: 24 }} src={facebook} alt="Facebook" />
+          </Button>
+      </a>
       <a
         href={`${host}/api/v1/accounts/social_auth/google/`}
-        style={{ width: "30%" }}
+        style={{ width: "45%" }}
       >
         <Button sx={{ width: "100%", height: "50px" }} variant="outlined">
           <Avatar sx={{ width: 24, height: 24 }} src={google} alt="Google" />
         </Button>
       </a>
-
-      <Button sx={{ width: "30%", height: "50px" }} variant="outlined">
-        <Avatar sx={{ width: 24, height: 24 }} src={apple} alt="Apple" />
-      </Button>
     </Box>
   );
 };

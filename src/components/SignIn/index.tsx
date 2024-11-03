@@ -99,9 +99,9 @@ const SignIn: React.FC = () => {
                     control={<Checkbox value="remember" color="primary" onChange={rememberPasswordHandler}/>}
                     label="Remember me"
                   />
-                  <GlobalLink fontSize='14px' fontWeight='500'>
-                    Forgot Password
-                  </GlobalLink>
+                  {/*<GlobalLink fontSize='14px' fontWeight='500'>*/}
+                  {/*  Forgot Password*/}
+                  {/*</GlobalLink>*/}
                 </FormGroup>
               </FormControl>
             </Box>
@@ -112,7 +112,10 @@ const SignIn: React.FC = () => {
             </Box>
             <Box mb='40px' display='flex' flexDirection='row' alignItems='center' justifyContent='center' gap='5px'>
               <GlobalParagraph fontSize='14px' fontWeight='500'>Don’t have an account?</GlobalParagraph>
-              <GlobalLink fontSize='14px' fontWeight='600'>Sign Up</GlobalLink>
+              {/*write navigate sing-up*/}
+                <GlobalLink fontSize='14px' fontWeight='500' onClick={() => navigate('/sign-up')}>
+                    Sign Up
+                </GlobalLink>
             </Box>
             <Box pb='40px' textAlign='center'>
               <Divider/>
