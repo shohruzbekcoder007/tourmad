@@ -18,8 +18,8 @@ i18n.use(initReactI18next).init<TranslationResources>({
     uz: { translation: uz },
     ru: { translation: ru },
   },
-  lng: "uz", // Default language
-  fallbackLng: "uz", // Fallback language if the current language is not available
+  lng: "en", // Default language
+  fallbackLng: "en", // Fallback language if the current language is not available
   interpolation: {
     escapeValue: false, // React already escapes by default
   },

@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { host } from "./API_urls";
 import { getStorage, getStorageR, removeStorage, setStorage, setStorageR } from "./storage" 
 import { token_refresh } from "./API_urls"
-
+import i18n from '../i18n';
 const instance: AxiosInstance = axios.create({
     baseURL: host + '/api/v1/',
 });
@@ -13,7 +13,7 @@ instance.interceptors.request.use(
     const token = getStorage(); 
     if (token) { 
       config.headers.Authorization = `Bearer ${token}`;
-      config.headers["Accept-Language"] = `uz`; 
+      config.headers["Accept-Language"] = i18n.language;
     } 
     return config; 
   }, 
