@@ -1,32 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { getHomeBanner } from '../../redux/slices/homeSlice';
-import { useAppDispatch } from '../../redux/hooks';
-import { getRecommendationTripHotel } from '../../redux/slices/hotelSlice';
-import { getRecommendationRestaurantList } from '../../redux/slices/restaurantSlice';
-import { getCategoryPlanList, getRecommendationPlanList } from '../../redux/slices/planSliser';
-import { getRecommendationDriverList } from '../../redux/slices/driverSliser';
 
 function LanguageSelect() {
     const { i18n } = useTranslation();
-    const dispatch = useAppDispatch()
 
     const handleChangeLanguage = (event: any) => {
         const newLanguage = event.target.value;
         i18n.changeLanguage(newLanguage);
         localStorage.setItem("language", newLanguage); // Save language to localStorage
+        window.location.reload();
     };
-
-    // Til o'zgarganda yangi requestni yuborish
-    useEffect(() => {
-        dispatch(getHomeBanner());
-        dispatch(getRecommendationPlanList());
-        dispatch(getCategoryPlanList())
-        dispatch(getRecommendationTripHotel())
-        dispatch(getRecommendationRestaurantList())
-        dispatch(getRecommendationDriverList())
-    }, [i18n.language, dispatch]);
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }}>
