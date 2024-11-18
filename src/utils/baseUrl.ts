@@ -13,8 +13,8 @@ instance.interceptors.request.use(
     const token = getStorage(); 
     if (token) { 
       config.headers.Authorization = `Bearer ${token}`;
-      config.headers["Accept-Language"] = i18n.language;
     } 
+    config.headers["Accept-Language"] = i18n.language;
     return config; 
   }, 
   (error) => Promise.reject(error) 
