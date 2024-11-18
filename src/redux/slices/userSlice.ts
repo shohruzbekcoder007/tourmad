@@ -47,7 +47,7 @@ export const getAccount = createAsyncThunk("account",
     async (_, { rejectWithValue }) => {
         try {
             const response = await UserService.account()
-            const account: AccountType = response.data;
+            const account: AccountType = response?.data;
             return account;
         }
         catch (error) {

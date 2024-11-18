@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom'
 
 const Users: React.FC = () => {
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
-
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY <= 400) {

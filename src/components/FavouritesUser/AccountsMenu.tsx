@@ -49,7 +49,7 @@ const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => { handleClose(); navigate('/users')}}>Profile</MenuItem>
+        <MenuItem onClick={() => { handleClose(); navigate('/users/users-account')}}>Profile</MenuItem>
         <MenuItem onClick={() => { handleClose(); navigate('/my-trip') }}>My trips</MenuItem>
         <MenuItem onClick={logOutF}>Logout</MenuItem>
       </Menu>

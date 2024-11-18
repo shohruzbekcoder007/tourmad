@@ -108,7 +108,7 @@ const App: React.FC = () => {
               <Route path="daily-filter" element={<DailyFilter />} />
             </Route>
             <Route path="users" element={<Users />}>
-              <Route index element={<UserAccount />} />
+            <Route index element={<Navigate to="users-account" />} />
               <Route path="users-account" element={<UserAccount />} />
               <Route path="users-History" element={<UserHistory />} />
               <Route path="users-payment" element={<p>Users Payments</p>} />
