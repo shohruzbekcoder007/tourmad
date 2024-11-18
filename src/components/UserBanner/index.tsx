@@ -7,7 +7,7 @@ import { BoxStyle } from './stayles';
 import { GlobalParagraph } from '../../global_styles/styles';
 import { useAppSelector } from '../../redux/hooks';
 import { getAccountInfo } from '../../redux/slices/userSlice';
-import avatar from '../../media/images/avatar.webp'
+import avatar from '../../media/images/avatar.jpg'
 
 const UsersBanner: React.FC = () => {
   const userInfo = useAppSelector(getAccountInfo)
