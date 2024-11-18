@@ -13,7 +13,9 @@ function LanguageSelect() {
     const dispatch = useAppDispatch()
 
     const handleChangeLanguage = (event: any) => {
-        i18n.changeLanguage(event.target.value);
+        const newLanguage = event.target.value;
+        i18n.changeLanguage(newLanguage);
+        localStorage.setItem("language", newLanguage); // Save language to localStorage
     };
 
     // Til o'zgarganda yangi requestni yuborish

@@ -11,6 +11,8 @@ type TranslationResources = {
   ru: typeof ru;
 };
 
+const defaultLanguage = localStorage.getItem("language") || "en";
+
 // Configure i18next with type checking on resources
 i18n.use(initReactI18next).init<TranslationResources>({
   resources: {
@@ -18,7 +20,7 @@ i18n.use(initReactI18next).init<TranslationResources>({
     uz: { translation: uz },
     ru: { translation: ru },
   },
-  lng: "en", // Default language
+  lng: defaultLanguage, // Default language
   fallbackLng: "en", // Fallback language if the current language is not available
   interpolation: {
     escapeValue: false, // React already escapes by default
