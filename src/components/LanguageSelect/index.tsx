@@ -3,12 +3,10 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { getHomeBanner } from '../../redux/slices/homeSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import { getCommonLanguageList } from '../../redux/slices/commonLanguage';
-import { getCommonLocationList } from '../../redux/slices/commonLocationSlicer';
-import { getTripConsultingCategoryList, getTripConsultingList } from '../../redux/slices/consultingSlice';
-import { getLoacationList } from '../../redux/slices/hotelSlice';
-import { getRecommendationTripDaily } from '../../redux/slices/dailySlice';
+import { getRecommendationTripHotel } from '../../redux/slices/hotelSlice';
 import { getRecommendationRestaurantList } from '../../redux/slices/restaurantSlice';
+import { getCategoryPlanList, getRecommendationPlanList } from '../../redux/slices/planSliser';
+import { getRecommendationDriverList } from '../../redux/slices/driverSliser';
 
 function LanguageSelect() {
     const { i18n } = useTranslation();
@@ -21,13 +19,11 @@ function LanguageSelect() {
     // Til o'zgarganda yangi requestni yuborish
     useEffect(() => {
         dispatch(getHomeBanner());
-        dispatch(getCommonLanguageList())
-        dispatch(getCommonLocationList())
-        dispatch(getTripConsultingList())
-        dispatch(getTripConsultingCategoryList())
-        dispatch(getLoacationList())
-        dispatch(getRecommendationTripDaily())
+        dispatch(getRecommendationPlanList());
+        dispatch(getCategoryPlanList())
+        dispatch(getRecommendationTripHotel())
         dispatch(getRecommendationRestaurantList())
+        dispatch(getRecommendationDriverList())
     }, [i18n.language, dispatch]);
 
     return (
