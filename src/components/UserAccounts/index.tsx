@@ -21,7 +21,6 @@ const UserAccounts: React.FC = () => {
   useEffect(() => {
     if (statusUserInfo === "idle") {
       dispatch(getAccount())
-      window.location.reload()
     };
   }, [statusUserInfo, dispatch]);
   return (
