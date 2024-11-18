@@ -15,6 +15,7 @@ function LoginGoogle() {
       setStorage(accessToken);
       setStorageR(refreshToken);
       navigate('/'); // navigate to the main page after tokens are set
+      window.location.reload()
     }
   }, [accessToken, refreshToken, navigate]); // triggers when tokens or navigate change
 
