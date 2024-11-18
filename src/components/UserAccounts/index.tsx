@@ -23,7 +23,6 @@ const UserAccounts: React.FC = () => {
       dispatch(getAccount())
     };
   }, [statusUserInfo, dispatch]);
-  console.log(userInfo, "userinfo")
   return (
     <Stack>
       <GlobalParagraph fontSize="32px" fontWeight="700" paddingbottom="16px">
