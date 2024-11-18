@@ -7,6 +7,7 @@ import { BoxStyle } from './stayles';
 import { GlobalParagraph } from '../../global_styles/styles';
 import { useAppSelector } from '../../redux/hooks';
 import { getAccountInfo } from '../../redux/slices/userSlice';
+import avatar from '../../media/images/avatar.webp'
 
 const UsersBanner: React.FC = () => {
   const userInfo = useAppSelector(getAccountInfo)
@@ -29,7 +30,7 @@ const UsersBanner: React.FC = () => {
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{transform: "translateY(-80px)"}}>
         <BoxStyle>
-            <img src={`${userInfo?.avatar}`} alt='User Name' style={{
+            <img src={`${userInfo?.avatar}` ?? avatar} alt='User Name' style={{
             width: "100%", 
             height: "100%", 
             objectFit: "cover", 
