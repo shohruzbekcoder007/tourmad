@@ -36,6 +36,7 @@ import {
 } from "../../redux/slices/historySlice";
 import { HistoryType } from "../../utils/response_types";
 import { postLikeIdH } from "../../redux/slices/wishListSlice";
+import { useTranslation } from "react-i18next";
 
 type Option = {
   label: string;
@@ -45,7 +46,7 @@ type Option = {
 const HistoryService: React.FC = () => {
   const [from, setFrom] = useState<Option | null>(null);
   const navigate = useNavigate();
-
+const {t} = useTranslation()
   useEffect(() => {}, [from]); //for error fixed
 
   const dispatch = useAppDispatch();
@@ -98,8 +99,6 @@ const HistoryService: React.FC = () => {
     dispatch(postLikeIdH(id));
   }
 
-  console.log(historyList, "historylist")
-
   return (
     <Stack mt="40px">
       <Box pb="40px" display="flex" justifyContent="space-between">
@@ -109,7 +108,7 @@ const HistoryService: React.FC = () => {
           texttransform="capitalize"
           part="true"
         >
-          History
+          {t("History")}
         </WelcomeMainText>
         <Button variant="outlined" onClick={() => navigate(-1)}>
           <KeyboardBackspaceIcon />
@@ -163,16 +162,14 @@ const HistoryService: React.FC = () => {
             fontSize={"32px"}
             part="true"
           >
-            Fall into travel
+            {t("Fall into travel")}
           </WelcomeMainText>
           <GlobalParagraph
             fontSize={"16px"}
             mediafontsize="14px"
             fontWeight="400"
           >
-            Going somewhere to celebrate this season? Whether you’re going home
-            or somewhere to roam, we’ve got the travel tools to get you to your
-            destination.
+            {t("Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.")}
           </GlobalParagraph>
         </Grid>
       </Grid>
@@ -270,7 +267,7 @@ const HistoryService: React.FC = () => {
                       variant="contained"
                       onClick={() => navigate(`/history-detail/${history?.id}`)}
                     >
-                      View History
+                      {t("View History")}
                     </Button>
                   </Box>
                 </Box>

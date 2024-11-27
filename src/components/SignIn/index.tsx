@@ -9,10 +9,12 @@ import { getLoginPassword, saveLogin, savePassword, setStorage, setStorageR } fr
 import { useNavigate } from 'react-router-dom'
 import UserService from '../../services/UserService'
 import { enqueueSnackbar } from 'notistack'
+import { useTranslation } from 'react-i18next'
 
 const SignIn: React.FC = () => {
 
   let navigate = useNavigate()
+  const {t} = useTranslation()
 
   const [loading, setLoading] = useState(false)
 
@@ -84,7 +86,7 @@ const SignIn: React.FC = () => {
               Login
             </WelcomeMainText>
             <GlobalParagraph fontSize='16px' paddingbottom='48px' fontWeight='400' oposity='0.75'>
-              Login to access your Golobe account
+              {t("Login to access your Golobe account")}
             </GlobalParagraph>
             <Box>
               <FormControl fullWidth>
@@ -107,7 +109,7 @@ const SignIn: React.FC = () => {
             </Box>
             <Box pb='16px'>
               <Button disabled={loading} fullWidth variant='contained' type='submit'>
-                {loading?"Login ...":"Loading"}
+                {loading?"Loading ...":"Login"}
               </Button>
             </Box>
             <Box mb='40px' display='flex' flexDirection='row' alignItems='center' justifyContent='center' gap='5px'>

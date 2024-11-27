@@ -5,6 +5,7 @@ import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles"
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { GalleryType, LocationType, RoomStyle } from "../../utils/response_types"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 type DailyCardProps = {
   id: number | null,
@@ -19,6 +20,7 @@ type DailyCardProps = {
 
 const DailyCard: React.FC<DailyCardProps> = ({ id, card, galery, grade, name, location, room_style, rate }) => {
   const navigate = useNavigate();
+  const {t} = useTranslation()
   return (
     <Paper
       elevation={0}
@@ -41,8 +43,8 @@ const DailyCard: React.FC<DailyCardProps> = ({ id, card, galery, grade, name, lo
           <Box pb="16px" width="100%" display="flex" justifyContent="space-between" gap="24px">
             <WelcomeMainText fontSize="20px" part="true" texttransform="capitalize">{name}</WelcomeMainText>
             <Box>
-              <GlobalParagraph fontSize="12px" fontWeight="500">starting from</GlobalParagraph>
-              <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">{room_style ? `${room_style[0]?.price ? `$${room_style[0]?.price}` : ""}` : ``}/night</GlobalParagraph>
+              <GlobalParagraph fontSize="12px" fontWeight="500">{t("starting from")}</GlobalParagraph>
+              <GlobalParagraph fontSize="24px" fontWeight="700" color="slamon">{room_style ? `${room_style[0]?.price ? `$${room_style[0]?.price}` : ""}` : ``}/{t("night")}</GlobalParagraph>
               {
                 (room_style) ? <GlobalParagraph fontSize='24px' mediafontsize='18px' fontWeight='600' color='neutrals'>{room_style[0]?.price} $</GlobalParagraph> : <></>
               }
@@ -54,11 +56,11 @@ const DailyCard: React.FC<DailyCardProps> = ({ id, card, galery, grade, name, lo
           </Box>
           <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
             <Rating name="disabled" value={grade} disabled />
-            <GlobalParagraph fontSize="12px" fontWeight="500">{grade} Star Daily</GlobalParagraph>
+            <GlobalParagraph fontSize="12px" fontWeight="500">{grade} {t("Star Daily")}</GlobalParagraph>
           </Box>
           <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
             <Button variant="outlined">{rate}</Button>
-            <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
+            <GlobalParagraph fontSize="12px" fontWeight="700">{t("Very Good")}</GlobalParagraph>
             {/* <GlobalParagraph fontSize="12px" fontWeight="500">371 reviews</GlobalParagraph> */}
           </Box>
           <Divider style={{
@@ -70,7 +72,7 @@ const DailyCard: React.FC<DailyCardProps> = ({ id, card, galery, grade, name, lo
             </Button>
             <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
               <Button onClick={() => navigate(`/daily-detail/${id}`)} variant="contained" fullWidth>
-                View Deals
+                {t("View Deals")}
               </Button>
             </Box>
           </Box>

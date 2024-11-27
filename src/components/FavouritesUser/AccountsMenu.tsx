@@ -5,13 +5,14 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { logOut } from '../../redux/slices/userSlice';
+import { useTranslation } from 'react-i18next';
 
 interface AccountMenuI {
     children: React.ReactNode
 }
 
 const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
-
+  const {t} = useTranslation()
   let navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -26,7 +27,6 @@ const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
   const logOutF = () => {
     dispatch(logOut())
     navigate('/')
-    console.log("close")
   }
 
   return (
@@ -49,9 +49,9 @@ const AccountsMenu:React.FC<AccountMenuI> = ({children}) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => { handleClose(); navigate('/users/users-account')}}>Profile</MenuItem>
-        <MenuItem onClick={() => { handleClose(); navigate('/my-trip') }}>My trips</MenuItem>
-        <MenuItem onClick={logOutF}>Logout</MenuItem>
+        <MenuItem onClick={() => { handleClose(); navigate('/users/users-account')}}>{t("Profile")}</MenuItem>
+        <MenuItem onClick={() => { handleClose(); navigate('/my-trip') }}>{t("My trips")}</MenuItem>
+        <MenuItem onClick={logOutF}>{t("Logout")}</MenuItem>
       </Menu>
     </div>
   );

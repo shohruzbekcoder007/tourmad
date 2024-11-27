@@ -10,12 +10,14 @@ import {
   getWishListList,
 } from "../../redux/slices/wishListSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FavouriteFour: React.FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
+  const {t} = useTranslation()
 
   React.useEffect(() => {
     if (statusWishList === "idle") {
@@ -300,7 +302,7 @@ const FavouriteFour: React.FC = () => {
                     {/* </Button> */}
                     <Box width="85%" paddingLeft="10px">
                       <Button variant="contained" fullWidth onClick={() => navigate(`/plan-detail/${item?.history_or_place?.id}`)}>
-                        View Deals
+                        {t("View Deals")}
                       </Button>
                     </Box>
                   </Box>

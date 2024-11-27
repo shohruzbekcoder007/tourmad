@@ -29,7 +29,7 @@ const HotelRooms: React.FC<HotelRoomsProps> = ({ room_style }) => {
                                     <GlobalParagraph fontSize='16px' fontWeight='500' mediafontsize='14px'>{item?.title}</GlobalParagraph>
                                 </Box>
                                 <Box display="flex" alignItems='center' justifyContent="flex-end" gap="64px">
-                                    <GlobalParagraph fontSize='14px' fontWeight='600'>${item?.price}/night | {item.style}</GlobalParagraph>
+                                    <GlobalParagraph fontSize='14px' fontWeight='600'>${item?.price}/{t("night")} | {item.style}</GlobalParagraph>
                                     <SwipeDrawer
                                         hotel_id={parseInt(("" + item?.id) as string)}
                                         addType={'hotel'}

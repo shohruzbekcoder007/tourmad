@@ -152,7 +152,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
         >
             <Box pb='32px'>
                 <WelcomeMainText fontSize='32px' part="true" mediafontsize='24px'>
-                    My Trips
+                    {t("My Trips")}
                 </WelcomeMainText>
                 {
                     props.addType === "hotel" &&
@@ -178,7 +178,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                 onSubmit={submitHandler}
             >
                 <WelcomeMainText fontSize='32px' paddingbottom='20px' part="true" mediafontsize='24px'>
-                    New Trip
+                    {t("New Trip")}
                 </WelcomeMainText>
                 {newTrip.newTripCreateMessage ? <Alert
                     severity="error"
@@ -188,7 +188,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     {newTrip.newTripCreateMessage}
                 </Alert> : <></>}
                 <Box pb="30px">
-                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Trip Name</GlobalParagraph>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Trip Name")}</GlobalParagraph>
                     <TextField
                         name="title"
                         fullWidth
@@ -199,7 +199,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     />
                 </Box>
                 <Box pb="30px">
-                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Destination</GlobalParagraph>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Destination")}</GlobalParagraph>
                     <CustomAutocomplete
                         options={newOption === undefined ? [] : newOption}
                         placeholder="Location"
@@ -209,7 +209,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     />
                 </Box>
                 <Box pb="30px">
-                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>Dates or Length of stay</GlobalParagraph>
+                    <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Dates or Length of stay")}</GlobalParagraph>
                     <Grid container spacing={2}>
                         <Grid item xl={6} md={6} sm={12} xs={12}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>

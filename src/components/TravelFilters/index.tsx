@@ -7,6 +7,7 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { GlobalParagraph } from '../../global_styles/styles';
 import TravelFilterCard from '../TravelFilterCard';
 import FilterDrawerTrip from '../FilterDrawerTrip';
+import { useTranslation } from 'react-i18next';
 
 type Option = {
   label: string,
@@ -31,6 +32,7 @@ function valuetext(value: number) {
 }
 
 const TravelFilters: React.FC = () => {
+  const {t} = useTranslation()
   const [from, setFrom] = useState<Option | null>(null)
   const [depart, setDepart] = useState<Option | null>(null)
   const [openPrice, setOpenPrice] = React.useState(true);
@@ -446,7 +448,7 @@ const TravelFilters: React.FC = () => {
           <TravelFilterCard />
           <Box display='flex' justifyContent="flex-end">
             <Button sx={{ width: "792px" }} color='success' variant='contained'>
-              Show more results
+              {t("Show more results")}
             </Button>
           </Box>
         </Box>

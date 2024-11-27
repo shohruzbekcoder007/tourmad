@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { RecommendationType } from '../../utils/response_types'
 import SwipeDrawer from '../SwipeDrawer'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 type IntoTravelPropsType = {
     data: RecommendationType[] | null,
@@ -14,7 +15,7 @@ type IntoTravelPropsType = {
 }
 const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) => {
     const navigate = useNavigate();
-
+const {t} = useTranslation()
     if (data) {
         return (
             <Stack pb="80px">
@@ -69,7 +70,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) 
                                                         fullWidth
                                                         variant='contained'
                                                     >
-                                                        Book a hotel
+                                                        {t("Book a hotel")}
                                                     </Button>}
                                             />
                                         }
@@ -83,7 +84,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) 
                                                         fullWidth
                                                         variant='contained'
                                                     >
-                                                        Book a hotel
+                                                        {t("Book a hotel")}
                                                     </Button>}
                                             />
                                         }
@@ -96,7 +97,7 @@ const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) 
             </Stack>
         )
     } else {
-        return <p>Ma'lumot yo'q</p>
+        return <p>{t("Ma'lumot yo'q")}</p>
     }
 
 }

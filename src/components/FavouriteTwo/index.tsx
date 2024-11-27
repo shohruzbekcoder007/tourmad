@@ -10,19 +10,20 @@ import {
   getWishListList,
 } from "../../redux/slices/wishListSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FavouriteTwo: React.FC = () => {
   const dispatch = useAppDispatch();
   const statusWishList = useAppSelector(getStatusWishList);
   const wishList = useAppSelector(getWishListList);
   const navigate = useNavigate()
+  const {t} = useTranslation()
 
   React.useEffect(() => {
     if (statusWishList === "idle") {
       dispatch(getWishList());
     }
   }, [statusWishList, dispatch]);
-  console.log(wishList, "wishList");
 
   return (
     <Box>
@@ -150,7 +151,7 @@ const FavouriteTwo: React.FC = () => {
                               marginLeft: "5px",
                             }}
                           >
-                            {item?.restaurant?.rate} Star Restaurant
+                            {item?.restaurant?.rate} {t("Star Restaurant")}
                           </GlobalParagraph>
                         </Box>
                         {/* <Box
@@ -207,7 +208,7 @@ const FavouriteTwo: React.FC = () => {
                           mediafontsize="10px"
                           fontWeight="700"
                         >
-                          Very Good
+                          {t("Very Good")}
                         </GlobalParagraph>
                         {/* <GlobalParagraph
                           fontSize="12px"
@@ -301,7 +302,7 @@ const FavouriteTwo: React.FC = () => {
                     {/* </Button> */}
                     <Box width="85%" paddingLeft="10px">
                       <Button variant="contained" fullWidth onClick={() => navigate(`/restaurant-detail/${item?.restaurant?.id}`)}>
-                        View Deals
+                        {t("View Deals")}
                       </Button>
                     </Box>
                   </Box>

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer'
 import { changePage, changeSearchLocation, getRestaurantList, getRestaurantListCurrentPage, getRestaurantListTotalPages, getRestaurantloading, getStatusRestaurantList, getTripRestaurantList } from '../../redux/slices/restaurantSlice';
 import { RestaurantType } from '../../utils/response_types';
+import { useTranslation } from 'react-i18next';
 
 
 type Option = {
@@ -19,6 +20,7 @@ type Option = {
 }
 
 const RestaurantFilter: React.FC = () => {
+    const {t} = useTranslation()
     const [from, setFrom] = useState<Option | null>(null)
     const [text, setText] = useState<string>("")
     const navigate = useNavigate()
@@ -167,7 +169,7 @@ const RestaurantFilter: React.FC = () => {
                                                             </Button>
                                                             <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
                                                                 <Button onClick={() => navigate(`/restaurant-detail/${restaurant.id}`)} variant="contained" fullWidth>
-                                                                    View Deals
+                                                                    {t("View Deals")}
                                                                 </Button>
                                                             </Box>
                                                         </Box>

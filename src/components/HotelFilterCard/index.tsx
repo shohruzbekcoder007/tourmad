@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getPlanList, getPlanloading, getStatusPlantList, getTripPlanList } from "../../redux/slices/planSliser";
 import { HistoryType } from "../../utils/response_types";
+import { useTranslation } from "react-i18next";
 
 const HotelFilterCard: React.FC = () => {
+  const {t} = useTranslation()
   const value: number | null = 2;
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
@@ -68,7 +70,7 @@ const HotelFilterCard: React.FC = () => {
                           </Button>
                           <Box width={{ xl: "85%", md: "75%", sm: "75%", xs: "75%" }}>
                             <Button onClick={() => navigate(`/plan-detail/${plan.id}`)} variant="contained" fullWidth>
-                              View Deals
+                              {t("View Deals")}
                             </Button>
                           </Box>
                         </Box>

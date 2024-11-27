@@ -15,6 +15,7 @@ import { TripType } from '../../utils/response_types';
 import { deleteTrip } from '../../redux/slices/tripSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // import { useTranslation } from 'react-i18next';
 
 const style = {
@@ -48,7 +49,7 @@ interface PropsType {
 }
 
 const MyTripCard: React.FC<PropsType> = ({ trip }) => {
-    // const {t} = useTranslation()
+    const {t} = useTranslation()
     const navigate= useNavigate()
     
     const [openDelete, setOpenDelete] = React.useState(false);
@@ -124,17 +125,17 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                 >
                     <Box sx={style} borderRadius='8px' width={{xl: 500, md: 500, sm: 400, xs: 300}}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Trip Name
+                            {t("Trip Name")}
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Are you sure you want to delete?
+                            {t("Are you sure you want to delete?")}
                         </Typography>
                         <Button 
                             sx={{ mt: '20px' }}
                             color='warning'
                             onClick={() => {deleteTripHandler(trip?.id as number)}}
                         >
-                            Delete
+                            {t("Delete")}
                         </Button>
                     </Box>
                 </Modal>
@@ -146,7 +147,7 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                 >
                     <Box sx={style} borderRadius='8px' width={{xl: 500, md: 500, sm: 400, xs: 300}}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Edit Trip
+                            {t("Edit Trip")}
                         </Typography>
                         <Box mt='16px'>
                             <GlobalParagraph fontSize='14px' fontWeight='700' paddingbottom='16px'>Trip Name</GlobalParagraph>
@@ -180,7 +181,7 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                                 </Grid>
                             </Grid>
                         </Box>
-                        <Button sx={{ mt: '20px' }} color='warning'>Edit Trip</Button>
+                        <Button sx={{ mt: '20px' }} color='warning'>{t("Edit Trip")}</Button>
                     </Box>
                 </Modal>
             </Box>

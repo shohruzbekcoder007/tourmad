@@ -5,7 +5,6 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { WelcomeMainText, GlobalParagraph } from "../../global_styles/styles";
 import { SliderCard, SliderShadow } from "./styles";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 const responsive = {
@@ -33,8 +32,8 @@ const HomeSlider: React.FC = () => {
             <Box pb="300px">
                 <Grid container pb="40px">
                     <Grid item xl={8} md={8} sm={6} xs={6}>
-                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} part="true">Reviews</WelcomeMainText>
-                        <GlobalParagraph fontSize={"16px"} fontWeight="400">What people says about Golobe facilities</GlobalParagraph>
+                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} part="true">{t("Reviews")}</WelcomeMainText>
+                        <GlobalParagraph fontSize={"16px"} fontWeight="400">{t("What people says about Golobe facilities")}</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
                         <Button variant="outlined" sx={{color: "#000"}} color="success">{t("See All")}</Button>
@@ -59,17 +58,14 @@ const HomeSlider: React.FC = () => {
                 >
                         <SliderCard>
                             <SliderShadow></SliderShadow>
-                            <WelcomeMainText fontSize="24px" paddingbottom="16px" part="true">“A real sense of community, nurtured”</WelcomeMainText>
-                            <GlobalParagraph fontSize="14px" fontWeight="500" oposity="0.5">Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me always, even when I was out of the country. And always available when needed.</GlobalParagraph>
+                            <WelcomeMainText fontSize="24px" paddingbottom="16px" part="true">{t("“A real sense of community, nurtured”")}</WelcomeMainText>
+                            <GlobalParagraph fontSize="14px" fontWeight="500" oposity="0.5">{t("Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me always, even when I was out of the country. And always available when needed.")}</GlobalParagraph>
                         </SliderCard>
 
                         <SliderCard>
                             <SliderShadow></SliderShadow>
-                            <WelcomeMainText fontSize="24px" paddingbottom="16px" part="true">“The facilities are superb. Clean, slick, bright.”</WelcomeMainText>
+                            <WelcomeMainText fontSize="24px" paddingbottom="16px" part="true">{t("“The facilities are superb. Clean, slick, bright.”")}</WelcomeMainText>
                         </SliderCard>
-
-                    
-                    
                 </Carousel>
             </Box>
         </Container>

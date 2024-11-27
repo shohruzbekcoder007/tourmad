@@ -15,6 +15,7 @@ import {
 import TranslateIcon from "@mui/icons-material/Translate";
 import { postLikeId } from "../../redux/slices/wishListSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { useTranslation } from "react-i18next";
 
 type DriveFilterProps = {
   id: number | null;
@@ -45,6 +46,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({
   orders_count,
   is_liked,
 }) => {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [liked, setLiked] = useState(is_liked);
   const dispatch = useAppDispatch()
@@ -117,7 +119,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({
               </Box>
               <Box>
                 <GlobalParagraph fontSize="12px" fontWeight="500">
-                  starting from
+                  {t("starting from")}
                 </GlobalParagraph>
                 <GlobalParagraph
                   fontSize="24px"
@@ -187,7 +189,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({
             >
               <Button variant="outlined">{avg_rate}</Button>
               <GlobalParagraph fontSize="12px" fontWeight="700">
-                Very Good
+                {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="12px" fontWeight="500">
                 {orders_count} reviews
@@ -223,7 +225,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({
                   variant="contained"
                   fullWidth
                 >
-                  View Deals
+                  {t("View Deals")}
                 </Button>
               </Box>
             </Box>

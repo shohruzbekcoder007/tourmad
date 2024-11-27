@@ -132,7 +132,7 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
                 <img width='50%' src={daily_plan_photo} alt="Plan" />
                 <Box mt='12px' width='100%' textAlign='center'>
                   <GlobalParagraph fontSize="16px" fontWeight="500" oposity="0.75">
-                    No Plan!!
+                    {t("No Plan!!")}
                   </GlobalParagraph>
                 </Box>
             </Box>
