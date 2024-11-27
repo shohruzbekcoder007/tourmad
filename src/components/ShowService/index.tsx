@@ -6,11 +6,12 @@ import { Box, Button, Grid } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getHomeBanner, getHomeBannerPhotos } from "../../redux/slices/homeSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ShowService: React.FC = () => {
     const navigate = useNavigate()
     const homeBanner = useAppSelector(getHomeBannerPhotos)
-
+const {t} = useTranslation()
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -36,12 +37,12 @@ const ShowService: React.FC = () => {
                                 sx={{height: "100%", background: "linear-gradient(180deg, #00000017, #00000073)"}}>
                                 <Box textAlign="center">
                                         <WelcomeMainText fontSize="40px" paddingbottom="8px">
-                                            History
+                                            {t("History")}
                                         </WelcomeMainText>
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
-                                            The study of history helps people to deepen their understanding of their own culture and relationships.
+                                            {t("The study of history helps people to deepen their understanding of their own culture and relationships.")}
                                         </GlobalParagraph>
-                                        <Button onClick={() => navigate("/history")}  variant="contained" startIcon={<TelegramIcon />}>Show History</Button>
+                                        <Button onClick={() => navigate("/history")}  variant="contained" startIcon={<TelegramIcon />}>{t("Show History")}</Button>
                                     </Box>
                                </Box>
                            </Box> 
@@ -61,12 +62,12 @@ const ShowService: React.FC = () => {
                                 sx={{height: "100%", background: "linear-gradient(180deg, #00000017, #00000073)"}}>
                                     <Box textAlign="center">
                                         <WelcomeMainText fontSize="40px" paddingbottom="8px">
-                                            Hotels
+                                            {t("Hotels")}
                                         </WelcomeMainText>
                                         <GlobalParagraph fontSize="16px" fontWeight="400" color="neutrals" paddingbottom="16px">
-                                            Search hotels & Places Hire to our most popular <br/> destinations
+                                            {t("Search hotels & Places Hire to our most popular destinations")}
                                         </GlobalParagraph>
-                                        <Button onClick={() => navigate("/hotel-filter")} variant="contained" startIcon={<TelegramIcon />}>Show Hotels</Button>
+                                        <Button onClick={() => navigate("/hotel-filter")} variant="contained" startIcon={<TelegramIcon />}>{t("Show Hotels")}</Button>
                                     </Box>
                                 </Box>
                            </Box> 

@@ -8,8 +8,10 @@ import { GlobalParagraph } from '../../global_styles/styles';
 import { DailyPlanDataType } from '../../utils/request_types';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import daily_plan_photo from "../../media/images/dailyplan.gif";
+import { useTranslation } from 'react-i18next';
 
 const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, drivers, date, daily_price, history_or_places}) => {
+  const {t} = useTranslation()
   return (
     <div>
         <Accordion sx={{marginBottom: "24px"}}>
@@ -29,7 +31,7 @@ const MyTripDailyPlan: React.FC <DailyPlanDataType> = ({hotels, restaurants, dri
             hotels?.length !== 0 || drivers?.length !== 0 || restaurants?.length !== 0 || history_or_places?.length !== 0 ?
             <>
             {
-                hotels?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>Hotels</GlobalParagraph>
+                hotels?.length !== 0 && <GlobalParagraph fontSize='20px' fontWeight='700' mediafontsize='16px' paddingbottom='12px'>{t("Hotels")}</GlobalParagraph>
             }
               {
                 hotels?.map((item, index) => {

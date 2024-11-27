@@ -18,9 +18,11 @@ import {
   getStatusLastRecommendationPlan,
 } from "../../redux/slices/planSliser";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useTranslation } from "react-i18next";
 
 const Plan: React.FC = () => {
   const navigate = useNavigate();
+  const {t} = useTranslation()
   const statusLastRecommendationPlan = useAppSelector(
     getStatusLastRecommendationPlan
   );
@@ -82,7 +84,7 @@ const Plan: React.FC = () => {
             alignItems="center"
           >
             <Button onClick={() => navigate("/plan-filter")} variant="outlined">
-              See All
+              {t("See All")}
             </Button>
           </Grid>
         </Grid>

@@ -18,7 +18,7 @@ const DriverCard: React.FC = () => {
                 <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
             </Grid>
             <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                <Button variant="outlined" >See All</Button>
+                <Button variant="outlined" >{t("See All")}</Button>
             </Grid>
         </Grid>
         <Box display="flex" width="100%" justifyContent="flex-start" gap="20px" sx={{overflowX: "scroll", '&::-webkit-scrollbar' : {

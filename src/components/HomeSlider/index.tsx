@@ -5,6 +5,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { WelcomeMainText, GlobalParagraph } from "../../global_styles/styles";
 import { SliderCard, SliderShadow } from "./styles";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const responsive = {
     desktop: {
@@ -25,6 +27,7 @@ const responsive = {
   };
 
 const HomeSlider: React.FC = () => {
+    const {t} = useTranslation()
     return (
         <Container>
             <Box pb="300px">
@@ -34,7 +37,7 @@ const HomeSlider: React.FC = () => {
                         <GlobalParagraph fontSize={"16px"} fontWeight="400">What people says about Golobe facilities</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button variant="outlined" sx={{color: "#000"}} color="success">See All</Button>
+                        <Button variant="outlined" sx={{color: "#000"}} color="success">{t("See All")}</Button>
                     </Grid>
                 </Grid>
                 <Carousel

@@ -5,11 +5,12 @@ import { CardPhoto, TripCardTitle, TripPlanCard } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getCommonLocationList, getCommonLocations } from "../../redux/slices/commonLocationSlicer";
+import { useTranslation } from "react-i18next";
 
 const TripPlan: React.FC = () => {
     const navigate = useNavigate()
     const commonLocation = useAppSelector(getCommonLocations)
-
+const {t} = useTranslation()
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -20,8 +21,8 @@ const TripPlan: React.FC = () => {
             <Box pb='48px'>
                 <Grid container pb="40px">
                     <Grid item xl={8} md={8} sm={6} xs={6}>
-                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} mediafontsize="18px" part="true">Plan your perfect trip</WelcomeMainText>
-                        <GlobalParagraph fontSize={"16px"} mediafontsize="12px" fontWeight="400">The best locations for your travel plans</GlobalParagraph>
+                        <WelcomeMainText paddingbottom={"16px"} fontSize={"32px"} mediafontsize="18px" part="true">{t("Plan your perfect trip")}</WelcomeMainText>
+                        <GlobalParagraph fontSize={"16px"} mediafontsize="12px" fontWeight="400">{t("The best locations for your travel plans")}</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
                         <Button onClick={() => navigate("/history")} variant="outlined" sx={{ color: "#000" }} color="success">See more places</Button>

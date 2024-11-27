@@ -8,6 +8,7 @@ import { getDriverRecommendationList, getLoacationList, getLocationList, getReco
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Drive: React.FC = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Drive: React.FC = () => {
     const statusLastSearchDriver = useAppSelector(getStatusLastSearchDriver)
     const driverLocationList = useAppSelector(getLocationList)
     const dispatch = useAppDispatch()
-
+const {t} = useTranslation()
     useEffect(() => {
         if (statusLastRecommendationDriver === 'idle') {
             dispatch(getRecommendationDriverList())
@@ -45,7 +46,7 @@ const Drive: React.FC = () => {
                         <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button variant="outlined" onClick={() => navigate("/drive-filter")}>See All</Button>
+                        <Button variant="outlined" onClick={() => navigate("/drive-filter")}>{t("See All")}</Button>
                     </Grid>
                 </Grid>
                 <IntoTravel link="drive" data={driverRecommendationList} daily={true} />

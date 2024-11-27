@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getHotelLocationList, getHotelRecommendationList, getLoacationList, getRecommendationTripHotel, getStatusLastRecommendationHotel, getStatusLastSearchHotel } from '../../redux/slices/hotelSlice'
 import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Hotel: React.FC = () => {
 
@@ -17,7 +18,7 @@ const Hotel: React.FC = () => {
     const statusLastSearchHotel = useAppSelector(getStatusLastSearchHotel)
     const hotelLocationList = useAppSelector(getHotelLocationList)
     const dispatch = useAppDispatch()
-
+    const {t} = useTranslation()
     useEffect(() => {
         if (statusLastRecommendationHotel === 'idle') {
             dispatch(getRecommendationTripHotel())
@@ -35,7 +36,7 @@ const Hotel: React.FC = () => {
         <>
             <Banner heightprops='400px' 
             bgimage={banner_photo} 
-            bannertitle='Make your travel whishlist, we’ll do the rest'
+            bannertitle={t("Make your travel whishlist, we’ll do the rest")}
             bannersubtitle='Special offers to suit your plan'/>
             <Container>
                 <ResentSearch statusLastSearch={statusLastSearchHotel} locationList={hotelLocationList}/>
@@ -45,7 +46,7 @@ const Hotel: React.FC = () => {
                         <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button onClick={() => navigate("/hotel-filter")} variant="outlined" >See All</Button>
+                        <Button onClick={() => navigate("/hotel-filter")} variant="outlined" >{t("See All")}</Button>
                     </Grid>
                 </Grid>
                 <IntoTravel link='hotel' data={hotelRecommendationList} type="hotel"/>

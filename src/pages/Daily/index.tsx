@@ -10,6 +10,7 @@ import { Button, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { getDailyLocationList, getDailyRecommendationList, getRecommendationTripDaily, getStatusLastRecommendationDaily, getStatusLastSearchDaily } from '../../redux/slices/dailySlice'
 import { getLoacationList } from '../../redux/slices/dailySlice'
+import { useTranslation } from 'react-i18next'
 
 const Daily: React.FC = () => {
 
@@ -19,7 +20,7 @@ const Daily: React.FC = () => {
     const statusLastSearchDaily = useAppSelector(getStatusLastSearchDaily)
     const dailyLocationList = useAppSelector(getDailyLocationList)
     const dispatch = useAppDispatch()
-
+    const {t} = useTranslation()
     useEffect(() => {
         if (statusLastRecommendationDaily === 'idle') {
             dispatch(getRecommendationTripDaily())
@@ -31,13 +32,12 @@ const Daily: React.FC = () => {
             dispatch(getLoacationList())
         }
     }, [statusLastSearchDaily, dispatch])
-    console.log(dailyLocationList, "dailyLocationList")
 
     return (
         <>
             <Banner heightprops='400px' 
             bgimage={banner_photo} 
-            bannertitle='Make your travel whishlist, we’ll do the rest'
+            bannertitle={t("Make your travel whishlist, we’ll do the rest")}
             bannersubtitle='Special offers to suit your plan'/>
             <Container>
                 <ResentSearch statusLastSearch={statusLastSearchDaily} locationList={dailyLocationList}/>
@@ -47,7 +47,7 @@ const Daily: React.FC = () => {
                         <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button onClick={() => navigate("/daily-filter")} variant="outlined" >See All</Button>
+                        <Button onClick={() => navigate("/daily-filter")} variant="outlined" >{t("See All")}</Button>
                     </Grid>
                 </Grid>
                 <IntoTravel link='daily' data={dailyRecommendationList} type="daily"/>
