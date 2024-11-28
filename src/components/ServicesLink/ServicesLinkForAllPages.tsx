@@ -11,6 +11,7 @@ import { sublink } from './types'
 import { Container } from '../../global_styles/styles'
 import { Paper } from '@mui/material'
 import MapIcon from '@mui/icons-material/Map';
+import { useTranslation } from 'react-i18next'
 
 let items: sublink[] = [
     {
@@ -51,6 +52,7 @@ let items: sublink[] = [
 ];
 
 const ServicesLinkForAllPages: React.FC = () => {
+    const {t} = useTranslation()
 
     return (
             <Container>
@@ -78,14 +80,14 @@ const ServicesLinkForAllPages: React.FC = () => {
                                             height: "40px",
                                         }}
                                             icon={item.iconc}
-                                            label={item.name}
+                                            label={t(`${item.name}`)}
                                         />:
                                         <Chip color='primary' sx={{
                                             width: "120px",
                                             height: "40px"
                                         }}
                                             icon={item.iconc}
-                                            label={item.name}
+                                            label={t(`${item.name}`)}
                                             variant='outlined'
                                         /> 
                                 }
