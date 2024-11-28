@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import Chip from '@mui/material/Chip'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import HotelIcon from '@mui/icons-material/Hotel'
+import LuggageIcon from '@mui/icons-material/Luggage';
+import GiteIcon from '@mui/icons-material/Gite';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
 import LocalTaxiIcon from '@mui/icons-material/LocalTaxi'
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
@@ -17,12 +19,17 @@ let items: sublink[] = [
     {
         name: "Daily",
         to: "daily",
-        iconc: <HotelIcon />
+        iconc: <GiteIcon />
     },
     {
         name: "Hotel",
         to: "hotel",
         iconc: <HotelIcon />
+    },
+    {
+        name: "Trip",
+        to: "",
+        iconc: <LuggageIcon />
     },
     {
         name: "Ticket",
