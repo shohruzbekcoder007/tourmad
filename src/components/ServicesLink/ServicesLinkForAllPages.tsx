@@ -28,7 +28,7 @@ let items: sublink[] = [
     },
     {
         name: "Trip",
-        to: "",
+        to: "trip",
         iconc: <LuggageIcon />
     },
     {

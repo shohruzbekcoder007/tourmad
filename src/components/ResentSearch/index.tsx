@@ -2,6 +2,7 @@ import { Box, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph, WelcomeMainText } from '../../global_styles/styles'
 import { LocationType } from '../../utils/response_types'
+import { useTranslation } from 'react-i18next'
 
 type ResentSearchPropsType =  {
     title?: string,
@@ -10,7 +11,7 @@ type ResentSearchPropsType =  {
 }
 
 const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch, locationList}) => {
-
+    const {t} = useTranslation()
     return (
         <Stack pb="80px"  pt={{xl: 0, md: 0, sm: "60px", xs: "60px"}}>
             <WelcomeMainText
@@ -20,7 +21,7 @@ const ResentSearch: React.FC<ResentSearchPropsType> = ({title, statusLastSearch,
                 fontSize='32px' 
                 mediafontsize='24px'
             >
-                {title?title:"Your recent searches"}
+                {title?title: t("Your recent searches")}
             </WelcomeMainText>
             <Box 
                 display="flex" 

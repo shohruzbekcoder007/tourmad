@@ -61,7 +61,7 @@ const Plan: React.FC = () => {
               fontSize={"32px"}
               part="true"
             >
-              Fall into travel
+              {t("Fall into travel")}
             </WelcomeMainText>
             <GlobalParagraph
               fontSize={"16px"}

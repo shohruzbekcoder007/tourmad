@@ -24,7 +24,7 @@ type PropsType = {
     hotel_id?: number | null,
     restaurant_id?: number | null,
     plan_id?: number | null,
-    addType?: "hotel" | "restaurant" | "history" | "plan-detail"
+    addType?: "hotel" | "restaurant" | "history" | "plan-detail" | "trip"
 }
 
 type Anchor = 'right';

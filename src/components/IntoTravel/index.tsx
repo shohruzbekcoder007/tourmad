@@ -1,7 +1,6 @@
 import { Box, Button, IconButton, Stack } from '@mui/material'
 import React from 'react'
 import { GlobalParagraph } from '../../global_styles/styles'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { RecommendationType } from '../../utils/response_types'
 import SwipeDrawer from '../SwipeDrawer'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 type IntoTravelPropsType = {
     data: RecommendationType[] | null,
     daily?: boolean,
-    type?: "hotel" | "restaurant" | "daily",
+    type?: "hotel" | "restaurant" | "daily" | "trip"
     link: string
 }
 const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) => {
@@ -84,7 +83,21 @@ const {t} = useTranslation()
                                                         fullWidth
                                                         variant='contained'
                                                     >
-                                                        {t("Book a hotel")}
+                                                        {t("Book a restaurant")}
+                                                    </Button>}
+                                            />
+                                        }
+                                        {
+                                            type === "trip" &&
+                                            <SwipeDrawer
+                                                restaurant_id={item?.id}
+                                                addType={'trip'}
+                                                button={<Button
+                                                        sx={{ height: "48px" }}
+                                                        fullWidth
+                                                        variant='contained'
+                                                    >
+                                                        {t("Book a trip")}
                                                     </Button>}
                                             />
                                         }
