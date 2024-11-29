@@ -123,7 +123,7 @@ const FilterDrawerTrip: React.FC = () => {
         >
             
             <GlobalParagraph fontSize='20px' fontWeight='600'>
-                Filters
+                {t("Filters")}
             </GlobalParagraph>
             <Box py='32px' display={{ xl: "none", md: "none", sm: "none", xs: "block" }} width="250px">
               <FormControl fullWidth size="small">
@@ -149,7 +149,7 @@ const FilterDrawerTrip: React.FC = () => {
                     aria-labelledby="nested-list-subheader"
                 >
                     <ListItemButton onClick={handleClickPrice}>
-                        <ListItemText primary="Prise" />
+                        <ListItemText primary={t("Prise")} />
                         {openPrice ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -227,7 +227,7 @@ const FilterDrawerTrip: React.FC = () => {
                     aria-labelledby="nested-list-subheader"
                 >
                     <ListItemButton onClick={handleClickRating}>
-                        <ListItemText primary="Rating" />
+                        <ListItemText primary={t("Rating")} />
                         {openRating ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={openRating} timeout="auto" unmountOnExit>

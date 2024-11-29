@@ -15,7 +15,7 @@ const {t} = useTranslation()
 
     useEffect(() => {
         dispatch(getCommonLocationList())
-    }, [])
+    }, [dispatch])
     return (
         <Container>
             <Box pb='48px'>
@@ -25,7 +25,7 @@ const {t} = useTranslation()
                         <GlobalParagraph fontSize={"16px"} mediafontsize="12px" fontWeight="400">{t("The best locations for your travel plans")}</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={6} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button onClick={() => navigate("/history")} variant="outlined" sx={{ color: "#000" }} color="success">See more places</Button>
+                        <Button onClick={() => navigate("/history")} variant="outlined" sx={{ color: "#000" }} color="success">{t("See more places")}</Button>
                     </Grid>
                 </Grid>
                 <Box display='flex'

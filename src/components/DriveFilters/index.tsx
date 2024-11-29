@@ -195,7 +195,7 @@ const DriveFilter: React.FC = () => {
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
                             options={newLocation === undefined ? [] : newLocation}
-                            placeholder="Location"
+                            placeholder={t("Location")}
                             getChange={getChangeOptionFromLocation}
                             icon={<LocationOnIcon />}
                         />
@@ -203,7 +203,7 @@ const DriveFilter: React.FC = () => {
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
                             options={newOption === undefined ? [] : newOption}
-                            placeholder="Language"
+                            placeholder={t("Language")}
                             getChange={getChangeOptionFromLanguage}
                             icon={<TranslateIcon />}
                         />
@@ -223,7 +223,7 @@ const DriveFilter: React.FC = () => {
                     height: '400px'
                 }} width={{ xl: "343px", md: "28%" }}>
                     <GlobalParagraph fontSize="20px" fontWeight="600">
-                        Filters
+                        {t("Filters")}
                     </GlobalParagraph>
                     <Box width="100%" py="32px">
                         <List
@@ -232,7 +232,7 @@ const DriveFilter: React.FC = () => {
                             aria-labelledby="nested-list-subheader"
                         >
                             <ListItemButton onClick={handleClickPrice}>
-                                <ListItemText primary="Prise" />
+                                <ListItemText primary={t("Prise")} />
                                 {openPrice ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -270,7 +270,7 @@ const DriveFilter: React.FC = () => {
                             aria-labelledby="nested-list-subheader"
                         >
                             <ListItemButton onClick={handleClickRating}>
-                                <ListItemText primary="Rating" />
+                                <ListItemText primary={t("Rating")} />
                                 {openRating ? <ExpandLess /> : <ExpandMore />}
                             </ListItemButton>
                             <Collapse in={openRating} timeout="auto" unmountOnExit>
@@ -356,13 +356,13 @@ const DriveFilter: React.FC = () => {
                         <Box width="250px" display={{ xl: "block", md: "block", sm: "none", xs: "none" }}>
                             <FormControl fullWidth size="small">
                                 <InputLabel id="demo-select-small-label">
-                                    Sort Type
+                                    {t("Sort Type")}
                                 </InputLabel>
                                 <Select
                                     labelId="demo-select-small-label"
                                     id="demo-select-small"
                                     value={age}
-                                    label="Sort Type"
+                                    label={t("Sort Type")}
                                     onChange={handleChangeSort}
                                 >
                                     {

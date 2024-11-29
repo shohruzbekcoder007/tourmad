@@ -14,7 +14,6 @@ import { CustomAutocomplete } from "../../helper_components";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ResentSearch from "../ResentSearch";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import {
   getCommonLocationList,
@@ -35,7 +34,6 @@ import {
   getTripHistoryList,
 } from "../../redux/slices/historySlice";
 import { HistoryType } from "../../utils/response_types";
-import { postLikeIdH } from "../../redux/slices/wishListSlice";
 import { useTranslation } from "react-i18next";
 
 type Option = {
@@ -92,13 +90,6 @@ const {t} = useTranslation()
     }
   }, [statusHistoryList, dispatch]);
 
-//   const [liked, setLiked] = useState(historyList);
-
-  function handleLikeFunc(id: number) {
-    // setLiked(!liked);
-    dispatch(postLikeIdH(id));
-  }
-
   return (
     <Stack mt="40px">
       <Box pb="40px" display="flex" justifyContent="space-between">
@@ -130,7 +121,7 @@ const {t} = useTranslation()
           >
             <CustomAutocomplete
               options={newOption === undefined ? [] : newOption}
-              placeholder="Search"
+              placeholder={t("Search")}
               getChange={getChangeOptionFrom}
               icon={<LocationOnIcon />}
             />

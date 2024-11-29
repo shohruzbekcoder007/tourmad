@@ -1,5 +1,4 @@
-import { Box, Button, Divider, Paper, Rating, Stack } from "@mui/material";
-import card_image from "./../../media/images/Rectangle 3.png";
+import { Box, Button, Divider, Paper, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles";
@@ -12,7 +11,6 @@ import { useTranslation } from "react-i18next";
 
 const HotelFilterCard: React.FC = () => {
   const {t} = useTranslation()
-  const value: number | null = 2;
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
 

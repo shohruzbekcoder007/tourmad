@@ -126,7 +126,7 @@ import { useTranslation } from "react-i18next";
       if (dailyPriceTo !== sliderValue[1]) {
         dispatch(changePriceTo(sliderValue[1]))
       }
-    }, [sliderValue, dispatch])
+    }, [sliderValue, dispatch, dailyPriceFrom, dailyPriceTo])
   
     useEffect(() => {
       setValue([dailyPriceFrom, dailyPriceTo])
@@ -146,8 +146,6 @@ import { useTranslation } from "react-i18next";
       return { label: item.name, value: "" + item.id }
     })
   
-    console.log(dailyList, "dailyList")
-    console.log(commonLocationList, "commonLocationList")
     return (
       <Stack mt="40px">
         <Box pb="40px" display="flex" justifyContent="space-between">
@@ -170,7 +168,7 @@ import { useTranslation } from "react-i18next";
             <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
               <CustomAutocomplete
                 options={newOption === undefined ? [] : newOption}
-                placeholder="Location"
+                placeholder={t("Location")}
                 getChange={getChangeOptionFrom}
                 icon={<LocationOnIcon />}
               />
@@ -197,7 +195,7 @@ import { useTranslation } from "react-i18next";
             height: '400px'
           }} width={{ xl: "343px", md: "28%" }}>
             <GlobalParagraph fontSize="20px" fontWeight="600">
-              Filters
+              {t("Filters")}
             </GlobalParagraph>
             <Box width="100%" py="32px">
               <List
@@ -206,7 +204,7 @@ import { useTranslation } from "react-i18next";
                 aria-labelledby="nested-list-subheader"
               >
                 <ListItemButton onClick={handleClickPrice}>
-                  <ListItemText primary="Prise" />
+                  <ListItemText primary={t("Prise")} />
                   {openPrice ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -243,7 +241,7 @@ import { useTranslation } from "react-i18next";
                 aria-labelledby="nested-list-subheader"
               >
                 <ListItemButton onClick={handleClickRating}>
-                  <ListItemText primary="Rating" />
+                  <ListItemText primary={t("Rating")} />
                   {openRating ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openRating} timeout="auto" unmountOnExit>

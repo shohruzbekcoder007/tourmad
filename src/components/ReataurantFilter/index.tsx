@@ -93,7 +93,7 @@ const RestaurantFilter: React.FC = () => {
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
                             options={newOption === undefined ? [] : newOption}
-                            placeholder="Location"
+                            placeholder={t("Location")}
                             getChange={getChangeOptionFrom}
                             icon={<LocationOnIcon />}
                         />

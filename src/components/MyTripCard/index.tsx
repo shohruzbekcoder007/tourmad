@@ -157,7 +157,7 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
                             <GlobalParagraph fontSize='14px' fontWeight='700' paddingbottom='16px'>Destination</GlobalParagraph>
                             <CustomAutocomplete
                                 options={options}
-                                placeholder="Location"
+                                placeholder={t("Location")}
                                 getChange={getChangeOptionFrom}
                                 icon={<LocationOnIcon />}
                             />

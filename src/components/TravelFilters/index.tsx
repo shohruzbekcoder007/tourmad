@@ -144,7 +144,7 @@ const TravelFilters: React.FC = () => {
           <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
-              placeholder="From - To"
+              placeholder={t("From - To")}
               getChange={getChangeOptionFrom}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -156,7 +156,7 @@ const TravelFilters: React.FC = () => {
           <Box mt="16px" minWidth={{ xl: "200px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
-              placeholder="Trip"
+              placeholder={t("Trip")}
               getChange={getChangeOptionFrom}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -168,7 +168,7 @@ const TravelFilters: React.FC = () => {
           <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
-              placeholder="Depart- Return"
+              placeholder={t("Depart- Return")}
               getChange={getChangeOptionDepart}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -180,7 +180,7 @@ const TravelFilters: React.FC = () => {
           <Box mt="16px" minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}>
             <CustomAutocomplete
               options={options}
-              placeholder="Passenger - Class"
+              placeholder={t("Passenger - Class")}
               getChange={getChangeOptionDepart}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -199,7 +199,7 @@ const TravelFilters: React.FC = () => {
       <Box display='flex' justifyContent='space-between'>
         <Box display={{ xl: "block", md: "block", sm: "none", xs: "none" }} width={{ xl: "343px", md: "28%" }}>
           <GlobalParagraph fontSize='20px' fontWeight='600'>
-            Filters
+            {t("Filters")}
           </GlobalParagraph>
           <Box width="100%" py='32px' >
             <List
@@ -208,7 +208,7 @@ const TravelFilters: React.FC = () => {
               aria-labelledby="nested-list-subheader"
             >
               <ListItemButton onClick={handleClickPrice}>
-                <ListItemText primary="Prise" />
+                <ListItemText primary={t("Prise")} />
                 {openPrice ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -286,7 +286,7 @@ const TravelFilters: React.FC = () => {
               aria-labelledby="nested-list-subheader"
             >
               <ListItemButton onClick={handleClickRating}>
-                <ListItemText primary="Rating" />
+                <ListItemText primary={t("Rating")} />
                 {openRating ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={openRating} timeout="auto" unmountOnExit>
@@ -415,13 +415,13 @@ const TravelFilters: React.FC = () => {
               </FormControl>
             </Box>
             <Tabs value={valueTab} sx={{ display: { xl: "block", md: "block", sm: "block", xs: "none" } }} onChange={handleChangeTab} aria-label="icon label tabs example">
-              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Cheapest" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label={t("Cheapest")} />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Best" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label={t("Best")} />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Quickest" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label={t("Quickest")} />
               <Divider orientation="vertical" variant="middle" flexItem />
-              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label="Other sort" />
+              <Tab sx={{ width: { xl: "180px", md: "140px", } }} label={t("Other sort")} />
             </Tabs>
           </Paper>
           <Box width="100%" display="flex" justifyContent='space-between' alignItems='center' pb='24px' >

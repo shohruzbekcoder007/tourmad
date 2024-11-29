@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
                 <TextField
                   id="outlined-basic"
                   type="email"
-                  label="Your email address"
+                  label={t("Your email address")}
                   value={email}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setEmail(event.target.value);

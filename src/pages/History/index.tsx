@@ -5,8 +5,10 @@ import { AuthUserInfo, Footer, Header, HistoryService, ProtectedLinks } from '..
 import BannerMain from '../../components/BannerMain';
 import banner_photo from './../../media/images/Samarkand_registan.jpg';
 import { Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const History: React.FC = () => {
+    const {t} = useTranslation()
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
     useEffect(() => {
         const handleScroll = () => {
@@ -34,7 +36,7 @@ const History: React.FC = () => {
                 </Container>
             </HeaderWrapper>
             <BannerMain bgimage={banner_photo} heightprops='400px'
-                bannersubtitle="From the ancient Silk Road to modern independence, Uzbekistan's history is a vibrant tapestry of culture, trade, and empire" bannertitle='Explore the Rich History of Uzbekistan.' />
+                bannersubtitle={t("From the ancient Silk Road to modern independence, Uzbekistan's history is a vibrant tapestry of culture, trade, and empire")} bannertitle={t("Explore the Rich History of Uzbekistan.")} />
             <Container>
                 <HistoryService />
             </Container>

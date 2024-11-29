@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Paper, Rating } from "@mui/material";
+import { Box, Button, Divider, Paper } from "@mui/material";
 import React from "react";
 // import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GlobalParagraph } from "../../global_styles/styles";

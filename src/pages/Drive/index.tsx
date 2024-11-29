@@ -43,7 +43,7 @@ const {t} = useTranslation()
                 <Grid container>
                     <Grid item xl={8} md={8} sm={6} xs={8}>
                         <WelcomeMainText paddingbottom={"16px"} mediafontsize="24px" texttransform='capitalize' fontSize={"32px"} part="true">{t("Fall into travel")}</WelcomeMainText>
-                        <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</GlobalParagraph>
+                        <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">{t("Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.")}</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
                         <Button variant="outlined" onClick={() => navigate("/drive-filter")}>{t("See All")}</Button>

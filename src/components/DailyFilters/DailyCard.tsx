@@ -1,6 +1,5 @@
 import { Box, Button, Divider, Paper, Rating } from "@mui/material"
 import React from "react"
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import { GlobalParagraph, WelcomeMainText } from "../../global_styles/styles"
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { GalleryType, LocationType, RoomStyle } from "../../utils/response_types"

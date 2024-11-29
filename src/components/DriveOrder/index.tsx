@@ -25,34 +25,16 @@ type PropsType = {
 
 type Anchor = "right";
 
-type Option = {
-  label: string;
-  value: string;
-};
-
-const options: Option[] = [
-  { label: "The Shawshank Redemption", value: "1994" },
-  { label: "The Godfather", value: "1972" },
-  { label: "The Godfather: Part II", value: "1974" },
-  { label: "The Dark Knight", value: "2008" },
-  { label: "12 Angry Men", value: "1957" },
-  { label: "Schindler's List", value: "1993" },
-  { label: "Pulp Fiction", value: "1994" },
-];
-
 const DriveOrder: React.FC<PropsType> = (props) => {
   const { t } = useTranslation();
   const [state, setState] = React.useState({
     right: false,
   });
 
-  const [from, setFrom] = useState<Option | null>(null);
   const [comment, setComment] = useState<string | null>(null);
   const [time, setTime] = useState<Dayjs | null | undefined>(null);
 
-  const getChangeOptionFrom = (newValue: Option | null) => {
-    setFrom(newValue);
-  };
+ 
 
   const defaultPosition = { lat: 40.71550047598207, lng: 64.99960158539278 };
   const [lat, setLat] = useState<number | null>(null);
@@ -67,8 +49,6 @@ const DriveOrder: React.FC<PropsType> = (props) => {
       (error) => console.log(error)
     );
   }, []);
-
-  useEffect(() => {}, [from]);
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>

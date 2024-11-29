@@ -34,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 import DriveFilterSkeleton from "../Skeleton/DriveFilterSkeleton";
 import { RecommendationType } from "../../utils/response_types";
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from "../../redux/slices/commonLocationSlicer";
+import { useTranslation } from "react-i18next";
 
 type Option = {
   label: string,
@@ -59,6 +60,8 @@ function valuetext(value: number) {
 }
 
 const HotelFilters: React.FC = () => {
+
+  const {t} = useTranslation()
 
   const navigate = useNavigate()
   const [from, setFrom] = useState<Option | null>(null)
@@ -125,7 +128,7 @@ const HotelFilters: React.FC = () => {
     if (hotelPriceTo !== sliderValue[1]) {
       dispatch(changePriceTo(sliderValue[1]))
     }
-  }, [sliderValue, dispatch])
+  }, [sliderValue, dispatch, hotelPriceTo, hotelPriceFrom])
 
   useEffect(() => {
     setValue([hotelPriceFrom, hotelPriceTo])
@@ -167,7 +170,7 @@ const HotelFilters: React.FC = () => {
           <Box mt="16px" minWidth={{ xl: "90%", md: "90%", sm: "85%", xs: "70%" }}>
             <CustomAutocomplete
               options={newOption === undefined ? [] : newOption}
-              placeholder="Location"
+              placeholder={t("Location")}
               getChange={getChangeOptionFrom}
               icon={<LocationOnIcon />}
             />
@@ -194,7 +197,7 @@ const HotelFilters: React.FC = () => {
           height: '400px'
         }} width={{ xl: "343px", md: "28%" }}>
           <GlobalParagraph fontSize="20px" fontWeight="600">
-            Filters
+            {t("Filters")}
           </GlobalParagraph>
           <Box width="100%" py="32px">
             <List
@@ -203,7 +206,7 @@ const HotelFilters: React.FC = () => {
               aria-labelledby="nested-list-subheader"
             >
               <ListItemButton onClick={handleClickPrice}>
-                <ListItemText primary="Prise" />
+                <ListItemText primary={t("Prise")} />
                 {openPrice ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -240,7 +243,7 @@ const HotelFilters: React.FC = () => {
               aria-labelledby="nested-list-subheader"
             >
               <ListItemButton onClick={handleClickRating}>
-                <ListItemText primary="Rating" />
+                <ListItemText primary={t("Rating")} />
                 {openRating ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={openRating} timeout="auto" unmountOnExit>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Container } from '../../global_styles/styles'
 import Header from '../Header'
 import { CustomAutocomplete } from '../../helper_components'
+import { useTranslation } from 'react-i18next'
+
 
 type Option = {
   label: string,
@@ -10,6 +12,7 @@ type Option = {
 }
 
 const TicketTable: React.FC = () => {
+  const {t} = useTranslation()
 
   const [from, setFrom] = useState<Option | null>(null)
   const [depart, setDepart] = useState<Option | null>(null)
@@ -60,7 +63,7 @@ const TicketTable: React.FC = () => {
           <Box width='300px'>
             <CustomAutocomplete
               options={options}
-              placeholder="From - To"
+              placeholder={t("From - To")}
               getChange={getChangeOptionFrom}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -73,7 +76,7 @@ const TicketTable: React.FC = () => {
           <Box width='300px'>
             <CustomAutocomplete
               options={options}
-              placeholder="From - To"
+              placeholder={t("From - To")}
               getChange={getChangeOptionDepart}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">
@@ -86,7 +89,7 @@ const TicketTable: React.FC = () => {
           <Box width='300px'  >
             <CustomAutocomplete
               options={options}
-              placeholder="From - To"
+              placeholder={t("From - To")}
               getChange={getChangeOptionDepart}
               icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g id="ion:swap-horizontal">

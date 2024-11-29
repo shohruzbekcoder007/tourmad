@@ -202,7 +202,7 @@ const SwipeDrawer: React.FC<PropsType> = (props) => {
                     <GlobalParagraph fontSize='16px' fontWeight='700' paddingbottom='16px'>{t("Destination")}</GlobalParagraph>
                     <CustomAutocomplete
                         options={newOption === undefined ? [] : newOption}
-                        placeholder="Location"
+                        placeholder={t("Location")}
                         getChange={getChangeOptionFrom}
                         icon={<LocationOnIcon />}
                         disabled={newTrip.newTripCreateLoading as boolean}

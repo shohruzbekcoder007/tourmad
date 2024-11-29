@@ -48,7 +48,7 @@ const Plan: React.FC = () => {
       />
       <Container>
         <ResentSearch
-          title="Your Location for plan"
+          title={t("Your Location for plan")}
           locationList={getPlanCategoryListt}
           statusLastSearch="succeeded"
         />

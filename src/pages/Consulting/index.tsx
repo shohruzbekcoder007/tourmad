@@ -37,7 +37,7 @@ const Consulting: React.FC = () => {
             </Container>
         </HeaderWrapper>
             <BannerMain bgimage={consultingbannerimage} heightprops="400px"
-                bannersubtitle="Turizm Biznesingizni Rivojlantirishda Bizning Konsalting Xizmatlarimizdan Foydalaning" bannertitle="Turizm Konsalting Xizmatlari" />
+                bannersubtitle={t("Turizm Biznesingizni Rivojlantirishda Bizning Konsalting Xizmatlarimizdan Foydalaning")} bannertitle={t("Turizm Konsalting Xizmatlari")} />
             <Container>
                 <Box pt="40px" display="flex" justifyContent="space-between">
                     <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">{t("Consulting")}</WelcomeMainText>

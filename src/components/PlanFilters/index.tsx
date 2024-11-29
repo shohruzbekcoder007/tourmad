@@ -11,6 +11,7 @@ import PlanCategory from '../PlanCategory';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getCommonLocationList, getCommonLocations, getStatusCommonLocation } from '../../redux/slices/commonLocationSlicer';
 import { changePage, changeSearchLocation, getCategoryPlanList, getPlanCategoryList, getPlanListCurrentPage, getPlanListTotalPages, getStatusPlanCategory } from '../../redux/slices/planSliser';
+import { t } from 'i18next';
 
 type Option = {
     label: string,
@@ -87,7 +88,7 @@ const PlanFilter: React.FC = () => {
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
                         <CustomAutocomplete
                             options={newOption === undefined ? [] : newOption}
-                            placeholder="Location"
+                            placeholder={t("Location")}
                             getChange={getChangeOptionFrom}
                             icon={<LocationOnIcon />}
                         />

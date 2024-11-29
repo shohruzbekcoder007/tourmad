@@ -80,7 +80,7 @@ const FilterDrawerHotel: React.FC = () => {
         if(driverPriceTo !== sliderValue[1]) {
           dispatch(changePriceTo(sliderValue[1]*10))
         }
-      }, [value, dispatch])
+      }, [value, dispatch, driverPriceFrom, driverPriceTo, sliderValue])
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -108,7 +108,7 @@ const FilterDrawerHotel: React.FC = () => {
         >
             
             <GlobalParagraph fontSize='20px' fontWeight='600'>
-                Filters
+                {t("Filters")}
             </GlobalParagraph>
             <Box width="100%" py='32px' >
                 <List
@@ -117,7 +117,7 @@ const FilterDrawerHotel: React.FC = () => {
                     aria-labelledby="nested-list-subheader"
                 >
                     <ListItemButton onClick={handleClickPrice}>
-                        <ListItemText primary="Prise" />
+                        <ListItemText primary={t("Prise")} />
                         {openPrice ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={openPrice} timeout="auto" unmountOnExit>
@@ -156,7 +156,7 @@ const FilterDrawerHotel: React.FC = () => {
                     aria-labelledby="nested-list-subheader"
                 >
                     <ListItemButton onClick={handleClickRating}>
-                        <ListItemText primary="Rating" />
+                        <ListItemText primary={t("Rating")} />
                         {openRating ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={openRating} timeout="auto" unmountOnExit>
