@@ -179,10 +179,10 @@ const RestaurantDetail: React.FC = () => {
             >
               <Button variant="outlined">{restaurant?.rate}</Button>
               <GlobalParagraph fontSize="12px" fontWeight="700">
-                Very Good
+                {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="12px" fontWeight="500">
-                {restaurant?.reviews_count} reviews
+                {restaurant?.reviews_count} {t("reviews")}
               </GlobalParagraph>
             </Box>
           </Box>
@@ -252,7 +252,7 @@ const RestaurantDetail: React.FC = () => {
                     onCopy={handleCopyLink}
                   >
                     <Button variant="outlined" startIcon={<LinkIcon />}>
-                      Copy Link
+                      {t("Copy Link")}
                     </Button>
                   </CopyToClipboard>
                 </Box>

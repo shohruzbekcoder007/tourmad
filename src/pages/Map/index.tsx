@@ -11,6 +11,7 @@ import daily from "../../media/images/daily.png";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { GlobalParagraph } from "../../global_styles/styles";
+import { host } from "../../utils/API_urls";
 
 interface Location {
   id: number;
@@ -61,7 +62,7 @@ const Map = () => {
     const fetchLocations = async () => {
       try {
         const response = await fetch(
-          "https://api.tourmad.uz/api/v1/trip/maps-coordinates"
+          `${host}/api/v1/trip/maps-coordinates`
         ); // Replace with your API endpoint
         const data: Location[] = await response.json(); // Specify the type for data
         setLocations(data);

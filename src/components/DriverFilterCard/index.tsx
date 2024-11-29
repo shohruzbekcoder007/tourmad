@@ -192,7 +192,7 @@ const DriveFilterCard: React.FC<DriveFilterProps> = ({
                 {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="12px" fontWeight="500">
-                {orders_count} reviews
+                {orders_count} {t("reviews")}
               </GlobalParagraph>
             </Box>
             <Divider

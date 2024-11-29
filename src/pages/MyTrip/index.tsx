@@ -11,8 +11,10 @@ import MyTripCard from '../../components/MyTripCard'
 import { getTripList, getTrips } from '../../redux/slices/tripSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { TripType } from '../../utils/response_types'
+import { useTranslation } from 'react-i18next'
 
 const MyTrip: React.FC = () => {
+    const {t} = useTranslation()
 
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
 
@@ -52,19 +54,19 @@ const MyTrip: React.FC = () => {
                 </Container>
             </HeaderWrapper>
             <BannerMain bgimage={banner_trip}
-                bannersubtitle='Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.'
-                bannertitle='Join Us on an Unforgettable Adventure!' heightprops='400px' />
+                bannersubtitle={t("Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.")}
+                bannertitle={t("Join Us on an Unforgettable Adventure!")} heightprops='400px' />
             <ServicesLink />
             <Container>
                 {
                     (trips?.tripListLoading || trips?.tripList?.length === 0) && <>
                         <Box display='flex' alignItems="center" mt={{ xl: 0, md: 0, sm: "32px", xs: "32px" }} justifyContent='space-between'>
-                            <GlobalParagraph fontSize='32px' fontWeight='700' mediafontsize='18px'>My Trips</GlobalParagraph>
+                            <GlobalParagraph fontSize='32px' fontWeight='700' mediafontsize='18px'>{t("My Trips")}</GlobalParagraph>
                             <SwipeDrawer button='Create Trip' />
                         </Box>
                         <Box textAlign='center'>
                             <img src={none_trip} width='300px' alt="" />
-                            <GlobalParagraph fontSize='14px' fontWeight='400' oposity='0.75'>You haven't created a trip yet</GlobalParagraph>
+                            <GlobalParagraph fontSize='14px' fontWeight='400' oposity='0.75'>{t("You haven't created a trip yet")}</GlobalParagraph>
                         </Box>
                     </>
                 }

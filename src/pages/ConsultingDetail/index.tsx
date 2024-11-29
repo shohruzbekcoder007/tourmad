@@ -33,6 +33,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -40,6 +41,7 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 }
 
 const ConsultingDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { consulting } = useAppSelector(getConsultingDetail);
@@ -183,7 +185,7 @@ const ConsultingDetail: React.FC = () => {
                     onCopy={handleCopyLink}
                   >
                     <Button variant="outlined" startIcon={<LinkIcon />}>
-                      Copy Link
+                      {t("Copy Link")}
                     </Button>
                   </CopyToClipboard>
                 </Box>

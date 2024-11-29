@@ -11,7 +11,7 @@ const Ticket: React.FC = () => {
         <>
             <Banner bgimage={banner_photo} heightprops='400px'
             bannertitle={t("Make your travel whishlist, we’ll do the rest")}
-            bannersubtitle='Special offers to suit your plan'/>
+            bannersubtitle={t("Special offers to suit your plan")}/>
             <Container>
                 <TravelFilters />
             </Container>

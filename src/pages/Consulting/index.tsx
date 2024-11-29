@@ -7,8 +7,9 @@ import { HeaderWrapper } from "../../components/Header/styles";
 import BannerMain from "../../components/BannerMain";
 import consultingbannerimage from '../../media/images/consulting-banner.jpeg'
 import { useNavigate } from "react-router-dom";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 const Consulting: React.FC = () => {
+    const {t} = useTranslation()
     const [topNavbar, setTopNavbar] = useState<boolean>(false);
     const navigate = useNavigate()
     useEffect(() => {

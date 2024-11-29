@@ -37,8 +37,10 @@ import {
 import CopyToClipboard from "react-copy-to-clipboard";
 import { getOrderCreateAction } from "../../redux/slices/driverSliser";
 import { DriveOrderType } from "../../utils/response_types";
+import { useTranslation } from "react-i18next";
 
 const MyDriveDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const { drive_detail } = useAppSelector(getDriveDriveDetail);
   const dispatch = useAppDispatch();
@@ -184,16 +186,16 @@ const MyDriveDetail: React.FC = () => {
             >
               <Button variant="outlined">{drive_detail?.avg_rate}</Button>
               <GlobalParagraph fontSize="12px" fontWeight="700">
-                Very Good
+                {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="12px" fontWeight="500">
-                {drive_detail?.reviews_count} reviews
+                {drive_detail?.reviews_count} {t("reviews")}
               </GlobalParagraph>
             </Box>
           </Box>
           <Box textAlign={{ xl: "right", md: "left", sm: "left", xs: "left" }}>
             <GlobalParagraph fontSize="12px" fontWeight="500">
-              starting from
+              {t("starting from")}
             </GlobalParagraph>
             <GlobalParagraph
               paddingbottom="16px"
@@ -201,7 +203,7 @@ const MyDriveDetail: React.FC = () => {
               fontWeight="700"
               color="slamon"
             >
-              ${drive_detail?.price}/day
+              ${drive_detail?.price}/{t("day")}
             </GlobalParagraph>
             <Box display="flex" justifyContent="flex-start" gap="16px">
               <Button variant="outlined">
@@ -253,7 +255,7 @@ const MyDriveDetail: React.FC = () => {
                     onCopy={handleCopyLink}
                   >
                     <Button variant="outlined" startIcon={<LinkIcon />}>
-                      Copy Link
+                      {t("Copy Link")}
                     </Button>
                   </CopyToClipboard>
                 </Box>
@@ -265,7 +267,7 @@ const MyDriveDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder message="" success={true} btnText="Book Now"  id={id} orderSend={orderSend} />
+              <DriveOrder message="" success={true} btnText={t("Book Now")}  id={id} orderSend={orderSend} />
             </Box>
           </Box>
         </Box>

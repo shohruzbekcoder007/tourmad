@@ -73,7 +73,7 @@ const RestaurantFilter: React.FC = () => {
     return (
         <Stack mt='40px'>
             <Box pb="40px" display="flex" justifyContent="space-between">
-                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">Restaurant Filter</WelcomeMainText>
+                <WelcomeMainText fontSize="32px" mediafontsize="18px" texttransform="capitalize" part="true">{t("Restaurant Filter")}</WelcomeMainText>
                 <Button onClick={() => navigate(-1)} variant="outlined"><KeyboardBackspaceIcon /></Button>
             </Box>
             <Paper
@@ -99,7 +99,7 @@ const RestaurantFilter: React.FC = () => {
                         />
                     </Box>
                     <Box mt="16px" minWidth={{ xl: "45%", md: "45%", sm: "40%", xs: "100%" }}>
-                        <TextField value={text} onChange={e => {setText(e.target.value); console.log(e.target.value)}} fullWidth id="outlined-basic" label="Restaurant Name" variant="outlined" />
+                        <TextField value={text} onChange={e => {setText(e.target.value); console.log(e.target.value)}} fullWidth id="outlined-basic" label={t("Restaurant Name")} variant="outlined" />
                     </Box>
                     <Box mt="16px" width={{ xl: '56px', md: '56px', sm: '56px', xs: "100%" }}>
                         <Button
@@ -141,7 +141,7 @@ const RestaurantFilter: React.FC = () => {
                                                 <Box display="flex" justifyContent="space-between" flexWrap="wrap">
                                                     <Box width={{ xl: '30%', md: "30%", sm: "30%", xs: "100%" }} position="relative">
                                                         <img src={`${restaurant?.card}`} width="100%" height="100%" style={{ objectFit: "cover", borderRadius: "12px" }} alt="" />
-                                                        <Button variant="contained" sx={{ right: "10px", top: "10px", position: "absolute", bgcolor: "#6b6c7566" }}>{restaurant.gallery?.length} images</Button>
+                                                        <Button variant="contained" sx={{ right: "10px", top: "10px", position: "absolute", bgcolor: "#6b6c7566" }}>{restaurant.gallery?.length} {t("images")}</Button>
                                                     </Box>
                                                     <Box mt={{ xl: 0, md: 0, sm: 0, xs: "24px" }} width={{ xl: '65%', md: "65%", sm: "65%", xs: "100%" }}>
                                                         <Box pb="16px" width="100%" display="flex" justifyContent="space-between" gap="24px">
@@ -153,12 +153,12 @@ const RestaurantFilter: React.FC = () => {
                                                         </Box>
                                                         <Box pb="12px" display="flex" alignItems="center" justifyContent="flex-start" gap="2px">
                                                             <Rating name="disabled" value={restaurant.grade} disabled />
-                                                            <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant.grade} Star Restaurant</GlobalParagraph>
+                                                            <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant.grade} {t("Star Restaurant")}</GlobalParagraph>
                                                         </Box>
                                                         <Box display="flex" alignItems="center" justifyContent="flex-start" gap="5px">
                                                             <Button variant="outlined">{restaurant.rate} </Button>
-                                                            <GlobalParagraph fontSize="12px" fontWeight="700">Very Good</GlobalParagraph>
-                                                            <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant.reviews_count} reviews</GlobalParagraph>
+                                                            <GlobalParagraph fontSize="12px" fontWeight="700">{t("Very Good")}</GlobalParagraph>
+                                                            <GlobalParagraph fontSize="12px" fontWeight="500">{restaurant.reviews_count} {t("reviews")}</GlobalParagraph>
                                                         </Box>
                                                         <Divider style={{
                                                             marginTop: "24px"

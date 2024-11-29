@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 const TripPlan: React.FC = () => {
     const navigate = useNavigate()
     const commonLocation = useAppSelector(getCommonLocations)
-const {t} = useTranslation()
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
 
     useEffect(() => {

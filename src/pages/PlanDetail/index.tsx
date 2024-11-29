@@ -231,7 +231,7 @@ const PlanDetail: React.FC = () => {
                     onCopy={handleCopyLink}
                   >
                     <Button variant="outlined" startIcon={<LinkIcon />}>
-                      Copy Link
+                      {t("Copy Link")}
                     </Button>
                   </CopyToClipboard>
                 </Box>

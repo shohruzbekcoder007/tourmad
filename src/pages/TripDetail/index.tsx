@@ -29,6 +29,7 @@ import history from "../../media/images/history.png";
 import place from "../../media/images/place.png";
 import daily from "../../media/images/daily.png";
 import { postRequest } from "../../utils/request";
+import { useTranslation } from "react-i18next";
 
 const defaultIcon = L.icon({
   iconUrl: markerIcon,
@@ -63,6 +64,7 @@ const icons: Record<string, L.Icon> = {
 
 const MyTrip: React.FC = () => {
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
+  const {t} = useTranslation()
 
   const { id } = useParams<{ id: string }>();
   const dailyPlans = useAppSelector(getDailyPlanDetailData);
@@ -118,8 +120,8 @@ const MyTrip: React.FC = () => {
       </HeaderWrapper>
       <BannerMain
         bgimage={banner_trip}
-        bannersubtitle="Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul."
-        bannertitle="Join Us on an Unforgettable Adventure!"
+        bannersubtitle={t("Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.")}
+        bannertitle={t("Join Us on an Unforgettable Adventure!")}
         heightprops="400px"
       />
       <ServicesLink />
@@ -223,7 +225,7 @@ const MyTrip: React.FC = () => {
                     fontWeight="600"
                     paddingbottom="16px"
                   >
-                    What is this trip about?
+                    {t("What is this trip about?")}
                   </GlobalParagraph>
                   {(dailyPlans.daily_plan?.is_paid && dailyPlans.daily_plan?.price !== "0") ? (
                     <GlobalParagraph
@@ -231,7 +233,7 @@ const MyTrip: React.FC = () => {
                       mediafontsize="16px"
                       fontWeight="600"
                     >
-                      Payment made
+                      {t("Payment made")}
                     </GlobalParagraph>
                   ) : dailyPlans.daily_plan?.price === "0" ? <span></span> : (
                     <Button

@@ -52,8 +52,10 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
 const MyDriverDetail: React.FC = () => {
+  const {t} = useTranslation()
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -241,10 +243,10 @@ const MyDriverDetail: React.FC = () => {
                 {driverDetail.driver?.avg_rate}
               </Button>
               <GlobalParagraph fontSize="12px" fontWeight="700">
-                Very Good
+                {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="12px" fontWeight="500">
-                {driverDetail.driver?.orders_count} reviews
+                {driverDetail.driver?.orders_count} {t("reviews")}
               </GlobalParagraph>
             </Box>
           </Box>
@@ -257,7 +259,7 @@ const MyDriverDetail: React.FC = () => {
               {driverDetail.driver?.auto_model?.status}
             </GlobalParagraph>
             <GlobalParagraph fontSize="12px" fontWeight="500">
-              starting from
+              {t("starting from")}
             </GlobalParagraph>
             <GlobalParagraph
               paddingbottom="16px"
@@ -317,7 +319,7 @@ const MyDriverDetail: React.FC = () => {
                     onCopy={handleCopyLink}
                   >
                     <Button variant="outlined" startIcon={<LinkIcon />}>
-                      Copy Link
+                      {t("Copy Link")}
                     </Button>
                   </CopyToClipboard>
                 </Box>
@@ -329,7 +331,7 @@ const MyDriverDetail: React.FC = () => {
                 onClose={handleSnackbarClose}
                 message="Link copied to clipboard!"
               />
-              <DriveOrder btnText="Book Now" id={id} success={newOrder.driverOrderLoading} orderSend={orderSend} message={newOrder.driverOrderMessage}/>
+              <DriveOrder btnText={t("Book Now")} id={id} success={newOrder.driverOrderLoading} orderSend={orderSend} message={newOrder.driverOrderMessage}/>
             </Box>
           </Box>
         </Box>
@@ -350,7 +352,7 @@ const MyDriverDetail: React.FC = () => {
               fontWeight="700"
               mediafontsize="16px"
             >
-              Reviews
+              {t("reviews")}
             </GlobalParagraph>
             <InputReview
               btnText="Give your review"
@@ -379,10 +381,10 @@ const MyDriverDetail: React.FC = () => {
                 mediafontsize="16px"
                 fontWeight="600"
               >
-                Very Good
+                {t("Very Good")}
               </GlobalParagraph>
               <GlobalParagraph fontSize="14px" fontWeight="400">
-                {driverDetail.driver?.orders_count} verified reviews
+                {driverDetail.driver?.orders_count} {t("verified reviews")}
               </GlobalParagraph>
             </Box>
           </Box>
