@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import { SubLink } from './styles'
 import { sublink } from './types'
+import { useTranslation } from 'react-i18next';
 
 let items: sublink[] = [
     {
@@ -35,6 +36,7 @@ let items: sublink[] = [
 ];
 
 const ProtectedLinks: React.FC = () => {
+    const {t} = useTranslation()
     return (
         <Box display={{xl: 'block', md: "block", sm: "none", xs: "none"}}>
             <Box
@@ -49,7 +51,7 @@ const ProtectedLinks: React.FC = () => {
                             to={`/protected/${item.to}`}
                             className={(navData) => (navData.isActive ? 'active' : '')}
                         >
-                            {item.name}
+                            {t(`${item.name}`)}
                         </SubLink>
                     ))
                 }
