@@ -12,6 +12,7 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { GlobalParagraph } from "../../global_styles/styles";
 import { host } from "../../utils/API_urls";
+import { useTranslation } from "react-i18next";
 
 interface Location {
   id: number;
@@ -57,6 +58,7 @@ const Map = () => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
+  const {t} = useTranslation()
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -127,7 +129,7 @@ const Map = () => {
                   fullWidth
                   sx={{ marginTop: "10px" }}
                 >
-                  View
+                  {t("View")}
                 </Button>
               </Box>
             </Popup>

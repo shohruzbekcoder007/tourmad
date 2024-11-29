@@ -43,8 +43,8 @@ const Plan: React.FC = () => {
       <Banner
         bgimage={banner_photo}
         heightprops="400px"
-        bannersubtitle="Special offers to suit your plan"
-        bannertitle="Make the best travel plan."
+        bannersubtitle={t("Special offers to suit your plan")}
+        bannertitle={t("Make the best travel plan.")}
       />
       <Container>
         <ResentSearch

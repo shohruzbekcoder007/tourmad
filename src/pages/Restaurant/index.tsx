@@ -33,7 +33,7 @@ const {t} = useTranslation()
     <>
       <Banner heightprops='400px' bgimage={require('./../../media/images/restaurant.jpg')}
         bannersubtitle={t("Make your travel whishlist, we’ll do the rest")}
-        bannertitle='Special offers to suit your plan' />
+        bannertitle={t("Special offers to suit your plan")} />
       <Container>
         <ResentSearch statusLastSearch={statusLastSearchRestaurant} locationList={restaurantLocationList}/>
         <Grid container>

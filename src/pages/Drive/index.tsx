@@ -37,7 +37,7 @@ const {t} = useTranslation()
     return (
         <>
             <Banner bgimage={banner_photo} heightprops='400px'
-                bannersubtitle='Special offers to suit your plan' bannertitle='Smart, polite, courteous drivers for customers' />
+                bannersubtitle={t("Special offers to suit your plan")} bannertitle={t("Smart, polite, courteous drivers for customers")} />
             <Container>
                 <ResentSearch statusLastSearch={statusLastSearchDriver} locationList={driverLocationList}/>
                 <Grid container>

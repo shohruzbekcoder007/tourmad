@@ -3,6 +3,7 @@ import React from 'react'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 import { GlobalParagraph } from '../../global_styles/styles'
+import { useTranslation } from 'react-i18next'
 
 type Anchor = 'left'
 
@@ -20,6 +21,7 @@ type PropsType = {
 }
 
 const ImgListDrawer:React.FC<PropsType> = ({ galeryList, name }) => {
+    const {t} = useTranslation()
     const [state, setState] = React.useState({
         left: false,
     });
@@ -71,7 +73,7 @@ const ImgListDrawer:React.FC<PropsType> = ({ galeryList, name }) => {
         <div>
             {(['left'] as const).map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button sx={{ position: "absolute", right: '16px', bottom: "16px" }} onClick={toggleDrawer("left", true)} variant='contained'>View All Photos</Button>
+                    <Button sx={{ position: "absolute", right: '16px', bottom: "16px" }} onClick={toggleDrawer("left", true)} variant='contained'>{t("View All Photos")}</Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}

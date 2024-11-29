@@ -37,7 +37,7 @@ const Hotel: React.FC = () => {
             <Banner heightprops='400px' 
             bgimage={banner_photo} 
             bannertitle={t("Make your travel whishlist, we’ll do the rest")}
-            bannersubtitle='Special offers to suit your plan'/>
+            bannersubtitle={t("Special offers to suit your plan")}/>
             <Container>
                 <ResentSearch statusLastSearch={statusLastSearchHotel} locationList={hotelLocationList}/>
                 <Grid container>
