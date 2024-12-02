@@ -5,13 +5,11 @@ import IntoTravel from '../../components/IntoTravel'
 import banner_photo from './../../media/images/banner-hotel.jpg'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Button, Grid } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getNewTripRecommendationList, getRecommendationTripNewTrip, getStatusLastSearchNewTrip } from '../../redux/slices/newTripSlice'
 
 const NewTrip: React.FC = () => {
 
-    const navigate = useNavigate();
     const dispatch = useAppDispatch()
     const {t} = useTranslation()
     const newTripRecommendationList = useAppSelector(getNewTripRecommendationList)
@@ -36,7 +34,7 @@ const NewTrip: React.FC = () => {
                         <GlobalParagraph fontSize={"16px"} mediafontsize='14px' fontWeight="400">{t("Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.")}</GlobalParagraph>
                     </Grid>
                     <Grid item xl={4} md={4} sm={6} xs={4} display='flex' justifyContent='flex-end' alignItems='center'>
-                        <Button onClick={() => navigate("/hotel-filter")} variant="outlined" >{t("See All")}</Button>
+                        <Button variant="outlined" >{t("See All")}</Button>
                     </Grid>
                 </Grid>
                 <IntoTravel link='trip' data={newTripRecommendationList} type="trip" query="trip"/>

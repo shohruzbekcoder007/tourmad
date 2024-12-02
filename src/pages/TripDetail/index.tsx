@@ -64,7 +64,6 @@ const icons: Record<string, L.Icon> = {
 
 const MyTrip: React.FC = () => {
   const location = useLocation()
-  console.log(location, "location")
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const {t} = useTranslation()
 

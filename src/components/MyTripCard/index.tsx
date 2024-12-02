@@ -73,7 +73,7 @@ const MyTripCard: React.FC<PropsType> = ({ trip }) => {
     }
 
     function navigateFunc() {
-        navigate(`/trip-detail/${trip?.id}`)
+        navigate(`/trip-detail/${trip?.id}`, {state: {query: "default"}})
     }
     
     return (
