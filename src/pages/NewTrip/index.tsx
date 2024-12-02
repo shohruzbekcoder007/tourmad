@@ -37,7 +37,7 @@ const NewTrip: React.FC = () => {
                         <Button variant="outlined" >{t("See All")}</Button>
                     </Grid>
                 </Grid>
-                <IntoTravel link='trip' data={newTripRecommendationList} type="trip" query="trip"/>
+                <IntoTravel link='trip' data={newTripRecommendationList} type="trip" query="default"/>
             </Container>
         </>
     )
