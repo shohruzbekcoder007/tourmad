@@ -14,6 +14,10 @@ let items: sublink[] = [
         to: "hotel"
     },
     {
+        name: "Trip",
+        to: "trip"
+    },
+    {
         name: "Ticket",
         to: "ticket"
     },
