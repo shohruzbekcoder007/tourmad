@@ -38,8 +38,12 @@ class TripService {
     return getRequest(`${trip_trip_drive}${id}`);
   };
 
-  static getTripDailyPlanDetail = (id: string) => {
-    return getRequest(`${trip_trip_daily_plans(id)}`)
+  static getTripDailyPlanDetail = (id: string, query?: string) => {
+    if(query) {
+      return getRequest(`${trip_trip_daily_plans(id)}?trip_type=${query}`)
+    } else {
+      return getRequest(`${trip_trip_daily_plans(id)}`)
+    }
   }
 }
 

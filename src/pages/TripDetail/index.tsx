@@ -13,7 +13,7 @@ import BannerMain from "../../components/BannerMain";
 import { GlobalParagraph } from "../../global_styles/styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getDailyPlan,
@@ -63,6 +63,8 @@ const icons: Record<string, L.Icon> = {
 };
 
 const MyTrip: React.FC = () => {
+  const location = useLocation()
+  console.log(location, "location")
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
   const {t} = useTranslation()
 
@@ -71,9 +73,15 @@ const MyTrip: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getDailyPlan(id as string));
-  }, [dispatch, id]);
-
+    const query = location?.state?.query; // Extract query from location state
+    if (query) {
+      dispatch(getDailyPlan({ id: id as string, query })); // Include query if it's not an empty string
+    } else {
+      dispatch(getDailyPlan({ id: id as string })); // Pass an object with only the id
+    }
+  }, [dispatch, id, location?.state?.query]);
+  
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 400) {

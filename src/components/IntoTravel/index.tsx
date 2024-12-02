@@ -10,11 +10,12 @@ type IntoTravelPropsType = {
     data: RecommendationType[] | null,
     daily?: boolean,
     type?: "hotel" | "restaurant" | "daily" | "trip"
-    link: string
+    link: string,
+    query?: string
 }
-const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link }) => {
+const IntoTravel: React.FC<IntoTravelPropsType> = ({ data, daily, type, link, query }) => {
     const navigate = useNavigate();
-const {t} = useTranslation()
+    const { t } = useTranslation()
     if (data) {
         return (
             <Stack pb="80px">
@@ -24,7 +25,7 @@ const {t} = useTranslation()
                         data?.map((item, index) => {
                             return (
                                 <Box
-                                    onClick={() => navigate(`/${link}-detail/${item.id}`)}
+                                    onClick={() => navigate(`/${link}-detail/${item.id}`, {state: {query: query}})}
                                     key={index}
                                     sx={{
                                         backgroundImage: `url(${item?.card})`,
@@ -54,9 +55,9 @@ const {t} = useTranslation()
                                                 <GlobalParagraph fontSize='14px' mediafontsize='12px' fontWeight='400' color='neutrals'>{item?.desc}</GlobalParagraph>
                                             </Box>
                                             {
-                                                daily?
-                                                (item?.price)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>day/ {item?.price}$</GlobalParagraph>:<></>:
-                                                (item?.room_style)?<GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price}$</GlobalParagraph>:<></>
+                                                daily ?
+                                                    (item?.price) ? <GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>day/ {item?.price}$</GlobalParagraph> : <></> :
+                                                    (item?.room_style) ? <GlobalParagraph fontSize='18px' mediafontsize='14px' fontWeight='600' color='neutrals'>{item?.room_style[0]?.price}$</GlobalParagraph> : <></>
                                             }
                                         </Box>
                                         {
@@ -65,12 +66,12 @@ const {t} = useTranslation()
                                                 hotel_id={item?.id}
                                                 addType={'hotel'}
                                                 button={<Button
-                                                        sx={{ height: "48px" }}
-                                                        fullWidth
-                                                        variant='contained'
-                                                    >
-                                                        {t("Book a hotel")}
-                                                    </Button>}
+                                                    sx={{ height: "48px" }}
+                                                    fullWidth
+                                                    variant='contained'
+                                                >
+                                                    {t("Book a hotel")}
+                                                </Button>}
                                             />
                                         }
                                         {
@@ -79,12 +80,12 @@ const {t} = useTranslation()
                                                 restaurant_id={item?.id}
                                                 addType={'restaurant'}
                                                 button={<Button
-                                                        sx={{ height: "48px" }}
-                                                        fullWidth
-                                                        variant='contained'
-                                                    >
-                                                        {t("Book a restaurant")}
-                                                    </Button>}
+                                                    sx={{ height: "48px" }}
+                                                    fullWidth
+                                                    variant='contained'
+                                                >
+                                                    {t("Book a restaurant")}
+                                                </Button>}
                                             />
                                         }
                                         {
@@ -93,12 +94,12 @@ const {t} = useTranslation()
                                                 restaurant_id={item?.id}
                                                 addType={'trip'}
                                                 button={<Button
-                                                        sx={{ height: "48px" }}
-                                                        fullWidth
-                                                        variant='contained'
-                                                    >
-                                                        {t("Book a trip")}
-                                                    </Button>}
+                                                    sx={{ height: "48px" }}
+                                                    fullWidth
+                                                    variant='contained'
+                                                >
+                                                    {t("Book a trip")}
+                                                </Button>}
                                             />
                                         }
                                     </Box>

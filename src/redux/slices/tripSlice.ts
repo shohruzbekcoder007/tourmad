@@ -41,7 +41,7 @@ export interface TripState {
     status: "idle" | "loading" | "succeeded" | "failed";
     error: string | null;
   };
-  dailyPlan : {
+  dailyPlan: {
     daily_plan: DailyPlanType | null;
     status: "idle" | "loading" | "succeeded" | "failed";
     error: string | null
@@ -199,20 +199,31 @@ export const getDriveDetail = createAsyncThunk(
   }
 );
 
-export const getDailyPlan = createAsyncThunk(
+export const getDailyPlan = createAsyncThunk<
+  DailyPlanType, // Return type
+  { id: string; query?: string }, // Argument type
+  { rejectValue: { message: string } } // Rejected value type
+>(
   "trip-daily-plan-detail",
-  async (id: string, {rejectWithValue}) => {
+  async ({ id, query }, { rejectWithValue }) => {
     try {
-      const response = await TripService.getTripDailyPlanDetail(id)
-      const daily_plan: DailyPlanType = response.data
-      return daily_plan
+      if (query) {
+        const response = await TripService.getTripDailyPlanDetail(id, query)
+        const daily_plan: DailyPlanType = response.data
+        return daily_plan
+      } else {
+        const response = await TripService.getTripDailyPlanDetail(id)
+        const daily_plan: DailyPlanType = response.data
+        return daily_plan
+      }
+
     }
     catch (error) {
       let errorMessage = "Error"
-      if(error instanceof AxiosError && error.response?.data?.message) {
+      if (error instanceof AxiosError && error.response?.data?.message) {
         errorMessage = error.response?.data?.message
       }
-      return rejectWithValue({message: errorMessage})
+      return rejectWithValue({ message: errorMessage })
     }
   }
 )
