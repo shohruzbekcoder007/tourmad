@@ -15,6 +15,7 @@ import accountSlice from "./slices/accountSlice";
 import dailySlice from "./slices/dailySlice";
 import wishListSlice from "./slices/wishListSlice";
 import newTripSlice from "./slices/newTripSlice";
+import ticketSlice from "./slices/ticketSlice";
 
 const store = configureStore({
   reducer: {
@@ -33,7 +34,8 @@ const store = configureStore({
     plan: planSlice,
     account: accountSlice,
     wishList: wishListSlice,
-    newTrip: newTripSlice
+    newTrip: newTripSlice,
+    ticket: ticketSlice,
   },
 });
 

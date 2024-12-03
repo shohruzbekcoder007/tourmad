@@ -48,18 +48,21 @@ export const consulting_detail = "consulting/detail";
 export const accounts_subscribe_create = "accounts/subscribe";
 
 export const accounts_profile = "accounts/profile/";
-export const with_google = "accounts/social_auth/google/"
+export const with_google = "accounts/social_auth/google/";
 
 export const trip_trip_drive = "trip/trip-drive/";
-export const trip_trip_daily_plans = (id: string) => `trip/trip/${id}/daily-plans`;
-export const location_daily = "common/location-hotel"
-export const recommendation_trip_daily = "trip/recommendation-trip-hotel"
+export const trip_trip_daily_plans = (id: string) =>
+  `trip/trip/${id}/daily-plans`;
+export const location_daily = "common/location-hotel";
+export const recommendation_trip_daily = "trip/recommendation-trip-hotel";
 // export const trip_daily = ""
 
-export const my_wishlist = "trip/my-wishlist"
-export const post_like = "drive/wishlist-driver"
-export const post_like_r = "trip/wishlist-restaurant"
-export const post_like_h = "history/wishlist"
-export const post_like_ht = "trip/wishlist-hotel"
-export const location_newTrip = "trip/recommendation-trip"
-export const recommendation_trip_newTrip = "trip/default-trip-list/"
+export const my_wishlist = "trip/my-wishlist";
+export const post_like = "drive/wishlist-driver";
+export const post_like_r = "trip/wishlist-restaurant";
+export const post_like_h = "history/wishlist";
+export const post_like_ht = "trip/wishlist-hotel";
+export const location_newTrip = "trip/recommendation-trip";
+export const recommendation_trip_newTrip = "trip/default-trip-list/";
+export const cheap_ticket_prices = "trip/ticket/cheap-prices/";
+export const cities_ticket = "trip/ticket/cities/";

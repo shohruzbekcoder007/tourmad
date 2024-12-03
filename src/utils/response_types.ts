@@ -73,7 +73,7 @@ export type RecommendationType = {
   rate: number | null;
   grade: number | null;
   price: number | null;
-  is_liked: boolean | null
+  is_liked: boolean | null;
 };
 
 export type CommonLocationType = {
@@ -123,7 +123,6 @@ export type MyTripDailyDriversType = {
   card: string | null;
 };
 
-
 export type HistoryOrPlaceCategryType = {
   id: number | null;
   name: string | null;
@@ -140,14 +139,14 @@ export type PlanDetailTypeCategory = {
   id: number | null;
   title: string | null;
   logo: string | null;
-  count: number | null
-}
+  count: number | null;
+};
 export type PlanDetailTypeLocation = {
   id: number | null;
   name: string | null;
   parent: number | null;
   photo: string | null;
-}
+};
 export type PlanDetailType = {
   id: number | null;
   name: string | null;
@@ -163,7 +162,7 @@ export type PlanDetailType = {
   gallery_count: number | null;
   gallery: GalleryType[] | null;
   is_liked: boolean | null;
-}
+};
 
 export type CommonLocationHistoryType = {
   id: number | null;
@@ -194,6 +193,19 @@ export type HistoryType = {
   longitude: number | null;
   gallery: GalleryType[] | null;
 };
+export type CitiesType = {
+  id: number | null;
+  created_at: string | null;
+  updated_at: string | null;
+  is_active: boolean | null;
+  name_en: string | null;
+  name_ru: string | null;
+  name_uz: string | null;
+  country_code: string | null;
+  code: string | null;
+  coordinates_lon: number | null;
+  coordinates_lat: number | null;
+};
 export type WishLocationType = {
   id: number | null;
   name: string | null;
@@ -201,7 +213,7 @@ export type WishLocationType = {
   photo: string | null;
   latitude: number | null;
   longitude: number | null;
-}
+};
 export type WishElementType = {
   id: number | null;
   location: WishLocationType | null;
@@ -223,22 +235,22 @@ export type WishElementType = {
   latitude: number | null;
   longitude: number | null;
   rate: number | null;
-  grade: number | null
-}
+  grade: number | null;
+};
 export type AutoModelType = {
-  id: number |  null;
+  id: number | null;
   name: string | null;
   status: string | null;
-}
+};
 export type AutoNumberType = {
   country: string | null;
   number: string | null;
   region: string | null;
-}
+};
 export type LanguageElemType = {
   id: number | null;
-  lang: string | null
-}
+  lang: string | null;
+};
 
 export type WishDriveUserType = {
   avatar: string | null;
@@ -248,28 +260,28 @@ export type WishDriveUserType = {
   gender: string | null;
   last_name: string | null;
   middle_name: string | null;
-}
+};
 
 export type WishElementDriverType = {
   auto_doc1: string | null;
   auto_doc2: string | null;
   auto_model: AutoModelType | null;
-auto_number: AutoNumberType | null;
-auto_photo: string | null;
-avg_rate: number | null;
-id: number | null;
-languages: LanguageElemType[] | null;
-location: WishLocationType | null;
-orders_count: number | null;
-price: string | null;
-user: WishDriveUserType | null
-}
+  auto_number: AutoNumberType | null;
+  auto_photo: string | null;
+  avg_rate: number | null;
+  id: number | null;
+  languages: LanguageElemType[] | null;
+  location: WishLocationType | null;
+  orders_count: number | null;
+  price: string | null;
+  user: WishDriveUserType | null;
+};
 export type WishHistoryCategory = {
   count: number | null;
   id: number | null;
   logo: string | null;
   title: string | null;
-}
+};
 export type WishElementHistoryType = {
   audio: string | null;
   banner: string | null;
@@ -292,7 +304,7 @@ export type WishElementHistoryType = {
   name_ru: string | null;
   name_uz: string | null;
   updated_at: string | null;
-}
+};
 export type HotelWish = {
   hotel: WishElementType | null;
 };
@@ -311,7 +323,7 @@ export type WishlistType = {
   user_restaurant_wishes: RestaurantWish[] | null;
   driver_wishes: DriverWish[] | null;
   user_trip_wishes: HistoryPlaceWish[] | null;
-}
+};
 
 export type ConsultingCategoryType = {
   id: number | null;
@@ -398,7 +410,7 @@ export type DriverType = {
   languages: Language[];
   price: number;
   orders_count: number;
-  is_liked: boolean
+  is_liked: boolean;
 };
 
 export type newUserType = {
@@ -440,11 +452,11 @@ export type DriveClientReviewType = {
 };
 
 export type DriveOrderType = {
-  driver: string | undefined,
-  start_time: string | null,
-  comment: string | null,
-  latitude: number | null,
-  longitude: number | null,
+  driver: string | undefined;
+  start_time: string | null;
+  comment: string | null;
+  latitude: number | null;
+  longitude: number | null;
 };
 
 export type HomeBannerType = {
@@ -467,7 +479,7 @@ export type RestaurantDetailType = {
   grade: number | null;
   gallery: GalleryType[] | null;
   reviews_count: number | null;
-  is_liked: boolean | null
+  is_liked: boolean | null;
 };
 
 export type RecommendationPlanType = {
