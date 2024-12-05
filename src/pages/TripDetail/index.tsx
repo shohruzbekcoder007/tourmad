@@ -13,7 +13,7 @@ import BannerMain from "../../components/BannerMain";
 import { GlobalParagraph } from "../../global_styles/styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getDailyPlan,
@@ -63,14 +63,15 @@ const icons: Record<string, L.Icon> = {
 };
 
 const MyTrip: React.FC = () => {
-  const location = useLocation()
+  const location = useLocation();
   const [topNavbar, setTopNavbar] = useState<boolean>(false);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   const { id } = useParams<{ id: string }>();
   const dailyPlans = useAppSelector(getDailyPlanDetailData);
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
+  console.log(location?.state?.query, "location?.state?.query");
   useEffect(() => {
     const query = location?.state?.query; // Extract query from location state
     if (query) {
@@ -79,8 +80,7 @@ const MyTrip: React.FC = () => {
       dispatch(getDailyPlan({ id: id as string })); // Pass an object with only the id
     }
   }, [dispatch, id, location?.state?.query]);
-  
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 400) {
@@ -98,20 +98,38 @@ const MyTrip: React.FC = () => {
   }, []);
 
   function handleClick(id: number) {
-    postRequest("order/payze/", { trip: id })
-      .then((response) => {
-        // Ensure payment_url exists and is a valid URL
-        const paymentUrl = response.data?.payment_url;
-        if (paymentUrl) {
-          console.log("Response:", response.data);
-          window.location.href = paymentUrl; // Using window.location.href for external navigation
-        } else {
-          console.error("Payment URL not found in response.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
+    if (location?.state?.query === "default") {
+      postRequest("trip/book-default-trip/", { trip_id: id })
+        .then((response) => {
+          // Ensure payment_url exists and is a valid URL
+          // const paymentUrl = response.data?.payment_url;
+          // if (paymentUrl) {
+          //   console.log("Response:", response.data);
+          //   window.location.href = paymentUrl; // Using window.location.href for external navigation
+          // } else {
+          //   console.error("Payment URL not found in response.");
+          // }
+          navigate("/my-trip");
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+        });
+    } else {
+      postRequest("order/payze/", { trip: id })
+        .then((response) => {
+          // Ensure payment_url exists and is a valid URL
+          const paymentUrl = response.data?.payment_url;
+          if (paymentUrl) {
+            console.log("Response:", response.data);
+            window.location.href = paymentUrl; // Using window.location.href for external navigation
+          } else {
+            console.error("Payment URL not found in response.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+        });
+    }
   }
   return (
     <>
@@ -127,7 +145,9 @@ const MyTrip: React.FC = () => {
       </HeaderWrapper>
       <BannerMain
         bgimage={banner_trip}
-        bannersubtitle={t("Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul.")}
+        bannersubtitle={t(
+          "Embark on a Journey of Discovery! Explore, Experience, and Enrich Your Soul."
+        )}
         bannertitle={t("Join Us on an Unforgettable Adventure!")}
         heightprops="400px"
       />
@@ -234,7 +254,8 @@ const MyTrip: React.FC = () => {
                   >
                     {t("What is this trip about?")}
                   </GlobalParagraph>
-                  {(dailyPlans.daily_plan?.is_paid && dailyPlans.daily_plan?.price !== "0") ? (
+                  {dailyPlans.daily_plan?.is_paid &&
+                  dailyPlans.daily_plan?.price !== "0" ? (
                     <GlobalParagraph
                       fontSize="24px"
                       mediafontsize="16px"
@@ -242,14 +263,22 @@ const MyTrip: React.FC = () => {
                     >
                       {t("Payment made")}
                     </GlobalParagraph>
-                  ) : dailyPlans.daily_plan?.price === "0" ? <span></span> : (
+                  ) : dailyPlans.daily_plan?.price === "0" ? (
+                    <span></span>
+                  ) : (
                     <Button
                       onClick={() =>
                         handleClick(dailyPlans.daily_plan?.id as number)
                       }
                       variant="contained"
                     >
-                      {dailyPlans.daily_plan?.price === "0" ? <span></span> : `$${dailyPlans.daily_plan?.price}`}
+                      {dailyPlans.daily_plan?.price === "0" ? (
+                        <span></span>
+                      ) : location?.state?.query === "default" ? (
+                        "Book now"
+                      ) : (
+                        `$${dailyPlans.daily_plan?.price}`
+                      )}
                     </Button>
                   )}
                 </Box>
