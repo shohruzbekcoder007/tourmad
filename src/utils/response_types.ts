@@ -206,6 +206,14 @@ export type CitiesType = {
   coordinates_lon: number | null;
   coordinates_lat: number | null;
 };
+export type CheapPriseType = {
+  airline: string | null;
+  departure_at: string | null;
+  return_at: string | null;
+  expires_at: string | null;
+  price: number | null;
+  flight_number: number | null
+}
 export type WishLocationType = {
   id: number | null;
   name: string | null;
