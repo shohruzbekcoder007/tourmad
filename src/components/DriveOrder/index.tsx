@@ -89,13 +89,13 @@ const DriveOrder: React.FC<PropsType> = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(driverOrderCreate, "<---driverOrderCreate")
     if (driverOrderMessage && driverOrderMessage !== "Loading") {
       enqueueSnackbar(driverOrderMessage, { variant: "error" });
       dispatch(deviderClear());
     } else if(driverOrderCreate){
       enqueueSnackbar("Order is created", { variant: "success" });
     }
+    setState({ ...state, right: false });
   }, [driverOrderMessage, driverOrderCreate]);
 
   const toggleDrawer =
