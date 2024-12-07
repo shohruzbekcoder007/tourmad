@@ -1,5 +1,5 @@
 import { Paper, Stack, Box, Button, Divider, Tabs, Tab } from "@mui/material";
-import { CustomAutocomplete } from "../../helper_components";
+import { CustomAutocomplete, ScrollPaginationAutoComlate } from "../../helper_components";
 import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import TravelFilterCard from "../TravelFilterCard";
@@ -19,6 +19,8 @@ import {
   setToCity,
 } from "../../redux/slices/ticketSlice";
 import dayjs, { Dayjs } from "dayjs";
+import { resolve } from "path";
+import TicketService from "../../services/TicketService";
 
 type Option = {
   label: string;
@@ -26,6 +28,7 @@ type Option = {
 };
 
 const TravelFilters: React.FC = () => {
+
   const dispatch = useAppDispatch();
   const ticketCitiesList = useAppSelector(getCitiesList);
   const statusCities = useAppSelector(getTicketStatus);
@@ -67,6 +70,26 @@ const TravelFilters: React.FC = () => {
     }
   };
 
+  const getOptions = async ({ search, page }: { search: string; page: number }) => {
+    try {
+      const response = await TicketService.getTicket({ search, page }); // API uchun kerakli query parametrlari
+      return {
+        results: response.data.results.map((item: any) => ({
+          id: item.code,
+          name: item.name_en,
+        })),
+        next: response.data.next, // Agar sahifalash mavjud bo'lsa
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        results: [],
+        next: null,
+      };
+    }
+  };
+  
+
   return (
     <Stack>
       <Paper
@@ -89,7 +112,7 @@ const TravelFilters: React.FC = () => {
             mt="16px"
             minWidth={{ xl: "300px", md: "200px", sm: "100%", xs: "100%" }}
           >
-            <CustomAutocomplete
+            {/* <CustomAutocomplete
               options={ticketCitiesList?.map((city) => ({
                 label: city.name_en ?? "",
                 value: city.code ?? "",
@@ -116,6 +139,16 @@ const TravelFilters: React.FC = () => {
                   </g>
                 </svg>
               }
+            /> */}
+            <ScrollPaginationAutoComlate 
+              options={[
+                {id: "1", name: "Option 1"},
+                {id : "2", name: "Option 2"},
+              ]} 
+              getOptions={getOptions}
+              TextFieldProps={{
+                label: 'Search Options',
+              }}
             />
           </Box>
           <Box
