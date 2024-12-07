@@ -71,7 +71,6 @@ const MyTrip: React.FC = () => {
   const dailyPlans = useAppSelector(getDailyPlanDetailData);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log(location?.state?.query, "location?.state?.query");
   useEffect(() => {
     const query = location?.state?.query; // Extract query from location state
     if (query) {

@@ -28,14 +28,20 @@ import { GlobalParagraph } from "../../global_styles/styles";
 import TravelFilterCard from "../TravelFilterCard";
 import FilterDrawerTrip from "../FilterDrawerTrip";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
+import {
+  DatePicker,
+} from "@mui/x-date-pickers";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getCitiesList,
   getCitiesTicketList,
+  getDate,
   getTicketStatus,
+  setDate,
+  setFromCity,
+  setToCity,
 } from "../../redux/slices/ticketSlice";
+import dayjs, { Dayjs } from "dayjs";
 
 const MAX = 1200;
 const MIN = 50;
@@ -50,6 +56,11 @@ const marks = [
   },
 ];
 
+type Option = {
+  label: string;
+  value: string;
+};
+
 function valuetext(value: number) {
   return `${value}°C`;
 }
@@ -58,6 +69,7 @@ const TravelFilters: React.FC = () => {
   const dispatch = useAppDispatch();
   const ticketCitiesList = useAppSelector(getCitiesList);
   const statusCities = useAppSelector(getTicketStatus);
+  const date = useAppSelector(getDate);
   const { t } = useTranslation();
   const [openPrice, setOpenPrice] = React.useState(true);
   const [openTime, setOpenTime] = React.useState(true);
@@ -75,8 +87,6 @@ const TravelFilters: React.FC = () => {
       dispatch(getCitiesTicketList());
     }
   }, [statusCities, dispatch]);
-
-  console.log(ticketCitiesList, "ticketCitiesList");
 
   const handleChangeSort = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -136,6 +146,25 @@ const TravelFilters: React.FC = () => {
     setOpenTrips(!openTrips);
   };
 
+  const handleFromChange = (selectedOption: Option | null) => {
+    if (selectedOption !== null) {
+      dispatch(setFromCity(selectedOption)); // selectedOption is guaranteed to be an object here
+    }
+  };
+
+  const handleToChange = (selectedOption: Option | null) => {
+    if (selectedOption !== null) {
+      dispatch(setToCity(selectedOption)); // selectedOption is guaranteed to be an object here
+    }
+  };
+
+  const handleDateChange = (newValue: Dayjs | null) => {
+    if (newValue) {
+      const formattedDate = newValue.format("D/M/YYYY");
+      dispatch(setDate(formattedDate));
+    }
+  };
+
   return (
     <Stack>
       <Paper
@@ -164,7 +193,7 @@ const TravelFilters: React.FC = () => {
                 value: city.country_code ?? "",
               }))}
               placeholder={t("From")}
-              getChange={() => console.log("nimad")}
+              getChange={handleFromChange}
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +226,7 @@ const TravelFilters: React.FC = () => {
                 value: city.country_code ?? "",
               }))}
               placeholder={t("To")}
-              getChange={() => console.log("ksjdn")}
+              getChange={handleToChange}
               icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -226,9 +255,10 @@ const TravelFilters: React.FC = () => {
           >
             <DatePicker
               label="Date Picker"
-              format="M/D/YYYY"
-              defaultValue={dayjs(Date.now())}
+              format="D/M/YYYY"
+              defaultValue={dayjs(date)}
               slotProps={{ field: { shouldRespectLeadingZeros: true } }}
+              onChange={handleDateChange}
             />
           </Box>
           <Box

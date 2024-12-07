@@ -3,11 +3,15 @@ import { CitiesType } from "../../utils/response_types";
 import TicketService from "../../services/TicketService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
+import dayjs, { Dayjs } from "dayjs";
 
 export interface TicketState {
   statusCitiesList: "idle" | "loading" | "succeeded" | "failed";
   loading: boolean;
   message: string;
+  fromCity: { label: string; value: string } | null;
+  toCity: { label: string; value: string } | null;
+  date: Dayjs;
   showMessage: boolean;
   citiesList: CitiesType[];
   error: null;
@@ -17,6 +21,9 @@ const initialState: TicketState = {
   statusCitiesList: "idle",
   loading: false,
   message: "",
+  fromCity: null,
+  toCity: null,
+  date: dayjs(Date.now()),
   showMessage: false,
   citiesList: [],
   error: null,
@@ -42,7 +49,17 @@ export const getCitiesTicketList = createAsyncThunk(
 export const ticketSlice = createSlice({
   name: "ticket",
   initialState,
-  reducers: {},
+  reducers: {
+    setFromCity: (state, action) => {
+      state.fromCity = action.payload; // Save selected city in the state
+    },
+    setToCity: (state, action) => {
+      state.toCity = action.payload; // Save selected city in the state
+    },
+    setDate: (state, action) => {
+      state.date = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCitiesTicketList.pending, (state) => {
@@ -57,7 +74,10 @@ export const ticketSlice = createSlice({
       });
   },
 });
+
+export const { setFromCity, setToCity, setDate } = ticketSlice.actions;
 export const getCitiesList = (state: RootState) => state.ticket.citiesList;
 export const getTicketStatus = (state: RootState) =>
   state.ticket.statusCitiesList;
+export const getDate = (state: RootState) => state.ticket.date
 export default ticketSlice.reducer;
