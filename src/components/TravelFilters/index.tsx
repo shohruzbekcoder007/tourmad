@@ -33,6 +33,7 @@ import {
 } from "@mui/x-date-pickers";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  getCheapTicketDataList,
   getCheapTicketList,
   getCitiesList,
   getCitiesTicketList,
@@ -70,6 +71,7 @@ const TravelFilters: React.FC = () => {
   const dispatch = useAppDispatch();
   const ticketCitiesList = useAppSelector(getCitiesList);
   const statusCities = useAppSelector(getTicketStatus);
+  const cheapTicketList = useAppSelector(getCheapTicketDataList)
   const date = useAppSelector(getDate);
   const { t } = useTranslation();
   const [openPrice, setOpenPrice] = React.useState(true);
@@ -601,7 +603,7 @@ const TravelFilters: React.FC = () => {
               </FormControl>
             </Box>
           </Box>
-          <TravelFilterCard />
+          <TravelFilterCard data={cheapTicketList}/>
           <Box display="flex" justifyContent="flex-end">
             <Button sx={{ width: "792px" }} color="success" variant="contained">
               {t("Show more results")}
