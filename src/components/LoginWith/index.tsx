@@ -1,7 +1,6 @@
 import { Avatar, Box, Button } from "@mui/material";
 import facebook from "./../../media/images/facebook.svg";
 import google from "./../../media/images/google.svg";
-import apple from "./../../media/images/apple.svg";
 import React from "react";
 import { host } from "../../utils/API_urls";
 
