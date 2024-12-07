@@ -1,5 +1,5 @@
-import { Button, Stack, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Button, Stack, TextField } from "@mui/material";
 import { GlobalParagraph } from "../../global_styles/styles";
 import { BoxStyle } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -10,6 +10,7 @@ import {
   putChanges,
 } from "../../redux/slices/userSlice";
 import { useTranslation } from "react-i18next";
+import { enqueueSnackbar } from "notistack";
 
 const UserAccounts: React.FC = () => {
   const { t } = useTranslation();
@@ -17,23 +18,33 @@ const UserAccounts: React.FC = () => {
   const statusUserInfo = useAppSelector(getUserStatus);
   const userInfo = useAppSelector(getAccountInfo);
   const [postData, setPostData] = useState({
-    first_name: userInfo?.first_name || "",
-    last_name: userInfo?.last_name || "",
-    middle_name: userInfo?.middle_name || "",
-    gender: userInfo?.gender || "",
-    birth_date: userInfo?.birth_date || "",
-    phone_number: userInfo?.phone_number || "",
+    first_name: "",
+    last_name: "",
+    middle_name: "",
+    gender: "",
+    birth_date: "",
+    phone_number: "",
   });
 
   useEffect(() => {
+    // Redux orqali user ma'lumotlarini yuklash
     if (statusUserInfo === "idle") {
-      dispatch(getAccount())
-    };
-  }, [statusUserInfo,  dispatch]);
-  
-  
+      dispatch(getAccount());
+    }
+  }, [statusUserInfo, dispatch]);
+
   useEffect(() => {
-    if (!userInfo) {
+    // Redux'dan userInfo kelganda postData ni yangilash
+    if (userInfo) {
+      setPostData({
+        first_name: userInfo.first_name || "",
+        last_name: userInfo.last_name || "",
+        middle_name: userInfo.middle_name || "",
+        gender: userInfo.gender || "",
+        birth_date: userInfo.birth_date || "",
+        phone_number: userInfo.phone_number || "",
+      });
+    } else {
       dispatch(getAccount());
     }
   }, [userInfo, dispatch]);
@@ -47,11 +58,15 @@ const UserAccounts: React.FC = () => {
       .unwrap()
       .then(() => {
         console.log("Changes saved successfully!");
-        // Optionally show a success message or update UI state
+        enqueueSnackbar("Changes saved successfully!", { variant: "success" });
+        // Success xabarini ko'rsatish mumkin
       })
       .catch((error: any) => {
         console.error("Failed to save changes:", error.message);
-        // Optionally show an error message
+        enqueueSnackbar(`"Failed to save changes:", ${error.message}`, {
+          variant: "error",
+        });
+        // Xatolik xabarini ko'rsatish mumkin
       });
   };
 
@@ -61,160 +76,45 @@ const UserAccounts: React.FC = () => {
         {t("Account")}
       </GlobalParagraph>
       <BoxStyle>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
+        {[
+          { label: "First name", field: "first_name" },
+          { label: "Last name", field: "last_name" },
+          { label: "Middle name", field: "middle_name" },
+          { label: "Phone Number", field: "phone_number" },
+          { label: "Gender", field: "gender" },
+          { label: "Date of Birth", field: "birth_date" },
+        ].map(({ label, field }) => (
+          <Stack
+            pb="32px"
+            width="100%"
+            display="flex"
+            flexWrap="wrap"
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            key={field}
+          >
+            <TextField
+              id={`outlined-${field}`}
+              label={label}
+              value={postData[field as keyof typeof postData]}
+              sx={{ width: "350px" }}
+              onChange={(e) => handleChange(field, e.target.value)}
+            />
+          </Stack>
+        ))}
+        <Stack pb="32px" width="100%">
           <TextField
-            id="outlined-read-only-input"
-            label="First name"
-            sx={{ width: "350px" }}
-            defaultValue={postData?.first_name}
-            onChange={(e) => handleChange("first_name", e.target.value)}
-          />
-        </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
-            label="Last name"
-            sx={{ width: "350px" }}
-            defaultValue={userInfo?.last_name}
-            onChange={(e) => handleChange("last_name", e.target.value)}
-          />
-        </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
-            label="Middle name"
-            sx={{ width: "350px" }}
-            defaultValue={userInfo?.middle_name}
-            onChange={(e) => handleChange("middle_name", e.target.value)}
-          />
-        </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
+            id="outlined-email"
             label="Email"
+            value={userInfo?.email || ""}
             sx={{ width: "350px" }}
-            value={`${userInfo?.email}`}
+            InputProps={{ readOnly: true }}
           />
         </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
-            label="Phone Number"
-            defaultValue={`${userInfo?.phone_number}`}
-            sx={{ width: "350px" }}
-            onChange={(e) => handleChange("phone_number", e.target.value)}
-          />
-        </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
-            label="Date of brith"
-            defaultValue={`${userInfo?.gender}`}
-            sx={{ width: "350px" }}
-            onChange={(e) => handleChange("gender", e.target.value)}
-          />
-        </Stack>
-        <Stack
-          pb="32px"
-          width="100%"
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent={{
-            xl: "space-between",
-            md: "space-between",
-            sm: "space-between",
-            xs: "flex-end",
-          }}
-          alignItems="center"
-        >
-          <TextField
-            id="outlined-read-only-input"
-            label="Date of brith"
-            defaultValue={`${userInfo?.birth_date}`}
-            sx={{ width: "350px" }}
-            onChange={(e) => handleChange("birth_date", e.target.value)}
-          />
-        </Stack>
-      <Button onClick={handleSave} variant="outlined">Save Changes</Button>
+        <Button onClick={handleSave} variant="outlined">
+          Save Changes
+        </Button>
       </BoxStyle>
     </Stack>
   );
