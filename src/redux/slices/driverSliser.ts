@@ -196,7 +196,7 @@ export const getOrderCreateAction = createAsyncThunk('order-create',
     async (data: {orderCreate: DriveOrderType}, { rejectWithValue }) => {
         try {
             const response = await DriverService.getDriverOrderCrete(data.orderCreate);
-            const order_create: DriveOrderType = response.data?.results;
+            const order_create: DriveOrderType = response.data;
             return order_create;
         } catch (error) {
             let errorMessage = 'Error';
@@ -251,6 +251,13 @@ export const driverSlice = createSlice({
             state.searchLanguage = action.payload
             state.driverCurrentPage = 1
             state.statusDriverList = "idle"
+        },
+        deviderClear: (state) => {
+            state.driverOrder = {
+                driverOrderCreate:  null,
+                driverOrderLoading: false,
+                driverOrderMessage: ""
+            }
         }
     },
     extraReducers: (builder) => {
@@ -338,18 +345,20 @@ export const driverSlice = createSlice({
                         state.driverOrder.driverOrderMessage = "Loading"
                     })
                     .addCase(getOrderCreateAction.fulfilled, (state, action) => {
+                        console.log(action.payload, "action.payload");
                         state.driverOrder.driverOrderCreate = action.payload;
                         state.driverOrder.driverOrderLoading = false;
                         state.driverOrder.driverOrderMessage = "";
                     })
                     .addCase(getOrderCreateAction.rejected, (state, _) => {
                         state.driverOrder.driverOrderMessage = "Driver is busy";
+                        state.driverOrder.driverOrderCreate = null;
                     })
     }
 })
 
 // export const { } = driverSlice.actions
-export const {changeGrade, changePriceFrom, changePriceTo, changeSearchLanguage, changeSearchLocation, changePage, changeDriversStyle, changeReviewPage} = driverSlice.actions
+export const {changeGrade, changePriceFrom, changePriceTo, changeSearchLanguage, deviderClear, changeSearchLocation, changePage, changeDriversStyle, changeReviewPage} = driverSlice.actions
 
 
 export const getStatusLastRecommendationDriver = (state: RootState) => state.driver.statusLastRecommendationDriver;
