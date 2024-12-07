@@ -3,7 +3,6 @@ import { CustomAutocomplete } from "../../helper_components";
 import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import TravelFilterCard from "../TravelFilterCard";
-import FilterDrawerTrip from "../FilterDrawerTrip";
 import { useTranslation } from "react-i18next";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -193,9 +192,6 @@ const TravelFilters: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <Box display={{ xl: "none", md: "none", sm: "block", xs: "block" }}>
-              <FilterDrawerTrip />
-            </Box>
             <Tabs
               value={valueTab}
               sx={{
@@ -233,8 +229,8 @@ const TravelFilters: React.FC = () => {
             pb="24px"
           ></Box>
           <TravelFilterCard data={cheapTicketList} />
-          <Box display="flex" justifyContent="flex-end">
-            <Button sx={{ width: "792px" }} color="success" variant="contained">
+          <Box display="flex" justifyContent="center">
+            <Button sx={{ width: "50%" }} color="success" variant="contained">
               {t("Show more results")}
             </Button>
           </Box>
