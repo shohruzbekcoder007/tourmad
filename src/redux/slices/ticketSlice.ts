@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CitiesType } from "../../utils/response_types";
+import { CheapPriseType, CitiesType } from "../../utils/response_types";
 import TicketService from "../../services/TicketService";
 import { AxiosError } from "axios";
 import { RootState } from "../store";
 import dayjs, { Dayjs } from "dayjs";
+import { enqueueSnackbar } from "notistack";
 
 export interface TicketState {
   statusCitiesList: "idle" | "loading" | "succeeded" | "failed";
+  statusCheapTicketList: "idle" | "loading" | "succeeded" | "failed";
+  cheapTicketList: CheapPriseType[];
   loading: boolean;
   message: string;
   fromCity: { label: string; value: string } | null;
@@ -19,6 +22,8 @@ export interface TicketState {
 
 const initialState: TicketState = {
   statusCitiesList: "idle",
+  statusCheapTicketList: "idle",
+  cheapTicketList: [],
   loading: false,
   message: "",
   fromCity: null,
@@ -34,12 +39,40 @@ export const getCitiesTicketList = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await TicketService.citiesTicket();
-      const cities_list: CitiesType[] = response.data;
+      const cities_list: CitiesType[] = response.data.results;
       return cities_list;
     } catch (error) {
       let errorMessage = "Error";
       if (error instanceof AxiosError && error.response?.data?.message) {
         errorMessage = error.response.data.message;
+      }
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
+export const getCheapTicketList = createAsyncThunk(
+  "get-cheap-ticket-list",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const state = getState() as RootState;
+      const fromCity = state.ticket.fromCity?.value;
+      const toCity = state.ticket.toCity?.value;
+      const date = state.ticket.date.format("YYYY-MM-DD");
+      console.log('Request parameters:', fromCity, toCity, date);  // Log parameters
+
+      if (!fromCity || !toCity) {
+        throw new Error("From city and To city are required.");
+      }
+      const query = `origin=${fromCity}&destination=${toCity}&depart_date=${date}`;
+      const response = await TicketService.cheapTicket(query);
+      const cheap_ticket_list: CheapPriseType[] = response.data;
+      return cheap_ticket_list;
+    } catch (error) {
+      let errorMessage = "Error";
+      if (error instanceof AxiosError && error.response?.data?.message) {
+        errorMessage = error.response.data.error;
+        enqueueSnackbar(errorMessage, {variant: "error"})
       }
       return rejectWithValue({ message: errorMessage });
     }
@@ -57,8 +90,8 @@ export const ticketSlice = createSlice({
       state.toCity = action.payload; // Save selected city in the state
     },
     setDate: (state, action) => {
-      state.date = action.payload
-    }
+      state.date = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -71,6 +104,17 @@ export const ticketSlice = createSlice({
       })
       .addCase(getCitiesTicketList.rejected, (state, _) => {
         state.statusCitiesList = "failed";
+      })
+
+      .addCase(getCheapTicketList.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(getCheapTicketList.fulfilled, (state, action) => {
+        state.statusCheapTicketList = "succeeded";
+        state.cheapTicketList = action.payload;
+      })
+      .addCase(getCheapTicketList.rejected, (state, _) => {
+        state.statusCheapTicketList = "failed";
       });
   },
 });
@@ -79,5 +123,9 @@ export const { setFromCity, setToCity, setDate } = ticketSlice.actions;
 export const getCitiesList = (state: RootState) => state.ticket.citiesList;
 export const getTicketStatus = (state: RootState) =>
   state.ticket.statusCitiesList;
-export const getDate = (state: RootState) => state.ticket.date
+export const getStatusCheapTicketList = (state: RootState) =>
+  state.ticket.statusCheapTicketList;
+export const getCheapTicketDataList = (state: RootState) =>
+  state.ticket.cheapTicketList;
+export const getDate = (state: RootState) => state.ticket.date;
 export default ticketSlice.reducer;

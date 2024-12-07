@@ -33,6 +33,7 @@ import {
 } from "@mui/x-date-pickers";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  getCheapTicketList,
   getCitiesList,
   getCitiesTicketList,
   getDate,
@@ -88,6 +89,10 @@ const TravelFilters: React.FC = () => {
     }
   }, [statusCities, dispatch]);
 
+  function handleTicketsFunc () {
+      dispatch(getCheapTicketList());
+  }
+  
   const handleChangeSort = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
@@ -165,6 +170,8 @@ const TravelFilters: React.FC = () => {
     }
   };
 
+
+
   return (
     <Stack>
       <Paper
@@ -190,7 +197,7 @@ const TravelFilters: React.FC = () => {
             <CustomAutocomplete
               options={ticketCitiesList?.map((city) => ({
                 label: city.name_en ?? "",
-                value: city.country_code ?? "",
+                value: city.code ?? "",
               }))}
               placeholder={t("From")}
               getChange={handleFromChange}
@@ -223,7 +230,7 @@ const TravelFilters: React.FC = () => {
             <CustomAutocomplete
               options={ticketCitiesList?.map((city) => ({
                 label: city.name_en ?? "",
-                value: city.country_code ?? "",
+                value: city.code ?? "",
               }))}
               placeholder={t("To")}
               getChange={handleToChange}
@@ -265,7 +272,7 @@ const TravelFilters: React.FC = () => {
             mt="16px"
             width={{ xl: "56px", md: "100%", sm: "100%", xs: "100%" }}
           >
-            <Button sx={{ height: "56px" }} fullWidth variant="contained">
+            <Button sx={{ height: "56px" }} fullWidth variant="contained" onClick={handleTicketsFunc}>
               <SearchIcon />
             </Button>
           </Box>
