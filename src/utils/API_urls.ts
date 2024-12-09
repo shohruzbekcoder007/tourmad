@@ -66,3 +66,4 @@ export const location_newTrip = "trip/recommendation-trip";
 export const recommendation_trip_newTrip = "trip/default-trip-list/";
 export const cheap_ticket_prices = "trip/ticket/cheap-prices/";
 export const cities_ticket = "trip/ticket/cities/";
+export const accounts_register = "accounts/register/";

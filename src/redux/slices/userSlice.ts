@@ -75,6 +75,23 @@ export const logOut = createAsyncThunk('logout', async (_, { rejectWithValue }) 
     }
 })
 
+
+export const userRegistration = createAsyncThunk("user-registration",
+    async (data: any, { rejectWithValue }) => {
+        try {
+            const response = await UserService.userRegistration(data);
+            return response.data;
+        }
+        catch (error) {
+            let errorMessage = 'Error';
+            if (error instanceof AxiosError && error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            }
+            return rejectWithValue({ message: errorMessage });
+        }
+    }
+)
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -127,6 +144,23 @@ export const userSlice = createSlice({
                 state.status = "failed"
                 // state.error = action.payload?.message || 'Failed to log out';
             })
+            .addCase(userRegistration.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.status = "loading"
+            })
+            .addCase(userRegistration.fulfilled, (state, action: PayloadAction<UserType>) => {
+                state.loading = false
+                let user = action?.payload
+                state.user = user
+                state.status = "succeeded"
+            })
+            .addCase(userRegistration.rejected, (state, action) => {
+                state.loading = false
+                state.status = "failed"
+                // state.error = action.payload?.message || 'Failed to register user';
+            })
+
     }
 })
 
