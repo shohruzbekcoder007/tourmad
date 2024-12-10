@@ -18,6 +18,7 @@ export interface TicketState {
   showMessage: boolean;
   citiesList: CitiesType[];
   error: null;
+  errorGetTicket: string | null;
 }
 
 const initialState: TicketState = {
@@ -32,6 +33,7 @@ const initialState: TicketState = {
   showMessage: false,
   citiesList: [],
   error: null,
+  errorGetTicket: ""
 };
 
 export const getCitiesTicketList = createAsyncThunk(
@@ -51,7 +53,11 @@ export const getCitiesTicketList = createAsyncThunk(
   }
 );
 
-export const getCheapTicketList = createAsyncThunk(
+export const getCheapTicketList = createAsyncThunk<
+CheapPriseType[], // Type of returned data on success
+void,             // No arguments expected when calling the thunk
+{ rejectValue: { message: string } } // Type of rejected value
+>(
   "get-cheap-ticket-list",
   async (_, { getState, rejectWithValue }) => {
     try {
@@ -69,10 +75,11 @@ export const getCheapTicketList = createAsyncThunk(
       const cheap_ticket_list: CheapPriseType[] = response.data;
       return cheap_ticket_list;
     } catch (error) {
+      console.log(error);
       let errorMessage = "Error";
-      if (error instanceof AxiosError && error.response?.data?.message) {
+      if (error instanceof AxiosError && error.response?.data?.error) {
         errorMessage = error.response.data.error;
-        enqueueSnackbar(errorMessage, {variant: "error"})
+        enqueueSnackbar(errorMessage, { variant: "error" });
       }
       return rejectWithValue({ message: errorMessage });
     }
@@ -113,8 +120,9 @@ export const ticketSlice = createSlice({
         state.statusCheapTicketList = "succeeded";
         state.cheapTicketList = action.payload;
       })
-      .addCase(getCheapTicketList.rejected, (state, _) => {
+      .addCase(getCheapTicketList.rejected, (state, action) => {
         state.statusCheapTicketList = "failed";
+        state.errorGetTicket = action.payload?.message || null;
       });
   },
 });
@@ -128,4 +136,5 @@ export const getStatusCheapTicketList = (state: RootState) =>
 export const getCheapTicketDataList = (state: RootState) =>
   state.ticket.cheapTicketList;
 export const getDate = (state: RootState) => state.ticket.date;
+export const getErrorGetTicket = (state: RootState ) => state.ticket.errorGetTicket
 export default ticketSlice.reducer;

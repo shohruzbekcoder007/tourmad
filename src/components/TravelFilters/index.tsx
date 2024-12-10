@@ -12,12 +12,14 @@ import {
   getCitiesList,
   getCitiesTicketList,
   getDate,
+  getErrorGetTicket,
   getTicketStatus,
   setDate,
   setFromCity,
   setToCity,
 } from "../../redux/slices/ticketSlice";
 import dayjs, { Dayjs } from "dayjs";
+import { enqueueSnackbar } from "notistack";
 
 type Option = {
   label: string;
@@ -29,6 +31,7 @@ const TravelFilters: React.FC = () => {
   const ticketCitiesList = useAppSelector(getCitiesList);
   const statusCities = useAppSelector(getTicketStatus);
   const cheapTicketList = useAppSelector(getCheapTicketDataList);
+  const ErrorGetTicket = useAppSelector(getErrorGetTicket)
   const date = useAppSelector(getDate);
   const { t } = useTranslation();
   const [valueTab, setValueTab] = React.useState(0);
@@ -41,6 +44,9 @@ const TravelFilters: React.FC = () => {
 
   function handleTicketsFunc() {
     dispatch(getCheapTicketList());
+    if(ErrorGetTicket) {
+      enqueueSnackbar(ErrorGetTicket, {variant: "error"})
+    }
   }
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
