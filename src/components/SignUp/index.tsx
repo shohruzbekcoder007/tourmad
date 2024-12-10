@@ -6,9 +6,48 @@ import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_style
 import LoginWith from '../LoginWith';
 import LoginCarousel from '../LoginCarousel';
 import {useNavigate} from "react-router-dom";
+import { enqueueSnackbar } from 'notistack';
+import { useAppDispatch } from '../../redux/hooks';
+import { registerUser } from '../../redux/slices/userSlice';
 
 const SignUp: React.FC = () => {
+
   let navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    let info_data = {
+      email: data.get('email'),
+      password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      phone: data.get('phone'),
+      confirmPassword: data.get('confirmPassword'),
+    }
+    if (info_data.password == info_data.confirmPassword) {
+      dispatch(registerUser({
+        first_name: info_data.firstName,
+        last_name: info_data.lastName,
+        email: info_data.email,
+        password: info_data.password,
+        phone_number: info_data.phone,
+        password_confirmation: info_data.confirmPassword,
+        role: "user"
+      }))
+    }else{
+      enqueueSnackbar("Kalit so'zda mostlik yo'q. Iltimos ma'lumotlarni tekshirib qayta urinib ko'ring", { variant: "info" });
+    }
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      phone: data.get('phone'),
+      confirmPassword: data.get('confirmPassword'),
+    })
+  }
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
       <Box display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>      
@@ -24,42 +63,31 @@ const SignUp: React.FC = () => {
             <GlobalParagraph fontSize='16px' paddingbottom='48px' fontWeight='400' oposity='0.75'>
               Let’s get you all st up so you can access your personal account.
             </GlobalParagraph>
-            <Box>
-              <FormControl fullWidth>
-                <FormGroup sx={{pb: '24px', display: 'flex', flexDirection: "row", justifyContent: "space-between"}}>
-                  <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}, pb: {xl: 0, md: 0, sm: 0, xs: "24px"}}} type='text' label='First Name' variant='outlined'></TextField>
-                  <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}}} type='text' label='Last Name' variant='outlined'></TextField>
-                </FormGroup>
-                <FormGroup sx={{pb: '24px', display: 'flex', flexDirection: "row", justifyContent: "space-between"}}>
-                  <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}, pb: {xl: 0, md: 0, sm: 0, xs: "24px"}}} type='text' label='Email' variant='outlined'></TextField>
-                  <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}}} type='email' label='Phone Number' variant='outlined'></TextField>
-                </FormGroup>
-                <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='password' label='Password' variant='outlined'></TextField>
-                </FormGroup>
-                <FormGroup sx={{pb: '24px'}}>
-                  <TextField type='password' label='Confirm Password' variant='outlined'></TextField>
-                </FormGroup>
-                <FormGroup sx={{pb: '40px', display: "flex", flexDirection: 'row', gap: '5px', alignItems: 'center', justifyContent: "flex-start"}}>
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="I agree to all the"
-                  />
-                  {/*<GlobalLink fontSize='15px' fontWeight='500'>*/}
-                  {/*  Terms*/}
-                  {/*</GlobalLink>*/}
-                  {/* and */}
-                  {/*<GlobalLink fontSize='15px' fontWeight='500'>*/}
-                  {/*  Privacy Policies*/}
-                  {/*</GlobalLink>*/}
-                </FormGroup>
-              </FormControl>
-            </Box>
-            <Box pb='16px'>
-              <Button fullWidth variant='contained'>
-                Create Account
-              </Button>
-            </Box>
+            <form onSubmit={handleSubmit}>
+              <Box>
+                <FormControl fullWidth>
+                  <FormGroup sx={{pb: '24px', display: 'flex', flexDirection: "row", justifyContent: "space-between"}}>
+                    <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}, pb: {xl: 0, md: 0, sm: 0, xs: "24px"}}} type='text' label='First Name' variant='outlined' name="firstName"></TextField>
+                    <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}}} type='text' label='Last Name' variant='outlined' name="lastName"></TextField>
+                  </FormGroup>
+                  <FormGroup sx={{pb: '24px', display: 'flex', flexDirection: "row", justifyContent: "space-between"}}>
+                    <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}, pb: {xl: 0, md: 0, sm: 0, xs: "24px"}}} type='text' label='Email' variant='outlined' name="email"></TextField>
+                    <TextField sx={{width: {xl: "310px", md: '48%', sm: "48%", xs: "100%"}}} type='phone' label='Phone Number' variant='outlined' name="phone"></TextField>
+                  </FormGroup>
+                  <FormGroup sx={{pb: '24px'}}>
+                    <TextField type='password' label='Password' variant='outlined' name="password"></TextField>
+                  </FormGroup>
+                  <FormGroup sx={{pb: '24px'}}>
+                    <TextField type='password' label='Confirm Password' variant='outlined' name="confirmPassword"></TextField>
+                  </FormGroup>
+                </FormControl>
+              </Box>
+              <Box pb='16px'>
+                <Button fullWidth variant='contained' type="submit">
+                  Create Account
+                </Button>
+              </Box>
+            </form>
             <Box mb='40px' display='flex' flexDirection='row' alignItems='center' justifyContent='center' gap='5px'>
               <GlobalParagraph fontSize='14px' fontWeight='500'>Don’t have an account?</GlobalParagraph>
               <GlobalLink fontSize='14px' fontWeight='600' onClick={() => navigate('/sign-in')}>

@@ -42,6 +42,7 @@ export const getUser = createAsyncThunk("me",
         }
     }
 )
+
 export const putChanges = createAsyncThunk("me-edit", 
     async (data: ChangesType, { rejectWithValue }) => {
         try {
@@ -80,6 +81,21 @@ export const logOut = createAsyncThunk('logout', async (_, { rejectWithValue }) 
         // const response = await UserService.logOut()
         removeStorage();
         return null;
+    }
+    catch (error) {
+        let errorMessage = 'Error';
+        if (error instanceof AxiosError && error.response?.data?.message) {
+            errorMessage = error.response.data.message;
+        }
+        return rejectWithValue({ message: errorMessage });
+    }
+})
+
+export const registerUser = createAsyncThunk('register', async (data: any, { rejectWithValue }) => {
+    try {
+        const response = await UserService.registirUser(data)
+        console.log(response.data)
+        return response.data
     }
     catch (error) {
         let errorMessage = 'Error';
@@ -159,6 +175,21 @@ export const userSlice = createSlice({
                 state.loading = false;
                 state.status = "failed";
                 // state.error = action.payload?.message || "Failed to save changes";
+              })
+              .addCase(registerUser.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.status = "loading"
+              })
+              .addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
+                state.loading = false
+                state.user = action.payload;
+                state.status = "succeeded"
+              })
+              .addCase(registerUser.rejected, (state, _) => {
+                state.loading = false
+                state.status = "failed"
+                // state.error = action.payload?.message || 'Failed to register user';
               });
     }
 })
