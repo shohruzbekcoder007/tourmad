@@ -57,7 +57,7 @@ const SignUp: React.FC = () => {
                 </FormControl>
               </Box>
               <Box pb='16px'>
-                <Button fullWidth variant='contained'>
+                <Button fullWidth variant='contained' type='submit'>
                   Create Account
                 </Button>
               </Box>
