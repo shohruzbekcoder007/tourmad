@@ -62,17 +62,19 @@ void,             // No arguments expected when calling the thunk
   async (_, { getState, rejectWithValue }) => {
     try {
       const state = getState() as RootState;
-      const fromCity = state.ticket.fromCity?.value;
-      const toCity = state.ticket.toCity?.value;
-      const date = state.ticket.date.format("YYYY-MM-DD");
-      console.log('Request parameters:', fromCity, toCity, date);  // Log parameters
+      // const fromCity = state.ticket.fromCity?.value;
+      const fromCity = "MOW";
+      // const toCity = state.ticket.toCity?.value;
+      const toCity = "TAS";
+      // const date = state.ticket.date.format("YYYY-MM-DD");
+      const date = "2024-12-20";
 
       if (!fromCity || !toCity) {
         throw new Error("From city and To city are required.");
       }
       const query = `origin=${fromCity}&destination=${toCity}&depart_date=${date}`;
       const response = await TicketService.cheapTicket(query);
-      const cheap_ticket_list: CheapPriseType[] = response.data;
+      const cheap_ticket_list: CheapPriseType[] = response.data?.data;
       return cheap_ticket_list;
     } catch (error) {
       console.log(error);
