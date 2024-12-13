@@ -61,7 +61,7 @@ void,             // No arguments expected when calling the thunk
   "get-cheap-ticket-list",
   async (_, { getState, rejectWithValue }) => {
     try {
-      const state = getState() as RootState;
+      // const state = getState() as RootState;
       // const fromCity = state.ticket.fromCity?.value;
       const fromCity = "MOW";
       // const toCity = state.ticket.toCity?.value;
@@ -135,6 +135,8 @@ export const getTicketStatus = (state: RootState) =>
   state.ticket.statusCitiesList;
 export const getStatusCheapTicketList = (state: RootState) =>
   state.ticket.statusCheapTicketList;
+export const getFromCity = (state: RootState) => state.ticket.fromCity
+export const getToCity = (state: RootState) => state.ticket.toCity
 export const getCheapTicketDataList = (state: RootState) =>
   state.ticket.cheapTicketList;
 export const getDate = (state: RootState) => state.ticket.date;

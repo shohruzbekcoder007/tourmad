@@ -1,4 +1,4 @@
-import { Paper, Stack, Box, Button, Divider, Tabs, Tab } from "@mui/material";
+import { Paper, Stack, Box, Button } from "@mui/material";
 import { CustomAutocomplete } from "../../helper_components";
 import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,7 +13,9 @@ import {
   getCitiesTicketList,
   getDate,
   getErrorGetTicket,
+  getFromCity,
   getTicketStatus,
+  getToCity,
   setDate,
   setFromCity,
   setToCity,
@@ -34,7 +36,8 @@ const TravelFilters: React.FC = () => {
   const ErrorGetTicket = useAppSelector(getErrorGetTicket)
   const date = useAppSelector(getDate);
   const { t } = useTranslation();
-  const [valueTab, setValueTab] = React.useState(0);
+  const toCity = useAppSelector(getToCity)
+  const fromCity = useAppSelector(getFromCity)
 
   useEffect(() => {
     if (statusCities === "idle") {
@@ -44,14 +47,10 @@ const TravelFilters: React.FC = () => {
 
   function handleTicketsFunc() {
     dispatch(getCheapTicketList());
-    if(ErrorGetTicket) {
-      enqueueSnackbar(ErrorGetTicket, {variant: "error"})
+    if (ErrorGetTicket) {
+      enqueueSnackbar(ErrorGetTicket, { variant: "error" })
     }
   }
-
-  const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
-    setValueTab(newValue);
-  };
 
   const handleFromChange = (selectedOption: Option | null) => {
     if (selectedOption !== null) {
@@ -177,6 +176,7 @@ const TravelFilters: React.FC = () => {
               fullWidth
               variant="contained"
               onClick={handleTicketsFunc}
+              disabled={(toCity && fromCity) ? false : true}
             >
               <SearchIcon />
             </Button>
@@ -185,7 +185,7 @@ const TravelFilters: React.FC = () => {
       </Paper>
       <Box display="flex" justifyContent="space-between">
         <Box width={{ xl: "100%", md: "100%", sm: "100%", xs: "100%" }}>
-          <Paper
+          {/* <Paper
             elevation={0}
             sx={{
               boxShadow: "0px 4px 16px 0px rgba(141, 211, 187, 0.15)",
@@ -226,14 +226,19 @@ const TravelFilters: React.FC = () => {
                 label={t("Other sort")}
               />
             </Tabs>
-          </Paper>
-          <Box
+            
+          </Paper> */}
+          {/* <Box
             width="100%"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
             pb="24px"
-          ></Box>
+          >
+            {
+              !cheapTicketList && <p>Yo'nalish tanlang</p>
+            }
+          </Box> */}
           <TravelFilterCard data={cheapTicketList} />
           <Box display="flex" justifyContent="center">
             <Button sx={{ width: "50%" }} color="success" variant="contained">
