@@ -18,6 +18,7 @@ export interface TicketState {
   showMessage: boolean;
   citiesList: CitiesType[];
   error: null;
+  errorGetTicket: string | null;
 }
 
 const initialState: TicketState = {
@@ -32,6 +33,7 @@ const initialState: TicketState = {
   showMessage: false,
   citiesList: [],
   error: null,
+  errorGetTicket: ""
 };
 
 export const getCitiesTicketList = createAsyncThunk(
@@ -51,28 +53,35 @@ export const getCitiesTicketList = createAsyncThunk(
   }
 );
 
-export const getCheapTicketList = createAsyncThunk(
+export const getCheapTicketList = createAsyncThunk<
+CheapPriseType[], // Type of returned data on success
+void,             // No arguments expected when calling the thunk
+{ rejectValue: { message: string } } // Type of rejected value
+>(
   "get-cheap-ticket-list",
   async (_, { getState, rejectWithValue }) => {
     try {
-      const state = getState() as RootState;
-      const fromCity = state.ticket.fromCity?.value;
-      const toCity = state.ticket.toCity?.value;
-      const date = state.ticket.date.format("YYYY-MM-DD");
-      console.log('Request parameters:', fromCity, toCity, date);  // Log parameters
+      // const state = getState() as RootState;
+      // const fromCity = state.ticket.fromCity?.value;
+      const fromCity = "MOW";
+      // const toCity = state.ticket.toCity?.value;
+      const toCity = "TAS";
+      // const date = state.ticket.date.format("YYYY-MM-DD");
+      const date = "2024-12-20";
 
       if (!fromCity || !toCity) {
         throw new Error("From city and To city are required.");
       }
       const query = `origin=${fromCity}&destination=${toCity}&depart_date=${date}`;
       const response = await TicketService.cheapTicket(query);
-      const cheap_ticket_list: CheapPriseType[] = response.data;
+      const cheap_ticket_list: CheapPriseType[] = response.data?.data;
       return cheap_ticket_list;
     } catch (error) {
+      console.log(error);
       let errorMessage = "Error";
-      if (error instanceof AxiosError && error.response?.data?.message) {
+      if (error instanceof AxiosError && error.response?.data?.error) {
         errorMessage = error.response.data.error;
-        enqueueSnackbar(errorMessage, {variant: "error"})
+        enqueueSnackbar(errorMessage, { variant: "error" });
       }
       return rejectWithValue({ message: errorMessage });
     }
@@ -113,8 +122,9 @@ export const ticketSlice = createSlice({
         state.statusCheapTicketList = "succeeded";
         state.cheapTicketList = action.payload;
       })
-      .addCase(getCheapTicketList.rejected, (state, _) => {
+      .addCase(getCheapTicketList.rejected, (state, action) => {
         state.statusCheapTicketList = "failed";
+        state.errorGetTicket = action.payload?.message || null;
       });
   },
 });
@@ -125,7 +135,10 @@ export const getTicketStatus = (state: RootState) =>
   state.ticket.statusCitiesList;
 export const getStatusCheapTicketList = (state: RootState) =>
   state.ticket.statusCheapTicketList;
+export const getFromCity = (state: RootState) => state.ticket.fromCity
+export const getToCity = (state: RootState) => state.ticket.toCity
 export const getCheapTicketDataList = (state: RootState) =>
   state.ticket.cheapTicketList;
 export const getDate = (state: RootState) => state.ticket.date;
+export const getErrorGetTicket = (state: RootState ) => state.ticket.errorGetTicket
 export default ticketSlice.reducer;
