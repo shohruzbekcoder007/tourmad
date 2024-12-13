@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getStorage, removeStorage } from '../../utils/storage'
+import { getStorage, removeStorage, setStorage, setStorageR } from '../../utils/storage'
 import UserService, { ChangesType } from '../../services/UserService'
 import { AccountType, UserType } from '../../utils/response_types'
 import { RootState } from '../store'
@@ -43,7 +43,7 @@ export const getUser = createAsyncThunk("me",
     }
 )
 
-export const putChanges = createAsyncThunk("me-edit", 
+export const putChanges = createAsyncThunk("me-edit",
     async (data: ChangesType, { rejectWithValue }) => {
         try {
             const response = await UserService.saveChanges(data)
@@ -52,14 +52,14 @@ export const putChanges = createAsyncThunk("me-edit",
         catch (error) {
             let errorMessage = "Error saving changes";
             if (error instanceof AxiosError && error.response?.data?.message) {
-              errorMessage = error.response.data.message;
+                errorMessage = error.response.data.message;
             }
             return rejectWithValue({ message: errorMessage });
-          }
+        }
     }
 )
 
-export const getAccount = createAsyncThunk("account", 
+export const getAccount = createAsyncThunk("account",
     async (_, { rejectWithValue }) => {
         try {
             const response = await UserService.account()
@@ -95,6 +95,9 @@ export const registerUser = createAsyncThunk('register', async (data: any, { rej
     try {
         const response = await UserService.registirUser(data)
         console.log(response.data)
+        const { access, refresh } = response.data.data.tokens
+        setStorage(access)
+        setStorageR(refresh)
         return response.data
     }
     catch (error) {
@@ -163,34 +166,34 @@ export const userSlice = createSlice({
                 state.loading = true;
                 state.error = null;
                 state.status = "loading";
-              })
-              .addCase(putChanges.fulfilled, (state, action: PayloadAction<UserType>) => {
+            })
+            .addCase(putChanges.fulfilled, (state, action: PayloadAction<UserType>) => {
                 state.loading = false;
                 state.user = action.payload;
                 state.status = "succeeded";
                 state.message = "Changes saved successfully!";
                 state.showMessage = true;
-              })
-              .addCase(putChanges.rejected, (state, action) => {
+            })
+            .addCase(putChanges.rejected, (state, action) => {
                 state.loading = false;
                 state.status = "failed";
                 // state.error = action.payload?.message || "Failed to save changes";
-              })
-              .addCase(registerUser.pending, (state) => {
+            })
+            .addCase(registerUser.pending, (state) => {
                 state.loading = true
                 state.error = null
                 state.status = "loading"
-              })
-              .addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
+            })
+            .addCase(registerUser.fulfilled, (state, action: PayloadAction<any>) => {
                 state.loading = false
                 state.user = action.payload;
                 state.status = "succeeded"
-              })
-              .addCase(registerUser.rejected, (state, _) => {
+            })
+            .addCase(registerUser.rejected, (state, _) => {
                 state.loading = false
                 state.status = "failed"
                 // state.error = action.payload?.message || 'Failed to register user';
-              });
+            });
     }
 })
 
