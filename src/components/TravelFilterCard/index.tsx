@@ -16,7 +16,6 @@ import { formatDate, formatTime } from "../../utils/dateTimeUtils";
 const TravelFilterCard: React.FC<{ data: CheapPriseType[] }> = ({ data }) => {
   const toCity = useAppSelector(getToCity)
   const fromCity = useAppSelector(getFromCity)
-  console.log(data, "data")
   return (
     <Stack>
       {fromCity && toCity ? (
