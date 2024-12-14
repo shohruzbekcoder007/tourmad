@@ -1,6 +1,6 @@
 import { Box, FormControl, FormGroup, Stack, TextField, Button, Divider } from '@mui/material'
 import logo from "./../../media/images/logo2.png";
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FooterLogoImg } from '../Footer/styles';
 import { GlobalLink, GlobalParagraph, WelcomeMainText } from '../../global_styles/styles';
 import LoginWith from '../LoginWith';
@@ -9,55 +9,51 @@ import {useNavigate} from "react-router-dom";
 import { enqueueSnackbar } from 'notistack';
 import { useAppDispatch } from '../../redux/hooks';
 import { registerUser } from '../../redux/slices/userSlice';
-import { getStorage } from '../../utils/storage';
 
 const SignUp: React.FC = () => {
 
   let navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [jjj, setJjj] = useState(true)
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    let info_data = {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const info_data = {
       email: data.get('email'),
       password: data.get('password'),
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
       phone: data.get('phone'),
       confirmPassword: data.get('confirmPassword'),
-    }
+    };
+  
     if (info_data.password === info_data.confirmPassword) {
-      dispatch(registerUser({
-        first_name: info_data.firstName,
-        last_name: info_data.lastName,
-        email: info_data.email,
-        password: info_data.password,
-        phone_number: info_data.phone,
-        password_confirmation: info_data.confirmPassword,
-        role: "user"
-      }))
-      setJjj(prev => !prev)
-    }else{
+      try {
+        const result = await dispatch(registerUser({
+          first_name: info_data.firstName,
+          last_name: info_data.lastName,
+          email: info_data.email,
+          password: info_data.password,
+          phone_number: info_data.phone,
+          password_confirmation: info_data.confirmPassword,
+          role: "user",
+        })).unwrap();
+  
+        if (result.data.tokens.access) { 
+          enqueueSnackbar("Successfully registered!", { variant: "success" });
+          navigate('/protected');
+        } else {
+          enqueueSnackbar("Registration failed. Please try again.", { variant: "error" });
+        }
+      } catch (error) {
+        const errorMessage = (error instanceof Error) ? error.message : "An error occurred during registration.";
+        enqueueSnackbar(errorMessage, { variant: "error" });
+      }
+    } else {
       enqueueSnackbar("Kalit so'zda mostlik yo'q. Iltimos ma'lumotlarni tekshirib qayta urinib ko'ring", { variant: "info" });
     }
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      phone: data.get('phone'),
-      confirmPassword: data.get('confirmPassword'),
-    })
-  }
-  // shujoyi
-  useEffect(() => {
-    const tokenn = getStorage()
-    if(tokenn) {
-      navigate('/protected')
-    }
-  }, [jjj])
+  };
+  
   return (
     <Stack maxWidth='1440px' margin='0 auto' height='1024px' padding={{xl: '104px', md: "50px", sm: '30px', xs: '20px'}}>
       <Box display='flex' justifyContent={{xl: "space-between", md: "space-between", sm: "center", xs: "center"}}>      
